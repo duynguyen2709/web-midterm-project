@@ -23,7 +23,7 @@ app.use(expressLayouts)
 
 
 app.get('/', function(req, res) {
-  res.render('HomePage');
+  res.render('Checkout');
 });
 app.get('/user', function(req, res) {
   res.render('/HomePage');
