@@ -28,6 +28,12 @@ app.get('/', function(req, res) {
 app.get('/user', function(req, res) {
   res.render('/HomePage');
 });
+app.get('/MyCart', function(req, res) {
+  res.render('MyCart');
+});
+app.get('/MyAccount', function(req, res) {
+  res.render('MyAccount');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
