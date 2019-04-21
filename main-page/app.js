@@ -22,11 +22,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts)
 
 
-app.get('/Checkout', function(req, res) {
-  res.render('Checkout');
+
+
+app.get('/', function(req, res) {
+  res.render('Homepage');
 });
 app.get('/user', function(req, res) {
-  res.render('HomePage');
+  res.render('/MyAccount');
 });
 app.get('/MyCart', function(req, res) {
   res.render('MyCart');
