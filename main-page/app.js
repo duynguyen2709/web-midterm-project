@@ -22,6 +22,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts)
 
 
+
+
 app.get('/', function(req, res) {
   res.render('HomePage');
 });
@@ -34,12 +36,16 @@ app.get('/MyCart', function(req, res) {
 app.get('/MyAccount', function(req, res) {
   res.render('MyAccount');
 });
-app.get('/ForgotPassword', function(req, res) {
-  res.render('ForgotPassword');
-});
+
 app.get('/ProductDetail', function(req, res) {
   res.render('ProductDetail');
 });
+
+app.get('/AccountDetail', function(req, res) {
+  res.render('AccountDetail');
+});
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
