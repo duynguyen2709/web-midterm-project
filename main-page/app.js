@@ -23,7 +23,7 @@ app.use(expressLayouts)
 
 
 app.get('/', function(req, res) {
-  res.render('Homepage');
+  res.render('HomePage');
 });
 app.get('/user', function(req, res) {
   res.render('/MyAccount');
@@ -33,6 +33,12 @@ app.get('/MyCart', function(req, res) {
 });
 app.get('/MyAccount', function(req, res) {
   res.render('MyAccount');
+});
+app.get('/ForgotPassword', function(req, res) {
+  res.render('ForgotPassword');
+});
+app.get('/ProductDetail', function(req, res) {
+  res.render('ProductDetail');
 });
 
 // catch 404 and forward to error handler

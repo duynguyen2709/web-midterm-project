@@ -95,12 +95,12 @@
               <!-- logo  -->
               <div class="aa-logo">
                 <!-- Text based logo -->
-                <a href="index.html">
+                <a href="/">
                   <span class="fa fa-shopping-cart"></span>
                   <p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p>
                 </a>
                 <!-- img based logo -->
-                <!-- <a href="index.html"><img src="/img/logo.jpg" alt="logo img"></a> -->
+                <!-- <a href="#"><img src="/img/logo.jpg" alt="logo img"></a> -->
               </div>
               <!-- / logo  -->
                <!-- cart box -->
@@ -174,7 +174,7 @@
           <div class="navbar-collapse collapse">
             <!-- Left nav -->
             <ul class="nav navbar-nav">
-              <li><a href="index.html">Trang chủ</a></li>
+              <li><a href="/">Trang chủ</a></li>
               <li><a href="#">Áo thun <span class="caret"></span></a>
                 <ul class="dropdown-menu">                
                   <li><a href="#">Áo thun MaBư</a></li>
@@ -330,16 +330,52 @@
             <input type="password" placeholder="Password">
             <button class="aa-browse-btn" type="submit">Đăng nhập</button>
             <label for="rememberme" class="rememberme"><input type="checkbox" id="rememberme"> Ghi nhớ </label>
-            <p class="aa-lost-password"><a href="#">Quên mật khẩu?</a></p>
+            <p class="aa-lost-password"><a href="ForgotPassword">Quên mật khẩu?</a></p>
             <div class="aa-register-now">
-              Bạn chưa có tài khoản?<a href="account.html">Đăng kí ngay!</a>
+              Bạn chưa có tài khoản?<a href="MyAccount">Đăng kí ngay!</a>
             </div>
           </form>
         </div>                        
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div>    
-
+  <!--modal-->
+  <!-- forgot password modal-->
+<div id="pwdModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h1 class="text-center">What's My Password?</h1>
+      </div>
+      <div class="modal-body">
+          <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="text-center">
+                          
+                          <p>If you have forgotten your password you can reset it here.</p>
+                            <div class="panel-body">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input class="form-control input-lg" placeholder="E-mail Address" name="email" type="email">
+                                    </div>
+                                    <input class="btn btn-lg btn-primary btn-block" value="Send My Password" type="submit">
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+          <div class="col-md-12">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		  </div>	
+      </div>
+  </div>
+  </div>
+</div>
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->

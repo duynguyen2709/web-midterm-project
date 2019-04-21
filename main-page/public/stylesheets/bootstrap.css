@@ -3118,8 +3118,8 @@ fieldset[disabled] .btn-default.focus {
 }
 .btn-primary {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #ff6666;;
+  border-color: #ff6666;;
 }
 .btn-primary:focus,
 .btn-primary.focus {
