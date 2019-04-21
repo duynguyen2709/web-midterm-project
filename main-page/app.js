@@ -23,10 +23,16 @@ app.use(expressLayouts)
 
 
 app.get('/', function(req, res) {
-  res.render('HomePage');
+  res.render('Checkout');
 });
 app.get('/user', function(req, res) {
   res.render('/HomePage');
+});
+app.get('/MyCart', function(req, res) {
+  res.render('MyCart');
+});
+app.get('/MyAccount', function(req, res) {
+  res.render('MyAccount');
 });
 
 // catch 404 and forward to error handler
