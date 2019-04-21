@@ -23,10 +23,10 @@ app.use(expressLayouts)
 
 
 app.get('/', function(req, res) {
-  res.render('Checkout');
+  res.render('Homepage');
 });
 app.get('/user', function(req, res) {
-  res.render('/HomePage');
+  res.render('/MyAccount');
 });
 app.get('/MyCart', function(req, res) {
   res.render('MyCart');
