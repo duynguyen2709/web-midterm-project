@@ -22,11 +22,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts)
 
 
-app.get('/', function(req, res) {
+app.get('/Checkout', function(req, res) {
   res.render('Checkout');
 });
 app.get('/user', function(req, res) {
-  res.render('/HomePage');
+  res.render('HomePage');
 });
 app.get('/MyCart', function(req, res) {
   res.render('MyCart');
@@ -34,6 +34,10 @@ app.get('/MyCart', function(req, res) {
 app.get('/MyAccount', function(req, res) {
   res.render('MyAccount');
 });
+app.get('/AccountDetail', function(req, res) {
+  res.render('AccountDetail');
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

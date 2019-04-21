@@ -73,7 +73,7 @@
               <!-- / header top left -->
               <div class="aa-header-top-right">
                 <ul class="aa-head-top-nav-right">
-                  <li><a href="MyAccount">My Account</a></li>
+                  <li><a href="AccountDetail">My Account</a></li>
                   <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
                   <li class="hidden-xs"><a href="MyCart">My Cart</a></li>
                   <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
@@ -96,7 +96,7 @@
               <!-- logo  -->
               <div class="aa-logo">
                 <!-- Text based logo -->
-                <a href="index.html">
+                <a href="user">
                   <span class="fa fa-shopping-cart"></span>
                   <p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p>
                 </a>
@@ -138,7 +138,7 @@
                       </span>
                     </li>
                   </ul>
-                  <a class="aa-cartbox-checkout aa-primary-btn" href="MyCart">Thanh toán</a>
+                  <a class="aa-cartbox-checkout aa-primary-btn" href="Checkout">Thanh toán</a>
                 </div>
               </div>
               <!-- / cart box -->
@@ -363,15 +363,31 @@
             <input type="password" placeholder="Password">
             <button class="aa-browse-btn" type="submit">Đăng nhập</button>
             <label for="rememberme" class="rememberme"><input type="checkbox" id="rememberme"> Ghi nhớ </label>
-            <p class="aa-lost-password"><a href="#">Quên mật khẩu?</a></p>
+            <p class="aa-lost-password"><a href="" data-toggle="modal" data-target="#login-modal1">Quên mật khẩu?</a></p>
             <div class="aa-register-now">
-              Bạn chưa có tài khoản?<a href="account.html">Đăng kí ngay!</a>
+              Bạn chưa có tài khoản?<a href="MyAccount">Đăng kí ngay!</a>
             </div>
           </form>
         </div>                        
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-  </div>    
+  </div>   
+  <div class="modal fade" id="login-modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">                      
+        <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4>Xác minh tài khoản</h4>
+          <form class="aa-login-form" action="" height="50px">
+            <label for="">Tài khoản hoặc Email<span>*</span></label>
+            <input type="text" placeholder="Username or email">
+            
+          </form>
+          <button class="aa-browse-btn" type="submit">Xác minh</button>
+        </div>                        
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>  
 
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
