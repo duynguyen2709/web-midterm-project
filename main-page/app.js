@@ -44,6 +44,12 @@ app.get('/ProductDetail', function(req, res) {
 app.get('/AccountDetail', function(req, res) {
   res.render('AccountDetail');
 });
+app.get('/Aokhoac', function(req, res) {
+  res.render('Aokhoac');
+});
+app.get('/Checkout', function(req, res) {
+  res.render('Checkout');
+});
 
 
 
