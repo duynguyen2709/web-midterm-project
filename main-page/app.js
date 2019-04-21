@@ -25,7 +25,7 @@ app.use(expressLayouts)
 
 
 app.get('/', function(req, res) {
-  res.render('Homepage');
+  res.render('HomePage');
 });
 app.get('/user', function(req, res) {
   res.render('/MyAccount');
