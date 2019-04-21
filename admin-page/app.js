@@ -25,6 +25,14 @@ app.post('/main', function(req, res){
   res.render('main', { title: 'Admin Page' });
 });
 
+app.use(function(req, res, next) {
+  if(req.protocol !== 'http') {
+      return res.status(403).send({message: 'Not Support HTTPS. Login With HTTP instead.'});
+  }
+  // allow the request to continue
+  next();
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
