@@ -56,6 +56,11 @@ app.get('/ForgotPassword', function(req, res) {
 app.get('/Customer-Orders', function(req, res) {
   res.render('Customer-Orders');
 });
+app.get('/OrderDetail', function(req, res) {
+  res.render('Order-Detail');
+});
+
+
 
 
 
