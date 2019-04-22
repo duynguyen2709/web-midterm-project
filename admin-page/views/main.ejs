@@ -70,9 +70,7 @@
               
               <!-- Menu Footer-->
               <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Thông tin cá nhân</a>
-                </div>
+                
                 <div class="pull-right">
                   <a href="#" class="btn btn-default btn-flat">Đăng Xuất</a>
                 </div>
@@ -115,7 +113,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">BẢNG ĐIỀU KHIỂN</li>
         
-        <li class="active treeview">
+        <li class="treeview">
           <a href="#" onclick="showSummary();return false;">
             <i class="fa fa-pie-chart"></i>
             <span>Thống Kê</span>
@@ -131,18 +129,13 @@
           </a>
           <ul class="treeview-menu">
             
-            <li class="treeview">
-              <a href="#"><i class="fa fa-users"></i> Người Dùng
+            <li>
+              <a href="#" onclick="showUsers();return false;"><i class="fa fa-users"></i> Người Dùng
                 <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
+                
                 </span>
               </a>
-              <ul class="treeview-menu">
-                  <li><a href="#"><i class="fa fa-user"></i> Tài Khoản</a></li>
-                  <li><a href="#"><i class="fa fa-user-plus"></i> Thông Tin Cá Nhân</a></li>
-      
-                </li>
-              </ul>
+            
             </li>
             <li class="treeview">
                 <a href="#"><i class="fa fa-shopping-cart"></i> Cửa Hàng
@@ -151,8 +144,7 @@
                   </span>
                 </a>
                 <ul class="treeview-menu">
-                  <li><a href="#"><i class="fa fa-circle-o"></i> Gian Hàng</a></li>
-                  <li><a href="#"><i class="fa fa-circle-o"></i> Sản Phẩm</a></li>
+                  <li><a href="#" onclick="showProducts();return false;"><i class="fa fa-shopping-cart"></i>Gian Hàng & Sản Phẩm</a></li>             
                   <li><a href="#" onclick="showListOrders();return false;"><i class="fa fa-copy"></i> Tình Trạng Đơn Hàng</a></li>
                 </ul>
               </li>
@@ -248,7 +240,7 @@
                 <div class="row">
 
                       <div class="col-md-10">
-                                    <iframe
+                      <iframe
                         src="http://chart-scttshop.herokuapp.com/public/dashboard/19a88397-0e3d-4483-b967-1488691ccf1d"
                         frameborder="0"
                         style="width:120%;"
@@ -271,121 +263,455 @@
 
        </div>
 
-      <!-- Main row -->
-      <div class="row">
-        <!-- Left col -->
-      
-          <div class="col-md-12" id="orders" style="display: none;">
-
-          <!-- TABLE: LATEST ORDERS -->
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Tình Trạng 10 Đơn Hàng Gần Nhất</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
+       <div id="users" style="display: none;">
+        <div class="row">
+          <div class="col-xs-12">
             
-            <div class="box-body">
-              <div class="table-responsive">
-                <table class="table no-margin">
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Danh Sách Người Dùng</h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <table id="userTable" class="table table-bordered table-striped table-hover">
                   <thead>
                   <tr>
-                    <th>Mã Đơn Hàng</th>
-                    <th>Tổng Giá Trị</th>
-                    <th>Trạng Thái</th>
-                    <th>Địa Chỉ Giao Hàng</th>
+                    <th>ID</th>
+                    <th>Tên Tài Khoản</th>
+                    <th>Họ Và Tên</th>
+                    <th>Mật Khẩu</th>
+                    <th>Số CMND</th>
+                    <th>Số Điện Thoại</th>
+                    <th>Địa Chỉ</th>
+                    <th>Cấp Độ</th>
+                    <th></th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                    <td>500.000VNĐ</td>
-                    <td><span class="label label-success">Đã Giao</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20">Quận 5, Thành Phố Hồ Chí Minh</div>
-                    </td>
+                    <td>1</td>
+                    <td>naduy</td>
+                    <td>Nguyễn Anh Duy</td>
+                    <td>******</td>
+                    <td>123456789</td>
+                    <td>0948202709</td>
+                    <td>Đồng Nai</td>
+                    <td>Quản Trị Viên</td>
+                    <td><Button class="btn btn-block btn-primary btn-sm"
+                      data-toggle="modal" data-target="#dlgupdate"
+                      onclick="onShowUpdateForm(1,'naduy','Nguyễn Anh Duy',
+                      '123456789','0948202709','Đồng Nai',0);"
+                      >Chỉnh Sửa</Button></td>
                   </tr>
                   <tr>
-                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                    <td>1.000.000VNĐ</td>
-                    <td><span class="label label-info">Đang Xử Lý</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#f39c12" data-height="20">Quận 3, Thành Phố Hồ Chí Minh</div>
-                    </td>
+                    <td>2</td>
+                    <td>vtduy</td>
+                    <td>Võ Tấn Duy</td>
+                    <td>******</td>
+                    <td>135792468</td>
+                    <td>0900112233</td>
+                    <td>TP.HCM</td>
+                    <td>Quản Lý</td>
+                    <td><Button 
+                      class="btn btn-block btn-primary btn-sm"
+                      data-toggle="modal" data-target="#dlgupdate"
+                      onclick="onShowUpdateForm(2,'vtduy','Võ Tấn Duy',
+                      '135792468','0900112233','TP.HCM',1);"
+                      >Chỉnh Sửa</Button></td>
                   </tr>
                   <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                    <td>2.000.000VNĐ</td>
-                    <td><span class="label label-danger">Đang Giao</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#f56954" data-height="20">Quận 9, Thành Phố Hồ Chí Minh</div>
-                    </td>
+                    <td>3</td>
+                    <td>dcduy</td>
+                    <td>Đinh Công Duy</td>
+                    <td>******</td>
+                    <td>987654321</td>
+                    <td>0840123445</td>
+                    <td>TP.HCM</td>
+                    <td>Người Dùng</td>
+                    <td><Button class="btn btn-block btn-primary btn-sm"
+                      data-toggle="modal" data-target="#dlgupdate"
+                      onclick="onShowUpdateForm(3,'dcduy','Đinh Công Duy',
+                      '987654321','0840123445','TP.HCM',2);"
+                      >Chỉnh Sửa</Button></td>
+                  </tr>
+                  
+                  
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+
+      <div id="products" style="display: none;">
+        <div class="row">
+          <div class="col-xs-12">
+            
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Danh Sách Gian Hàng</h3>
+                <a href="#" class="btn btn-sm btn-info btn-flat pull-right">Tạo Gian Hàng Mới</a>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <table id="boothTable" class="table table-bordered table-striped table-hover">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Tên Gian Hàng</th>
+                    <th>Số Loại Sản Phẩm</th>
+                    <th>Tổng Số Sản Phẩm</th>
+                    <th>Xóa Gian Hàng</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Áo</td>
+                    <td>3</td>
+                    <td>50</td>
+                    <td><Button class="btn btn-block btn-danger btn-sm"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(1,'Áo');">Xóa</Button></td>
                   </tr>
                   <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                    <td>2.500.000VNĐ</td>
+                    <td>2</td>
+                    <td>Quần</td>
+                    <td>4</td>
+                    <td>55</td>
+                    <td><Button class="btn btn-block btn-danger btn-sm"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(2,'Quần');"
+                      >Xóa</Button></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Nón</td>
+                    <td>2</td>
+                    <td>35</td>
+                    <td><Button class="btn btn-block btn-danger btn-sm"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(3,'Nón');">Xóa</Button></td>
+                  </tr>
+                  
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Danh Sách Sản Phẩm Thuộc Gian Hàng Trên</h3>
+                <a href="#" class="btn btn-sm btn-info btn-flat pull-right">Thêm Sản Phẩm Mới</a>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body" id="productTable1">
+                <table class="table table-bordered table-striped table-hover">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Loại</th>
+                    <th>Số Lượng</th>
+                    <th>Đơn Giá</th>
+                    <th>Chỉnh Sửa Thông Tin</th>
+                    <th>Xóa Sản Phẩm</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Áo Sơ Mi</td>
+                    <td>Áo</td>
+                    <td>15</td>
+                    <td>250.000VNĐ</td>
+                    <td><Button class="btn btn-block btn-primary btn-sm"
+                      data-toggle="modal" data-target="#dlgupdate"
+                      >Chỉnh Sửa</Button></td>
+                    <td><Button class="btn btn-block btn-danger btn-sm"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(1,'Áo Sơ Mi');">Xóa</Button></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Áo Thun Tay Dài</td>
+                    <td>Áo</td>
+                    <td>15</td>
+                    <td>350.000VNĐ</td>
+                    <td><Button class="btn btn-block btn-primary btn-sm"
+                      data-toggle="modal" data-target="#dlgupdate"
+                      >Chỉnh Sửa</Button></td>
+                    <td><Button class="btn btn-block btn-danger btn-sm"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(2,'Áo Thun Tay Dài');">Xóa</Button></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Áo Hoodie</td>
+                    <td>Áo</td>
+                    <td>20</td>
+                    <td>400.000VNĐ</td>
+                    <td><Button class="btn btn-block btn-primary btn-sm"
+                      data-toggle="modal" data-target="#dlgupdate"
+                      >Chỉnh Sửa</Button></td>
+                    <td><Button class="btn btn-block btn-danger btn-sm"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(3,'Áo Hoodie');">Xóa</Button></td>
+                  </tr>
+                  
+                  </tfoot>
+                </table>
+              </div>
+              <div class="box-body" id="productTable2" style="display:none;">
+                <table class="table table-bordered table-striped table-hover">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Loại</th>
+                    <th>Số Lượng</th>
+                    <th>Đơn Giá</th>
+                    <th>Chỉnh Sửa Thông Tin</th>
+                    <th>Xóa Sản Phẩm</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Quần Kaki</td>
+                    <td>Quần</td>
+                    <td>25</td>
+                    <td>550.000VNĐ</td>
+                    <td><Button class="btn btn-block btn-primary btn-sm"
+                      data-toggle="modal" data-target="#dlgupdate"
+                      >Chỉnh Sửa</Button></td>
+                    <td><Button class="btn btn-block btn-danger btn-sm"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(1,'Quần Kaki');">Xóa</Button></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Quần Dài</td>
+                    <td>Quần</td>
+                    <td>15</td>
+                    <td>350.000VNĐ</td>
+                    <td><Button class="btn btn-block btn-primary btn-sm"
+                      data-toggle="modal" data-target="#dlgupdate"
+                      >Chỉnh Sửa</Button></td>
+                    <td><Button class="btn btn-block btn-danger btn-sm"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(2,'Quần Dài');">Xóa</Button></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Quần Short</td>
+                    <td>Quần</td>
+                    <td>10</td>
+                    <td>400.000VNĐ</td>
+                    <td><Button class="btn btn-block btn-primary btn-sm"
+                      data-toggle="modal" data-target="#dlgupdate"
+                      >Chỉnh Sửa</Button></td>
+                    <td><Button class="btn btn-block btn-danger btn-sm"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(3,'Quần Short');">Xóa</Button></td>
+                  </tr>
+
+                  <tr>
+                    <td>4</td>
+                    <td>Quần Thun Đi Biển</td>
+                    <td>Quần</td>
+                    <td>5</td>
+                    <td>150.000VNĐ</td>
+                    <td><Button class="btn btn-block btn-primary btn-sm"
+                      data-toggle="modal" data-target="#dlgupdate"
+                      >Chỉnh Sửa</Button></td>
+                    <td><Button class="btn btn-block btn-danger btn-sm"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(4,'Quần Thun Đi Biển');">Xóa</Button></td>
+                  </tr>
+                  
+                  </tfoot>
+                </table>
+              </div>
+              <div class="box-body" id="productTable3" style="display:none;">
+                <table  class="table table-bordered table-striped table-hover">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Loại</th>
+                    <th>Số Lượng</th>
+                    <th>Đơn Giá</th>
+                    <th>Chỉnh Sửa Thông Tin</th>
+                    <th>Xóa Sản Phẩm</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Nón Kết</td>
+                    <td>Nón</td>
+                    <td>15</td>
+                    <td>100.000VNĐ</td>
+                    <td><Button class="btn btn-block btn-primary btn-sm"
+                      data-toggle="modal" data-target="#dlgupdate"
+                      >Chỉnh Sửa</Button></td>
+                    <td><Button class="btn btn-block btn-danger btn-sm"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(1,'Nón Kết');">Xóa</Button></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Nón Vành Rộng</td>
+                    <td>Nón</td>
+                    <td>20</td>
+                    <td>150.000VNĐ</td>
+                    <td><Button class="btn btn-block btn-primary btn-sm"
+                      data-toggle="modal" data-target="#dlgupdate"
+                      >Chỉnh Sửa</Button></td>
+                    <td><Button class="btn btn-block btn-danger btn-sm"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(2,'Nón Vành Rộng');">Xóa</Button></td>
+                  </tr>
+                
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+
+      <div id="orders" style="display: none;">
+        <div class="col-md-12" >
+
+        <!-- TABLE: LATEST ORDERS -->
+        <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Tình Trạng 10 Đơn Hàng Gần Nhất</h3>
+
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+          
+          <div class="box-body">
+            <div class="table-responsive">
+              <table class="table no-margin">
+                <thead>
+                <tr>
+                  <th>Mã Đơn Hàng</th>
+                  <th>Tổng Giá Trị</th>
+                  <th>Trạng Thái</th>
+                  <th>Địa Chỉ Giao Hàng</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                  <td>500.000VNĐ</td>
+                  <td><span class="label label-success">Đã Giao</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#00a65a" data-height="20">Quận 5, Thành Phố Hồ Chí Minh</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                  <td>1.000.000VNĐ</td>
+                  <td><span class="label label-info">Đang Xử Lý</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#f39c12" data-height="20">Quận 3, Thành Phố Hồ Chí Minh</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                  <td>2.000.000VNĐ</td>
+                  <td><span class="label label-danger">Đang Giao</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#f56954" data-height="20">Quận 9, Thành Phố Hồ Chí Minh</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                  <td>2.500.000VNĐ</td>
+                  <td><span class="label label-info">Đang Xử Lý</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#00c0ef" data-height="20">Quận 2, Thành Phố Hồ Chí Minh</div>
+                  </td>
+                </tr>
+                <tr>
+                    <td><a href="pages/examples/invoice.html">OR3515</a></td>
+                    <td>4.550.000VNĐ</td>
                     <td><span class="label label-info">Đang Xử Lý</span></td>
                     <td>
                       <div class="sparkbar" data-color="#00c0ef" data-height="20">Quận 2, Thành Phố Hồ Chí Minh</div>
                     </td>
                   </tr>
-                  <tr>
-                      <td><a href="pages/examples/invoice.html">OR3515</a></td>
-                      <td>4.550.000VNĐ</td>
-                      <td><span class="label label-info">Đang Xử Lý</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00c0ef" data-height="20">Quận 2, Thành Phố Hồ Chí Minh</div>
-                      </td>
-                    </tr>
-                    
-                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                    <td>3.000.000VNĐ</td>
-                    <td><span class="label label-warning">Chưa Thanh Toán</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#f39c12" data-height="20">Quận Bình Thạnh, Thành Phố Hồ Chí Minh</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                    <td>3.500.000VNĐ</td>
-                    <td><span class="label label-success">Đã Giao</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#f56954" data-height="20">Biên Hòa, Đồng Nai</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                    <td>2.000.000VNĐ</td>
-                    <td><span class="label label-success">Đã Giao</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20">Vũng Tàu</div>
-                    </td>
-                  </tr>
-                  <tr>
-                      <td><a href="pages/examples/invoice.html">OR2709</a></td>
-                      <td>4.500.000VNĐ</td>
-                      <td><span class="label label-info">Đang Xử Lý</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00c0ef" data-height="20">Quận 2, Thành Phố Hồ Chí Minh</div>
-                      </td>
-                    </tr>
+                  
+                  <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                  <td>3.000.000VNĐ</td>
+                  <td><span class="label label-warning">Chưa Thanh Toán</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#f39c12" data-height="20">Quận Bình Thạnh, Thành Phố Hồ Chí Minh</div>
+                  </td>
+                </tr>
                 <tr>
-                  </tbody>
-                </table>
-              </div>
-              
+                  <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                  <td>3.500.000VNĐ</td>
+                  <td><span class="label label-success">Đã Giao</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#f56954" data-height="20">Biên Hòa, Đồng Nai</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                  <td>2.000.000VNĐ</td>
+                  <td><span class="label label-success">Đã Giao</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#00a65a" data-height="20">Vũng Tàu</div>
+                  </td>
+                </tr>
+                <tr>
+                    <td><a href="pages/examples/invoice.html">OR2709</a></td>
+                    <td>4.500.000VNĐ</td>
+                    <td><span class="label label-info">Đang Xử Lý</span></td>
+                    <td>
+                      <div class="sparkbar" data-color="#00c0ef" data-height="20">Quận 2, Thành Phố Hồ Chí Minh</div>
+                    </td>
+                  </tr>
+              <tr>
+                </tbody>
+              </table>
             </div>
             
-            <div class="box-footer clearfix">
-              <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Tạo Đơn Hàng Mới</a>
-              <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Xem Tât Cả Đơn Hàng</a>
-            </div>
           </div>
+          
+          <div class="box-footer clearfix">
+            <a href="#" class="btn btn-sm btn-info btn-flat pull-left">Tạo Đơn Hàng Mới</a>
+             </div>
         </div>
+        </div>
+      </div>
+
+    </section>
+
+       
+
+      <div class="row">
+        <!-- Left col -->
+        
         </div>
         <!-- /.col -->
 
@@ -465,6 +791,103 @@
 
 
 </div>
+
+<!-- Modal Update -->
+<div id="dlgupdate" class="modal fade" role="dialog">
+  <div class="modal-dialog"  style="padding-top: 10%;">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Chỉnh Sửa Thông Tin</h4>
+          </div>
+
+          <div class="modal-body">
+              <form action="#" method="POST">
+                  <div class="form-group">
+                      <label for="id" class="control-label">ID:</label>
+                      <input type="number" class="form-control" id="id"  readonly required>
+                  </div>
+                  <div class="form-group">
+                      <label for="username" class="control-label">Tên Tài Khoản:</label>
+                      <input type="text" class="form-control" id="username">
+                  </div>
+                  <div class="form-group">
+                      <label for="fullname" class="control-label">Họ Và Tên:</label>
+                      <input type="text" class="form-control" id="fullname">
+                  </div>
+                  <div class="form-group">
+                      <label for="password" class="control-label">Mật Khẩu:</label>
+                      <input type="password" class="form-control" id="password">
+                  </div>
+                  <div class="form-group">
+                    <label for="retypepassword" class="control-label">Nhập Lại Mật Khẩu:</label>
+                    <input type="password" class="form-control" id="retypepassword">
+                  </div>
+                  <div class="form-group">
+                      <label for="idcardnumber" class="control-label">Số CMND:</label>
+                      <input type="number" class="form-control" id="idcardnumber">
+                  </div>
+                  <div class="form-group">
+                      <label for="phonenumber" class="control-label">Số Điện Thoại:</label>
+                      <input type="number" class="form-control" id="phonenumber">
+                  </div>
+                  <div class="form-group">
+                    <label for="address" class="control-label">Địa Chỉ:</label>
+                    <input type="text" class="form-control" id="address">
+                  </div>
+                  <div class="form-group">
+                    <label for="role" class="control-label">Cấp Độ:</label>
+                    <select id="role">
+                      <option value="0" selected>Quản Trị Viên</option>
+                      <option value="1" selected>Quản Lý</option>
+                      <option value="2" selected>Người Dùng</option>
+                    </select>
+                    
+                  </div>
+                  
+
+                  <button type="button" class="btn btn-info" data-dismiss="modal">Update</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              </form>
+          </div>
+
+      </div>
+  </div>
+</div>
+
+<!-- Modal Delete Booth -->
+<div id="dlgdeletebooth" class="modal fade" role="dialog">
+    <div class="modal-dialog"  style="padding-top: 10%;">
+  
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Xóa Gian Hàng / Sản Phẩm</h4>
+            </div>
+  
+            <div class="modal-body">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="id" class="control-label">ID:</label>
+                        <input type="number" class="form-control" id="boothid"  readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label for="boothname" class="control-label">Tên Gian Hàng / Sản Phẩm:</label>
+                        <input type="text" class="form-control" id="boothname" readonly>
+                    </div>
+                  
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+  
+        </div>
+    </div>
+  </div>
+
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
@@ -498,16 +921,71 @@
                  window.location.protocol="http";
          });
      }
-     
+
+     $('#boothTable').find('tr').click( function(){
+       const index = ($(this).index()+1).toString();
+
+       if (index=="1"){
+        document.getElementById('productTable1').style.display = 'inline';
+        document.getElementById('productTable2').style.display = 'none';
+        document.getElementById('productTable3').style.display = 'none';
+       }
+       else if (index=="2"){
+        document.getElementById('productTable1').style.display = 'none';
+        document.getElementById('productTable2').style.display = 'inline';
+        document.getElementById('productTable3').style.display = 'none';
+       }
+       else if (index=="3"){
+        document.getElementById('productTable1').style.display = 'none';
+        document.getElementById('productTable2').style.display = 'none';
+        document.getElementById('productTable3').style.display = 'inline';
+       }
+       
+    });
 
      function showListOrders(){
         document.getElementById('summary').style.display = 'none';
+        document.getElementById('users').style.display = 'none';
+        document.getElementById('products').style.display = 'none';
         document.getElementById('orders').style.display = 'inline';
      }
 
      function showSummary(){
         document.getElementById('summary').style.display = 'inline';
         document.getElementById('orders').style.display = 'none';
+        document.getElementById('products').style.display = 'none';
+        document.getElementById('users').style.display = 'none';
+     }
+
+     function showUsers(){
+        document.getElementById('summary').style.display = 'none';
+        document.getElementById('orders').style.display = 'none';
+        document.getElementById('products').style.display = 'none';
+        document.getElementById('users').style.display = 'inline';
+     }
+
+     function showProducts(){
+        document.getElementById('summary').style.display = 'none';
+        document.getElementById('orders').style.display = 'none';
+        document.getElementById('users').style.display = 'none';
+        document.getElementById('products').style.display = 'inline';
+     }
+
+     function onShowUpdateForm(id,username,fullname,idcardnumber,phonenumber,address,role){
+        document.getElementById('id').value = id;
+        document.getElementById('username').value = username;
+        document.getElementById('fullname').value = fullname;
+        document.getElementById('idcardnumber').value = idcardnumber;
+        document.getElementById('phonenumber').value = phonenumber;
+        document.getElementById('address').value = address;
+        document.getElementById('role').value = role;
+        document.getElementById('password').value = '';
+        document.getElementById('retypepassword').value = '';
+     }
+
+     function onShowDeleteBooth(id,name){
+      document.getElementById('boothid').value = id;
+      document.getElementById('boothname').value = name;
      }
 
     </script>
