@@ -625,6 +625,7 @@ img {
   display: inline;
   float: left;
   width: 100%;
+  margin-bottom:10px;
 }
 #menu .menu-area {
   float: left;
