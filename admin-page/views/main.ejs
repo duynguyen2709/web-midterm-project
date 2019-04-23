@@ -240,13 +240,13 @@
                 <div class="row">
 
                       <div class="col-md-10">
-                      <iframe
+                      <!-- <iframe
                         src="http://chart-scttshop.herokuapp.com/public/dashboard/19a88397-0e3d-4483-b967-1488691ccf1d"
                         frameborder="0"
                         style="width:120%;"
                         height="600"
                         allowtransparency
-                    ></iframe>
+                    ></iframe> -->
                   </div>
                   <!-- /.col -->
                 </div>
@@ -270,6 +270,10 @@
             <div class="box">
               <div class="box-header">
                 <h3 class="box-title">Danh Sách Người Dùng</h3>
+                <a href="#" class="btn btn-sm btn-info btn-flat pull-right"
+                data-toggle="modal" data-target="#dlgupdate"
+                onclick="onShowInsertUser();return false;"
+                >Thêm Người Dùng Mới</a>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
@@ -284,6 +288,7 @@
                     <th>Số Điện Thoại</th>
                     <th>Địa Chỉ</th>
                     <th>Cấp Độ</th>
+                    <th></th>
                     <th></th>
                   </tr>
                   </thead>
@@ -302,6 +307,10 @@
                       onclick="onShowUpdateForm(1,'naduy','Nguyễn Anh Duy',
                       '123456789','0948202709','Đồng Nai',0);"
                       >Chỉnh Sửa</Button></td>
+                      <td><Button class="btn btn-block btn-danger btn-sm"
+                        data-toggle="modal" data-target="#dlgXóauser"
+                        onclick="onShowXóaUser(1,'naduy');"
+                        >Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -318,6 +327,10 @@
                       onclick="onShowUpdateForm(2,'vtduy','Võ Tấn Duy',
                       '135792468','0900112233','TP.HCM',1);"
                       >Chỉnh Sửa</Button></td>
+                      <td><Button class="btn btn-block btn-danger btn-sm"
+                        data-toggle="modal" data-target="#dlgXóauser"
+                        onclick="onShowXóaUser(2,'vtduy');"
+                        >Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>3</td>
@@ -333,6 +346,10 @@
                       onclick="onShowUpdateForm(3,'dcduy','Đinh Công Duy',
                       '987654321','0840123445','TP.HCM',2);"
                       >Chỉnh Sửa</Button></td>
+                      <td><Button class="btn btn-block btn-danger btn-sm"
+                        data-toggle="modal" data-target="#dlgXóauser"
+                        onclick="onShowXóaUser(3,'dcduy');"
+                        >Xóa</Button></td>
                   </tr>
                   
                   
@@ -376,8 +393,8 @@
                     <td>3</td>
                     <td>50</td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(1,'Áo');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgXóabooth"
+                      onclick="onShowXóaBooth(1,'Áo');">Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -385,8 +402,8 @@
                     <td>4</td>
                     <td>55</td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(2,'Quần');"
+                      data-toggle="modal" data-target="#dlgXóabooth"
+                      onclick="onShowXóaBooth(2,'Quần');"
                       >Xóa</Button></td>
                   </tr>
                   <tr>
@@ -395,8 +412,8 @@
                     <td>2</td>
                     <td>35</td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(3,'Nón');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgXóabooth"
+                      onclick="onShowXóaBooth(3,'Nón');">Xóa</Button></td>
                   </tr>
                   
                   </tfoot>
@@ -435,8 +452,8 @@
                       data-toggle="modal" data-target="#dlgupdate"
                       >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(1,'Áo Sơ Mi');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgXóabooth"
+                      onclick="onShowXóaBooth(1,'Áo Sơ Mi');">Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -448,8 +465,8 @@
                       data-toggle="modal" data-target="#dlgupdate"
                       >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(2,'Áo Thun Tay Dài');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgXóabooth"
+                      onclick="onShowXóaBooth(2,'Áo Thun Tay Dài');">Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>3</td>
@@ -461,8 +478,8 @@
                       data-toggle="modal" data-target="#dlgupdate"
                       >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(3,'Áo Hoodie');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgXóabooth"
+                      onclick="onShowXóaBooth(3,'Áo Hoodie');">Xóa</Button></td>
                   </tr>
                   
                   </tfoot>
@@ -492,8 +509,8 @@
                       data-toggle="modal" data-target="#dlgupdate"
                       >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(1,'Quần Kaki');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgXóabooth"
+                      onclick="onShowXóaBooth(1,'Quần Kaki');">Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -505,8 +522,8 @@
                       data-toggle="modal" data-target="#dlgupdate"
                       >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(2,'Quần Dài');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgXóabooth"
+                      onclick="onShowXóaBooth(2,'Quần Dài');">Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>3</td>
@@ -518,8 +535,8 @@
                       data-toggle="modal" data-target="#dlgupdate"
                       >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(3,'Quần Short');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgXóabooth"
+                      onclick="onShowXóaBooth(3,'Quần Short');">Xóa</Button></td>
                   </tr>
 
                   <tr>
@@ -532,8 +549,8 @@
                       data-toggle="modal" data-target="#dlgupdate"
                       >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(4,'Quần Thun Đi Biển');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgXóabooth"
+                      onclick="onShowXóaBooth(4,'Quần Thun Đi Biển');">Xóa</Button></td>
                   </tr>
                   
                   </tfoot>
@@ -563,8 +580,8 @@
                       data-toggle="modal" data-target="#dlgupdate"
                       >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(1,'Nón Kết');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgXóabooth"
+                      onclick="onShowXóaBooth(1,'Nón Kết');">Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -576,8 +593,8 @@
                       data-toggle="modal" data-target="#dlgupdate"
                       >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(2,'Nón Vành Rộng');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgXóabooth"
+                      onclick="onShowXóaBooth(2,'Nón Vành Rộng');">Xóa</Button></td>
                   </tr>
                 
                   </tfoot>
@@ -800,7 +817,7 @@
       <div class="modal-content">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Chỉnh Sửa Thông Tin</h4>
+              <h4 class="modal-title">Chỉnh Sửa/ Thêm Thông Tin Người Dùng</h4>
           </div>
 
           <div class="modal-body">
@@ -848,8 +865,8 @@
                   </div>
                   
 
-                  <button type="button" class="btn btn-info" data-dismiss="modal">Update</button>
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-info" data-dismiss="modal">Cập Nhật</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
               </form>
           </div>
 
@@ -857,8 +874,8 @@
   </div>
 </div>
 
-<!-- Modal Delete Booth -->
-<div id="dlgdeletebooth" class="modal fade" role="dialog">
+<!-- Modal Xóa Booth -->
+<div id="dlgXóabooth" class="modal fade" role="dialog">
     <div class="modal-dialog"  style="padding-top: 10%;">
   
         <!-- Modal content-->
@@ -879,14 +896,45 @@
                         <input type="text" class="form-control" id="boothname" readonly>
                     </div>
                   
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Xóa</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                 </form>
             </div>
   
         </div>
     </div>
   </div>
+
+  <!-- Modal Xóa Booth -->
+<div id="dlgXóauser" class="modal fade" role="dialog">
+  <div class="modal-dialog"  style="padding-top: 10%;">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Xóa Người Dùng</h4>
+          </div>
+
+          <div class="modal-body">
+              <form action="#" method="POST">
+                  <div class="form-group">
+                      <label for="id" class="control-label">ID:</label>
+                      <input type="number" class="form-control" id="deluserid"  readonly>
+                  </div>
+                  <div class="form-group">
+                      <label for="boothname" class="control-label">Tên Người Dùng:</label>
+                      <input type="text" class="form-control" id="delusername" readonly>
+                  </div>
+                
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Xóa</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+              </form>
+          </div>
+
+      </div>
+  </div>
+</div>
 
 <!-- ./wrapper -->
 
@@ -983,10 +1031,28 @@
         document.getElementById('retypepassword').value = '';
      }
 
-     function onShowDeleteBooth(id,name){
+     function onShowXóaBooth(id,name){
       document.getElementById('boothid').value = id;
       document.getElementById('boothname').value = name;
      }
+
+     function onShowXóaUser(id,name){
+      document.getElementById('deluserid').value = id;
+      document.getElementById('delusername').value = name;
+     }
+
+     function onShowInsertUser(){
+        document.getElementById('id').value = '';
+        document.getElementById('username').value = '';
+        document.getElementById('fullname').value = '';
+        document.getElementById('idcardnumber').value = '';
+        document.getElementById('phonenumber').value = '';
+        document.getElementById('address').value = '';
+        document.getElementById('role').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('retypepassword').value = '';
+     }
+
 
     </script>
 
