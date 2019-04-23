@@ -308,8 +308,8 @@
                       '123456789','0948202709','Đồng Nai',0);"
                       >Chỉnh Sửa</Button></td>
                       <td><Button class="btn btn-block btn-danger btn-sm"
-                        data-toggle="modal" data-target="#dlgXóauser"
-                        onclick="onShowXóaUser(1,'naduy');"
+                        data-toggle="modal" data-target="#dlgdeleteuser"
+                        onclick="onShowDeleteUser(1,'naduy');"
                         >Xóa</Button></td>
                   </tr>
                   <tr>
@@ -328,8 +328,8 @@
                       '135792468','0900112233','TP.HCM',1);"
                       >Chỉnh Sửa</Button></td>
                       <td><Button class="btn btn-block btn-danger btn-sm"
-                        data-toggle="modal" data-target="#dlgXóauser"
-                        onclick="onShowXóaUser(2,'vtduy');"
+                        data-toggle="modal" data-target="#dlgdeleteuser"
+                        onclick="onShowDeleteUser(2,'vtduy');"
                         >Xóa</Button></td>
                   </tr>
                   <tr>
@@ -347,8 +347,8 @@
                       '987654321','0840123445','TP.HCM',2);"
                       >Chỉnh Sửa</Button></td>
                       <td><Button class="btn btn-block btn-danger btn-sm"
-                        data-toggle="modal" data-target="#dlgXóauser"
-                        onclick="onShowXóaUser(3,'dcduy');"
+                        data-toggle="modal" data-target="#dlgdeleteuser"
+                        onclick="onShowDeleteUser(3,'dcduy');"
                         >Xóa</Button></td>
                   </tr>
                   
@@ -372,7 +372,9 @@
             <div class="box">
               <div class="box-header">
                 <h3 class="box-title">Danh Sách Gian Hàng</h3>
-                <a href="#" class="btn btn-sm btn-info btn-flat pull-right">Tạo Gian Hàng Mới</a>
+                <a href="#" class="btn btn-sm btn-info btn-flat pull-right"
+                data-toggle="modal" data-target="#dlginsertbooth"
+                >Tạo Gian Hàng Mới</a>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
@@ -393,8 +395,8 @@
                     <td>3</td>
                     <td>50</td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgXóabooth"
-                      onclick="onShowXóaBooth(1,'Áo');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(1,'Áo');">Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -402,8 +404,8 @@
                     <td>4</td>
                     <td>55</td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgXóabooth"
-                      onclick="onShowXóaBooth(2,'Quần');"
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(2,'Quần');"
                       >Xóa</Button></td>
                   </tr>
                   <tr>
@@ -412,8 +414,8 @@
                     <td>2</td>
                     <td>35</td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgXóabooth"
-                      onclick="onShowXóaBooth(3,'Nón');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(3,'Nón');">Xóa</Button></td>
                   </tr>
                   
                   </tfoot>
@@ -425,7 +427,10 @@
             <div class="box">
               <div class="box-header">
                 <h3 class="box-title">Danh Sách Sản Phẩm Thuộc Gian Hàng Trên</h3>
-                <a href="#" class="btn btn-sm btn-info btn-flat pull-right">Thêm Sản Phẩm Mới</a>
+                <a href="#" class="btn btn-sm btn-info btn-flat pull-right"
+                data-toggle="modal" data-target="#dlgproduct"
+                onclick="onShowInsertProduct();return false;"
+                >Thêm Sản Phẩm Mới</a>
               </div>
               <!-- /.box-header -->
               <div class="box-body" id="productTable1">
@@ -437,7 +442,6 @@
                     <th>Loại</th>
                     <th>Số Lượng</th>
                     <th>Đơn Giá</th>
-                    <th>Chỉnh Sửa Thông Tin</th>
                     <th>Xóa Sản Phẩm</th>
                   </tr>
                   </thead>
@@ -448,12 +452,9 @@
                     <td>Áo</td>
                     <td>15</td>
                     <td>250.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-primary btn-sm"
-                      data-toggle="modal" data-target="#dlgupdate"
-                      >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgXóabooth"
-                      onclick="onShowXóaBooth(1,'Áo Sơ Mi');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(1,'Áo Sơ Mi');">Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -461,12 +462,9 @@
                     <td>Áo</td>
                     <td>15</td>
                     <td>350.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-primary btn-sm"
-                      data-toggle="modal" data-target="#dlgupdate"
-                      >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgXóabooth"
-                      onclick="onShowXóaBooth(2,'Áo Thun Tay Dài');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(2,'Áo Thun Tay Dài');">Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>3</td>
@@ -474,12 +472,9 @@
                     <td>Áo</td>
                     <td>20</td>
                     <td>400.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-primary btn-sm"
-                      data-toggle="modal" data-target="#dlgupdate"
-                      >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgXóabooth"
-                      onclick="onShowXóaBooth(3,'Áo Hoodie');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(3,'Áo Hoodie');">Xóa</Button></td>
                   </tr>
                   
                   </tfoot>
@@ -494,7 +489,6 @@
                     <th>Loại</th>
                     <th>Số Lượng</th>
                     <th>Đơn Giá</th>
-                    <th>Chỉnh Sửa Thông Tin</th>
                     <th>Xóa Sản Phẩm</th>
                   </tr>
                   </thead>
@@ -505,12 +499,9 @@
                     <td>Quần</td>
                     <td>25</td>
                     <td>550.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-primary btn-sm"
-                      data-toggle="modal" data-target="#dlgupdate"
-                      >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgXóabooth"
-                      onclick="onShowXóaBooth(1,'Quần Kaki');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(1,'Quần Kaki');">Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -518,12 +509,9 @@
                     <td>Quần</td>
                     <td>15</td>
                     <td>350.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-primary btn-sm"
-                      data-toggle="modal" data-target="#dlgupdate"
-                      >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgXóabooth"
-                      onclick="onShowXóaBooth(2,'Quần Dài');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(2,'Quần Dài');">Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>3</td>
@@ -531,12 +519,9 @@
                     <td>Quần</td>
                     <td>10</td>
                     <td>400.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-primary btn-sm"
-                      data-toggle="modal" data-target="#dlgupdate"
-                      >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgXóabooth"
-                      onclick="onShowXóaBooth(3,'Quần Short');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(3,'Quần Short');">Xóa</Button></td>
                   </tr>
 
                   <tr>
@@ -545,12 +530,9 @@
                     <td>Quần</td>
                     <td>5</td>
                     <td>150.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-primary btn-sm"
-                      data-toggle="modal" data-target="#dlgupdate"
-                      >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgXóabooth"
-                      onclick="onShowXóaBooth(4,'Quần Thun Đi Biển');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(4,'Quần Thun Đi Biển');">Xóa</Button></td>
                   </tr>
                   
                   </tfoot>
@@ -565,7 +547,6 @@
                     <th>Loại</th>
                     <th>Số Lượng</th>
                     <th>Đơn Giá</th>
-                    <th>Chỉnh Sửa Thông Tin</th>
                     <th>Xóa Sản Phẩm</th>
                   </tr>
                   </thead>
@@ -576,12 +557,9 @@
                     <td>Nón</td>
                     <td>15</td>
                     <td>100.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-primary btn-sm"
-                      data-toggle="modal" data-target="#dlgupdate"
-                      >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgXóabooth"
-                      onclick="onShowXóaBooth(1,'Nón Kết');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(1,'Nón Kết');">Xóa</Button></td>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -589,12 +567,9 @@
                     <td>Nón</td>
                     <td>20</td>
                     <td>150.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-primary btn-sm"
-                      data-toggle="modal" data-target="#dlgupdate"
-                      >Chỉnh Sửa</Button></td>
                     <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgXóabooth"
-                      onclick="onShowXóaBooth(2,'Nón Vành Rộng');">Xóa</Button></td>
+                      data-toggle="modal" data-target="#dlgdeletebooth"
+                      onclick="onShowDeleteBooth(2,'Nón Vành Rộng');">Xóa</Button></td>
                   </tr>
                 
                   </tfoot>
@@ -715,98 +690,60 @@
             
           </div>
           
-          <div class="box-footer clearfix">
-            <a href="#" class="btn btn-sm btn-info btn-flat pull-left">Tạo Đơn Hàng Mới</a>
-             </div>
         </div>
         </div>
       </div>
 
     </section>
+   
 
-       
 
-      <div class="row">
-        <!-- Left col -->
-        
-        </div>
-        <!-- /.col -->
+</div>
 
-        <!-- <div class="col-md-4">
-          
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Recently Added Products</h3>
+<div id="dlgproduct" class="modal fade" role="dialog">
+  <div class="modal-dialog"  style="padding-top: 10%;">
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              <ul class="products-list product-list-in-box">
-                <li class="item">
-                  <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Samsung TV
-                      <span class="label label-warning pull-right">$1800</span></a>
-                    <span class="product-description">
-                          Samsung 32" 1080p 60Hz LED Smart HDTV.
-                        </span>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Bicycle
-                      <span class="label label-info pull-right">$700</span></a>
-                    <span class="product-description">
-                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                        </span>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Xbox One <span
-                        class="label label-danger pull-right">$350</span></a>
-                    <span class="product-description">
-                          Xbox One Console Bundle with Halo Master Chief Collection.
-                        </span>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">PlayStation 4
-                      <span class="label label-success pull-right">$399</span></a>
-                    <span class="product-description">
-                          PlayStation 4 500GB Console (PS4)
-                        </span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="box-footer text-center">
-              <a href="javascript:void(0)" class="uppercase">View All Products</a>
-            </div>
+      <!-- Modal content-->
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Chỉnh Sửa/ Thêm Thông Tin Sản Phẩm</h4>
           </div>
-        </div>
+
+          <div class="modal-body">
+              <form action="#" method="POST">
+                  <div class="form-group">
+                      <label for="id" class="control-label">ID:</label>
+                      <input type="number" class="form-control" id="productid"  readonly required>
+                  </div>
+                  <div class="form-group">
+                      <label for="username" class="control-label">Tên Sản Phẩm:</label>
+                      <input type="text" class="form-control" id="productname">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="role" class="control-label">Loại:</label>
+                    <select id="producttype">
+                      <option value="0" selected>Áo</option>
+                      <option value="1" selected>Quần</option>
+                      <option value="2" selected>Nón</option>
+                    </select>               
+                  </div>
+                  <div class="form-group">
+                      <label for="productquantity" class="control-label">Số Lượng:</label>
+                      <input type="number" class="form-control" id="productquantity">
+                  </div>
+                  <div class="form-group">
+                    <label for="productquantity" class="control-label">Đơn Giá:</label>
+                    <input type="number" class="form-control" id="productprice">
+                </div>
+                  <button type="button" class="btn btn-info" data-dismiss="modal">Cập Nhật</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+              </form>
+          </div>
+
       </div>
-    </section>
   </div>
-  <!-- /.content-wrapper -->
-
-
 </div>
 
 <!-- Modal Update -->
@@ -875,7 +812,7 @@
 </div>
 
 <!-- Modal Xóa Booth -->
-<div id="dlgXóabooth" class="modal fade" role="dialog">
+<div id="dlgdeletebooth" class="modal fade" role="dialog">
     <div class="modal-dialog"  style="padding-top: 10%;">
   
         <!-- Modal content-->
@@ -906,7 +843,7 @@
   </div>
 
   <!-- Modal Xóa Booth -->
-<div id="dlgXóauser" class="modal fade" role="dialog">
+<div id="dlgdeleteuser" class="modal fade" role="dialog">
   <div class="modal-dialog"  style="padding-top: 10%;">
 
       <!-- Modal content-->
@@ -928,6 +865,37 @@
                   </div>
                 
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Xóa</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+              </form>
+          </div>
+
+      </div>
+  </div>
+</div>
+
+
+<div id="dlginsertbooth" class="modal fade" role="dialog">
+  <div class="modal-dialog"  style="padding-top: 10%;">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Thêm Người Dùng</h4>
+          </div>
+
+          <div class="modal-body">
+              <form action="#" method="POST">
+                  <div class="form-group">
+                      <label for="id" class="control-label">ID:</label>
+                      <input type="number" class="form-control" value="4" readonly>
+                  </div>
+                  <div class="form-group">
+                      <label for="boothname" class="control-label">Tên Gian Hàng:</label>
+                      <input type="text" class="form-control" >
+                  </div>
+                
+                  <button type="button" class="btn btn-info" data-dismiss="modal">Thêm</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
               </form>
           </div>
@@ -1031,12 +999,12 @@
         document.getElementById('retypepassword').value = '';
      }
 
-     function onShowXóaBooth(id,name){
+     function onShowDeleteBooth(id,name){
       document.getElementById('boothid').value = id;
       document.getElementById('boothname').value = name;
      }
 
-     function onShowXóaUser(id,name){
+     function onShowDeleteUser(id,name){
       document.getElementById('deluserid').value = id;
       document.getElementById('delusername').value = name;
      }
@@ -1051,6 +1019,15 @@
         document.getElementById('role').value = '';
         document.getElementById('password').value = '';
         document.getElementById('retypepassword').value = '';
+     }
+
+     function onShowInsertProduct(){
+        document.getElementById('productid').value = '';
+        document.getElementById('productname').value = '';
+        document.getElementById('producttype').value = '';
+        document.getElementById('productquantity').value = '';
+        document.getElementById('productprice').value = '';
+        
      }
 
 
