@@ -5,15 +5,11 @@ var boothController = require('../controllers/boothController');
 var orderController = require('../controllers/orderController');
 var productController = require('../controllers/productController');
 var userController = require('../controllers/userController');
+var chartController = require('../controllers/chartController');
 
-/* GET home page. */
-router.post('/', function(req, res, next) {
-  res.render('main', { title: 'Admin Page' });
-});
+router.get('/', chartController.index);
 
-/// user ROUTES ///
-
-router.get('/', userController.index);
+/// user ROUTES //
 
 // POST request for creating user.
 router.post('/users/create', userController.user_create);

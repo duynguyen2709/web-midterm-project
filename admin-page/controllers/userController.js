@@ -1,7 +1,3 @@
-exports.index = function(req, res) {
-    res.send('NOT IMPLEMENTED: User Home Page');
-};
-
 // Display list of all users.
 exports.user_list = function(req, res) {
     res.send('NOT IMPLEMENTED: user list');

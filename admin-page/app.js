@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var mainRouter = require('./routes/main');
+var chartRouter = require('./routes/chart');
 
 var app = express();
 
@@ -21,6 +22,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/main',mainRouter);
+app.use('/chart',chartRouter);
+
 
 app.use(function(req, res, next) {
   if(req.protocol !== 'http') {

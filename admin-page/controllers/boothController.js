@@ -1,4 +1,3 @@
-
 // Display list of all booths.
 exports.booth_list = function(req, res) {
     res.send('NOT IMPLEMENTED: booth list');
