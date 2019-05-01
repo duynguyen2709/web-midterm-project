@@ -1,0 +1,126 @@
+
+<!-- jQuery 3 -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- Sparkline -->
+<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<!-- jvectormap  -->
+<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<!-- SlimScroll -->
+<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- ChartJS -->
+<script src="bower_components/chart.js/Chart.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+
+<script>
+
+  window.onload=function(){
+       $(function(){
+           if(window.location.protocol==="https:")
+               window.location.protocol="http";
+       });
+   }
+
+   $('#boothTable').find('tr').click( function(){
+     const index = ($(this).index()+1).toString();
+
+     if (index=="1"){
+      document.getElementById('productTable1').style.display = 'inline';
+      document.getElementById('productTable2').style.display = 'none';
+      document.getElementById('productTable3').style.display = 'none';
+     }
+     else if (index=="2"){
+      document.getElementById('productTable1').style.display = 'none';
+      document.getElementById('productTable2').style.display = 'inline';
+      document.getElementById('productTable3').style.display = 'none';
+     }
+     else if (index=="3"){
+      document.getElementById('productTable1').style.display = 'none';
+      document.getElementById('productTable2').style.display = 'none';
+      document.getElementById('productTable3').style.display = 'inline';
+     }
+     
+  });
+
+   function showListOrders(){
+      document.getElementById('summary').style.display = 'none';
+      document.getElementById('users').style.display = 'none';
+      document.getElementById('products').style.display = 'none';
+      document.getElementById('orders').style.display = 'inline';
+   }
+
+   function showSummary(){
+      document.getElementById('summary').style.display = 'inline';
+      document.getElementById('orders').style.display = 'none';
+      document.getElementById('products').style.display = 'none';
+      document.getElementById('users').style.display = 'none';
+   }
+
+   function showUsers(){
+      document.getElementById('summary').style.display = 'none';
+      document.getElementById('orders').style.display = 'none';
+      document.getElementById('products').style.display = 'none';
+      document.getElementById('users').style.display = 'inline';
+   }
+
+   function showProducts(){
+      document.getElementById('summary').style.display = 'none';
+      document.getElementById('orders').style.display = 'none';
+      document.getElementById('users').style.display = 'none';
+      document.getElementById('products').style.display = 'inline';
+   }
+
+   function onShowUpdateForm(id,username,fullname,idcardnumber,phonenumber,address,role){
+      document.getElementById('id').value = id;
+      document.getElementById('username').value = username;
+      document.getElementById('fullname').value = fullname;
+      document.getElementById('idcardnumber').value = idcardnumber;
+      document.getElementById('phonenumber').value = phonenumber;
+      document.getElementById('address').value = address;
+      document.getElementById('role').value = role;
+      document.getElementById('password').value = '';
+      document.getElementById('retypepassword').value = '';
+   }
+
+   function onShowDeleteBooth(id,name){
+    document.getElementById('boothid').value = id;
+    document.getElementById('boothname').value = name;
+   }
+
+   function onShowDeleteUser(id,name){
+    document.getElementById('deluserid').value = id;
+    document.getElementById('delusername').value = name;
+   }
+
+   function onShowInsertUser(){
+      document.getElementById('id').value = '';
+      document.getElementById('username').value = '';
+      document.getElementById('fullname').value = '';
+      document.getElementById('idcardnumber').value = '';
+      document.getElementById('phonenumber').value = '';
+      document.getElementById('address').value = '';
+      document.getElementById('role').value = '';
+      document.getElementById('password').value = '';
+      document.getElementById('retypepassword').value = '';
+   }
+
+   function onShowInsertProduct(){
+      document.getElementById('productid').value = '';
+      document.getElementById('productname').value = '';
+      document.getElementById('producttype').value = '';
+      document.getElementById('productquantity').value = '';
+      document.getElementById('productprice').value = '';
+      
+   }
+
+
+</script>

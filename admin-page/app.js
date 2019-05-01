@@ -5,7 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var mainRouter = require('./routes/main');
+
 var app = express();
 
 // view engine setup
@@ -19,11 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-app.post('/main', function(req, res){
-  res.render('main', { title: 'Admin Page' });
-});
+app.use('/main',mainRouter);
 
 app.use(function(req, res, next) {
   if(req.protocol !== 'http') {
