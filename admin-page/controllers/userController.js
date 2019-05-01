@@ -1,3 +1,7 @@
+exports.index = function(req, res) {
+    res.render('layouts/user', { title: 'Admin Page' });
+};
+
 // Display list of all users.
 exports.user_list = function(req, res) {
     res.send('NOT IMPLEMENTED: user list');

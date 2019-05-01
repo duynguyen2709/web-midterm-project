@@ -1,4 +1,6 @@
-
+exports.index = function(req, res) {
+    res.render('layouts/product', { title: 'Admin Page' });
+};
 
 // Display list of all products.
 exports.product_list = function(req, res) {
@@ -11,7 +13,7 @@ exports.product_detail = function(req, res) {
 };
 
 // Handle product create on POST.
-exports.product_create_post = function(req, res) {
+exports.product_create = function(req, res) {
     res.send('NOT IMPLEMENTED: product create POST');
 };
 

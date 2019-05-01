@@ -1,3 +1,7 @@
+exports.index = function(req, res) {
+    res.render('layouts/product', { title: 'Admin Page' });
+};
+
 // Display list of all booths.
 exports.booth_list = function(req, res) {
     res.send('NOT IMPLEMENTED: booth list');

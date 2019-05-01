@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<% include ../common/preheader%>
+
+<body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+    <% include ../common/header%>
+    <% include ../common/sidebar%>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+      <!-- Main content -->
+      <section class="content">
+
+        <div id="users">
+          <div class="row">
+            <div class="col-xs-12">
+              
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Danh Sách Người Dùng</h3>
+                  <a href="#" class="btn btn-sm btn-info btn-flat pull-right"
+                  data-toggle="modal" data-target="#dlgupdate"
+                  onclick="onShowInsertUser();return false;"
+                  >Thêm Người Dùng Mới</a>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  <table id="userTable" class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Tên Tài Khoản</th>
+                      <th>Họ Và Tên</th>
+                      <th>Mật Khẩu</th>
+                      <th>Số CMND</th>
+                      <th>Số Điện Thoại</th>
+                      <th>Địa Chỉ</th>
+                      <th>Cấp Độ</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>naduy</td>
+                      <td>Nguyễn Anh Duy</td>
+                      <td>******</td>
+                      <td>123456789</td>
+                      <td>0948202709</td>
+                      <td>Đồng Nai</td>
+                      <td>Quản Trị Viên</td>
+                      <td><Button class="btn btn-block btn-primary btn-sm"
+                        data-toggle="modal" data-target="#dlgupdate"
+                        onclick="onShowUpdateForm(1,'naduy','Nguyễn Anh Duy',
+                        '123456789','0948202709','Đồng Nai',0);"
+                        >Chỉnh Sửa</Button></td>
+                        <td><Button class="btn btn-block btn-danger btn-sm"
+                          data-toggle="modal" data-target="#dlgdeleteuser"
+                          onclick="onShowDeleteUser(1,'naduy');"
+                          >Xóa</Button></td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>vtduy</td>
+                      <td>Võ Tấn Duy</td>
+                      <td>******</td>
+                      <td>135792468</td>
+                      <td>0900112233</td>
+                      <td>TP.HCM</td>
+                      <td>Quản Lý</td>
+                      <td><Button 
+                        class="btn btn-block btn-primary btn-sm"
+                        data-toggle="modal" data-target="#dlgupdate"
+                        onclick="onShowUpdateForm(2,'vtduy','Võ Tấn Duy',
+                        '135792468','0900112233','TP.HCM',1);"
+                        >Chỉnh Sửa</Button></td>
+                        <td><Button class="btn btn-block btn-danger btn-sm"
+                          data-toggle="modal" data-target="#dlgdeleteuser"
+                          onclick="onShowDeleteUser(2,'vtduy');"
+                          >Xóa</Button></td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>dcduy</td>
+                      <td>Đinh Công Duy</td>
+                      <td>******</td>
+                      <td>987654321</td>
+                      <td>0840123445</td>
+                      <td>TP.HCM</td>
+                      <td>Người Dùng</td>
+                      <td><Button class="btn btn-block btn-primary btn-sm"
+                        data-toggle="modal" data-target="#dlgupdate"
+                        onclick="onShowUpdateForm(3,'dcduy','Đinh Công Duy',
+                        '987654321','0840123445','TP.HCM',2);"
+                        >Chỉnh Sửa</Button></td>
+                        <td><Button class="btn btn-block btn-danger btn-sm"
+                          data-toggle="modal" data-target="#dlgdeleteuser"
+                          onclick="onShowDeleteUser(3,'dcduy');"
+                          >Xóa</Button></td>
+                    </tr>
+                    
+                    
+                    </tfoot>
+                  </table>
+                </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+
+      </section>
+
+    </div>
+
+    <%include ../common/script%>
+
+</body>
+
+</html>
