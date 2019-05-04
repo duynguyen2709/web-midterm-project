@@ -7,6 +7,10 @@ var expressLayouts=require('express-ejs-layouts');
 
 
 var app = express();
+var indexRoutes = require('./routes/index.js');
+var userRoutes=require('./routes/user.js');
+var productRoutes=require('./routes/product.js');
+var orderRoutes=require('./routes/order.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,8 +28,12 @@ app.use(expressLayouts)
 
 
 
-app.get('/', function(req, res) {
-  res.render('HomePage');
+app.use('/', indexRoutes);
+app.use('/user',userRoutes);
+app.use('/products',productRoutes);
+app.use('/order',orderRoutes);
+/*app.get('/', function(req, res) {
+  res.render('home/homepage',{ title: 'Daily Shop' });
 });
 app.get('/user', function(req, res) {
   res.render('/MyAccount');
@@ -58,7 +66,7 @@ app.get('/Customer-Orders', function(req, res) {
 });
 app.get('/OrderDetail', function(req, res) {
   res.render('Order-Detail');
-});
+});*/
 
 
 
