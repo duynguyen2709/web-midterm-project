@@ -7,13 +7,13 @@ exports.product_list = function(req, res) {
 // Display list of all products of specific type.
 exports.product_list_type = function(req, res) {
     const type=req.body.type;
-    res.render('product',{type: type});
+    res.render('product/product',{type: type});
 };
 
 // Display detail page for a specific product.
 exports.product_detail = function(req, res) {
     //const type=req.body.id;
-    res.render('product_detail'/*,{id: id}*/)
+    res.render('product/product_detail'/*,{id: id}*/)
 };
 
 
