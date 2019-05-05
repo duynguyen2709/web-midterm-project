@@ -1,5 +1,5 @@
 exports.index = function(req, res) {
-    res.render('layouts/product', { title: 'Admin Page' });
+    res.render('product/product', { title: 'Admin Page' });
 };
 
 // Display list of all booths.

@@ -1,5 +1,5 @@
 exports.index = function(req, res) {
-    res.render('layouts/user', { title: 'Admin Page' });
+    res.render('user/user', { title: 'Admin Page' });
 };
 
 // Display list of all users.
