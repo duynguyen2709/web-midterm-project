@@ -1,5 +1,5 @@
 exports.index = function(req, res) {
-    res.render('layouts/order', { title: 'Admin Page' });
+    res.render('order/order', { title: 'Admin Page' });
 };
 
 // Display list of all orders.
