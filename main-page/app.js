@@ -11,6 +11,8 @@ var indexRoutes = require('./routes/index.js');
 var userRoutes=require('./routes/user.js');
 var productRoutes=require('./routes/product.js');
 var orderRoutes=require('./routes/order.js');
+var checkoutRoutes=require('./routes/checkout.js');
+var carttRoutes=require('./routes/mycart.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,41 +34,9 @@ app.use('/', indexRoutes);
 app.use('/user',userRoutes);
 app.use('/products',productRoutes);
 app.use('/order',orderRoutes);
-/*app.get('/', function(req, res) {
-  res.render('home/homepage',{ title: 'Daily Shop' });
-});
-app.get('/user', function(req, res) {
-  res.render('/MyAccount');
-});
-app.get('/MyCart', function(req, res) {
-  res.render('MyCart');
-});
-app.get('/MyAccount', function(req, res) {
-  res.render('MyAccount');
-});
+app.use('/check-out',checkoutRoutes);
+app.use('/my-cart',carttRoutes);
 
-app.get('/ProductDetail', function(req, res) {
-  res.render('ProductDetail');
-});
-
-app.get('/AccountDetail', function(req, res) {
-  res.render('AccountDetail');
-});
-app.get('/Aokhoac', function(req, res) {
-  res.render('Aokhoac');
-});
-app.get('/Checkout', function(req, res) {
-  res.render('Checkout');
-});
-app.get('/ForgotPassword', function(req, res) {
-  res.render('ForgotPassword');
-});
-app.get('/Customer-Orders', function(req, res) {
-  res.render('Customer-Orders');
-});
-app.get('/OrderDetail', function(req, res) {
-  res.render('Order-Detail');
-});*/
 
 
 
