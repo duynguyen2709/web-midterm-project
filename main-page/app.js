@@ -15,6 +15,8 @@ var productRoutes=require('./routes/product.js');
 var orderRoutes=require('./routes/order.js');
 var checkoutRoutes=require('./routes/checkout.js');
 var carttRoutes=require('./routes/mycart.js');
+//
+//
 
 
 // view engine setup
