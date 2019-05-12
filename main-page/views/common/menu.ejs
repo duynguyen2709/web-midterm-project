@@ -16,12 +16,15 @@
             <!-- Left nav -->
             <ul class="nav navbar-nav">
               <li><a href="/">Trang chủ</a></li>
-              <li><a href="/products/type?id=1">Áo thun</a></li>
-              <li><a href="/products/type?id=1">Áo khoác</a></li>
-              <li><a href="/products/type?id=1">Áo sơ mi</a></li>
-              <li><a href="/products/type?id=1">Quần</a></li>
-              <li><a href="/products/type?id=1">Giày</a></li>
-              <li><a href="/products/type?id=1">Balo</a></li>  
+              <%
+              console.log(listCategory);  
+              listCategory.forEach(category=>{
+                  
+                  %><li>
+                    <a href="/products/type?id=<%= category['Id'] %>" ><%= category['name'] %></a>
+                  </li><%
+                });
+              %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

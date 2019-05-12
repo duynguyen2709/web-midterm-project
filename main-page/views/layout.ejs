@@ -55,8 +55,40 @@
 
  
   <% include ./common/header %>
-  <% include ./common/menu %>
 
+
+  <!-- menu -->
+<section id="menu">
+    <div class="container">
+      <div class="menu-area">
+        <!-- Navbar -->
+        <div class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>          
+          </div>
+          <div class="navbar-collapse collapse">
+            <!-- Left nav -->
+            <ul class="nav navbar-nav">
+              <li><a href="/">Trang chủ</a></li>
+              <%
+                listCategory.forEach(category=>{
+                  %><li>
+                    <a href="/products/type?id=<%= category['Id'] %>" ><%= category['name'] %></a>
+                  </li><%
+                });
+              %>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>       
+    </div>
+  </section>
+  <!-- / menu -->
   <%- body %>
    
 
