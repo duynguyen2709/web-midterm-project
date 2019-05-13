@@ -29,18 +29,25 @@
                         <% for(var i=0; i<info.length; i++) {%>
                       <li>
                         <figure>
-                            <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=<%= info[i].image %> /></a>
+                            <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="250px" alt="polo shirt img" src=<%= info[i].image %> /></a>
                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                               <figcaption>
                               <h4 class="aa-product-title"><a href="/products/detail?id=<%=info[i].productID%>""><%= info[i].productName %></a></h4>
-                              <span class="aa-product-price"><%= info[i].sellPrice %> VNĐ</span><span class="aa-product-price"><del><%= info[i].sellPrice*10 %> đ</del></span>
+                              <span class="aa-product-price"><%= info[i].discountPrice %> VNĐ</span>
+                              <%if (info[i].promotionDiscount > 0) { %>
+                                <span class="aa-product-price"><del><%= info[i].sellPrice %> đ</del></span>
+                              <% } %>
+                              
                             </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">
                             <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= info[i].image %>','/products/detail?id=<%=info[i].productID %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
                           </div>
                           <!-- product badge -->
-                          <span class="aa-badge aa-sale" href="#">SALE!</span>
+                          <%if (info[i].promotionDiscount > 0) { %>
+                            <span class="aa-badge aa-sale">SALE!</span>
+                            <span class="aa-badge-right aa-hot"><%= info[i].promotionDiscount %> %</span>
+                            <% } %>
                          
                         </li>
                         <% } %>
