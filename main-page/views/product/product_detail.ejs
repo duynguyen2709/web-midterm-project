@@ -6,9 +6,11 @@
        <div class="aa-catg-head-banner-content">
          <h2>T-Shirt</h2>
          <ol class="breadcrumb">
-           <li><a href="/">Home</a></li>         
-           <li><a href="#">Áo thun</a></li>
-           <li class="active">Áo Thun Nam KiriMaru Basic ST51</li>
+           <li><a href="/">Home</a></li>  
+           <%       
+           %><li><a href="/products/type?id=<%=productInfo.categoryID%>"><%= listCategory.find(x => x.Id === productInfo.categoryID).name%></a></li><%
+           %><li class="active"><%=productInfo.productName%></li><%
+           %>
          </ol>
        </div>
       </div>
@@ -24,25 +26,25 @@
            <div class="aa-product-details-area">
              <div class="aa-product-details-content">
                <div class="row">
-                 <!-- Modal view slider -->
-                 <div class="col-md-5 col-sm-5 col-xs-12">                              
-                   <div class="aa-product-view-slider">                                
-                     <div id="demo-1" class="simpleLens-gallery-container">
-                       <div class="simpleLens-container">
-                         <div class="simpleLens-big-image-container"><a data-lens-image="../img/view-slider/large/8.jpg" class="simpleLens-lens-image"><img src="../img/t-shirt/8.jpg" class="simpleLens-big-image"></a></div>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
-                 <!-- Modal view content -->
+                  <%
+                  %><div class="col-md-5 col-sm-5 col-xs-12">                              
+                      <div class="aa-product-view-slider">                                
+                        <div id="demo-1" class="simpleLens-gallery-container">
+                          <div class="simpleLens-container">
+                            <div class="simpleLens-big-image-container"><img src="<%=productInfo.image%>" class="simpleLens-big-image"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                  <div class="col-md-7 col-sm-7 col-xs-12">
                    <div class="aa-product-view-content">
-                     <h3>Áo Thun Nam KiriMaru Basic ST51</h3>
+                     <h3><%=productInfo.productName%></h3>
                      <div class="aa-price-block">
-                       <span class="aa-product-view-price">99.000 VNĐ</span>
+
+                       <span class="aa-product-view-price"><%=productInfo.discountPrice%></span>
                        <p class="aa-product-avilability">Tình trạng: <span>Có sẵn hàng</span></p>
                      </div>
-                     <p>Với chất vải cotton thoáng mát cùng hai màu đỏ và xám đầy năng động phù hợp với những người trẻ thích chuyển động.</p>
+                     <p><%=productInfo.description%></p>
                      <h4>Size</h4>
                      <div class="aa-prod-view-size">
                        <a href="#">S</a>
@@ -70,7 +72,7 @@
                          </select>
                        </form>
                        <p class="aa-prod-category">
-                         Mục: <a href="#">Áo thun KiriMaru</a>
+                         Mục: <a href="/products/type?id=<%=productInfo.categoryID%>"><%= listCategory.find(x => x.Id === productInfo.categoryID).name%></a>
                        </p>
                      </div>
                      <div class="aa-prod-view-bottom">
@@ -79,7 +81,8 @@
                    </div>
                  </div>
                </div>
-             </div>
+             </div><%
+             %>
              <div class="aa-product-details-bottom">
                <ul class="nav nav-tabs" id="myTab2">
                  <li><a href="#description" data-toggle="tab">Mô tả</a></li>
@@ -89,14 +92,10 @@
                <!-- Tab panes -->
                <div class="tab-content">
                  <div class="tab-pane fade in active" id="description">
-                   <p>Với chất vải cotton thoáng mát cùng hai màu đỏ và xám đầy năng động phù hợp với những người trẻ thích chuyển động.</p>
-                   <ul>
-                     <li>Màu sắc trẻ trung</li>
-                     <li>Chất liệu thoáng mát</li>
-                     <li>Nhiều sự lựa chọn về kích cỡ</li>
-                     <li>Kiểu dáng trẻ trung năng động</li>
-                     
-                   </ul>
+                   <%
+                   %><p><%=productInfo.description%></p><%
+                   %>
+                   
                   
                  </div>
                  <div class="tab-pane fade " id="review">
@@ -300,70 +299,70 @@
                        <span class="aa-badge aa-sold-out" href="#">Hết hàng!</span>
                     </li>                                                                                             
                </ul>
-               <!-- quick view modal -->                  
-               <div class="modal fade" id="quick-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                 <div class="modal-dialog">
-                   <div class="modal-content">                      
-                     <div class="modal-body">
-                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                       <div class="row">
-                         <!-- Modal view slider -->
-                         <div class="col-md-6 col-sm-6 col-xs-12">                              
-                           <div class="aa-product-view-slider">                                
-                             <div class="simpleLens-gallery-container" id="demo-1">
-                               <div class="simpleLens-container">
-                                   <div class="simpleLens-big-image-container">
-                                       <a class="simpleLens-lens-image"  <!--data-lens-image=""--></a>>
-                                           <img id="showImg" src="" class="simpleLens-big-image">
-                                       </a>
-                                   </div>
-                               </div>
-                             </div>
-                           </div>
-                         </div>
-                         <!-- Modal view content -->
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="aa-product-view-content">
-                              <h3>Tên sản phẩm</h3>
-                              <div class="aa-price-block">
-                                <span class="aa-product-view-price">Giá tiền</span>
-                                <p class="aa-product-avilability">Tình trạng: <span>Hàng có sẵn</span></p>
-                              </div>
-                              <p>Mô tả sản phẩm</p>
-                              <h4>Size</h4>
-                              <div class="aa-prod-view-size">
-                                <a href="#">S</a>
-                                <a href="#">M</a>
-                                <a href="#">L</a>
-                                <a href="#">XL</a>
-                              </div>
-                              <div class="aa-prod-quantity">
-                                <form action="">
-                                  <select name="" id="">
-                                    <option value="0" selected="1">1</option>
-                                    <option value="1">2</option>
-                                    <option value="2">3</option>
-                                    <option value="3">4</option>
-                                    <option value="4">5</option>
-                                    <option value="5">6</option>
-                                  </select>
-                                </form>
-                                <p class="aa-prod-category">
-                                  Loại: <a href="#"></a>
-                                </p>
-                              </div>
-                              <div class="aa-prod-view-bottom">
-                                <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                                <a href="ProductDetail" class="aa-add-to-cart-btn">Chi tiết</a>
-                             </div>
-                           </div>
-                         </div>
-                       </div>
-                     </div>                        
-                   </div><!-- /.modal-content -->
-                 </div><!-- /.modal-dialog -->
-               </div>
-               <!-- / quick view modal -->   
+ <!-- quick view modal -->                  
+ <div class="modal fade" id="quick-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">                      
+        <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div class="row">
+            <!-- Modal view slider -->
+            <div class="col-md-6 col-sm-6 col-xs-12">                              
+              <div class="aa-product-view-slider">                                
+                <div class="simpleLens-gallery-container" id="demo-1">
+                  <div class="simpleLens-container">
+                      <div class="simpleLens-big-image-container">
+                          <a class="simpleLens-lens-image"  <!--data-lens-image=""--></a>>
+                              <img id="showImg" src="" class="simpleLens-big-image">
+                          </a>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal view content -->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+               <div class="aa-product-view-content">
+                 <h3>Tên sản phẩm</h3>
+                 <div class="aa-price-block">
+                   <span class="aa-product-view-price">Giá tiền</span>
+                   <p class="aa-product-avilability">Tình trạng: <span>Hàng có sẵn</span></p>
+                 </div>
+                 <p>Mô tả sản phẩm</p>
+                 <h4>Size</h4>
+                 <div class="aa-prod-view-size">
+                   <a href="#">S</a>
+                   <a href="#">M</a>
+                   <a href="#">L</a>
+                   <a href="#">XL</a>
+                 </div>
+                 <div class="aa-prod-quantity">
+                   <form action="">
+                     <select name="" id="">
+                       <option value="0" selected="1">1</option>
+                       <option value="1">2</option>
+                       <option value="2">3</option>
+                       <option value="3">4</option>
+                       <option value="4">5</option>
+                       <option value="5">6</option>
+                     </select>
+                   </form>
+                   <p class="aa-prod-category">
+                     Loại: <a href="#"></a>
+                   </p>
+                 </div>
+                 <div class="aa-prod-view-bottom">
+                   <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                   <a href="ProductDetail" class="aa-add-to-cart-btn">Chi tiết</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>                        
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+  <!-- / quick view modal -->    
              </div>  
            </div>
          </div>

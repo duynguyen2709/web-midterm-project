@@ -1,4 +1,5 @@
 var category=require('../model/category')
+var product=require('../model/product')
 
 // // Display list of all products.
 // exports.product_list = function(req, res) {
@@ -30,15 +31,12 @@ exports.product_list_type = async function(req, res) {
     {         
         await category.getListCategory();     
     }
-    const type=req.body.type;
-    res.render('product/product',{listCategory: category.listCategory});
     var urlProduct= url+req.query.id+'/products';
-    console.log("Temp: ",urlProduct);
     var info;
     request(urlProduct, (error, response, body)=> {
         if (!error && response.statusCode === 200) {
         info = JSON.parse(body)
-        res.render('product/product',{info: info});
+        res.render('product/product',{info: info,listCategory: category.listCategory});
         } else {
         console.log("Got an error: ", error, ", status code: ", response.statusCode)
         }
@@ -55,8 +53,11 @@ exports.product_detail = async function(req, res) {
     {         
         await category.getListCategory();     
     }
-    //const type=req.body.id;
-    res.render('product/product_detail'/*,{id: id}*/,{listCategory: category.listCategory})
+    var productId= req.query.id
+    console.log(productId)
+    const productInfo= await product.getProductDetail(productId)   
+    
+    res.render('product/product_detail',{productInfo:productInfo, listCategory: category.listCategory})
 };
 
 

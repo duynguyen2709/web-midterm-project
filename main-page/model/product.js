@@ -9,4 +9,12 @@ exports.getPromoProduct=async()=>{
     this.promoProduct=result;
     //console.log(promoProduct)
 }
+exports.getProductDetail= async(ID)=>{
+    var url='https://api-scttshop.herokuapp.com/api/products/'+ID
+    const res= await fetch(url);
+    let  data=await res.json();
+
+    return data
+
+}
 
