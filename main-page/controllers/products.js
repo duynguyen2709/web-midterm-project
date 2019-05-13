@@ -56,7 +56,6 @@ exports.product_detail = async function(req, res) {
     var productId= req.query.id
     console.log(productId)
     const productInfo= await product.getProductDetail(productId)   
-    
     res.render('product/product_detail',{productInfo:productInfo, listCategory: category.listCategory})
 };
 

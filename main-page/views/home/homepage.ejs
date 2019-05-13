@@ -38,7 +38,7 @@
                                   </figcaption>
                                 </figure>                        
                                 <div class="aa-product-hvr-content">
-                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
+                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>','/products/detail?id=<%=product.productID %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
                                 </div>
                                 <!-- product badge -->
                                 <span class="aa-badge aa-sale" href="#"><%= product['promotionDiscount']%> %</span>
@@ -76,7 +76,7 @@
                                   </figcaption>
                                 </figure>                        
                                 <div class="aa-product-hvr-content">
-                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
+                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>','/products/detail?id=<%=product.productID %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
                                 </div>
                                 <!-- product badge -->
                                 <span class="aa-badge aa-sale" href="#"><%= product['promotionDiscount']%> %</span>
@@ -114,7 +114,7 @@
                                   </figcaption>
                                 </figure>                        
                                 <div class="aa-product-hvr-content">
-                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
+                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>','/products/detail?id=<%=product.productID %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
                                 </div>
                                 <!-- product badge -->
                                 <span class="aa-badge aa-sale" href="#"><%= product['promotionDiscount']%> %</span>
@@ -153,7 +153,7 @@
                                   </figcaption>
                                 </figure>                        
                                 <div class="aa-product-hvr-content">
-                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
+                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>','/products/detail?id=<%=product.productID %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
                                 </div>
                                 <!-- product badge -->
                                 <span class="aa-badge aa-sale" href="#"><%= product['promotionDiscount']%> %</span>
@@ -178,9 +178,10 @@
       <% include support %>
 </body>
 <script>
-  function clickSearch(linkimg)
+  function clickSearch(linkimg,linkP)
     {
-      document.getElementsByClassName("simpleLens-lens-image")[0].src=linkimg;
-      document.getElementById("showImg").src=linkimg;
+        document.getElementsByClassName("simpleLens-lens-image")[0].src=linkimg;
+        document.getElementById("showImg").src=linkimg;
+        document.getElementById("linkProduct").href=linkP;
     }
 </script>

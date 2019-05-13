@@ -37,7 +37,7 @@
                             </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">
-                            <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= info[i].image %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
+                            <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= info[i].image %>','/products/detail?id=<%=info[i].productID %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
                           </div>
                           <!-- product badge -->
                           <span class="aa-badge aa-sale" href="#">SALE!</span>
@@ -100,7 +100,7 @@
                       </div>
                       <div class="aa-prod-view-bottom">
                         <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                        <a href="/products/type?id=1" class="aa-add-to-cart-btn">Chi tiết</a>
+                        <a id="linkProduct" href="" class="aa-add-to-cart-btn">Chi tiết</a>
                       </div>
                     </div>
                   </div>
@@ -165,10 +165,11 @@
          </section>
   
       <script>
-          function clickSearch(linkimg)
+          function clickSearch(linkimg,linkP)
           {
-              document.getElementsByClassName("simpleLens-lens-image")[0].src=linkimg;
-              document.getElementById("showImg").src=linkimg;
+            document.getElementsByClassName("simpleLens-lens-image")[0].src=linkimg;
+        document.getElementById("showImg").src=linkimg;
+        document.getElementById("linkProduct").href=linkP;
           }
       </script>
       

@@ -177,127 +177,24 @@
              <div class="aa-product-related-item">
                <h3>Sản phẩm liên quan</h3>
                <ul class="aa-product-catg aa-related-item-slider">
-                 <!-- start single product item -->
-                 <li>
+                <% 
+                 
+                 productInfo.relatedProducts.forEach(product=>{
+                  %><li>
                     <figure>
-                        <a class="aa-product-img" href="#"><img src="../img/t-shirt/T-Shirt-U.jpg" alt="polo shirt img"></a>
-                        <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                          <figcaption>
-                          <h4 class="aa-product-title"><a href="ProductDetail">Áo Thun U Y2010 Basic A01</a></h4>
-                          <span class="aa-product-price">79.000 VNĐ</span><span class="aa-product-price"><del>150.000 đ</del></span>
-                        </figcaption>
-                      </figure>                        
-                      <div class="aa-product-hvr-content">
-                        <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('../img/t-shirt/T-Shirt-U.jpg')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
-                      </div>
-                      <!-- product badge -->
-                      <span class="aa-badge aa-sale" href="#">SALE!</span>
-                    </li>
-                    <!-- start single product item -->
-                    <li>
-                      <figure>
-                        <a class="aa-product-img" href="#"><img src="../img/t-shirt/T-Shirt- KiriMaru.jpg" alt="polo shirt img"></a>
-                        <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                         <figcaption>
-                          <h4 class="aa-product-title"><a href="ProductDetail">Áo Thun Nam KiriMaru Basic ST51</a></h4>
-                          <span class="aa-product-price">99.000 VNĐ</span>
-                        </figcaption>
-                      </figure>                         
-                      <div class="aa-product-hvr-content">
-                        <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('../img/t-shirt/T-Shirt- KiriMaru.jpg')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
-                      </div>
-                      <!-- product badge -->
-                       <span class="aa-badge aa-sold-out" href="#">Hết hàng!</span>
-                    </li>
-                    <!-- start single product item -->
-                    <li>
-                      <figure>
-                        <a class="aa-product-img" href="#"><img src="../img/t-shirt/T-Shirt- KiriMaru-2.jpg" alt="polo shirt img"></a>
-                        <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                         <figcaption>
-                          <h4 class="aa-product-title"><a href="ProductDetail">Áo Thun Nam KiriMaru Basic EM04</a></h4>
-                          <span class="aa-product-price">99.000 VNĐ</span><span class="aa-product-price"><del>$150.000 đ</del></span>
-                        </figcaption>
-                      </figure>                         
-                      <div class="aa-product-hvr-content">
-                        <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('../img/t-shirt/T-Shirt- KiriMaru-2.jpg')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
-                      </div>
-                    </li>
-                    <!-- start single product item -->
-                    <li>
-                            <figure>
-                              <a class="aa-product-img" href="#"><img src="../img/t-shirt/T-Shirt- KiriMaru-2.jpg" alt="polo shirt img"></a>
-                              <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                               <figcaption>
-                                <h4 class="aa-product-title"><a href="ProductDetail">Áo Thun Nam KiriMaru Basic EM04</a></h4>
-                                <span class="aa-product-price">99.000 VNĐ</span><span class="aa-product-price"><del>$150.000 đ</del></span>
-                              </figcaption>
-                            </figure>                         
-                            <div class="aa-product-hvr-content">
-                              <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('../img/t-shirt/T-Shirt- KiriMaru-2.jpg')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
-                            </div>
-                      <!-- product badge -->
-                      <span class="aa-badge aa-hot" href="#">HOT!</span>
-                    </li>
-                    <!-- start single product item -->
-                    <li>
-                            <figure>
-                              <a class="aa-product-img" href="#"><img src="../img/t-shirt/T-Shirt- KiriMaru-2.jpg" alt="polo shirt img"></a>
-                              <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                               <figcaption>
-                                <h4 class="aa-product-title"><a href="ProductDetail">Áo Thun Nam KiriMaru Basic EM04</a></h4>
-                                <span class="aa-product-price">99.000 VNĐ</span><span class="aa-product-price"><del>$150.000 đ</del></span>
-                              </figcaption>
-                            </figure>                         
-                            <div class="aa-product-hvr-content">
-                              <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('../img/t-shirt/T-Shirt- KiriMaru-2.jpg')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
-                            </div>
-                    </li>
-                    <!-- start single product item -->
-                    <li>
-                            <figure>
-                              <a class="aa-product-img" href="#"><img src="../img/t-shirt/T-Shirt- KiriMaru-2.jpg" alt="polo shirt img"></a>
-                              <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                               <figcaption>
-                                <h4 class="aa-product-title"><a href="ProductDetail">Áo Thun Nam KiriMaru Basic EM04</a></h4>
-                                <span class="aa-product-price">99.000 VNĐ</span><span class="aa-product-price"><del>$150.000 đ</del></span>
-                              </figcaption>
-                            </figure>                         
-                            <div class="aa-product-hvr-content">
-                              <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('../img/t-shirt/T-Shirt- KiriMaru-2.jpg')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
-                            </div>
-                          </li>
-                    <!-- start single product item -->
-                    <li>
-                            <figure>
-                              <a class="aa-product-img" href="#"><img src="../img/t-shirt/T-Shirt- KiriMaru-2.jpg" alt="polo shirt img"></a>
-                              <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                               <figcaption>
-                                <h4 class="aa-product-title"><a href="ProductDetail">Áo Thun Nam KiriMaru Basic EM04</a></h4>
-                                <span class="aa-product-price">99.000 VNĐ</span><span class="aa-product-price"><del>$150.000 đ</del></span>
-                              </figcaption>
-                            </figure>                         
-                            <div class="aa-product-hvr-content">
-                              <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('../img/t-shirt/T-Shirt- KiriMaru-2.jpg')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
-                            </div>
-                          </li>
-                    <!-- start single product item -->
-                    <li>
-                            <figure>
-                              <a class="aa-product-img" href="#"><img src="../img/t-shirt/T-Shirt- KiriMaru-2.jpg" alt="polo shirt img"></a>
-                              <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                               <figcaption>
-                                <h4 class="aa-product-title"><a href="ProductDetail">Áo Thun Nam KiriMaru Basic EM04</a></h4>
-                                <span class="aa-product-price">99.000 VNĐ</span><span class="aa-product-price"><del>$150.000 đ</del></span>
-                              </figcaption>
-                            </figure>                         
-                            <div class="aa-product-hvr-content">
-                              <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('../img/t-shirt/T-Shirt- KiriMaru-2.jpg')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
-                            </div>
-                          
-                      <!-- product badge -->
-                       <span class="aa-badge aa-sold-out" href="#">Hết hàng!</span>
-                    </li>                                                                                             
+                      <a class="aa-product-img" ><img src="<%= product['image'] %>" alt="img" style="height: 300px; width: 250px"></a>
+                      <a class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                        <figcaption>
+                        <h4 class="aa-product-title"><a href="/products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
+                        <span class="aa-product-price"><%= product['discountPrice']%> VNĐ</span><span class="aa-product-price"><del><%= product['sellPrice']%> đ</del></span>
+                      </figcaption>
+                    </figure>                        
+                    <div class="aa-product-hvr-content">
+                      <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>','/products/detail?id=<%=product.productID %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
+                    </div>
+                  </li><%
+                 })
+                %>                                                                                           
                </ul>
  <!-- quick view modal -->                  
  <div class="modal fade" id="quick-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -353,7 +250,7 @@
                  </div>
                  <div class="aa-prod-view-bottom">
                    <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                   <a href="ProductDetail" class="aa-add-to-cart-btn">Chi tiết</a>
+                   <a id="linkProduct" href="" class="aa-add-to-cart-btn">Chi tiết</a>
                 </div>
               </div>
             </div>
@@ -371,9 +268,10 @@
    </section>
    <!-- / product category -->
    <script>
-    function clickSearch(linkimg)
+    function clickSearch(linkimg,linkP)
     {
         document.getElementsByClassName("simpleLens-lens-image")[0].src=linkimg;
         document.getElementById("showImg").src=linkimg;
+        document.getElementById("linkProduct").href=linkP;
     }
 </script>
