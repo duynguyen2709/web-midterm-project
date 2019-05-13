@@ -25,11 +25,11 @@
                      </div>
                    </div>
                    <div class="aa-product-catg-body">
-                     <ul class="aa-product-catg">
+                     <ul class="aa-product-catg" style="margin-left:-35px;">
                         <% for(var i=0; i<info.length; i++) {%>
                       <li>
                         <figure>
-                            <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="250px" alt="polo shirt img" src=<%= info[i].image %> /></a>
+                            <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=<%= info[i].image %> /></a>
                             <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                               <figcaption>
                               <h4 class="aa-product-title"><a href="/products/detail?id=<%=info[i].productID%>""><%= info[i].productName %></a></h4>
