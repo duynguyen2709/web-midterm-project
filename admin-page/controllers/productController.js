@@ -1,4 +1,7 @@
+var product=require('../models/productModel');
+
 exports.index = function(req, res) {
+    product.productList();
     res.render('product/product', { title: 'Admin Page' });
 };
 
