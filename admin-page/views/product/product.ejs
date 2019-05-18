@@ -12,32 +12,65 @@
 
      <!-- Main content -->
      <section class="content">
-  
+        <%if (isLoading == true) { %>
+          <div id="loader"></div>
+          <div style="position: absolute;left: 47%;top:47%;width:50px;height:50px;"><p>Loading...</p></div>
+          <% } %>
+        
+      <!-- <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> -->
+
       <div id="products">
         <div class="row">
           <div class="col-xs-12">
             
             <div class="box">
               <div class="box-header">
-                <h3 class="box-title">Danh Sách Gian Hàng</h3>
+                <h3 class="box-title">Danh Sách Sản Phẩm</h3>
                 <a href="#" class="btn btn-sm btn-info btn-flat pull-right"
-                data-toggle="modal" data-target="#dlginsertbooth"
-                >Tạo Gian Hàng Mới</a>
+                data-toggle="modal" data-target="#dlginsertproduct"
+                >Thêm Sản Phẩm Mới</a>
               </div>
-              <!-- /.box-header -->
+              
               <div class="box-body">
-                <table id="boothTable" class="table table-bordered table-striped table-hover">
+                <table id="productTable" class="table table-bordered table-striped table-hover">
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Tên Gian Hàng</th>
-                    <th>Số Loại Sản Phẩm</th>
-                    <th>Tổng Số Sản Phẩm</th>
-                    <th>Xóa Gian Hàng</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Loại Sản Phẩm</th>
+                    <th>Nhà Sản Xuất</th>
+                    <th>Hình Ảnh</th>
+                    <th>Mô Tả</th>
+                    <th>Giá Nhập</th>
+                    <th>Giá Bán</th>
+                    <th>Số Lượng</th>
+                    <th>Trạng Thái</th>
+                    <th>Cập Nhật</th>
+                    <th>Xóa</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
+                      <% for(var i=0; i < listProduct.length; i++) {%>
+                              <tr>
+                                <td><%= listProduct[i].productID%></td>
+                                <td><%= listProduct[i].productName%></td>
+                                <td><%= listProduct[i].productName%></td>
+                                <td><%= listProduct[i].manufacturer%></td>                            
+                                <td><img width="50px" height="50px" src="<%= listProduct[i].image %>"/></td>
+                                <td><%= listProduct[i].description%></td>
+                                <td><%= listProduct[i].importPrice%></td>
+                                <td><%= listProduct[i].sellPrice%></td>
+                                <td><%= listProduct[i].quantity%></td>
+                                <td><%= listProduct[i].isActive%></td>
+                                <td><Button class="btn btn-block btn-primary btn-sm"
+                                  data-toggle="modal" data-target="#dlgdeletebooth"
+                                  >Chỉnh Sửa</Button></td>
+                                <td><Button class="btn btn-block btn-danger btn-sm"
+                                  data-toggle="modal" data-target="#dlgdeletebooth"
+                                  >Xóa</Button></td>
+                              </tr>
+                            <% } %>
+                  <!-- <tr>
                     <td>1</td>
                     <td>Áo</td>
                     <td>3</td>
@@ -64,7 +97,7 @@
                     <td><Button class="btn btn-block btn-danger btn-sm"
                       data-toggle="modal" data-target="#dlgdeletebooth"
                       onclick="onShowDeleteBooth(3,'Nón');">Xóa</Button></td>
-                  </tr>
+                  </tr> -->
                   
                   </tfoot>
                 </table>
@@ -72,7 +105,7 @@
               <!-- /.box-body -->
             </div>
 
-            <div class="box">
+            <!-- <div class="box">
               <div class="box-header">
                 <h3 class="box-title">Danh Sách Sản Phẩm Thuộc Gian Hàng Trên</h3>
                 <a href="#" class="btn btn-sm btn-info btn-flat pull-right"
@@ -80,7 +113,7 @@
                 onclick="onShowInsertProduct();return false;"
                 >Thêm Sản Phẩm Mới</a>
               </div>
-              <!-- /.box-header -->
+              
               <div class="box-body" id="productTable1">
                 <table class="table table-bordered table-striped table-hover">
                   <thead>
@@ -223,13 +256,9 @@
                   </tfoot>
                 </table>
               </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
+            </div> -->
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
 
     </section>

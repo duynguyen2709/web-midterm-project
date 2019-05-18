@@ -1,12 +1,11 @@
 
-<!-- jQuery 3 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<!-- <script src="dist/js/adminlte.min.js"></script> -->
 <!-- Sparkline -->
 <script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap  -->
@@ -21,8 +20,22 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 
+<!-- DataTables -->
+<script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
 <script>
-   
+   var $=jQuery.noConflict();
+   $('#productTable').DataTable();
+   //  $('#productTable').DataTable({
+   //    'paging'      : true,
+   //    'lengthChange': true,
+   //    'searching'   : true,
+   //    'ordering'    : true,
+   //    'info'        : true,
+   //    'autoWidth'   : true
+   //  })
+
    $(document).ready(function(){
                 /** add active class and stay opened when selected */
                 var url = window.location;
@@ -35,6 +48,7 @@
                 $('ul.treeview-menu a').filter(function() {
                      return this.href == url;
                 }).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
+
             });
 
   window.onload=function(){

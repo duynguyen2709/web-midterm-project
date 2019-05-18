@@ -1,8 +1,11 @@
 var product=require('../models/productModel');
 
-exports.index = function(req, res) {
-    product.productList();
-    res.render('product/product', { title: 'Admin Page' });
+exports.index = async function(req, res) {
+    
+    const listProduct = await product.productList();
+    res.render('product/product', { title: 'Admin Page',
+                                    listProduct: listProduct,
+                                    isLoading:false});
 };
 
 // Display list of all products.
