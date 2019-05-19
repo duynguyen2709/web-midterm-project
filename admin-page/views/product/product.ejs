@@ -54,11 +54,17 @@
                               <tr>
                                 <td><%= listProduct[i].productID%></td>
                                 <td><%= listProduct[i].productName%></td>
-                              
-                                <td><%= listProduct[i].subCategoryName%></td>
+                                
+                                <%if (listProduct[i].subCategoryName == null) { %>
+                                  <td><%= listProduct[i].categoryName%></td>
+                                  <% } else{ %>  %>
+                                    <td><%= listProduct[i].subCategoryName%></td>
+                                <% } %>
+                                
                                 <td><%= listProduct[i].manufacturer%></td>                            
-                                <td><img width="50px" height="50px" src="<%= listProduct[i].image %>"/></td>
-                                <td><%= listProduct[i].description%></td>
+                                <td><img width="64px" height="64px" src="<%= listProduct[i].image %>"/></td>
+                                <td><span><%= listProduct[i].description%></span></td>
+                            
                                 <td><%= listProduct[i].importPrice%></td>
                                 <td><%= listProduct[i].sellPrice%></td>
                                 <td><%= listProduct[i].quantity%></td>

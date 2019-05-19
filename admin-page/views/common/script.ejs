@@ -1,5 +1,3 @@
-
-
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
@@ -20,9 +18,23 @@
 <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
+
+<!-- wrap word in datatable cell -->
+<script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/ellipsis.js"></script>
+
 <script>
-   var $=jQuery.noConflict();
-   $('#productTable').DataTable();
+   var $ = jQuery.noConflict();
+   $('#productTable').DataTable({
+      columnDefs: [{
+            targets: 5,
+            render: $.fn.dataTable.render.ellipsis(128, false)
+         },
+         {
+            'searchable': false,
+            'targets': [4, 5, 8]
+         }
+      ]
+   });
    //  $('#productTable').DataTable({
    //    'paging'      : true,
    //    'lengthChange': true,
@@ -32,78 +44,76 @@
    //    'autoWidth'   : true
    //  })
 
-   $(document).ready(function(){
-                /** add active class and stay opened when selected */
-                var url = window.location;
-                // for sidebar menu entirely but not cover treeview
-                $('ul.sidebar-menu a').filter(function() {
-                     return this.href == url;
-                }).parent().addClass('active');
+   $(document).ready(function () {
+      /** add active class and stay opened when selected */
+      var url = window.location;
+      // for sidebar menu entirely but not cover treeview
+      $('ul.sidebar-menu a').filter(function () {
+         return this.href == url;
+      }).parent().addClass('active');
 
-                // for treeview
-                $('ul.treeview-menu a').filter(function() {
-                     return this.href == url;
-                }).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
+      // for treeview
+      $('ul.treeview-menu a').filter(function () {
+         return this.href == url;
+      }).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
 
-            });
+   });
 
-  window.onload=function(){
-       $(function(){
-           if(window.location.protocol==="https:")
-               window.location.protocol="http";
-       });
+   window.onload = function () {
+      $(function () {
+         if (window.location.protocol === "https:")
+            window.location.protocol = "http";
+      });
    }
 
-   $('#boothTable').find('tr').click( function(){
-     const index = ($(this).index()+1).toString();
+   $('#boothTable').find('tr').click(function () {
+      const index = ($(this).index() + 1).toString();
 
-     if (index=="1"){
-      document.getElementById('productTable1').style.display = 'inline';
-      document.getElementById('productTable2').style.display = 'none';
-      document.getElementById('productTable3').style.display = 'none';
-     }
-     else if (index=="2"){
-      document.getElementById('productTable1').style.display = 'none';
-      document.getElementById('productTable2').style.display = 'inline';
-      document.getElementById('productTable3').style.display = 'none';
-     }
-     else if (index=="3"){
-      document.getElementById('productTable1').style.display = 'none';
-      document.getElementById('productTable2').style.display = 'none';
-      document.getElementById('productTable3').style.display = 'inline';
-     }
-     
-  });
+      if (index == "1") {
+         document.getElementById('productTable1').style.display = 'inline';
+         document.getElementById('productTable2').style.display = 'none';
+         document.getElementById('productTable3').style.display = 'none';
+      } else if (index == "2") {
+         document.getElementById('productTable1').style.display = 'none';
+         document.getElementById('productTable2').style.display = 'inline';
+         document.getElementById('productTable3').style.display = 'none';
+      } else if (index == "3") {
+         document.getElementById('productTable1').style.display = 'none';
+         document.getElementById('productTable2').style.display = 'none';
+         document.getElementById('productTable3').style.display = 'inline';
+      }
 
-   function showListOrders(){
+   });
+
+   function showListOrders() {
       document.getElementById('summary').style.display = 'none';
       document.getElementById('users').style.display = 'none';
       document.getElementById('products').style.display = 'none';
       document.getElementById('orders').style.display = 'inline';
    }
 
-   function showSummary(){
+   function showSummary() {
       document.getElementById('summary').style.display = 'inline';
       document.getElementById('orders').style.display = 'none';
       document.getElementById('products').style.display = 'none';
       document.getElementById('users').style.display = 'none';
    }
 
-   function showUsers(){
+   function showUsers() {
       document.getElementById('summary').style.display = 'none';
       document.getElementById('orders').style.display = 'none';
       document.getElementById('products').style.display = 'none';
       document.getElementById('users').style.display = 'inline';
    }
 
-   function showProducts(){
+   function showProducts() {
       document.getElementById('summary').style.display = 'none';
       document.getElementById('orders').style.display = 'none';
       document.getElementById('users').style.display = 'none';
       document.getElementById('products').style.display = 'inline';
    }
 
-   function onShowUpdateForm(id,username,fullname,idcardnumber,phonenumber,address,role){
+   function onShowUpdateForm(id, username, fullname, idcardnumber, phonenumber, address, role) {
       document.getElementById('id').value = id;
       document.getElementById('username').value = username;
       document.getElementById('fullname').value = fullname;
@@ -115,17 +125,17 @@
       document.getElementById('retypepassword').value = '';
    }
 
-   function onShowDeleteBooth(id,name){
-    document.getElementById('boothid').value = id;
-    document.getElementById('boothname').value = name;
+   function onShowDeleteBooth(id, name) {
+      document.getElementById('boothid').value = id;
+      document.getElementById('boothname').value = name;
    }
 
-   function onShowDeleteUser(id,name){
-    document.getElementById('deluserid').value = id;
-    document.getElementById('delusername').value = name;
+   function onShowDeleteUser(id, name) {
+      document.getElementById('deluserid').value = id;
+      document.getElementById('delusername').value = name;
    }
 
-   function onShowInsertUser(){
+   function onShowInsertUser() {
       document.getElementById('id').value = '';
       document.getElementById('username').value = '';
       document.getElementById('fullname').value = '';
@@ -137,15 +147,12 @@
       document.getElementById('retypepassword').value = '';
    }
 
-   function onShowInsertProduct(){
+   function onShowInsertProduct() {
       document.getElementById('productid').value = '';
       document.getElementById('productname').value = '';
       document.getElementById('producttype').value = '';
       document.getElementById('productquantity').value = '';
       document.getElementById('productprice').value = '';
-      
+
    }
-
-
 </script>
-
