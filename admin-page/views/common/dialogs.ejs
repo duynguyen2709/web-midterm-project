@@ -1,64 +1,134 @@
-<div id="dlgproduct" class="modal fade" role="dialog">
-    <div class="modal-dialog"  style="padding-top: 10%;">
-  
+<!-- ############################### PROMOTION SECTION ###############################-->
+<div id="dlginsertpromotion" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Thêm Chương Trình Khuyến Mãi</h4>
+            </div>
+
+            <div class="modal-body">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="promotionID" class="control-label">ID:</label>
+                        <input type="number" class="form-control" id="promotionID" name="promotionID" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="promotionName" class="control-label">Tên Chương Trình Khuyến Mãi:</label>
+                        <input type="text" class="form-control" id="promotionName" name="promotionName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role" class="control-label">Sản Phẩm Áp Dụng:</label>
+                        <select id="producttype">
+                            <option value="0" selected>Áo</option>
+                            <option value="1" selected>Quần</option>
+                            <option value="2" selected>Nón</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="promotionDiscount" class="control-label">Phần Trăm Khuyến Mãi:</label>
+                        <input type="number" class="form-control" id="promotionDiscount" name="promotionDiscount"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeFrom" class="control-label">Thời Gian Bắt Đầu:</label>
+                        <div class='input-group date date-picker'>
+                            <input type="text" class="form-control" id="timeFrom"
+                                name="timeFrom" placeholder="YYYY-MM-DD HH:mm:ss"></input>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                           
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="timeTo" class="control-label">Thời Gian Kết Thúc:</label>
+                            <div class='input-group date date-picker'>
+                                <input type="text" class="form-control" id="timeTo"
+                                    name="timeTo" placeholder="YYYY-MM-DD HH:mm:ss"></input>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Thêm</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ############################### END PROMOTION SECTION ###############################-->
+
+<div id="dlgproduct" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Chỉnh Sửa/ Thêm Thông Tin Sản Phẩm</h4>
             </div>
-  
+
             <div class="modal-body">
                 <form action="#" method="POST">
                     <div class="form-group">
                         <label for="id" class="control-label">ID:</label>
-                        <input type="number" class="form-control" id="productid"  readonly required>
+                        <input type="number" class="form-control" id="productid" readonly required>
                     </div>
                     <div class="form-group">
                         <label for="username" class="control-label">Tên Sản Phẩm:</label>
                         <input type="text" class="form-control" id="productname">
                     </div>
-  
+
                     <div class="form-group">
-                      <label for="role" class="control-label">Loại:</label>
-                      <select id="producttype">
-                        <option value="0" selected>Áo</option>
-                        <option value="1" selected>Quần</option>
-                        <option value="2" selected>Nón</option>
-                      </select>               
+                        <label for="role" class="control-label">Loại:</label>
+                        <select id="producttype">
+                            <option value="0" selected>Áo</option>
+                            <option value="1" selected>Quần</option>
+                            <option value="2" selected>Nón</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="productquantity" class="control-label">Số Lượng:</label>
                         <input type="number" class="form-control" id="productquantity">
                     </div>
                     <div class="form-group">
-                      <label for="productquantity" class="control-label">Đơn Giá:</label>
-                      <input type="number" class="form-control" id="productprice">
-                  </div>
+                        <label for="productquantity" class="control-label">Đơn Giá:</label>
+                        <input type="number" class="form-control" id="productprice">
+                    </div>
                     <button type="button" class="btn btn-info" data-dismiss="modal">Cập Nhật</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                 </form>
             </div>
-  
+
         </div>
     </div>
-  </div>
-  
-  <div id="dlgupdate" class="modal fade" role="dialog">
-    <div class="modal-dialog"  style="padding-top: 10%;">
-  
+</div>
+
+<div id="dlgupdate" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Chỉnh Sửa/ Thêm Thông Tin Người Dùng</h4>
             </div>
-  
+
             <div class="modal-body">
                 <form action="#" method="POST">
                     <div class="form-group">
                         <label for="id" class="control-label">ID:</label>
-                        <input type="number" class="form-control" id="id"  readonly required>
+                        <input type="number" class="form-control" id="id" readonly required>
                     </div>
                     <div class="form-group">
                         <label for="username" class="control-label">Tên Tài Khoản:</label>
@@ -73,8 +143,8 @@
                         <input type="password" class="form-control" id="password">
                     </div>
                     <div class="form-group">
-                      <label for="retypepassword" class="control-label">Nhập Lại Mật Khẩu:</label>
-                      <input type="password" class="form-control" id="retypepassword">
+                        <label for="retypepassword" class="control-label">Nhập Lại Mật Khẩu:</label>
+                        <input type="password" class="form-control" id="retypepassword">
                     </div>
                     <div class="form-group">
                         <label for="idcardnumber" class="control-label">Số CMND:</label>
@@ -85,99 +155,102 @@
                         <input type="number" class="form-control" id="phonenumber">
                     </div>
                     <div class="form-group">
-                      <label for="address" class="control-label">Địa Chỉ:</label>
-                      <input type="text" class="form-control" id="address">
+                        <label for="address" class="control-label">Địa Chỉ:</label>
+                        <input type="text" class="form-control" id="address">
                     </div>
                     <div class="form-group">
-                      <label for="role" class="control-label">Cấp Độ:</label>
-                      <select id="role">
-                        <option value="0" selected>Quản Trị Viên</option>
-                        <option value="1" selected>Quản Lý</option>
-                        <option value="2" selected>Người Dùng</option>
-                      </select>
-                      
+                        <label for="role" class="control-label">Cấp Độ:</label>
+                        <select id="role">
+                            <option value="0" selected>Quản Trị Viên</option>
+                            <option value="1" selected>Quản Lý</option>
+                            <option value="2" selected>Người Dùng</option>
+                        </select>
+
                     </div>
-                    
-  
+
+
                     <button type="button" class="btn btn-info" data-dismiss="modal">Cập Nhật</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                 </form>
             </div>
-  
+
         </div>
     </div>
-  </div>
-  
-  <div id="dlgdeletebooth" class="modal fade" role="dialog">
-      <div class="modal-dialog"  style="padding-top: 10%;">
-    
-          <!-- Modal content-->
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title">Xóa Gian Hàng / Sản Phẩm</h4>
-              </div>
-    
-              <div class="modal-body">
-                  <form action="#" method="POST">
-                      <div class="form-group">
-                          <label for="id" class="control-label">ID:</label>
-                          <input type="number" class="form-control" id="boothid"  readonly required>
-                      </div>
-                      <div class="form-group">
-                          <label for="boothname" class="control-label">Tên Gian Hàng / Sản Phẩm:</label>
-                          <input type="text" class="form-control" id="boothname" readonly>
-                      </div>
-                    
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Xóa</button>
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                  </form>
-              </div>
-    
-          </div>
-      </div>
-    </div>
-  
-  <div id="dlgdeleteuser" class="modal fade" role="dialog">
-    <div class="modal-dialog"  style="padding-top: 10%;">
-  
+</div>
+
+<div id="dlgdeletebooth" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Xóa Người Dùng</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Xóa Gian Hàng / Sản Phẩm</h4>
             </div>
-  
+
             <div class="modal-body">
-                <form  method="POST" >
+                <form action="#" method="POST">
                     <div class="form-group">
                         <label for="id" class="control-label">ID:</label>
-                        <input type="number" class="form-control" id="deluserid"  readonly>
+                        <input type="number" class="form-control" id="boothid" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label for="boothname" class="control-label">Tên Gian Hàng / Sản Phẩm:</label>
+                        <input type="text" class="form-control" id="boothname" readonly>
+                    </div>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Xóa</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="dlgdeleteuser" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Xóa Người Dùng</h4>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="id" class="control-label">ID:</label>
+                        <input type="number" class="form-control" id="deluserid" readonly>
                     </div>
                     <div class="form-group">
                         <label for="boothname" class="control-label">Tên Người Dùng:</label>
                         <input type="text" class="form-control" id="delusername" readonly>
                     </div>
-                  
+
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Xóa</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                 </form>
             </div>
-  
+
         </div>
     </div>
-  </div>
-  
-  <div id="dlginsertbooth" class="modal fade" role="dialog">
-    <div class="modal-dialog"  style="padding-top: 10%;">
-  
+</div>
+
+<div id="dlginsertbooth" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Thêm Người Dùng</h4>
             </div>
-  
+
             <div class="modal-body">
                 <form action="#" method="POST">
                     <div class="form-group">
@@ -186,49 +259,51 @@
                     </div>
                     <div class="form-group">
                         <label for="boothname" class="control-label">Tên Gian Hàng:</label>
-                        <input type="text" class="form-control" >
+                        <input type="text" class="form-control">
                     </div>
-                  
+
                     <button type="button" class="btn btn-info" data-dismiss="modal">Thêm</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                 </form>
             </div>
-  
+
         </div>
     </div>
-  </div>
+</div>
 
 
 
 
-  <!-- ################################# PRODUCT ################################# -->
+<!-- ################################# PRODUCT ################################# -->
 
-  <div id="dlgdeleteproduct" class="modal fade" role="dialog">
-    <div class="modal-dialog"  style="padding-top: 10%;">
-  
+<div id="dlgdeleteproduct" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Xóa Sản Phẩm</h4>
             </div>
-  
+
             <div class="modal-body">
                 <form action="#" method="POST" id="formDeleteProduct">
                     <div class="form-group">
                         <label for="del_productID" class="control-label">ID:</label>
-                        <input type="number" class="form-control" name="productID" id="del_productID"  readonly required>
+                        <input type="number" class="form-control" name="productID" id="del_productID" readonly required>
                     </div>
                     <div class="form-group">
                         <label for="del_productName" class="control-label">Tên Sản Phẩm:</label>
                         <input type="text" class="form-control" name="productName" id="del_productName" readonly>
                     </div>
-                  
-                    <button type="submit" onclick="deleteProduct();return false;" class="btn btn-danger" data-dismiss="modal">Xóa</button>
+
+                    <button type="submit" onclick="deleteProduct();return false;" class="btn btn-danger"
+                        data-dismiss="modal">Xóa</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                 </form>
             </div>
-  
+
         </div>
     </div>
-  </div>
+</div>

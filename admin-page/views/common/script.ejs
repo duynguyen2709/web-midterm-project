@@ -1,5 +1,5 @@
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
 <!-- FastClick -->
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
@@ -20,6 +20,7 @@
 
 
 <script src="handlers/productHandler.js"></script>
+<script src="handlers/promotionHandler.js"></script>
 
 <!-- wrap word in datatable cell -->
 <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/ellipsis.js"></script>
@@ -48,6 +49,10 @@
    //  })
 
    $(document).ready(function () {
+      $('.date-picker').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss',
+            sideBySide: true
+        });
       /** add active class and stay opened when selected */
       var url = window.location;
       // for sidebar menu entirely but not cover treeview
@@ -60,7 +65,8 @@
          return this.href == url;
       }).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
 
-      loadData();
+      //loadPromotion();
+     // loadProduct();
    });
 
    window.onload = function () {

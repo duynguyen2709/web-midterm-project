@@ -2,7 +2,7 @@ const BASE_PATH = window.location.protocol + "//" + window.location.host + "/pro
 
 var $dataTable;
 
-function loadData() {
+function loadProduct() {
     $dataTable = $('#productTable').DataTable({
         "ajax": {
             "type": "GET",
@@ -21,43 +21,44 @@ function loadData() {
             },
             {
                 "data": "categoryName",
-                "defaultContent": ""
+                "defaultContent": "",
+                "render": function (data, type, row) {
+
+                    if (row.subCategoryName === null) {
+                        return row.categoryName;
+                    } else {
+
+                        return row.subCategoryName;
+                    }
+                }
             },
             {
                 "data": "manufacturer",
                 "defaultContent": ""
-            },
-            {
+            }, {
                 "render": function (data, type, JsonResultRow, meta) {
-                    return '<img width="64px" height="64px" src="' + JsonResultRow.image+'">';
+                    return '<img width="64px" height="64px" src="' + JsonResultRow.image + '">';
                 }
-            },
-            {
+            }, {
                 "data": "description",
                 "defaultContent": ""
-            },
-            {
+            }, {
                 "data": "importPrice",
                 "defaultContent": ""
-            },
-            {
+            }, {
                 "data": "sellPrice",
                 "defaultContent": ""
-            },
-            {
+            }, {
                 "data": "quantity",
                 "defaultContent": ""
-            },
-            {
+            }, {
                 "data": "isActive",
                 "defaultContent": ""
-            },
-            {
+            }, {
                 data: null,
                 className: "center",
                 defaultContent: '<Button class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#dlgdeleteproduct">Chỉnh Sửa</Button>'
-            },
-            {
+            }, {
                 data: null,
                 className: "center",
                 defaultContent: '<Button class="btn btn-block btn-danger btn-sm" data-toggle="modal" data-target="#dlgdeleteproduct"">Xóa</Button>'

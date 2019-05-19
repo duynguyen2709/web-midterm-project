@@ -11,9 +11,14 @@ var orderRouter = require('./routes/order');
 var productRouter = require('./routes/product');
 var userRouter = require('./routes/user');
 var categoryRouter = require('./routes/category');
+var promotionRouter = require('./routes/promotion');
 
 var app = express();
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -34,6 +39,8 @@ app.use('/order',orderRouter);
 app.use('/product',productRouter);
 app.use('/user',userRouter);
 app.use('/category',categoryRouter);
+app.use('/promotion',promotionRouter);
+
 
 app.use(function(req, res, next) {
   if(req.protocol !== 'http') {
