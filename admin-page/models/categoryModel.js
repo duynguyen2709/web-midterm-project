@@ -6,6 +6,5 @@ module.exports.categoryList = async () => {
         return response.data;
     });
 
-    console.log(result);
     return result;
 };

@@ -22,6 +22,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
+app.use("/handlers",express.static(path.join(__dirname, 'handlers')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -31,7 +34,6 @@ app.use('/order',orderRouter);
 app.use('/product',productRouter);
 app.use('/user',userRouter);
 app.use('/category',categoryRouter);
-
 
 app.use(function(req, res, next) {
   if(req.protocol !== 'http') {

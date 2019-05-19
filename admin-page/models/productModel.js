@@ -6,6 +6,5 @@ module.exports.productList = async () => {
         return response.data;
     });
 
-    console.log(result);
     return result;
 };

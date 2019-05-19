@@ -1,13 +1,15 @@
 var product=require('../models/productModel');
 
-exports.index = async function(req, res) {
+exports.index = function(req, res) {
     
-    const listProduct = await product.productList();
-    res.render('product/product', { title: 'Admin Page',
-                                    listProduct: listProduct,
-                                    isLoading:false});
+    res.render('product/product', { title: 'Admin Page'});
 };
 
+exports.getListProduct = async function(req,res){
+
+    const listProduct = await product.productList();
+    res.send(JSON.stringify(listProduct));
+}
 // Display list of all products.
 exports.product_list = function(req, res) {
     res.send('NOT IMPLEMENTED: product list');

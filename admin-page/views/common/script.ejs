@@ -18,22 +18,26 @@
 <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
+
+<script src="handlers/productHandler.js"></script>
+
 <!-- wrap word in datatable cell -->
 <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/ellipsis.js"></script>
 
 <script>
-   var $ = jQuery.noConflict();
-   $('#productTable').DataTable({
-      columnDefs: [{
-            targets: 5,
-            render: $.fn.dataTable.render.ellipsis(128, false)
-         },
-         {
-            'searchable': false,
-            'targets': [4, 5, 8]
-         }
-      ]
-   });
+   
+   // $('#productTable').DataTable({
+   //    columnDefs: [{
+   //          targets: 5,
+   //          render: $.fn.dataTable.render.ellipsis(128, false)
+   //       },
+   //       {
+   //          'searchable': false,
+   //          'targets': [4, 5, 8]
+   //       }
+   //    ]
+   // });
+
    //  $('#productTable').DataTable({
    //    'paging'      : true,
    //    'lengthChange': true,
@@ -56,6 +60,7 @@
          return this.href == url;
       }).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
 
+      loadData();
    });
 
    window.onload = function () {
@@ -165,6 +170,7 @@
    
       const data = serialFormToJSon("#formDeleteProduct");
       console.log(data);
+      loadData();
    }
 
    // ####################################################################

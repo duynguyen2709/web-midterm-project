@@ -5,6 +5,8 @@ var productController = require('../controllers/productController');
 
 router.get('/', productController.index);
 
+router.get('/get',productController.getListProduct);
+
 //POST request for creating product.
 router.post('/products/create', productController.product_create);
 
