@@ -70,10 +70,11 @@
                                 <td><%= listProduct[i].quantity%></td>
                                 <td><%= listProduct[i].isActive%></td>
                                 <td><Button class="btn btn-block btn-primary btn-sm"
-                                  data-toggle="modal" data-target="#dlgdeletebooth"
+                                  data-toggle="modal" data-target="#dlgdeleteproduct"
                                   >Chỉnh Sửa</Button></td>
                                 <td><Button class="btn btn-block btn-danger btn-sm"
-                                  data-toggle="modal" data-target="#dlgdeletebooth"
+                                  data-toggle="modal" data-target="#dlgdeleteproduct"
+                                  onclick="onShowDeleteProduct('<%= listProduct[i].productID%>','<%= listProduct[i].productName%>')"
                                   >Xóa</Button></td>
                               </tr>
                             <% } %>
