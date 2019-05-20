@@ -5,19 +5,14 @@ var categoryController = require('../controllers/categoryController');
 
 router.get('/', categoryController.index);
 
-// GET request for creating category. NOTE This must come before route for id (i.e. display category).
-router.post('/category/create', categoryController.category_create);
+router.get('/get/:categoryID',categoryController.getCategory);
 
-// DELETE request to delete category.
-router.delete('/category/:id/delete', categoryController.category_delete);
+router.get('/get',categoryController.getListCategory);
 
-// PUT request to update category.
-router.put('/category/:id/update', categoryController.category_update);
+router.post('/delete',categoryController.deleteCategory);
 
-// GET request for one category.
-router.get('/category/:id', categoryController.category_detail);
+router.post('/insert',categoryController.insertCategory);
 
-// GET request for list of all category.
-router.get('/category', categoryController.category_list);
+router.post('/update',categoryController.updateCategory);
 
 module.exports = router;

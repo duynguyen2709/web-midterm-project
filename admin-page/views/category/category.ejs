@@ -10,234 +10,50 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
-     <!-- Main content -->
-     <section class="content">
-  
-      <div id="products">
-        <div class="row">
-          <div class="col-xs-12">
-            
-            <div class="box">
-              <div class="box-header">
-                <h3 class="box-title">Danh Sách Gian Hàng</h3>
-                <a href="#" class="btn btn-sm btn-info btn-flat pull-right"
-                data-toggle="modal" data-target="#dlginsertbooth"
-                >Tạo Gian Hàng Mới</a>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body">
-                <table id="boothTable" class="table table-bordered table-striped table-hover">
-                  <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Tên Gian Hàng</th>
-                    <th>Số Loại Sản Phẩm</th>
-                    <th>Tổng Số Sản Phẩm</th>
-                    <th>Xóa Gian Hàng</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Áo</td>
-                    <td>3</td>
-                    <td>50</td>
-                    <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(1,'Áo');">Xóa</Button></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Quần</td>
-                    <td>4</td>
-                    <td>55</td>
-                    <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(2,'Quần');"
-                      >Xóa</Button></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Nón</td>
-                    <td>2</td>
-                    <td>35</td>
-                    <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(3,'Nón');">Xóa</Button></td>
-                  </tr>
-                  
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.box-body -->
-            </div>
+      <!-- Main content -->
+      <section class="content">
 
-            <div class="box">
-              <div class="box-header">
-                <h3 class="box-title">Danh Sách Sản Phẩm Thuộc Gian Hàng Trên</h3>
-                <a href="#" class="btn btn-sm btn-info btn-flat pull-right"
-                data-toggle="modal" data-target="#dlgproduct"
-                onclick="onShowInsertProduct();return false;"
-                >Thêm Sản Phẩm Mới</a>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body" id="productTable1">
-                <table class="table table-bordered table-striped table-hover">
-                  <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Tên Sản Phẩm</th>
-                    <th>Loại</th>
-                    <th>Số Lượng</th>
-                    <th>Đơn Giá</th>
-                    <th>Xóa Sản Phẩm</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Áo Sơ Mi</td>
-                    <td>Áo</td>
-                    <td>15</td>
-                    <td>250.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(1,'Áo Sơ Mi');">Xóa</Button></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Áo Thun Tay Dài</td>
-                    <td>Áo</td>
-                    <td>15</td>
-                    <td>350.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(2,'Áo Thun Tay Dài');">Xóa</Button></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Áo Hoodie</td>
-                    <td>Áo</td>
-                    <td>20</td>
-                    <td>400.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(3,'Áo Hoodie');">Xóa</Button></td>
-                  </tr>
-                  
-                  </tfoot>
-                </table>
-              </div>
-              <div class="box-body" id="productTable2" style="display:none;">
-                <table class="table table-bordered table-striped table-hover">
-                  <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Tên Sản Phẩm</th>
-                    <th>Loại</th>
-                    <th>Số Lượng</th>
-                    <th>Đơn Giá</th>
-                    <th>Xóa Sản Phẩm</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Quần Kaki</td>
-                    <td>Quần</td>
-                    <td>25</td>
-                    <td>550.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(1,'Quần Kaki');">Xóa</Button></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Quần Dài</td>
-                    <td>Quần</td>
-                    <td>15</td>
-                    <td>350.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(2,'Quần Dài');">Xóa</Button></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Quần Short</td>
-                    <td>Quần</td>
-                    <td>10</td>
-                    <td>400.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(3,'Quần Short');">Xóa</Button></td>
-                  </tr>
+        <div id="products">
+          <div class="row">
+            <div class="col-xs-12">
 
-                  <tr>
-                    <td>4</td>
-                    <td>Quần Thun Đi Biển</td>
-                    <td>Quần</td>
-                    <td>5</td>
-                    <td>150.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(4,'Quần Thun Đi Biển');">Xóa</Button></td>
-                  </tr>
-                  
-                  </tfoot>
-                </table>
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Danh Sách Loại Sản Phẩm</h3>
+                  <a href="#" class="btn btn-sm btn-info btn-flat pull-right" data-toggle="modal"
+                    data-target="#dlginsertcategory">Thêm Loại Sản Phẩm Mới</a>
+                </div>
+
+                <div class="box-body">
+                  <table id="categoryTable" class="table table-bordered table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Tên Loại Sản Phẩm</th>
+                        <th>Số Sản Phẩm Tương Ứng</th>
+                        <th>Cập Nhật</th>
+                        <th>Xóa</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <!-- /.box-body -->
               </div>
-              <div class="box-body" id="productTable3" style="display:none;">
-                <table  class="table table-bordered table-striped table-hover">
-                  <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Tên Sản Phẩm</th>
-                    <th>Loại</th>
-                    <th>Số Lượng</th>
-                    <th>Đơn Giá</th>
-                    <th>Xóa Sản Phẩm</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Nón Kết</td>
-                    <td>Nón</td>
-                    <td>15</td>
-                    <td>100.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(1,'Nón Kết');">Xóa</Button></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Nón Vành Rộng</td>
-                    <td>Nón</td>
-                    <td>20</td>
-                    <td>150.000VNĐ</td>
-                    <td><Button class="btn btn-block btn-danger btn-sm"
-                      data-toggle="modal" data-target="#dlgdeletebooth"
-                      onclick="onShowDeleteBooth(2,'Nón Vành Rộng');">Xóa</Button></td>
-                  </tr>
-                
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.box-body -->
             </div>
-            <!-- /.box -->
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
-      </div>
 
-    </section>
+      </section>
 
     </div>
     <%include ../common/dialogs%>
     <%include ../common/script%>
 
+    <script>
+      $(function () {
+          loadCategory();
+      });
+    </script>
 </body>
 
 </html>

@@ -22,33 +22,13 @@
 <script src="handlers/productHandler.js"></script>
 <script src="handlers/promotionHandler.js"></script>
 <script src="handlers/userAccountHandler.js"></script>
+<script src="handlers/categoryHandler.js"></script>
 <script src="handlers/utils.js"></script>
 
 <!-- wrap word in datatable cell -->
 <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/ellipsis.js"></script>
 
 <script>
-   
-   // $('#productTable').DataTable({
-   //    columnDefs: [{
-   //          targets: 5,
-   //          render: $.fn.dataTable.render.ellipsis(128, false)
-   //       },
-   //       {
-   //          'searchable': false,
-   //          'targets': [4, 5, 8]
-   //       }
-   //    ]
-   // });
-
-   //  $('#productTable').DataTable({
-   //    'paging'      : true,
-   //    'lengthChange': true,
-   //    'searching'   : true,
-   //    'ordering'    : true,
-   //    'info'        : true,
-   //    'autoWidth'   : true
-   //  })
 
    $(document).ready(function () {
       $('.date-picker').datetimepicker({
@@ -66,9 +46,6 @@
       $('ul.treeview-menu a').filter(function () {
          return this.href == url;
       }).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
-
-      //loadPromotion();
-     // loadProduct();
    });
 
    window.onload = function () {
@@ -78,95 +55,6 @@
       });
    }
 
-   $('#boothTable').find('tr').click(function () {
-      const index = ($(this).index() + 1).toString();
-
-      if (index == "1") {
-         document.getElementById('productTable1').style.display = 'inline';
-         document.getElementById('productTable2').style.display = 'none';
-         document.getElementById('productTable3').style.display = 'none';
-      } else if (index == "2") {
-         document.getElementById('productTable1').style.display = 'none';
-         document.getElementById('productTable2').style.display = 'inline';
-         document.getElementById('productTable3').style.display = 'none';
-      } else if (index == "3") {
-         document.getElementById('productTable1').style.display = 'none';
-         document.getElementById('productTable2').style.display = 'none';
-         document.getElementById('productTable3').style.display = 'inline';
-      }
-
-   });
-
-   function showListOrders() {
-      document.getElementById('summary').style.display = 'none';
-      document.getElementById('users').style.display = 'none';
-      document.getElementById('products').style.display = 'none';
-      document.getElementById('orders').style.display = 'inline';
-   }
-
-   function showSummary() {
-      document.getElementById('summary').style.display = 'inline';
-      document.getElementById('orders').style.display = 'none';
-      document.getElementById('products').style.display = 'none';
-      document.getElementById('users').style.display = 'none';
-   }
-
-   function showUsers() {
-      document.getElementById('summary').style.display = 'none';
-      document.getElementById('orders').style.display = 'none';
-      document.getElementById('products').style.display = 'none';
-      document.getElementById('users').style.display = 'inline';
-   }
-
-   function showProducts() {
-      document.getElementById('summary').style.display = 'none';
-      document.getElementById('orders').style.display = 'none';
-      document.getElementById('users').style.display = 'none';
-      document.getElementById('products').style.display = 'inline';
-   }
-
-   function onShowUpdateForm(id, username, fullname, idcardnumber, phonenumber, address, role) {
-      document.getElementById('id').value = id;
-      document.getElementById('username').value = username;
-      document.getElementById('fullname').value = fullname;
-      document.getElementById('idcardnumber').value = idcardnumber;
-      document.getElementById('phonenumber').value = phonenumber;
-      document.getElementById('address').value = address;
-      document.getElementById('role').value = role;
-      document.getElementById('password').value = '';
-      document.getElementById('retypepassword').value = '';
-   }
-
-   function onShowDeleteBooth(id, name) {
-      document.getElementById('boothid').value = id;
-      document.getElementById('boothname').value = name;
-   }
-
-   function onShowDeleteUser(id, name) {
-      document.getElementById('deluserid').value = id;
-      document.getElementById('delusername').value = name;
-   }
-
-   function onShowInsertUser() {
-      document.getElementById('id').value = '';
-      document.getElementById('username').value = '';
-      document.getElementById('fullname').value = '';
-      document.getElementById('idcardnumber').value = '';
-      document.getElementById('phonenumber').value = '';
-      document.getElementById('address').value = '';
-      document.getElementById('role').value = '';
-      document.getElementById('password').value = '';
-      document.getElementById('retypepassword').value = '';
-   }
-
-   function onShowInsertProduct() {
-      document.getElementById('productid').value = '';
-      document.getElementById('productname').value = '';
-      document.getElementById('producttype').value = '';
-      document.getElementById('productquantity').value = '';
-      document.getElementById('productprice').value = '';
-
-   }
 
    // ################################# PRODUCT #################################
    function onShowDeleteProduct(id, name) {

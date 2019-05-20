@@ -13,7 +13,6 @@ module.exports.userAccountList = async () => {
 
 module.exports.getUser = async (username) => {
 
-    console.log(username);
     const result = await axios.get('http://localhost:8080/api/useraccounts/' + username)
         .then((res) => {
            return res.data;

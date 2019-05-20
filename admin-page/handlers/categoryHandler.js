@@ -1,51 +1,39 @@
-const BASE_USER_PATH = window.location.protocol + "//" + window.location.host + "/user";
+const BASE_CATEGORY_PATH = window.location.protocol + "//" + window.location.host + "/category";
 
 var $dataTable;
 
-function loadUserAccount() {
-    $dataTable = $('#userAccountTable').DataTable({
+function loadCategory() {
+    $dataTable = $('#categoryTable').DataTable({
         "ajax": {
             "type": "GET",
-            "url": BASE_USER_PATH + '/get',
+            "url": BASE_CATEGORY_PATH + '/get',
             "dataSrc": function (json) {
                 return json;
             },
             "timeout": 10000
         },
         "columns": [{
-                "data": "username",
+                "data": "categoryID",
                 "defaultContent": ""
             },
             {
-                "data": "fullName",
+                "data": "categoryName",
                 "defaultContent": ""
             },
             {
-                "data": "role",
+                "data": "totalProductType",
                 "defaultContent": ""
             },
+        
             {
-                "data": "address",
-                "defaultContent": ""
-            },
-
-            {
-                "data": "phoneNumber",
-                "defaultContent": ""
-            },
-            {
-                "data": "lastLoginTime",
-                "defaultContent": ""
+                data: null,
+                className: "center",
+                defaultContent: '<Button class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#dlgupdatecategory" onclick="showPopupUpdateCategory(this)">Chỉnh Sửa</Button>'
             },
             {
                 data: null,
                 className: "center",
-                defaultContent: '<Button class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUser(this)">Chỉnh Sửa</Button>'
-            },
-            {
-                data: null,
-                className: "center",
-                defaultContent: '<Button class="btn btn-block btn-danger btn-sm" data-toggle="modal" data-target="#dlgdeleteuser" onclick="showPopupDeleteUser(this)">Xóa</Button>'
+                defaultContent: '<Button class="btn btn-block btn-danger btn-sm" data-toggle="modal" data-target="#dlgdeletecategory" onclick="showPopupDeleteCategory(this)">Xóa</Button>'
             },
         ],
         "rowCallback": function (row, data, index) {
@@ -63,50 +51,47 @@ function loadUserAccount() {
     });
 }
 
-function showPopupUpdateUser(itemthis) {
+function showPopupUpdateCategory(itemthis) {
     var chil = $(itemthis).parent().parent().children();
 
-    var username = chil[0].innerHTML;
+    var id = chil[0].innerHTML;
 
     $.ajax({
         type: "GET",
-        url: BASE_USER_PATH + "/get/" + username,
+        url: BASE_CATEGORY_PATH + "/get/" + id,
         data: {
-            username: username
+            categoryID: id
         }
     }).done(function (resp) {
 
         const obj = JSON.parse(resp);
 
-        $("#dlgupdateuser input[name='username']").val(obj.username);
-        $("#dlgupdateuser select[name='role'] option").filter(function () {
-            return $.trim($(this).val()) === $.trim(obj.role);
-        }).attr("selected", true).prop("selected", "selected");
-
-        $("#dlgupdateuser input[name='fullName']").val(obj.fullName);
-        $("#dlgupdateuser input[name='address']").val(obj.address);
-        $("#dlgupdateuser input[name='phoneNumber']").val(obj.phoneNumber);
-        $("#dlgupdateuser input[name='lastLoginTime']").val(obj.lastLoginTime);
+        $("#dlgupdatecategory input[name='categoryID']").val(obj.categoryID);
+        $("#dlgupdatecategory input[name='categoryName']").val(obj.categoryName);
+        $("#dlgupdatecategory input[name='totalProductType']").val(obj.totalProductType);
+        
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus);
     }).always(function () {
     });
 }
 
-function showPopupDeleteUser(itemthis) {
+function showPopupDeleteCategory(itemthis) {
     var chil = $(itemthis).parent().parent().children();
 
-    var username = chil[0].innerText;
+    var id = chil[0].innerText;
+    var categoryName = chil[1].innerText;
 
-    $("#dlgdeleteuser input[name='username']").val(username);
+    $("#dlgdeletecategory input[name='categoryID']").val(id);
+    $("#dlgdeletecategory input[name='categoryName']").val(categoryName);
 }
 
 
-function handleDeleteUserAccount() {
+function handleDeleteCategory() {
     $.ajax({
         type: "POST",
-        url: BASE_USER_PATH + "/delete",
-        data: $("#formdeleteuser").serialize(),
+        url: BASE_CATEGORY_PATH + "/delete",
+        data: serializeFormToJSon("#formdeletecategory"),
         dataType: "json"
     }).done(function (resp) {
         console.log("Response: " + resp.status + " - " + resp.data);
@@ -118,36 +103,36 @@ function handleDeleteUserAccount() {
     });
 }
 
-function handleInsertUserAccount() {
+function handleInsertCategory() {
     $.ajax({
         type: "POST",
-        url: BASE_USER_PATH + "/insert",
+        url: BASE_CATEGORY_PATH + "/insert",
         // data: $("#formdeleteuser").serialize(),
-        data: serializeFormToJSon("#forminsertuser"),
+        data: serializeFormToJSon("#forminsertcategory"),
         dataType: "json"
     }).done(function (resp) {
         console.log("Response: " + resp.status + " - " + resp.data);
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus);
     }).always(function () {
-        $("#dlginsertuser").modal('hide');
+        $("#dlginsertcategory").modal('hide');
         $dataTable.ajax.reload(null, false);
     });
 }
 
-function handleUpdateUserAccount() {
+function handleUpdateCategory() {
     $.ajax({
         type: "POST",
-        url: BASE_USER_PATH + "/update",
+        url: BASE_CATEGORY_PATH + "/update",
         // data: $("#formdeleteuser").serialize(),
-        data: serializeFormToJSon("#formupdateuser"),
+        data: serializeFormToJSon("#formupdatecategory"),
         dataType: "json"
     }).done(function (resp) {
         console.log("Response: " + resp.status + " - " + resp.data);
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus);
     }).always(function () {
-        $("#dlgupdateuser").modal('hide');
+        $("#dlgupdatecategory").modal('hide');
         $dataTable.ajax.reload(null, false);
     });
 }
