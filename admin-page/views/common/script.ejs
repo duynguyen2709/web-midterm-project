@@ -21,6 +21,8 @@
 
 <script src="handlers/productHandler.js"></script>
 <script src="handlers/promotionHandler.js"></script>
+<script src="handlers/userAccountHandler.js"></script>
+<script src="handlers/utils.js"></script>
 
 <!-- wrap word in datatable cell -->
 <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/ellipsis.js"></script>
@@ -174,14 +176,14 @@
 
    function deleteProduct(){
    
-      const data = serialFormToJSon("#formDeleteProduct");
+      const data = serializeFormToJSon("#formDeleteProduct");
       console.log(data);
       loadData();
    }
 
    // ####################################################################
 
-   function serialFormToJSon(form){
+   function serializeFormToJSon(form){
       return $(form).serializeArray().reduce((acc, next) => ({ ...acc, [next.name]: next.value }), {});
    }
 </script>

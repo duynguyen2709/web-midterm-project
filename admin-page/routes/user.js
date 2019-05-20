@@ -5,6 +5,18 @@ var userController = require('../controllers/userController');
 
 router.get('/', userController.index);
 
+router.get('/get/:username',userController.getUserAccount);
+
+router.get('/get',userController.getListUserAccount);
+
+router.post('/delete',userController.deleteUserAccount);
+
+router.post('/insert',userController.insertUserAccount);
+
+router.post('/update',userController.updateUserAccount);
+
+
+
 //POST request for creating user.
 router.post('/users/create', userController.user_create);
 
