@@ -1,0 +1,178 @@
+<!-- ################################# PRODUCT SECTION ################################# -->
+<div id="dlginsertproduct" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Thêm Sản Phẩm</h4>
+            </div>
+
+            <div class="modal-body">
+                <form action="#" method="POST" id="forminsertproduct">
+                    <div class="form-group">
+                        <label for="productName" class="control-label">Tên Sản Phẩm:</label>
+                        <input type="text" class="form-control" id="productName" name="productName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoryID" class="control-label">Loại Sản Phẩm:</label>
+                        <select id="categoryID" name="categoryID">
+                            <% for(var i=0; i<listCategory.length; i++) {%>
+                            <option value="<%= listCategory[i].categoryID %>"><%= listCategory[i].categoryName %>
+                            </option>
+                            <% } %>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="manufacturer" class="control-label">Nhà Sản Xuất:</label>
+                        <input type="text" class="form-control" id="manufacturer" name="manufacturer" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image" class="control-label">URL Hình Ảnh:</label>
+                        <input type="text" class="form-control" id="image" name="image" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="control-label">Mô tả:</label>
+                        <input type="text" class="form-control" id="description" name="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="importPrice" class="control-label">Giá Nhập:</label>
+                        <input type="number" class="form-control" id="importPrice" name="importPrice">
+                    </div>
+                    <div class="form-group">
+                        <label for="sellPrice" class="control-label">Giá Bán:</label>
+                        <input type="number" class="form-control" id="sellPrice" name="sellPrice">
+                    </div>
+                    <div class="form-group">
+                            <label for="quantity" class="control-label">Số Lượng:</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity">
+                        </div>
+
+                    <div class="form-group">
+                        <label for="isActive" class="control-label">Trạng Thái:</label>
+                        <select id="isActive" name="isActive">
+                            <option value="0">TẠM NGỪNG BÁN</option>
+                            <option value="1" selected>ĐANG BÁN</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-info"
+                        onclick="handleInsertProduct(); $('#forminsertproduct').get(0).reset();  return false;"
+                        data-dismiss="modal">Thêm</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="dlgupdateproduct" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="padding-top: 10%;">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Chỉnh Sửa Thông Tin Sản Phẩm</h4>
+                </div>
+    
+                <div class="modal-body">
+                    <form action="#" method="POST" id="formupdateproduct">
+                            <div class="form-group">
+                                    <label for="updproductID" class="control-label">ID Sản Phẩm:</label>
+                                    <input type="text" class="form-control" id="updproductID" name="productID" readonly required>
+                                </div>
+                        <div class="form-group">
+                            <label for="updproductName" class="control-label">Tên Sản Phẩm:</label>
+                            <input type="text" class="form-control" id="updproductName" name="productName" required>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="updcategoryID" class="control-label">Loại Sản Phẩm:</label>
+                            <select id="updcategoryID" name="categoryID">
+                                <% for(var i=0; i<listCategory.length; i++) {%>
+                                <option value="<%= listCategory[i].categoryID %>"><%= listCategory[i].categoryName %>
+                                </option>
+                                <% } %>
+    
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="updmanufacturer" class="control-label">Nhà Sản Xuất:</label>
+                            <input type="text" class="form-control" id="updmanufacturer" name="manufacturer" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="updimage" class="control-label">URL Hình Ảnh:</label>
+                            <input type="text" class="form-control" id="updimage" name="image" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="upddescription" class="control-label">Mô tả:</label>
+                            <input type="text" class="form-control" id="upddescription" name="description">
+                        </div>
+                        <div class="form-group">
+                            <label for="updimportPrice" class="control-label">Giá Nhập:</label>
+                            <input type="number" class="form-control" id="updimportPrice" name="importPrice">
+                        </div>
+                        <div class="form-group">
+                            <label for="updsellPrice" class="control-label">Giá Bán:</label>
+                            <input type="number" class="form-control" id="updsellPrice" name="sellPrice">
+                        </div>
+                        <div class="form-group">
+                                <label for="updquantity" class="control-label">Số Lượng:</label>
+                                <input type="number" class="form-control" id="updquantity" name="quantity">
+                            </div>
+    
+                        <div class="form-group">
+                            <label for="updisActive" class="control-label">Trạng Thái:</label>
+                            <select id="updisActive" name="isActive">
+                                <option value="0">TẠM NGỪNG BÁN</option>
+                                <option value="1">ĐANG BÁN</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-info"
+                            onclick="handleUpdateProduct(); return false;"
+                            data-dismiss="modal">Cập Nhật</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+<div id="dlgdeleteproduct" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Xóa Sản Phẩm</h4>
+            </div>
+
+            <div class="modal-body">
+                <form action="#" method="POST" id="formdeleteproduct">
+                    <div class="form-group">
+                        <label for="del_productID" class="control-label">ID:</label>
+                        <input type="number" class="form-control" name="productID" id="del_productID" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label for="del_productName" class="control-label">Tên Sản Phẩm:</label>
+                        <input type="text" class="form-control" name="productName" id="del_productName" readonly>
+                    </div>
+
+                    <button type="submit" onclick="handleDeleteProduct(); return false;" class="btn btn-danger"
+                        data-dismiss="modal">Xóa</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -7,7 +7,6 @@ var listProduct = null;
 exports.index = async function (req, res) {
 
     listProduct = await productModel.productList();
-
     res.render('promotion/promotion', {
         title: 'Admin Page',
         listProduct: listProduct

@@ -1,0 +1,180 @@
+<!-- ############################### PROMOTION SECTION ###############################-->
+<div id="dlginsertpromotion" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="padding-top: 10%;">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Thêm Chương Trình Khuyến Mãi</h4>
+                </div>
+    
+                <div class="modal-body">
+                    <form action="#" method="POST" id="forminsertpromotion">
+                        <div class="form-group">
+                            <label for="promotionName" class="control-label">Tên Chương Trình Khuyến Mãi:</label>
+                            <input type="text" class="form-control" id="promotionName" name="promotionName" required>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="appliedID" class="control-label">Sản Phẩm Áp Dụng:</label>
+                            <select id="appliedID" name="appliedID">
+                                <% for(var i=0; i<listProduct.length; i++) {%>
+                                <option value="<%= listProduct[i].productID %>"><%= listProduct[i].productName %></option>
+                                <% } %>
+    
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="promotionDiscount" class="control-label">Phần Trăm Khuyến Mãi:</label>
+                            <input type="number" class="form-control" id="promotionDiscount" name="promotionDiscount"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeFrom" class="control-label">Thời Gian Bắt Đầu:</label>
+                            <div class='input-group date date-picker'>
+                                <input type="text" class="form-control" id="timeFrom" name="timeFrom"
+                                    placeholder="YYYY-MM-DD HH:mm:ss"></input>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+    
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeTo" class="control-label">Thời Gian Kết Thúc:</label>
+                            <div class='input-group date date-picker'>
+                                <input type="text" class="form-control" id="timeTo" name="timeTo"
+                                    placeholder="YYYY-MM-DD HH:mm:ss"></input>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="isActive" class="control-label">Trạng Thái:</label>
+                            <select id="isActive" name="isActive">
+                                <option value="0">TẠM DỪNG</option>
+                                <option value="1" selected>ĐANG CHẠY</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-info"
+                            onclick="handleInsertPromotion(); $('#forminsertpromotion').get(0).reset();  return false;"
+                            data-dismiss="modal">Thêm</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+    <div id="dlgupdatepromotion" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="padding-top: 10%;">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Chỉnh Sửa Chương Trình Khuyến Mãi</h4>
+                </div>
+    
+                <div class="modal-body">
+                    <form action="#" method="POST" id="formupdatepromotion">
+                        <div class="form-group">
+                            <label for="updpromotionID" class="control-label">ID:</label>
+                            <input type="text" class="form-control" id="updpromotionID" name="promotionID" readonly
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="updpromotionName" class="control-label">Tên Chương Trình Khuyến Mãi:</label>
+                            <input type="text" class="form-control" id="updpromotionName" name="promotionName" required>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="updappliedID" class="control-label">Sản Phẩm Áp Dụng:</label>
+                            <select id="updappliedID" name="appliedID">
+                                <% for(var i=0; i<listProduct.length; i++) {%>
+                                <option value="<%= listProduct[i].productID %>"><%= listProduct[i].productName %></option>
+                                <% } %>
+    
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="updpromotionDiscount" class="control-label">Phần Trăm Khuyến Mãi:</label>
+                            <input type="number" class="form-control" id="updpromotionDiscount" name="promotionDiscount"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="updtimeFrom" class="control-label">Thời Gian Bắt Đầu:</label>
+                            <div class='input-group date date-picker'>
+                                <input type="text" class="form-control" id="updtimeFrom" name="timeFrom"
+                                    placeholder="YYYY-MM-DD HH:mm:ss"></input>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+    
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updtimeTo" class="control-label">Thời Gian Kết Thúc:</label>
+                            <div class='input-group date date-picker'>
+                                <input type="text" class="form-control" id="updtimeTo" name="timeTo"
+                                    placeholder="YYYY-MM-DD HH:mm:ss"></input>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updisActive" class="control-label">Trạng Thái:</label>
+                            <select id="updisActive" name="isActive">
+                                <option value="0">TẠM DỪNG</option>
+                                <option value="1">ĐANG CHẠY</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-info" onclick="handleUpdatePromotion(); return false;"
+                            data-dismiss="modal">Cập Nhật</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+    <div id="dlgdeletepromotion" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="padding-top: 10%;">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Xóa Chương Trình Khuyến Mãi</h4>
+                </div>
+    
+                <div class="modal-body">
+                    <form method="POST" action="#" id="formdeletepromotion">
+                        <div class="form-group">
+                            <label for="del_promotionID" class="control-label">ID:</label>
+                            <input type="text" class="form-control" id="del_promotionID" name="promotionID" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="del_appliedName" class="control-label">Sản Phẩm Áp Dụng:</label>
+                            <input type="text" class="form-control" id="del_appliedName" name="appliedName" readonly>
+                        </div>
+    
+                        <button type="button" onclick="handleDeletePromotion(); return false;" class="btn btn-danger"
+                            data-dismiss="modal">Xóa</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+    <!-- ############################### END PROMOTION SECTION ###############################-->

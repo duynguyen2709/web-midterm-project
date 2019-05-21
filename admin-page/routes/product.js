@@ -3,23 +3,17 @@ var router = express.Router();
 
 var productController = require('../controllers/productController');
 
+
 router.get('/', productController.index);
+
+router.get('/get/:productID',productController.getProduct);
 
 router.get('/get',productController.getListProduct);
 
-//POST request for creating product.
-router.post('/products/create', productController.product_create);
+router.post('/delete',productController.deleteProduct);
 
-// DELETE request to delete product.
-router.delete('/products/:id/delete', productController.product_delete);
+router.post('/insert',productController.insertProduct);
 
-// PUT request to update product.
-router.put('/products/:id/update', productController.product_update);
-
-// GET request for one product.
-router.get('/products/:id', productController.product_detail);
-
-// GET request for list of all product.
-router.get('/products', productController.product_list);
+router.post('/update',productController.updateProduct);
 
 module.exports = router;

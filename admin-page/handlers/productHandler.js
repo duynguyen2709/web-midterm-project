@@ -22,15 +22,6 @@ function loadProduct() {
             {
                 "data": "categoryName",
                 "defaultContent": "",
-                "render": function (data, type, row) {
-
-                    if (row.subCategoryName === null) {
-                        return row.categoryName;
-                    } else {
-
-                        return row.subCategoryName;
-                    }
-                }
             },
             {
                 "data": "manufacturer",
@@ -57,21 +48,21 @@ function loadProduct() {
             }, {
                 data: null,
                 className: "center",
-                defaultContent: '<Button class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#dlgdeleteproduct">Chỉnh Sửa</Button>'
+                defaultContent: '<Button class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#dlgupdateproduct" onclick="showPopupUpdateProduct(this)">Chỉnh Sửa</Button>'
             }, {
                 data: null,
                 className: "center",
-                defaultContent: '<Button class="btn btn-block btn-danger btn-sm" data-toggle="modal" data-target="#dlgdeleteproduct"">Xóa</Button>'
+                defaultContent: '<Button class="btn btn-block btn-danger btn-sm" data-toggle="modal" data-target="#dlgdeleteproduct" onclick="showPopupDeleteProduct(this)">Xóa</Button>'
             },
         ],
         "rowCallback": function (row, data, index) {
-            // if (data["active"] === "ACTIVE") {
-            //     $(row).find('td:eq(6)').css('color', 'green');
-            // // } else if (data["iosstatus"] === "MAINTENANCE") {
-            // //     $(row).find('td:eq(5)').css('color', 'blue');
-            // } else {
-            //     $(row).find('td:eq(6)').css('color', 'red');
-            // }
+            if (data["isActive"] == "1") {
+                $(row).find('td:eq(9)').css('color', 'green');
+                $(row).find('td:eq(9)').text('Đang Bán');
+            } else {
+                $(row).find('td:eq(9)').css('color', 'red');
+                $(row).find('td:eq(9)').text('Tạm Ngừng Bán');
+            }
         },
         columnDefs: [{
                 targets: 5,
@@ -87,10 +78,108 @@ function loadProduct() {
     });
 }
 
-function reloadData() {
-    $dataTable.ajax.reload(null, false);
+
+function showPopupUpdateProduct(itemthis) {
+    var chil = $(itemthis).parent().parent().children();
+
+    var productID = chil[0].innerHTML;
+
+    $.ajax({
+        type: "GET",
+        url: BASE_PATH + "/get/" + productID,
+        data: {
+            productID: productID
+        }
+    }).done(function (resp) {
+
+        const obj = JSON.parse(resp);
+
+        $("#dlgupdateproduct input[name='productID']").val(obj.productID);
+        $("#dlgupdateproduct select[name='categoryID'] option").filter(function () {
+            return $.trim($(this).val()) === $.trim(obj.categoryID);
+        }).attr("selected", true).prop("selected", "selected");
+
+        $("#dlgupdateproduct input[name='productName']").val(obj.productName);
+        $("#dlgupdateproduct input[name='manufacturer']").val(obj.manufacturer);
+        $("#dlgupdateproduct input[name='image']").val(obj.image);
+        $("#dlgupdateproduct input[name='description']").val(obj.description);
+        $("#dlgupdateproduct input[name='importPrice']").val(obj.importPrice);
+        $("#dlgupdateproduct input[name='sellPrice']").val(obj.sellPrice);
+        $("#dlgupdateproduct input[name='quantity']").val(obj.quantity);
+
+        $("#dlgupdateproduct select[name='isActive'] option").filter(function () {
+            return $.trim($(this).val()) === $.trim(obj.isActive);
+        }).attr("selected", true).prop("selected", "selected");
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("Error: " + textStatus);
+    }).always(function () {
+    });
 }
 
-function test() {
-    alert(BASE_PATH);
+function showPopupDeleteProduct(itemthis) {
+    var chil = $(itemthis).parent().parent().children();
+
+    var productID = chil[0].innerText;
+    var productName = chil[1].innerText;
+
+    $("#dlgdeleteproduct input[name='productID']").val(productID);
+    $("#dlgdeleteproduct input[name='productName']").val(productName);
+}
+
+
+function handleDeleteProduct() {
+    $.ajax({
+        type: "POST",
+        url: BASE_PATH + "/delete",
+        data: $("#formdeleteproduct").serialize(),
+        dataType: "json"
+    }).done(function (resp) {
+        console.log("Response: " + resp.status + " - " + resp.data);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("Error: " + textStatus);
+    }).always(function () {
+        $("#dlgdeleteproduct").modal('hide');
+        $dataTable.ajax.reload(null, false);
+    });
+}
+
+function handleInsertProduct() {
+    $.ajax({
+        type: "POST",
+        url: BASE_PATH + "/insert",
+        // data: $("#formdeleteuser").serialize(),
+        data: serializeFormToJSon("#forminsertproduct"),
+        dataType: "json"
+    }).done(function (resp) {
+        console.log("Response: " + resp.status + " - " + resp.data);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("Error: " + textStatus);
+    }).always(function () {
+        $("#dlginsertproduct").modal('hide');
+        $dataTable.ajax.reload(null, false);
+    });
+}
+
+function handleUpdateProduct() {
+    $.ajax({
+        type: "POST",
+        url: BASE_PATH + "/update",
+        // data: $("#formdeleteuser").serialize(),
+        data: serializeFormToJSon("#formupdateproduct"),
+        dataType: "json"
+    }).done(function (resp) {
+        console.log("Response: " + resp.status + " - " + resp.data);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("Error: " + textStatus);
+    }).always(function () {
+        $("#dlgupdateproduct").modal('hide');
+        $dataTable.ajax.reload(null, false);
+    });
+}
+
+function serializeFormToJSon(form) {
+    return $(form).serializeArray().reduce((acc, next) => ({
+        ...acc,
+        [next.name]: next.value
+    }), {});
 }

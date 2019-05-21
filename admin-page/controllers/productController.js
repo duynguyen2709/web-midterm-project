@@ -1,36 +1,117 @@
-var product=require('../models/productModel');
+var productModel = require('../models/productModel');
+var axios = require('axios');
+var categoryModel = require('../models/categoryModel');
 
-exports.index = function(req, res) {
-    
-    res.render('product/product', { title: 'Admin Page'});
+var listCategory = null;
+
+exports.index = async function (req, res) {
+
+    listCategory = await categoryModel.categoryList();
+    res.render('product/product', {
+        title: 'Admin Page',
+        listCategory:listCategory
+    });
 };
 
-exports.getListProduct = async function(req,res){
+exports.getListProduct = async function (req, res) {
 
-    const listProduct = await product.productList();
+    const listProduct = await productModel.productList();
     res.send(JSON.stringify(listProduct));
 }
-// Display list of all products.
-exports.product_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: product list');
-};
 
-// Display detail page for a specific product.
-exports.product_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: product detail: ' + req.params.id);
-};
 
-// Handle product create on POST.
-exports.product_create = function(req, res) {
-    res.send('NOT IMPLEMENTED: product create POST');
-};
+exports.getProduct = async function (req, res) {
 
-// Display product delete form on delete.
-exports.product_delete = function(req, res) {
-    res.send('NOT IMPLEMENTED: product delete DELETE');
-};
+    const productID = req.params.productID;
+    const response = await productModel.getProduct(productID);
 
-// Handle product update on POST.
-exports.product_update = function(req, res) {
-    res.send('NOT IMPLEMENTED: product update PUT');
-};
+    res.send(JSON.stringify(response));
+}
+
+exports.deleteProduct = function (req, res) {
+    const productID = req.body.productID;
+
+    axios.delete("http://localhost:8080/api/products/" + productID)
+        .then(response => {
+            res.json({
+                data: "Delete Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Delete Failed",
+                status: 500
+            });
+        });
+}
+
+exports.insertProduct = function (req, res) {
+
+    console.log("categoryID:" + req.body.categoryID);
+
+    axios({
+            method: 'POST',
+            url: 'http://localhost:8080/api/products/',
+            data: {
+                productName: req.body.productName,
+                categoryID: req.body.categoryID,
+                manufacturer: req.body.manufacturer,
+                image: req.body.image,
+                description: req.body.description,
+                importPrice: req.body.importPrice,
+                sellPrice: req.body.sellPrice,
+                isActive: req.body.isActive,
+                quantity: req.body.quantity,
+                updDate: ''
+            }
+        })
+        .then(response => {
+            res.json({
+                data: "Insert Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Insert Failed",
+                status: 500
+            });
+        });
+}
+
+exports.updateProduct = function (req, res) {
+
+    axios({
+            method: 'PUT',
+            url: 'http://localhost:8080/api/products/' + req.body.productID,
+            data: {
+                productID:req.body.productID,
+                productName: req.body.productName,
+                categoryID: req.body.categoryID,
+                manufacturer: req.body.manufacturer,
+                image: req.body.image,
+                description: req.body.description,
+                importPrice: req.body.importPrice,
+                sellPrice: req.body.sellPrice,
+                isActive: req.body.isActive,
+                quantity: req.body.quantity,
+                updDate: ''
+            }
+        })
+        .then(response => {
+            res.json({
+                data: "Update Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Update Failed",
+                status: 500
+            });
+        });
+}
