@@ -5,21 +5,15 @@ var promotionController = require('../controllers/promotionController');
 
 router.get('/', promotionController.index);
 
+router.get('/get/:promotionID',promotionController.getPromotion);
+
 router.get('/get',promotionController.getListPromotion);
 
-//POST request for creating promotion.
-router.post('/promotions/create', promotionController.promotion_create);
+router.post('/delete',promotionController.deletePromotion);
 
-// DELETE request to delete promotion.
-router.delete('/promotions/:id/delete', promotionController.promotion_delete);
+router.post('/insert',promotionController.insertPromotion);
 
-// PUT request to update promotion.
-router.put('/promotions/:id/update', promotionController.promotion_update);
+router.post('/update',promotionController.updatePromotion);
 
-// GET request for one promotion.
-router.get('/promotions/:id', promotionController.promotion_detail);
-
-// GET request for list of all promotion.
-router.get('/promotions', promotionController.promotion_list);
 
 module.exports = router;
