@@ -9,8 +9,7 @@ function loadCategory() {
             "url": BASE_CATEGORY_PATH + '/get',
             "dataSrc": function (json) {
                 return json;
-            },
-            "timeout": 10000
+            }
         },
         "columns": [{
                 "data": "categoryID",

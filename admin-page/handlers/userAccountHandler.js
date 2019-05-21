@@ -9,8 +9,7 @@ function loadUserAccount() {
             "url": BASE_USER_PATH + '/get',
             "dataSrc": function (json) {
                 return json;
-            },
-            "timeout": 10000
+            }
         },
         "columns": [{
                 "data": "username",

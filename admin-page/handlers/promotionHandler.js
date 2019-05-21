@@ -9,8 +9,7 @@ function loadPromotion() {
             "url": BASE_PROMOTION_PATH + '/get',
             "dataSrc": function (json) {
                 return json;
-            },
-            "timeout":10000
+            }
         },
         "columns": [{
                 "data": "promotionID",
