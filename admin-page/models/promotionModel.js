@@ -1,7 +1,7 @@
 var axios = require('axios');
 
 module.exports.promotionList = async () => {
-    const result = await axios('http://localhost:8080/api/promotions')
+    const result = await axios('https://api-scttshop.herokuapp.com/api/promotions')
     .then((response) => {
         return response.data;
     });
@@ -11,7 +11,7 @@ module.exports.promotionList = async () => {
 
 module.exports.getPromotion = async (id) => {
 
-    const result = await axios.get('http://localhost:8080/api/promotions/' + id)
+    const result = await axios.get('https://api-scttshop.herokuapp.com/api/promotions/' + id)
         .then((res) => {
            return res.data;
         })

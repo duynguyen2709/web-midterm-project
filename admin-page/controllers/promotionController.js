@@ -32,7 +32,7 @@ exports.getPromotion = async function (req, res) {
 exports.deletePromotion = function (req, res) {
     const promotionID = req.body.promotionID;
 
-    axios.delete("http://localhost:8080/api/promotions/" + promotionID)
+    axios.delete("https://api-scttshop.herokuapp.com/api/promotions/" + promotionID)
         .then(response => {
             res.json({
                 data: "Delete Succeed",
@@ -52,7 +52,7 @@ exports.insertPromotion = function (req, res) {
 
     axios({
             method: 'POST',
-            url: 'http://localhost:8080/api/promotions/',
+            url: 'https://api-scttshop.herokuapp.com/api/promotions/',
             data: {
                 type: 'PRODUCT',
                 appliedID: req.body.appliedID,
@@ -83,7 +83,7 @@ exports.updatePromotion = function (req, res) {
 
     axios({
             method: 'PUT',
-            url: 'http://localhost:8080/api/promotions/' + req.body.promotionID,
+            url: 'https://api-scttshop.herokuapp.com/api/promotions/' + req.body.promotionID,
             data: {
                 promotionID: req.body.promotionID,
                 type: 'PRODUCT',
