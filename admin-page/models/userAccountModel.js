@@ -1,7 +1,7 @@
 var axios = require('axios');
 
 module.exports.userAccountList = async () => {
-    const result = await axios.get('http://localhost:8080/api/useraccounts', {
+    const result = await axios.get('https://api-scttshop.herokuapp.com/api/useraccounts', {
             timeout: 10000
         })
         .then((response) => {
@@ -13,7 +13,7 @@ module.exports.userAccountList = async () => {
 
 module.exports.getUser = async (username) => {
 
-    const result = await axios.get('http://localhost:8080/api/useraccounts/' + username)
+    const result = await axios.get('https://api-scttshop.herokuapp.com/api/useraccounts/' + username)
         .then((res) => {
            return res.data;
         })

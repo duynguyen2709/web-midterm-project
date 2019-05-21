@@ -22,7 +22,7 @@ exports.getUserAccount = async function(req,res){
 exports.deleteUserAccount = function(req,res){
     const username = req.body.username;
 
-    axios.delete("http://localhost:8080/api/useraccounts/" + username)
+    axios.delete("https://api-scttshop.herokuapp.com/api/useraccounts/" + username)
     .then(response => {
         res.json({data : "Delete Succeed", status : 200});
     })
@@ -36,7 +36,7 @@ exports.insertUserAccount = function(req,res){
     
     axios({
         method: 'POST',
-        url: 'http://localhost:8080/api/useraccounts/',
+        url: 'https://api-scttshop.herokuapp.com/api/useraccounts/',
         data: {
           username: req.body.username,
           password: '123456',
@@ -60,7 +60,7 @@ exports.updateUserAccount = function(req,res){
     
     axios({
         method: 'PUT',
-        url: 'http://localhost:8080/api/useraccounts/' + req.body.username,
+        url: 'https://api-scttshop.herokuapp.com/api/useraccounts/' + req.body.username,
         data: {
           username: req.body.username,
           password: '123456',
