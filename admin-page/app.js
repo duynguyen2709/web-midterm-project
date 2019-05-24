@@ -21,6 +21,7 @@ var productRouter = require('./routes/product');
 var userRouter = require('./routes/user');
 var categoryRouter = require('./routes/category');
 var promotionRouter = require('./routes/promotion');
+var testRouter = require('./routes/userdetail');
 
 
 var app = express();
@@ -70,6 +71,7 @@ app.use('/product', productRouter);
 app.use('/user', userRouter);
 app.use('/category', categoryRouter);
 app.use('/promotion', promotionRouter);
+app.use('/userdetail', testRouter);
 
 
 app.use(function (req, res, next) {
@@ -101,6 +103,9 @@ passport.use('local', new LocalStrategy({
       if (err) throw err;
 
       if (isMatch) {
+        axios.post('https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + user.username + "/logon")
+          .then((res) => console.log("Login Succeed!"));
+
         return done(null, user);
       } else {
         req.authError = "Sai Mật Khẩu";
@@ -125,7 +130,7 @@ app.post('/login',
     failWithError: true
   }),
   function (req, res) {
-    res.redirect('/chart');
+    res.redirect('/userdetail');
   },
   function (err, req, res, next) {
     if (req.authError) {
@@ -139,14 +144,14 @@ app.post('/login',
 // app.post('/login', function (req, res) {
 
 //   axios({
-//       method: 'POST',
-//       url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/',
+//       method: 'PUT',
+//       url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username,
 //       data: {
 //         username: req.body.username,
 //         password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null),
-//         fullName: 'req.body.fullName',
-//         address: 'req.body.address',
-//         phoneNumber: '123',
+//         fullName: 'NGUYỄN ANH DUY',
+//         address: 'BIÊN HÒA, ĐỒNG NAI',
+//         phoneNumber: '0948202709',
 //         role: 'ADMIN',
 //         updDate: ''
 //       }
