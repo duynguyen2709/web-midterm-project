@@ -8,7 +8,6 @@ exports.index = async function (req, res) {
 
     listCategory = await categoryModel.categoryList();
     res.render('product/product', {
-        title: 'Admin Page',
         listCategory:listCategory
     });
 };
@@ -31,7 +30,7 @@ exports.getProduct = async function (req, res) {
 exports.deleteProduct = function (req, res) {
     const productID = req.body.productID;
 
-    axios.delete("https://api-scttshop.herokuapp.com/api/products/" + productID)
+    axios.delete("https://api-scttshop-v2.herokuapp.com/api/products/" + productID)
         .then(response => {
             res.json({
                 data: "Delete Succeed",
@@ -53,7 +52,7 @@ exports.insertProduct = function (req, res) {
 
     axios({
             method: 'POST',
-            url: 'https://api-scttshop.herokuapp.com/api/products/',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/products/',
             data: {
                 productName: req.body.productName,
                 categoryID: req.body.categoryID,
@@ -86,7 +85,7 @@ exports.updateProduct = function (req, res) {
 
     axios({
             method: 'PUT',
-            url: 'https://api-scttshop.herokuapp.com/api/products/' + req.body.productID,
+            url: 'https://api-scttshop-v2.herokuapp.com/api/products/' + req.body.productID,
             data: {
                 productID:req.body.productID,
                 productName: req.body.productName,

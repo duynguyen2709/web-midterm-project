@@ -8,8 +8,7 @@ exports.index = async function (req, res) {
 
     listProduct = await productModel.productList();
     res.render('promotion/promotion', {
-        title: 'Admin Page',
-        listProduct: listProduct
+     listProduct: listProduct
     });
     
 };
@@ -32,7 +31,7 @@ exports.getPromotion = async function (req, res) {
 exports.deletePromotion = function (req, res) {
     const promotionID = req.body.promotionID;
 
-    axios.delete("https://api-scttshop.herokuapp.com/api/promotions/" + promotionID)
+    axios.delete("https://api-scttshop-v2.herokuapp.com/api/promotions/" + promotionID)
         .then(response => {
             res.json({
                 data: "Delete Succeed",
@@ -52,7 +51,7 @@ exports.insertPromotion = function (req, res) {
 
     axios({
             method: 'POST',
-            url: 'https://api-scttshop.herokuapp.com/api/promotions/',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/promotions/',
             data: {
                 type: 'PRODUCT',
                 appliedID: req.body.appliedID,
@@ -83,7 +82,7 @@ exports.updatePromotion = function (req, res) {
 
     axios({
             method: 'PUT',
-            url: 'https://api-scttshop.herokuapp.com/api/promotions/' + req.body.promotionID,
+            url: 'https://api-scttshop-v2.herokuapp.com/api/promotions/' + req.body.promotionID,
             data: {
                 promotionID: req.body.promotionID,
                 type: 'PRODUCT',

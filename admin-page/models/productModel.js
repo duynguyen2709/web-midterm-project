@@ -1,7 +1,7 @@
 var axios = require('axios');
 
 module.exports.productList = async () => {
-    const result = await axios('https://api-scttshop.herokuapp.com/api/products')
+    const result = await axios('https://api-scttshop-v2.herokuapp.com/api/products')
     .then((response) => {
         return response.data;
     });
@@ -11,7 +11,7 @@ module.exports.productList = async () => {
 
 module.exports.getProduct = async (id) => {
 
-    const result = await axios.get('https://api-scttshop.herokuapp.com/api/products/' + id)
+    const result = await axios.get('https://api-scttshop-v2.herokuapp.com/api/products/' + id)
         .then((res) => {
            return res.data;
         })

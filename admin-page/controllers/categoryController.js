@@ -2,7 +2,7 @@ var axios = require('axios');
 var categoryModel=require('../models/categoryModel');
 
 exports.index = function(req, res) {
-    res.render('category/category', { title: 'Admin Page' });
+    res.render('category/category');
 };
 
 
@@ -23,7 +23,7 @@ exports.getCategory = async function(req,res){
 exports.deleteCategory = function(req,res){
     const categoryID = req.body.categoryID;
 
-    axios.delete("https://api-scttshop.herokuapp.com/api/categories/" + categoryID)
+    axios.delete("https://api-scttshop-v2.herokuapp.com/api/categories/" + categoryID)
     .then(response => {
         res.json({data : "Delete Succeed", status : 200});
     })
@@ -37,7 +37,7 @@ exports.insertCategory = function(req,res){
     
     axios({
         method: 'POST',
-        url: 'https://api-scttshop.herokuapp.com/api/categories/',
+        url: 'https://api-scttshop-v2.herokuapp.com/api/categories/',
         data: {
           categoryName: req.body.categoryName,
           updDate:''
@@ -56,7 +56,7 @@ exports.updateCategory = function(req,res){
     
     axios({
         method: 'PUT',
-        url: 'https://api-scttshop.herokuapp.com/api/categories/' + req.body.categoryID,
+        url: 'https://api-scttshop-v2.herokuapp.com/api/categories/' + req.body.categoryID,
         data: {
             categoryName: req.body.categoryName,
             updDate:''

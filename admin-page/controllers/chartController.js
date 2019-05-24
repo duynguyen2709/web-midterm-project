@@ -1,3 +1,3 @@
 exports.index = function(req, res) {
-    res.render('chart/chart', { title: 'Admin Page' });
+    res.render('chart/chart');
 };
