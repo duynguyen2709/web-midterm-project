@@ -138,7 +138,6 @@ function handleUpdateUserAccount() {
     $.ajax({
         type: "POST",
         url: BASE_USER_PATH + "/update",
-        // data: $("#formdeleteuser").serialize(),
         data: serializeFormToJSon("#formupdateuser"),
         dataType: "json"
     }).done(function (resp) {

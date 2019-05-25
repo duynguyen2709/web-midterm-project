@@ -14,29 +14,7 @@
       <section class="content">
 
         <div class="row">
-          <!-- <div class="col-md-3">
-  
-            <div class="box box-primary">
-              <div class="box-body box-profile">
-               
-  
-                <ul class="list-group list-group-unbordered">
-                  <li class="list-group-item">
-                    <b>Followers</b> <a class="pull-right">1,322</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Following</b> <a class="pull-right">543</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Friends</b> <a class="pull-right">13,287</a>
-                  </li>
-                </ul>
-  
-                <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
-              </div>
-            </div>
-            
-          </div> -->
+
           <!-- /.col -->
           <div class="col-md-6 col-md-offset-2">
             <!-- About Me Box -->
@@ -44,63 +22,48 @@
               <div class="box-header with-border">
                 <h3 class="box-title">Thông Tin Cá Nhân</h3>
                 <a href="#" class="btn btn-sm btn-primary pull-right" data-toggle="modal"
-                  data-target="#dlgupdateuserdetail">Cập Nhật Thông Tin</a>
+                  data-target="#dlgupdateuserdetail" onclick="showPopupUpdateUserDetail(user);">Cập Nhật Thông Tin</a>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
-                <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg"
+                <img class="profile-user-img img-responsive img-circle" src="<%= user.avatar %>"
                   alt="User profile picture">
 
-                <h3 class="profile-username text-center">FULL NAME</h3>
+                <h3 class="profile-username text-center"><%= user.fullName %></h3>
 
-                <p class="text-center"><span class="label label-primary">ROLE</span></p>
+                <p class="text-center" style="font-size: 20px;"><span class="label label-primary"><%= user.role %></span></p>
 
                 <div style="margin-left:10px">
-                  <strong><i class="fa fa-book margin-r-5"></i> Email </strong>
+                  <strong><i class="fa fa-envelope margin-r-5"></i> Email </strong>
 
                   <p>
-                    naduy.hcmus@gmail.com
+                      <%= user.email %>
                   </p>
 
                   <hr>
 
-                  <strong><i class="fa fa-book margin-r-5"></i> NĂM SINH </strong>
+                  <strong><i class="fa fa-calendar margin-r-5"></i> NĂM SINH </strong>
 
                   <p class="">
-                    27-09-1998
+                    <%= user.birthDate %>
                   </p>
 
                   <hr>
 
-                  <strong><i class="fa fa-book margin-r-5"></i> ADDRESS</strong>
+                  <strong><i class="fa fa-map-marker margin-r-5"></i> ĐỊA CHỈ</strong>
 
                   <p>
-                    Gò Vấp, Thành Phố Hồ Chí Minh
+                    <%= user.address %>
                   </p>
 
                   <hr>
 
-                  <strong><i class="fa fa-map-marker margin-r-5"></i> PHONE NUMBER</strong>
+                  <strong><i class="fa fa-mobile-phone margin-r-5"></i> SỐ ĐIỆN THOẠI</strong>
 
-                  <p>0948202709</p>
-
-                  <hr>
-
-                  <!-- <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-                  <p>
-
-                    <span class="label label-success">Coding</span>
-                    <span class="label label-info">Javascript</span>
-                    <span class="label label-warning">PHP</span>
-                    <span class="label label-primary">Node.js</span>
-                  </p>
+                  <p><%= user.phoneNumber %></p>
 
                   <hr>
 
-                  <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p> -->
                 </div>
               </div>
               <!-- /.box-body -->
@@ -117,6 +80,9 @@
     <%include ../common/dialogs%>
     <%include ../common/script%>
 
+    <script>
+        const user = encodeURI('<%-JSON.stringify(user)%>');
+    </script>
 </body>
 
 </html>

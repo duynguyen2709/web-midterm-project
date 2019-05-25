@@ -1,5 +1,5 @@
 exports.index = function(req, res) {
-    res.render('order/order');
+    res.render('order/order',{user:req.user});
 };
 
 // Display list of all orders.

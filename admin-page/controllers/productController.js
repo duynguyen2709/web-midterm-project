@@ -8,7 +8,8 @@ exports.index = async function (req, res) {
 
     listCategory = await categoryModel.categoryList();
     res.render('product/product', {
-        listCategory:listCategory
+        listCategory:listCategory,
+        user:req.user
     });
 };
 

@@ -8,7 +8,8 @@ exports.index = async function (req, res) {
 
     listProduct = await productModel.productList();
     res.render('promotion/promotion', {
-     listProduct: listProduct
+     listProduct: listProduct,
+     user:req.user
     });
     
 };

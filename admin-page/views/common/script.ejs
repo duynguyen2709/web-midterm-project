@@ -23,18 +23,24 @@
 <script src="handlers/promotionHandler.js"></script>
 <script src="handlers/userAccountHandler.js"></script>
 <script src="handlers/categoryHandler.js"></script>
+<script src="handlers/userDetailHandler.js"></script>
 <script src="handlers/utils.js"></script>
 
 <!-- wrap word in datatable cell -->
 <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/ellipsis.js"></script>
 
 <script>
-
    $(document).ready(function () {
+
       $('.date-picker').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            sideBySide: true
-        });
+         format: 'YYYY-MM-DD HH:mm:ss',
+         sideBySide: true
+      });
+
+      $('.date-picker2').datetimepicker({
+         format: 'DD-MM-YYYY',
+         sideBySide: true
+      });
       /** add active class and stay opened when selected */
       var url = window.location;
       // for sidebar menu entirely but not cover treeview
@@ -62,8 +68,8 @@
       document.getElementById('del_productName').value = name;
    }
 
-   function deleteProduct(){
-   
+   function deleteProduct() {
+
       const data = serializeFormToJSon("#formDeleteProduct");
       console.log(data);
       loadData();
@@ -71,7 +77,10 @@
 
    // ####################################################################
 
-   function serializeFormToJSon(form){
-      return $(form).serializeArray().reduce((acc, next) => ({ ...acc, [next.name]: next.value }), {});
+   function serializeFormToJSon(form) {
+      return $(form).serializeArray().reduce((acc, next) => ({
+         ...acc,
+         [next.name]: next.value
+      }), {});
    }
 </script>
