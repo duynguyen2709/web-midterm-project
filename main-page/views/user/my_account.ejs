@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+  </head>
   <body>
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
@@ -43,11 +46,11 @@
               <div class="col-md-6">
                 <div class="aa-myaccount-register">                 
                  <h4>Đăng kí</h4>
-                 <form action="" class="aa-login-form">
+                 <form action="/user/createUser" method="POST" class="aa-login-form" onsubmit="return handleSignUp()"  >
                     <label for="">Tên đăng nhập hoặc địa chỉ Email<span>*</span></label>
-                    <input type="text" placeholder="Username or email">
+                    <input type="text" id="username"  name="username" placeholder="Username or email">
                     <label for="">Mật khẩu<span>*</span></label>
-                    <input type="password" placeholder="Password">
+                    <input type="password" id="password" name="password" placeholder="Password">
                     <button type="submit" class="aa-browse-btn">Đăng kí</button>                    
                   </form>
                 </div>
@@ -60,3 +63,37 @@
  </section>
  
   </body>
+    <script>
+  
+      var code = "<%= code %>";
+      if (code==="-1") alert("Đã xảy ra lỗi trong quá trình đăng ký tài khoản")
+      else if (code==="1") alert("Đăng ký tài khoản thành công ! Vui lòng kiểm tra email để xác thực tài khoản. ")
+      async function handleSignUp() {
+          //console.log("abc")
+        var email = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        if (email.length < 8) {
+          alert('Please enter an email address.');
+          return false;
+        }
+        if (password.length < 8) {
+          alert('Please enter a password.');
+          return false;
+        }
+        /*const data=await auth.createUserWithEmailAndPassword(email, password)
+        /*auth.createUserWithEmailAndPassword(email, password)
+        then(userData=>{
+          alert(userData)
+          return false;
+        }).catch(function(error) {alert("error") 
+        return false})*/
+        /*alert(data)
+        console.log(data)*/
+        return false
+      
+        }
+    
+    
+      
+    
+      </script>

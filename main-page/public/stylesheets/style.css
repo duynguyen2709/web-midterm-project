@@ -2626,6 +2626,11 @@ img {
 
 /*---- Login form ----*/
 
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+}
 .aa-login-form input[type="text"],
 .aa-login-form input[type="password"] {
   border: 1px solid #ccc;
@@ -2635,6 +2640,16 @@ img {
   padding: 10px;
   width: 100%;
 }
+
+.aa-account-detail input[type="text"] {
+  border: 0;
+  font-size: 16px;
+  height: 40px;
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 100%;
+}
+
 .aa-login-form label {
   font-weight: normal;
   margin-top: 8px;

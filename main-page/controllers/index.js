@@ -1,17 +1,16 @@
 var category=require('../model/category.js')
 var product=require('../model/product')
+var user=require('./user')
 // Display list of all products.
 exports.display_hp = async function(req, res) {     
     
-    if(category.listCategory==null)
-    {
-        await category.getListCategory();  
-    }
+    let listCategories=await category.getListCategory();   
     if(product.promoProduct==null)
     {
         await product.getPromoProduct(); 
     }
-    
-    res.render('home/homepage', {title: 'Daily Shop', listCategory: category.listCategory , productOfPromo:product.promoProduct });
+    let curUser=null
+    curUser=user.currentUser()
+    res.render('home/homepage', {title: 'Daily Shop', listCategory: listCategories , productOfPromo:product.promoProduct, user: curUser});
  
 };

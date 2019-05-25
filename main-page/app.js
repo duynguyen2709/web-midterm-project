@@ -4,10 +4,22 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressLayouts=require('express-ejs-layouts');
+var firebase=require('firebase')
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-
+var firebaseConfig = {
+  apiKey: "AIzaSyBLJIZC1_WYwNJR2aESyKgaOGaIWNJTtoc",
+  authDomain: "dailyshop-4d39c.firebaseapp.com",
+  databaseURL: "https://dailyshop-4d39c.firebaseio.com",
+  projectId: "dailyshop-4d39c",
+  storageBucket: "dailyshop-4d39c.appspot.com",
+  messagingSenderId: "827153058216",
+  appId: "1:827153058216:web:8c950574c0121eb9",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var user=null
 var app = express();
 var indexRoutes = require('./routes/index.js');
 var userRoutes=require('./routes/user.js');

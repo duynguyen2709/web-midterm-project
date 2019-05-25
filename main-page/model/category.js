@@ -1,4 +1,4 @@
-var listCategory=[];
+
 
 exports.getName=function()
 {
@@ -11,11 +11,10 @@ exports.getLinkProduct=function()
 exports.getListCategory= async ()=>
 {
     let result=[];
-    const res= await fetch('https://api-scttshop.herokuapp.com/api/categories');
+    const res= await fetch('https://api-scttshop-v2.herokuapp.com/api/categories');
     let  data=await res.json();
     data.forEach(element => {
-            result.push({name: element['categoryName'], Id: element['categoryID']});
+            result.push({name: element.categoryName, Id: element.categoryID});
     });
-    this.listCategory=result;
     return result;
 }
