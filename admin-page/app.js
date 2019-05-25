@@ -141,33 +141,6 @@ app.post('/login',
   }
 );
 
-// app.post('/login', function (req, res) {
-
-//   axios({
-//       method: 'PUT',
-//       url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username,
-//       data: {
-//         username: req.body.username,
-//         password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null),
-//         fullName: 'NGUYỄN ANH DUY',
-//         address: 'BIÊN HÒA, ĐỒNG NAI',
-//         phoneNumber: '0948202709',
-//         role: 'ADMIN',
-//         updDate: ''
-//       }
-//     })
-//     .then(response => {
-//       res.redirect("/");
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.json({
-//         data: "Insert Failed",
-//         status: 500
-//       });
-//     });
-// })
-
 // Endpoint to logout
 app.get('/logout', function (req, res) {
   req.logout();

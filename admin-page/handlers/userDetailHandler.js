@@ -3,27 +3,32 @@ function handleChangePassword() {
 }
 
 function handleUpdateUserDetail() {
+    $("#dlgupdateuserdetail").modal('hide');
+    $('#dlgloading').modal('show');
     $.ajax({
         type: "POST",
         url: BASE_USER_PATH + "/update",
         data: serializeFormToJSon("#formupdateuserdetail"),
         dataType: "json"
     }).done(function (resp) {
-        console.log("Response: " + resp.status + " - " + resp.data);
 
         if (resp.status == 200) {
-            FormUtils.showMessageBox('Cập Nhật Thông Tin Thành Công', null, 'success');
+            FormUtils.showMessageBox('Cập Nhật Thông Tin Thành Công', reloadUserDetail, 'success');
         } else {
             FormUtils.showMessageBox('Cập Nhật Thông Tin Thất Bại', null, 'error');
         }
-        $("#dlgupdateuserdetail").modal('hide');
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus);
         FormUtils.showMessageBox('Cập Nhật Thông Tin Thất Bại', null, 'error');
-        $("#dlgupdateuserdetail").modal('hide');
+       
     }).always(function () {
-        
+       
+        $('#dlgloading').modal('hide');
     });
+}
+
+function reloadUserDetail(){
+    window.location.href = window.location.protocol + "//" + window.location.host + "/userdetail/reload";
 }
 
 function showPopupUpdateUserDetail(userEncoded) {
