@@ -1,3 +1,10 @@
-exports.index = function(req, res) {
-    res.render('chart/chart', { title: 'Admin Page' });
+exports.index = function (req, res) {
+    if (req.isAuthenticated()) {
+        res.render('chart/chart', {
+            user: req.user
+        });
+    } else {
+        res.redirect('/');
+    }
+
 };

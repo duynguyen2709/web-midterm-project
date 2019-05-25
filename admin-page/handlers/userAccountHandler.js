@@ -19,8 +19,17 @@ function loadUserAccount() {
                 "data": "fullName",
                 "defaultContent": ""
             },
+            
             {
                 "data": "role",
+                "defaultContent": ""
+            },
+            {
+                "data": "email",
+                "defaultContent": ""
+            },
+            {
+                "data": "birthDate",
                 "defaultContent": ""
             },
             {
@@ -78,6 +87,8 @@ function showPopupUpdateUser(itemthis) {
         const obj = JSON.parse(resp);
 
         $("#dlgupdateuser input[name='username']").val(obj.username);
+        $("#dlgupdateuser input[name='email']").val(obj.email);
+        $("#dlgupdateuser input[name='birthDate']").val(obj.birthDate);
         $("#dlgupdateuser select[name='role'] option").filter(function () {
             return $.trim($(this).val()) === $.trim(obj.role);
         }).attr("selected", true).prop("selected", "selected");
@@ -102,6 +113,8 @@ function showPopupDeleteUser(itemthis) {
 
 
 function handleDeleteUserAccount() {
+    $("#dlgdeleteuser").modal('hide');
+    $("#dlgloading").modal('show');
     $.ajax({
         type: "POST",
         url: BASE_USER_PATH + "/delete",
@@ -112,12 +125,22 @@ function handleDeleteUserAccount() {
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus);
     }).always(function () {
-        $("#dlgdeleteuser").modal('hide');
+        
         $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
     });
 }
 
 function handleInsertUserAccount() {
+    
+    if ($("#dlginsertuser input[name='password']").val() != $("#dlginsertuser input[name='repassword']").val())
+    {
+        FormUtils.showMessageBox('Mật Khẩu Không Trùng. Vui Lòng Nhập Lại', null,'error');
+        return false;
+    }
+    $("#dlginsertuser").modal('hide');
+    $("#dlgloading").modal('show');
+
     $.ajax({
         type: "POST",
         url: BASE_USER_PATH + "/insert",
@@ -129,16 +152,18 @@ function handleInsertUserAccount() {
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus);
     }).always(function () {
-        $("#dlginsertuser").modal('hide');
         $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
     });
 }
 
 function handleUpdateUserAccount() {
+    $("#dlgupdateuser").modal('hide');
+    $("#dlgloading").modal('show');
+    
     $.ajax({
         type: "POST",
         url: BASE_USER_PATH + "/update",
-        // data: $("#formdeleteuser").serialize(),
         data: serializeFormToJSon("#formupdateuser"),
         dataType: "json"
     }).done(function (resp) {
@@ -146,8 +171,8 @@ function handleUpdateUserAccount() {
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus);
     }).always(function () {
-        $("#dlgupdateuser").modal('hide');
         $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
     });
 }
 

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<% include ../common/preheader%>
+
+<body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+    <% include ../common/header%>
+    <% include ../common/sidebar%>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+      <!-- Main content -->
+      <section class="content">
+
+        <div class="row">
+
+          <!-- /.col -->
+          <div class="col-md-6 col-md-offset-2">
+            <!-- About Me Box -->
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Thông Tin Cá Nhân</h3>
+                <a href="#" class="btn btn-sm btn-primary pull-right" data-toggle="modal"
+                  data-target="#dlgupdateuserdetail" onclick="showPopupUpdateUserDetail(user);">Cập Nhật Thông Tin</a>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <img class="profile-user-img img-responsive img-circle" src="<%= user.avatar %>"
+                  alt="User profile picture">
+
+                <h2 class="profile-username text-center"><b><%= user.fullName %></b></h2>
+
+                <p class="text-center" style="font-size: 20px;"><span class="label label-primary"><%= user.role %></span></p>
+
+                <div style="margin-left:10px">
+                  <strong><i class="fa fa-envelope margin-r-5"></i> Email </strong>
+
+                  <p>
+                      <%= user.email %>
+                  </p>
+
+                  <hr>
+
+                  <strong><i class="fa fa-calendar margin-r-5"></i> NĂM SINH </strong>
+
+                  <p class="">
+                    <%= user.birthDate %>
+                  </p>
+
+                  <hr>
+
+                  <strong><i class="fa fa-map-marker margin-r-5"></i> ĐỊA CHỈ</strong>
+
+                  <p>
+                    <%= user.address %>
+                  </p>
+
+                  <hr>
+
+                  <strong><i class="fa fa-mobile-phone margin-r-5"></i> SỐ ĐIỆN THOẠI</strong>
+
+                  <p><%= user.phoneNumber %></p>
+
+                  <hr>
+
+                </div>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+      </section>
+
+    </div>
+    <%include ../common/dialogs%>
+    <%include ../common/script%>
+
+    <script>
+        const user = encodeURI('<%-JSON.stringify(user)%>');
+    </script>
+</body>
+
+</html>
