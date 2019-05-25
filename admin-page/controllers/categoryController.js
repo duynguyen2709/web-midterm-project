@@ -2,9 +2,14 @@ var axios = require('axios');
 var categoryModel = require('../models/categoryModel');
 
 exports.index = function (req, res) {
-    res.render('category/category', {
-        user: req.user
-    });
+    if (req.isAuthenticated()) {
+        res.render('category/category', {
+            user: req.user
+        });
+    } else {
+        res.redirect('/');
+    }
+
 };
 
 

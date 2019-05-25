@@ -1,5 +1,12 @@
 exports.index = function(req, res) {
-    res.render('order/order',{user:req.user});
+    if (req.isAuthenticated()) {
+        res.render('order/order', {
+            user: req.user
+        });
+    } else {
+        res.redirect('/');
+    }
+    
 };
 
 // Display list of all orders.

@@ -6,11 +6,16 @@ var listCategory = null;
 
 exports.index = async function (req, res) {
 
-    listCategory = await categoryModel.categoryList();
-    res.render('product/product', {
-        listCategory:listCategory,
-        user:req.user
-    });
+    if (req.isAuthenticated()) {
+        listCategory = await categoryModel.categoryList();
+        res.render('product/product', {
+            listCategory: listCategory,
+            user: req.user
+        });
+    } else {
+        res.redirect('/');
+    }
+
 };
 
 exports.getListProduct = async function (req, res) {
@@ -88,7 +93,7 @@ exports.updateProduct = function (req, res) {
             method: 'PUT',
             url: 'https://api-scttshop-v2.herokuapp.com/api/products/' + req.body.productID,
             data: {
-                productID:req.body.productID,
+                productID: req.body.productID,
                 productName: req.body.productName,
                 categoryID: req.body.categoryID,
                 manufacturer: req.body.manufacturer,

@@ -21,13 +21,15 @@ router.get('/signup', function (req, res, next) {
   if (req.isAuthenticated()) {
     res.redirect('/userdetail');
   } else {
-    res.render('signupPage');
+    res.render('signupPage', {
+      user: ''
+    });
   }
 
 });
 
 router.post('/signup', async function (req, res, next) {
-  
+
   axios({
       method: 'POST',
       url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/',
@@ -39,6 +41,7 @@ router.post('/signup', async function (req, res, next) {
         phoneNumber: req.body.phoneNumber,
         email: req.body.email,
         birthDate: req.body.birthDate,
+        avatar: 'https://i.stack.imgur.com/l60Hf.png',
         role: 'ADMIN',
         updDate: ''
       }

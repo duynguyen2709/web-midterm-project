@@ -103,7 +103,8 @@ passport.use('local', new LocalStrategy({
       if (err) throw err;
 
       if (isMatch) {
-        axios.post('https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + user.username + "/logon")
+
+        axios.post('https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + user.username + '/logon')
           .then((res) => console.log("Login Succeed!"));
 
         return done(null, user);

@@ -6,12 +6,18 @@ var listProduct = null;
 
 exports.index = async function (req, res) {
 
-    listProduct = await productModel.productList();
-    res.render('promotion/promotion', {
-     listProduct: listProduct,
-     user:req.user
-    });
-    
+    if (req.isAuthenticated()) {
+        listProduct = await productModel.productList();
+        res.render('promotion/promotion', {
+            listProduct: listProduct,
+            user: req.user
+        });
+    } else {
+        res.redirect('/');
+    }
+
+
+
 };
 
 exports.getListPromotion = async function (req, res) {
@@ -25,7 +31,7 @@ exports.getPromotion = async function (req, res) {
 
     const promotionID = req.params.promotionID;
     const response = await promotion.getPromotion(promotionID);
-    
+
     res.send(JSON.stringify(response));
 }
 

@@ -23,8 +23,30 @@
                         <input type="text" class="form-control" id="username" name="username" required>
                     </div>
                     <div class="form-group">
+                        <label for="password" class="control-label">Mật Khẩu:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="repassword" class="control-label">Nhập Lại Mật Khẩu:</label>
+                        <input type="password" class="form-control" id="repassword" name="repassword" required>
+                    </div>
+                    <div class="form-group">
                         <label for="fullname" class="control-label">Họ Và Tên:</label>
                         <input type="text" class="form-control" id="fullName" name="fullName">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email:</label>
+                        <input type="text" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate" class="control-label">Ngày Sinh:</label>
+                        <div class='input-group date date-picker2'>
+                            <input type="text" class="form-control" id="birthDate" name="birthDate"
+                                placeholder="DD-MM-YYYY"></input>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="phoneNumber" class="control-label">Số Điện Thoại:</label>
@@ -34,7 +56,7 @@
                         <label for="address" class="control-label">Địa Chỉ:</label>
                         <input type="text" class="form-control" id="address" name="address">
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="role" class="control-label">Cấp Độ:</label>
                         <select id="role" name="role">
                             <option value="ADMIN" selected>Quản Trị Viên</option>
@@ -42,7 +64,7 @@
                             <option value="USER">Người Dùng</option>
                         </select>
 
-                    </div>
+                    </div> -->
 
                     <button type="submit"
                         onclick="handleInsertUserAccount(); $('#forminsertuser').get(0).reset();  return false;"
@@ -72,9 +94,26 @@
                         <label for="id" class="control-label">Tên Đăng Nhập:</label>
                         <input type="text" class="form-control" id="username" name="username" readonly required>
                     </div>
+                    <div class="form-group" style="display:none">
+                        <input type="text" class="form-control" name="password">
+                    </div>
                     <div class="form-group">
                         <label for="fullname" class="control-label">Họ Và Tên:</label>
                         <input type="text" class="form-control" id="fullName" name="fullName">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email:</label>
+                        <input type="text" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate" class="control-label">Ngày Sinh:</label>
+                        <div class='input-group date date-picker2'>
+                            <input type="text" class="form-control" id="birthDate" name="birthDate"
+                                placeholder="DD-MM-YYYY"></input>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="phoneNumber" class="control-label">Số Điện Thoại:</label>
@@ -214,9 +253,30 @@
             <div class="modal-body">
                 <form action="#" method="POST" id="formchangepassword">
                     <div class="form-group">
-                        <label for="id" class="control-label">Tên Đăng Nhập:</label>
+                        <label for="username" class="control-label">Tên Đăng Nhập:</label>
                         <input type="text" class="form-control" name="username" readonly required>
                     </div>
+                    <div class="form-group" style="display: none">
+                        <input type="text" class="form-control" name="fullName" readonly required>
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <input type="text" class="form-control" name="address" readonly required>
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <input type="text" class="form-control" name="phoneNumber" readonly required>
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <input type="text" class="form-control" name="birthDate" readonly required>
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <input type="text" class="form-control" name="role" readonly required>
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <input type="text" class="form-control" name="email" readonly required>
+                    </div>
+                    <div class="form-group" style="display: none">
+                            <input type="text" class="form-control" name="avatar" readonly required>
+                        </div>
 
                     <div class="form-group">
                         <label for="password" class="control-label">Mật Khẩu Mới:</label>

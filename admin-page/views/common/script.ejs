@@ -30,6 +30,8 @@
 <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/ellipsis.js"></script>
 
 <script>
+   const globalUser = encodeURI('<%-JSON.stringify(user)%>');
+
    $(document).ready(function () {
 
       $('.date-picker').datetimepicker({
@@ -62,25 +64,24 @@
    }
 
 
-   // ################################# PRODUCT #################################
-   function onShowDeleteProduct(id, name) {
-      document.getElementById('del_productID').value = id;
-      document.getElementById('del_productName').value = name;
-   }
-
-   function deleteProduct() {
-
-      const data = serializeFormToJSon("#formDeleteProduct");
-      console.log(data);
-      loadData();
-   }
-
-   // ####################################################################
-
    function serializeFormToJSon(form) {
       return $(form).serializeArray().reduce((acc, next) => ({
          ...acc,
          [next.name]: next.value
       }), {});
    }
+
+   function showPopupChangePassword(encodedUser){
+      const obj = JSON.parse(decodeURI(encodedUser));
+
+      $("#dlgchangepassword input[name='username']").val(obj.username);
+      $("#dlgchangepassword input[name='fullName']").val(obj.fullName);
+      $("#dlgchangepassword input[name='email']").val(obj.email);
+      $("#dlgchangepassword input[name='role']").val(obj.role);
+      $("#dlgchangepassword input[name='avatar']").val(obj.avatar);
+      $("#dlgchangepassword input[name='birthDate']").val(obj.birthDate);
+      $("#dlgchangepassword input[name='address']").val(obj.address);
+      $("#dlgchangepassword input[name='phoneNumber']").val(obj.phoneNumber);
+   }
+
 </script>
