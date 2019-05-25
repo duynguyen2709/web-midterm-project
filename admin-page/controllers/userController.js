@@ -47,11 +47,13 @@ exports.insertUserAccount = function (req, res) {
             url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/',
             data: {
                 username: req.body.username,
-                password: '123456',
+                password: req.password,
                 fullName: req.body.fullName,
                 address: req.body.address,
                 phoneNumber: req.body.phoneNumber,
-                role: req.body.role,
+                email: req.body.email,
+                birthDate: req.body.birthDate,
+                role: 'ADMIN',
                 updDate: ''
             }
         })
