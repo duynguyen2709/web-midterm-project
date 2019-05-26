@@ -113,6 +113,9 @@ exports.user_create_post = async function(req, res) {
                 username: req.body.displayName,
                 verified: user.emailVerified
             }
+            console.log(req.body.displayName)
+            console.log(req.body.address)
+            console.log(req.body.phone)
             await axios({
                 method: 'POST',
                 url: 'https://api-scttshop-v2.herokuapp.com/api/customers',
