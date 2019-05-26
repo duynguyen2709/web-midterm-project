@@ -1,4 +1,5 @@
 var category=require('../model/category')
+var product=require('../model/product')
 var firebase=require('firebase')
 var axios = require('axios');
 
@@ -27,24 +28,23 @@ exports.view_detail = async function(req, res) {
 exports.user_create_get = async function(req, res) {
     let listCategories=await category.getListCategory(); 
     let user=null
-    user = await firebase.auth().currentUser
     res.render('user/register_account',{listCategory: listCategories, user: user  ,code: "0"});
 };
 
-exports.user_logout_post = async function(req, res) {
-    let listCategories=await category.getListCategory();   
-    req.session.destroy(function() {
-        console.log("Logged Out!");
-      });
+exports.user_logout_post =  function(req, res) {
+    req.session.destroy()
     firebase.auth().signOut().then(()=>{
-        res.redirect("/")
+        res.redirect('/')
+       
+    }).catch((err)=>{
+        console.log(err)
     })
+   
 
 }
 
 
-exports.user_login_post = async function(req, res) {
-    let listCategories=await category.getListCategory();   
+exports.user_login_post =  function(req, res) {
     let user=[]
     let email = req.body.username;
     let password = req.body.password;  
@@ -61,39 +61,48 @@ exports.user_login_post = async function(req, res) {
         var errorMessage = error.message;
         console.log(errorMessage)
         // ...
-      });
-    firebase.auth().onAuthStateChanged(async function(user) {
-        if (user) {
-            console.log(user)
-            req.session.isLogged = true;
-            req.session.user = user
-            if(user.emailVerified)
-            {
-                await axios({
+      }).then(()=>{
+          let user=firebase.auth().currentUser
+          //console.log(firebase.auth().currentUser)
+          req.session.isLogged = true;
+          req.session.user = user
+          if(user.emailVerified==true)
+          {
+            axios({
                 method: 'PUT',
                 url: 'https://api-scttshop-v2.herokuapp.com/api/customers/'+user.email+"/verify",
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-            }
-            let code="1"
-            res.redirect("/")
-           
-        } else {
-
-            console.log("no user")
-          // No user is signed in.
+            }).catch(err => {
+                console.log(err)
+            })
+                  
         }
-      }).catch((error)=>{});
+          res.redirect('/')
+        /*firebase.auth().onAuthStateChanged( function(user) {
+            if (user) {
+                req.session.isLogged = true;
+                req.session.user = user
+                if(user.emailVerified==true)
+                {
+                   
+                  
+                }
+                
+                res.redirect('/')
+               
+            } else {
+                console.log("no user")
+            }
+          })*/
+
+      })
+   
 };
 
-exports.user_create_post = async function(req, res) {
+exports.user_create_post =  function(req, res) {
     const auth = firebase.auth();
     var email = req.body.username;
     var password = req.body.password;
     let user=null
-    let listCategories=await category.getListCategory();
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -101,55 +110,51 @@ exports.user_create_post = async function(req, res) {
         let code= "-1"
         res.render('user/register_account',{listCategory: listCategories,user: null , code: code });
         // ...
-    });
-    firebase.auth().onAuthStateChanged(async function(user) {
-        if (user) {
-            user.updateProfile({
-                displayName: req.body.displayName
-            })
-            var currentUser={
-                uid: user.uid,
-                email: user.email,
-                username: req.body.displayName,
-                verified: user.emailVerified
-            }
-            console.log(req.body.displayName)
-            console.log(req.body.address)
-            console.log(req.body.phone)
-            await axios({
-                method: 'POST',
-                url: 'https://api-scttshop-v2.herokuapp.com/api/customers',
-                data: {
-                  email: user.email,
-                  fullName: req.body.displayName,
-                  avatar: "",
-                  address: req.body.address,
-                  phoneNumber:req.body.phone,
-                  totalBuy: 0,
-                  verified: user.emailVerified
-                }
-            })
-            .catch(err => {
-                console.log(err)
-                //res.render('user/my_account',{listCategory: listCategories, user: currentUser ,code: "-1"});
-            })
-            let code="1"
-            user.sendEmailVerification().then(function() {
-                req.session.destroy(function() {
-                    console.log("Logged Out!");
-                  });
-                user.signOut().then(()=>{res.redirect('/')})
-                //res.render('user/register_account',{listCategory: listCategories, user: currentUser ,code: code});
-            })
-            .catch(err=>{
-                res.redirect('/')
-                //res.render('user/register_account',{listCategory: listCategories, user: currentUser ,code: "-1"});
-            })
-           
-        } else {
-          // No user is signed in.
+    }).then ( ()=>{
+
+        let user=firebase.auth().currentUser
+        user.updateProfile({
+            displayName: req.body.displayName
+        })
+        var currentUser={
+            uid: user.uid,
+            email: user.email,
+            username: req.body.displayName,
+            verified: user.emailVerified
         }
-      });
+        axios({
+            method: 'POST',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/customers',
+            data: {
+              email: user.email,
+              fullName: req.body.displayName,
+              avatar: "",
+              address: req.body.address,
+              phoneNumber:req.body.phone,
+              totalBuy: 0,
+              verified: user.emailVerified
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            //res.render('user/my_account',{listCategory: listCategories, user: currentUser ,code: "-1"});
+        })
+        let code="1"
+        user.sendEmailVerification().then(function() {
+            
+            firebase.auth().currentUser.signOut()
+            req.session.destroy(function() {
+                console.log("Logged Out!");
+              });
+            res.redirect('/')
+            //res.render('user/register_account',{listCategory: listCategories, user: currentUser ,code: code});
+        })
+        .catch(err=>{
+            res.redirect('/')
+            //res.render('user/register_account',{listCategory: listCategories, user: currentUser ,code: "-1"});
+        })
+       
+    })
 
 
 };
