@@ -9,10 +9,10 @@ exports.currentUser= function(){
 }
 exports.view_detail = async function(req, res) {
     let listCategories=await category.getListCategory();   
-    let curUser=null
-    curUser= firebase.auth().currentUser
+    let  curUser =req.session.user
     let data= await fetch("https://api-scttshop-v2.herokuapp.com/api/customers/"+curUser.email)
     let user= await data.json()
+   console.log(user)
     curUser={
         email: user.email,
         displayName: user.fullName,
@@ -48,7 +48,7 @@ exports.user_login_post = async function(req, res) {
     let user=[]
     let email = req.body.username;
     let password = req.body.password;  
-    user = await firebase.auth().currentUser
+    //user = await firebase.auth().currentUser
     /*await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -64,7 +64,7 @@ exports.user_login_post = async function(req, res) {
       });
     firebase.auth().onAuthStateChanged(async function(user) {
         if (user) {
-            console.log(user.emailVerified)
+            console.log(user)
             req.session.isLogged = true;
             req.session.user = user
             if(user.emailVerified)

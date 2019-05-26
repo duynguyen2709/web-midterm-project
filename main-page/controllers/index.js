@@ -11,7 +11,7 @@ exports.display_hp = async function(req, res) {
     }
     let curUser=null
     curUser=req.session.user
-    console.log(user)
+    console.log(curUser)
     res.render('home/homepage', {title: 'Daily Shop', listCategory: listCategories , productOfPromo:product.promoProduct, user: curUser});
  
 };
