@@ -28,10 +28,11 @@ exports.product_list_type = async function(req, res) {
     let listCategories=await category.getListCategory();   
     var urlProduct= url+req.query.id+'/products';
     var info;
+    let  curUser =req.session.user
     request(urlProduct, (error, response, body)=> {
         if (!error && response.statusCode === 200) {
         info = JSON.parse(body)
-        res.render('product/product',{info: info,listCategory: listCategories});
+        res.render('product/product',{info: info,listCategory: listCategories,user: curUser});
         } else {
         console.log("Got an error: ", error, ", status code: ", response.statusCode)
         }
