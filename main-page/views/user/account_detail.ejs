@@ -31,7 +31,13 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="aa-myaccount-login">
-                    <h4>Thông tin cá nhân</h4>
+                    <div class="row">
+                        <h4 class="col-sm-6 col-md-6">Thông tin cá nhân</h4>
+                        <div class="aa-register-now  col-sm-6 col-md-6" >
+                            <a href="/user/update">Thay đổi thông tin cá nhân ?</a>
+                        </div>
+                    </div>
+                    
                     <form action="/user/logout" class="aa-account-detail" method="POST">
                       <div class="row">
                       <label for="staticEmail" class="col-sm-2 col-form-label col-md-4">Email: </label>
@@ -63,7 +69,7 @@
                         <input type="text" readonly class="form-control-plaintext" id="status1" value="<% if (user.verified===true) { %> Đã xác thực <%} else {%>Chưa xác thực<% }%>">
                       </div>
                       
-                        <button class="aa-browse-btn" type="submit" value="submit" >Đăng xuất</button>
+                      <button class="aa-browse-btn" type="submit" value="submit" >Đăng xuất</button>
                       
                       
                     </div>

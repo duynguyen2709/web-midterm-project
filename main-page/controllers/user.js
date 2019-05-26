@@ -132,6 +132,9 @@ exports.user_create_post = async function(req, res) {
             })
             let code="1"
             user.sendEmailVerification().then(function() {
+                req.session.destroy(function() {
+                    console.log("Logged Out!");
+                  });
                 user.signOut().then(()=>{res.redirect('/')})
                 //res.render('user/register_account',{listCategory: listCategories, user: currentUser ,code: code});
             })
@@ -150,11 +153,56 @@ exports.user_create_post = async function(req, res) {
 
 // Display book update form on GET.
 exports.user_update_get = async function(req, res) {
-    let listCategories=await category.getListCategory();   
-    res.render('user/account_detail',{listCategory: listCategories});
+    let listCategories=await category.getListCategory(); 
+    let user=null
+    user = await firebase.auth().currentUser
+    let data= await fetch("https://api-scttshop-v2.herokuapp.com/api/customers/"+user.email)
+    user= await data.json()
+    curUser={
+        email: user.email,
+        displayName: user.fullName,
+        avatar: user.avatar,
+        address: user.address,
+        phoneNumber: user.phoneNumber,
+        verified: user.verified
+    }
+    res.render('user/update_account',{listCategory: listCategories, user: curUser});
 };
 // Handle book update on POST.
 exports.user_update_post = async function(req, res) {
-    let listCategories=await category.getListCategory();   
-    res.render('user/account_detail',{listCategory: listCategories});
+    let listCategories=await category.getListCategory(); 
+    let user=null
+    user = await firebase.auth().currentUser
+    let data= await fetch("https://api-scttshop-v2.herokuapp.com/api/customers/"+user.email)
+    user= await data.json()
+    let curUser={
+        email: user.email,
+        displayName: user.fullName,
+        avatar: user.avatar,
+        address: user.address,
+        phoneNumber: user.phoneNumber,
+        verified: user.verified
+    }
+    await axios({
+        method: 'PUT',
+        url: 'https://api-scttshop-v2.herokuapp.com/api/customers/'+curUser.email,
+        data: {
+          email: curUser.email,
+          fullName: req.body.displayName,
+          avatar: user.avatar,
+          address: req.body.address,
+          phoneNumber:req.body.phone,
+          totalBuy: user.totalBuy,
+          verified: curUser.emailVerified
+        }
+    }).then(()=>{
+        req.session.isLogged = true;
+        req.session.user = user
+
+    })
+    .catch(err => {
+        console.log(err)
+        //res.render('user/my_account',{listCategory: listCategories, user: currentUser ,code: "-1"});
+    }) 
+    res.redirect("/user/detailUser")
 };
