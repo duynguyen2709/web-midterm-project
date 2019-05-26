@@ -15,7 +15,7 @@ var user=require('./user')
 // };
 var request = require('request')
 // const url = 'https://api-scttshop.herokuapp.com/api/categories/1/products'
-const url = 'https://api-scttshop.herokuapp.com/api/categories/';
+const url = 'https://api-scttshop-v2.herokuapp.com/api/categories/';
 //
 // Display list of all products.
 exports.product_list = async function(req, res) {     

@@ -5,7 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressLayouts=require('express-ejs-layouts');
 var firebase=require('firebase')
+var cookieSession = require('cookie-session')
 require('es6-promise').polyfill();
+var session=require('express-session')
 require('isomorphic-fetch');
 
 var firebaseConfig = {
@@ -19,8 +21,13 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-var user=null
+
 var app = express();
+app.use(session({
+  secret: 'my_session',
+  resave: false,
+  saveUninitialized: false
+}))
 var indexRoutes = require('./routes/index.js');
 var userRoutes=require('./routes/user.js');
 var productRoutes=require('./routes/product.js');

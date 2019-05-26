@@ -33,6 +33,9 @@ exports.user_create_get = async function(req, res) {
 
 exports.user_logout_post = async function(req, res) {
     let listCategories=await category.getListCategory();   
+    req.session.destroy(function() {
+        console.log("Logged Out!");
+      });
     firebase.auth().signOut().then(()=>{
         res.redirect("/")
     })
@@ -46,6 +49,12 @@ exports.user_login_post = async function(req, res) {
     let email = req.body.username;
     let password = req.body.password;  
     user = await firebase.auth().currentUser
+    /*await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    });*/
+  
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -56,6 +65,8 @@ exports.user_login_post = async function(req, res) {
     firebase.auth().onAuthStateChanged(async function(user) {
         if (user) {
             console.log(user.emailVerified)
+            req.session.isLogged = true;
+            req.session.user = user
             if(user.emailVerified)
             {
                 await axios({
@@ -74,7 +85,7 @@ exports.user_login_post = async function(req, res) {
             console.log("no user")
           // No user is signed in.
         }
-      });
+      }).catch((error)=>{});
 };
 
 exports.user_create_post = async function(req, res) {
