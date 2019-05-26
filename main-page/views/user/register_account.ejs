@@ -34,8 +34,14 @@
                     <input type="text" id="username"  name="username" placeholder="Email">
                     <label for="">Họ và tên<span>*</span></label>
                     <input type="text" id="displayName" name="displayName" placeholder="Full name">
-                    <label for="">Mật khẩu<span>*</span></label>
-                    <input type="password" id="password" name="password" placeholder="Password">
+                    <div class="md-form form-lg">
+                        <label for="">Mật khẩu<span>*</span></label>
+                        <input type="password" id="password" name="password" placeholder="Password">
+                        <small  id="passwordHelpBlock" class="form-text text-muted">
+                            Mật khẩu phải dài hơn 8 kí tự
+                        </small>   
+                    </div>
+                    
                     <label for="">Nhập lại mật khẩu<span>*</span></label>
                     <input type="password" id="re-password" name="re-password" placeholder="Confirm Password">
                     <label for="">Địa chỉ<span>*</span></label>
@@ -61,14 +67,23 @@
       else if (code==="1") alert("Đăng ký tài khoản thành công ! Vui lòng kiểm tra email để xác thực tài khoản. ")
       async function handleSignUp() {
           //console.log("abc")
+        
         var email = document.getElementById('username').value;
         var password = document.getElementById('password').value;
-        if (email.length < 8) {
+        if (email.length==0) {
           alert('Please enter an email address.');
+          event.preventDefault() 
           return false;
         }
-        if (password.length < 8) {
+        if (password.length==0) {
           alert('Please enter a password.');
+          event.preventDefault() 
+          return false;
+        }
+        if(password.length<8)
+        {
+          alert('Your password must be larger than 8 characters long ');
+          event.preventDefault() 
           return false;
         }
         /*const data=await auth.createUserWithEmailAndPassword(email, password)
@@ -80,7 +95,7 @@
         return false})*/
         /*alert(data)
         console.log(data)*/
-        return false
+        return true
       
         }
     

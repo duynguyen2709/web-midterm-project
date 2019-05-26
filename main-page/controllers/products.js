@@ -15,7 +15,7 @@ var user=require('./user')
 // };
 var request = require('request')
 // const url = 'https://api-scttshop.herokuapp.com/api/categories/1/products'
-const url = 'https://api-scttshop.herokuapp.com/api/categories/';
+const url = 'https://api-scttshop-v2.herokuapp.com/api/categories/';
 //
 // Display list of all products.
 exports.product_list = async function(req, res) {     
@@ -28,10 +28,11 @@ exports.product_list_type = async function(req, res) {
     let listCategories=await category.getListCategory();   
     var urlProduct= url+req.query.id+'/products';
     var info;
+    let  curUser =req.session.user
     request(urlProduct, (error, response, body)=> {
         if (!error && response.statusCode === 200) {
         info = JSON.parse(body)
-        res.render('product/product',{info: info,listCategory: listCategories});
+        res.render('product/product',{info: info,listCategory: listCategories,user: curUser});
         } else {
         console.log("Got an error: ", error, ", status code: ", response.statusCode)
         }

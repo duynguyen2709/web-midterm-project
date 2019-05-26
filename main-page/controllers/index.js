@@ -10,7 +10,8 @@ exports.display_hp = async function(req, res) {
         await product.getPromoProduct(); 
     }
     let curUser=null
-    curUser=user.currentUser()
+    curUser=req.session.user
+    console.log(curUser)
     res.render('home/homepage', {title: 'Daily Shop', listCategory: listCategories , productOfPromo:product.promoProduct, user: curUser});
  
 };

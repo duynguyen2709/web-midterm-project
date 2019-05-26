@@ -3,15 +3,13 @@ var user=require('./user')
 // Display list of all products of specific type.
 exports.get_detail =async function(req, res) {
     let listCategories=await category.getListCategory();   
-    let curUser=null
-    curUser=user.currentUser()
+    let  curUser =req.session.user
     res.send('NOT IMPLEMENTED: my cart get detail',{listCategory: listCategories, user:curUser});
 };
 
 exports.get_page = async function(req, res) {
     let listCategories=await category.getListCategory();   
-    let curUser=null
-    curUser=user.currentUser()
+    let  curUser =req.session.user
     res.render('mycart/my_cart.ejs',{listCategory: listCategories, user:curUser});
 };
 // Display detail page for a specific product.
@@ -26,7 +24,6 @@ exports.update =async function(req, res) {
 
 exports.proceed_to_checkout =async function(req, res) {
     let listCategories=await category.getListCategory();  
-    let curUser=null
-    curUser=user.currentUser() 
+    let  curUser =req.session.user
     res.render('/check-out/checkout.ejs',{listCategory: listCategories, user:curUser});
 };
