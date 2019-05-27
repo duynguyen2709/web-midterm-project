@@ -98,7 +98,8 @@ exports.user_login_post =  function(req, res) {
    
 };
 
-exports.user_create_post =  function(req, res) {
+exports.user_create_post = async function(req, res) {
+    let listCategories=await category.getListCategory(); 
     const auth = firebase.auth();
     var email = req.body.username;
     var password = req.body.password;
@@ -108,12 +109,15 @@ exports.user_create_post =  function(req, res) {
         var errorCode = error.code;
         var errorMessage = error.message;
         let code= "-1"
-        res.render('user/register_account',{listCategory: listCategories,user: null , code: code });
+        console.log(errorCode)
+        res.render('user/register_account',{listCategory: listCategories,user: null , code: errorMessage });
         // ...
     }).then ( ()=>{
 
         let user=firebase.auth().currentUser
-        user.updateProfile({
+        if(user!=null)
+        {
+            user.updateProfile({
             displayName: req.body.displayName
         })
         var currentUser={
@@ -153,6 +157,7 @@ exports.user_create_post =  function(req, res) {
             res.redirect('/')
             //res.render('user/register_account',{listCategory: listCategories, user: currentUser ,code: "-1"});
         })
+    }
        
     })
 
