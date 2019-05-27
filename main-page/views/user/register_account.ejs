@@ -63,7 +63,7 @@
     <script>
   
       var code = "<%= code %>";
-      if (code==="-1") alert("Đã xảy ra lỗi trong quá trình đăng ký tài khoản")
+      if (typeof code !== 'undefined' && code !=="0" ) alert(code)
       else if (code==="1") alert("Đăng ký tài khoản thành công ! Vui lòng kiểm tra email để xác thực tài khoản. ")
       async function handleSignUp() {
           //console.log("abc")
