@@ -30,20 +30,29 @@
                 <div class="aa-myaccount-register">                 
                  <h4>Đăng kí</h4>
                  <form action="/user/createUser" method="POST" class="aa-login-form" onsubmit="return handleSignUp()"  >
-                    <label for="">Email<span>*</span></label>
-                    <input type="text" id="username"  name="username" placeholder="Email">
+                  <div class="md-form form-lg">
+                      <label for="">Email<span>*</span></label>
+                      <input type="text" id="username"  name="username" placeholder="Email">
+                      <div id="divCheckEmail" style="color: red"></div>
+                  </div>
+                   
                     <label for="">Họ và tên<span>*</span></label>
                     <input type="text" id="displayName" name="displayName" placeholder="Full name">
                     <div class="md-form form-lg">
                         <label for="">Mật khẩu<span>*</span></label>
-                        <input type="password" id="password" name="password" placeholder="Password">
-                        <small  id="passwordHelpBlock" class="form-text text-muted">
-                            Mật khẩu phải dài hơn 8 kí tự
-                        </small>   
+                        <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Password"  title="Phải chứa ít nhất một chữ số, một kí tự hoa, một kí tự thường và độ dài tối thiểu là 8 kí tự" required>  
+                        <div id="message">
+                          <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                          <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                          <p id="number" class="invalid">A <b>number</b></p>
+                          <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                        </div>
                     </div>
-                    
-                    <label for="">Nhập lại mật khẩu<span>*</span></label>
-                    <input type="password" id="re-password" name="re-password" placeholder="Confirm Password">
+                    <div class="md-form form-lg">
+                        <label for="">Nhập lại mật khẩu<span>*</span></label>
+                        <input type="password" id="re-password" name="re-password" placeholder="Confirm Password">
+                        <div id="divCheckPassword" style="color: red"></div>
+                    </div>
                     <label for="">Địa chỉ<span>*</span></label>
                     <input type="text" id="address" name="address" placeholder="Address">
                     <label for="">Số điên thoại<span>*</span></label>
@@ -58,48 +67,127 @@
      </div>
    </div>
  </section>
- 
-  </body>
-    <script>
+ <script>
+    var myInput = document.getElementById("password");
+    var letter = document.getElementById("letter");
+    var capital = document.getElementById("capital");
+    var number = document.getElementById("number");
+    var length = document.getElementById("length");
+    var repass = document.getElementById("re-password");
+    var username=document.getElementById("username");
+    username.onfocusout= function()
+    {
+       
+       if(username.value!="")
+       {
+        $.ajax({
+          type: 'POST',
+          url: '/user/check' ,
+          data: {email:username.value },
+          async: true,
+          beforeSend: function (xhr) {
+          if (xhr && xhr.overrideMimeType) {
+            xhr.overrideMimeType('application/json;charset=utf-8');
+          }
+          },
+          dataType: 'json',
+          success: function (data) {
+            if(data.email!=null)
+            {
+              console.log(data)
+              document.getElementById("divCheckEmail").innerHTML="Email đã được sử dụng"
+            }
+            else{
+              document.getElementById("divCheckEmail").innerHTML=""
+            }
+          }
+        });
+       }
+    }
+    repass.onfocusout=function(){
+      if(repass.value!=(myInput.value))
+      {
+        document.getElementById("divCheckPassword").innerHTML="Passwords do not match!"
+      }
+      else
+      {
+        document.getElementById("divCheckPassword").innerHTML=""
+      }
+    }
+    myInput.onfocus = function() {
+      document.getElementById("message").style.display = "block";
+    }
+    myInput.onkeyup = function() {
+// Validate lowercase letters
+var lowerCaseLetters = /[a-z]/g;
+if(myInput.value.match(lowerCaseLetters)) { 
+  letter.classList.remove("invalid");
+  letter.classList.add("valid");
+} else {
+  letter.classList.remove("valid");
+  letter.classList.add("invalid");
+}
+
+// Validate capital letters
+var upperCaseLetters = /[A-Z]/g;
+if(myInput.value.match(upperCaseLetters)) { 
+  capital.classList.remove("invalid");
+  capital.classList.add("valid");
+} else {
+  capital.classList.remove("valid");
+  capital.classList.add("invalid");
+}
+
+// Validate numbers
+var numbers = /[0-9]/g;
+if(myInput.value.match(numbers)) { 
+  number.classList.remove("invalid");
+  number.classList.add("valid");
+} else {
+  number.classList.remove("valid");
+  number.classList.add("invalid");
+}
+
+// Validate length
+if(myInput.value.length >= 8) {
+  length.classList.remove("invalid");
+  length.classList.add("valid");
+} else {
+  length.classList.remove("valid");
+  length.classList.add("invalid");
+}
+}
+    var code = "<%= code %>";
+    if (typeof code !== 'undefined' && code !=="0" ) alert(code)
+    else if (code==="1") alert("Đăng ký tài khoản thành công ! Vui lòng kiểm tra email để xác thực tài khoản. ")
+    async function handleSignUp() {
+        //console.log("abc")
+      
+      var email = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      if (email.length==0) {
+        alert('Please enter an email address.');
+        event.preventDefault() 
+        return false;
+      }
+      if (password.length==0) {
+        alert('Please enter a password.');
+        event.preventDefault() 
+        return false;
+      }
+      if(password.length<8)
+      {
+        alert('Your password must be larger than 8 characters long ');
+        event.preventDefault() 
+        return false;
+      }
+      return true
+    
+      }
   
-      var code = "<%= code %>";
-      if (typeof code !== 'undefined' && code !=="0" ) alert(code)
-      else if (code==="1") alert("Đăng ký tài khoản thành công ! Vui lòng kiểm tra email để xác thực tài khoản. ")
-      async function handleSignUp() {
-          //console.log("abc")
-        
-        var email = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-        if (email.length==0) {
-          alert('Please enter an email address.');
-          event.preventDefault() 
-          return false;
-        }
-        if (password.length==0) {
-          alert('Please enter a password.');
-          event.preventDefault() 
-          return false;
-        }
-        if(password.length<8)
-        {
-          alert('Your password must be larger than 8 characters long ');
-          event.preventDefault() 
-          return false;
-        }
-        /*const data=await auth.createUserWithEmailAndPassword(email, password)
-        /*auth.createUserWithEmailAndPassword(email, password)
-        then(userData=>{
-          alert(userData)
-          return false;
-        }).catch(function(error) {alert("error") 
-        return false})*/
-        /*alert(data)
-        console.log(data)*/
-        return true
-      
-        }
+  
     
-    
-      
-    
-      </script>
+  
+    </script>
+ </body>
+  

@@ -24,5 +24,6 @@ router.get('/update', user_controller.user_update_get);
 
 // POST request to update Book.
 router.post('/update', user_controller.user_update_post);
+router.post('/check', user_controller.user_check_post);
 
 module.exports = router;

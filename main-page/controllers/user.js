@@ -43,6 +43,13 @@ exports.user_logout_post =  function(req, res) {
 
 }
 
+exports.user_check_post = async function(req, res) {
+   let email=req.body.email
+   let data= await fetch("https://api-scttshop-v2.herokuapp.com/api/customers/"+email)
+   let user= await data.json()
+   res.json(user)
+}
+
 
 exports.user_login_post =  function(req, res) {
     let user=[]

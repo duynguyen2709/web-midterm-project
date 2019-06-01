@@ -6,6 +6,7 @@ var logger = require('morgan');
 var expressLayouts=require('express-ejs-layouts');
 var firebase=require('firebase')
 var cookieSession = require('cookie-session')
+var cors = require('cors');
 require('es6-promise').polyfill();
 var session=require('express-session')
 require('isomorphic-fetch');
@@ -27,6 +28,11 @@ app.use(session({
   secret: 'my_session',
   resave: false,
   saveUninitialized: false
+}))
+
+app.use(cors({
+  'origin': '*',
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE'
 }))
 var indexRoutes = require('./routes/index.js');
 var userRoutes=require('./routes/user.js');
