@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trang Admin SCTT-Shop</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/site.css">
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bootstrap-select/js/i18n/defaults-vi_VN.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
+    <style>
+        body {
+            background: #ddd;
+        }
+        .loader {
+            border: 16px solid #f3f3f3;
+            /* Light grey */
+            border-top: 16px solid #3498db;
+            /* Blue */
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .modal {
+            text-align: center;
+            padding: 0 !important;
+        }
+
+        .modal:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-right: -4px;
+        }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="container" id="dlgsignup">
+        <div class="col-md-8 col-md-offset-2" style="margin-top: 5%; background: #fff; padding: 20px;">
+            <form class="well form-horizontal" action="/signup" method="post" id="formsignup">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend>
+                        <center>
+                            <h2><b>Đăng Ký Tài Khoản</b></h2>
+                        </center>
+                    </legend><br>
+
+                    <!-- Text input-->
+                    <!-- ERROR MESSAGE -->
+                    <div class="row" style="margin-top:-15px;display: none;" id="error_message">
+                        <div class=" col-md-8 col-md-offset-2 alert alert-danger" role="alert"
+                            style="display:flex;align-items: center;justify-content: center;">
+                            <i style="margin-right:5px;" class="glyphicon glyphicon-remove"></i>
+
+                            <p id="error_message_text" style="display: inline;">
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-md-offset-1 control-label">Tên Tài Khoản</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input name="username" placeholder="UserName" class="form-control" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-md-offset-1 control-label">Họ Và Tên</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input name="fullName" placeholder="Full Name" class="form-control" type="text"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-3 col-md-offset-1 control-label">E-Mail</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input name="email" placeholder="E-Mail Address" class="form-control" type="text"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-md-offset-1 control-label">Mật Khẩu</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
+                                <input name="password" placeholder="Password" class="form-control" type="password"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-md-offset-1 control-label">Nhập Lại Mật Khẩu</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
+                                <input name="repassword" placeholder="Confirm Password" class="form-control"
+                                    type="password" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-md-offset-1 control-label">Địa Chỉ</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                <input name="address" class="form-control" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-md-offset-1 control-label">Số Điện Thoại</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                <input name="phoneNumber" class="form-control" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-md-offset-1 control-label">Ngày Sinh:</label>
+                        <div class='col-md-5 inputGroupContainer'>
+                            <div class='input-group date date-picker2'>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                <input type="text" class="form-control" name="birthDate"
+                                    placeholder="DD-MM-YYYY"></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-4"><br>
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <button type="button" class="btn btn-warning" onclick="validateFormSignup(); return false;">
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT <span
+                                    class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    </div><!-- /.container -->
+    <%include common/dialogs%>
+    <%include common/script%>
+
+</body>
+<script>
+    $(document).ready(function () {
+        $('.date-picker2').datetimepicker({
+            format: 'DD-MM-YYYY',
+            sideBySide: true
+        });
+    });
+
+
+    function validateFormSignup() {
+        const signup_username = $("#dlgsignup input[name='username']").val();
+        const signup_fullname = $("#dlgsignup input[name='fullName']").val();
+        const signup_email = $("#dlgsignup input[name='email']").val();
+        const signup_address = $("#dlgsignup input[name='address']").val();
+        const signup_pass1 = $("#dlgsignup input[name='password']").val();
+        const signup_pass2 = $("#dlgsignup input[name='repassword']").val();
+        const signup_phone = $("#dlgsignup input[name='phoneNumber']").val();
+        const signup_birthDate = $("#dlgsignup input[name='birthDate']").val();
+
+        if (signup_username === "" || signup_fullname === "" || signup_email === "" || signup_address === "" ||
+            signup_pass1 === "" || signup_pass2 === "" || signup_phone === "" || signup_birthDate === "") {
+            document.getElementById('error_message_text').innerText =
+                'Nhập Thiếu Thông Tin. Vui Lòng Nhập Lại.';
+            document.getElementById('error_message').style.display = "block";
+            return false;
+        }
+
+        if (signup_pass1 !== signup_pass2) {
+            document.getElementById('error_message_text').innerText =
+                'Mật Khẩu Không Trùng Nhau. Vui Lòng Nhập Lại.';
+            document.getElementById('error_message').style.display = "block";
+            return false;
+        }
+
+        if (isNaN(signup_phone)) {
+            document.getElementById('error_message_text').innerText =
+                'Số Điện Thoại Không Hợp Lệ. Vui Lòng Nhập Lại.';
+            document.getElementById('error_message').style.display = "block";
+            return false;
+        }
+
+        if (!moment(signup_birthDate, 'DD-MM-YYYY', true).isValid()) {
+            document.getElementById('error_message_text').innerText =
+                'Ngày Sinh Không Hợp Lệ. Vui Lòng Nhập Lại.';
+            document.getElementById('error_message').style.display = "block";
+            return false;
+        }
+
+        document.getElementById('error_message').style.display = "none";
+        $('#dlgloading').modal('show');
+        const obj = serializeFormToJSon("#formsignup");
+
+        $.ajax({
+            type: "POST",
+            url: window.location.protocol + "//" + window.location.host + "/signup",
+            data: obj,
+            dataType: "json"
+        }).done(function (resp) {
+            if (resp.returncode == 1) {
+                FormUtils.showMessageBox('Tạo Tài Khoản Thành Công', function () {
+                    window.location.href = window.location.protocol + "//" + window.location.host + "/";
+                }, 'success');
+            } else {
+                FormUtils.showMessageBox('Tạo Tài Khoản Thất Bại', null, 'error');
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            FormUtils.showMessageBox('Tạo Tài Khoản Thất Bại', null, 'error');
+        }).always(function () {
+            $('#dlgloading').modal('hide');
+        });
+    }
+
+    function serializeFormToJSon(form) {
+        return $(form).serializeArray().reduce((acc, next) => ({
+            ...acc,
+            [next.name]: next.value
+        }), {});
+    }
+</script>
+
+</html>

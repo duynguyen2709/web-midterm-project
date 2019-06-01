@@ -15,4 +15,6 @@ router.post('/insert',userController.insertUserAccount);
 
 router.post('/update',userController.updateUserAccount);
 
+router.post('/changepassword',userController.changePassword);
+
 module.exports = router;
