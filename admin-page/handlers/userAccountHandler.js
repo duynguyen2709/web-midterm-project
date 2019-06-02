@@ -25,6 +25,10 @@ function loadUserAccount(encodedUser) {
             {
                 "data": "role",
                 "defaultContent": ""
+            },{
+                "render": function (data, type, JsonResultRow, meta) {
+                    return '<img width="64px" height="64px" src="' + JsonResultRow.avatar + '">';
+                }
             },
             {
                 "data": "email",
@@ -61,8 +65,8 @@ function loadUserAccount(encodedUser) {
         "rowCallback": function (row, data, index) {
 
             if (data["username"] == obj.username){
-                $(row).find('td:eq(8)').html('');
                 $(row).find('td:eq(9)').html('');
+                $(row).find('td:eq(10)').html('');
             }
             // if (data["isActive"] == "1") {
             //     $(row).find('td:eq(6)').css('color', 'green');
@@ -96,6 +100,7 @@ function showPopupUpdateUser(itemthis) {
         $("#dlgupdateuser input[name='password']").val(obj.password);
         $("#dlgupdateuser input[name='email']").val(obj.email);
         $("#dlgupdateuser input[name='birthDate']").val(obj.birthDate);
+        $("#dlgupdateuser input[name='avatar']").val(obj.avatar);
         $("#dlgupdateuser select[name='role'] option").filter(function () {
             return $.trim($(this).val()) === $.trim(obj.role);
         }).attr("selected", true).prop("selected", "selected");
