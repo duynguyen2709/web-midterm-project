@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<% include ../common/preheader%>
+
+<body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+    <% include ../common/header%>
+    <% include ../common/sidebar%>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+      <!-- Main content -->
+      <section class="content">
+
+        <div id="products">
+          <div class="row">
+            <div class="col-xs-12">
+
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Danh Sách Khách Hàng</h3>
+                
+                </div>
+
+                <div class="box-body">
+                  <table id="customerTable" class="table table-bordered table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Email</th>
+                        <th style="width:15%;">Họ Và Tên</th>
+                        <th>Ảnh Đại Diện</th>
+                        <th>Địa Chỉ</th>
+                        <th>Số Điện Thoại</th>
+                        <th>Tổng Số Tiền Mua Hàng</th>
+                        <th>Trạng Thái Xác Thực</th>
+                        <th>Lần Đăng Nhập Cuối</th>
+                        <th>Cập Nhật</th>
+                        <th>Xóa</th>     
+                        <th style="display: none;"></th>           
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <!-- /.box-body -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+    <%include ../common/dialogs%>
+    <%include ../common/script%>
+    <%include ./customerDialogs%>
+
+    <script>
+      $(function () {
+          loadCustomer();
+      });
+    </script>
+</body>
+
+</html>
