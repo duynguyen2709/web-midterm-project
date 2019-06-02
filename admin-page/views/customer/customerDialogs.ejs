@@ -1,0 +1,76 @@
+<div id="dlgdeletecustomer" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Xóa Khách Hàng</h4>
+            </div>
+
+            <div class="modal-body">
+                <form method="POST" action="#" id="formdeletecustomer">
+                    <div class="form-group">
+                        <label class="control-label">Email Khách Hàng:</label>
+                        <input type="text" class="form-control" name="email" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">UID:</label>
+                        <input type="text" class="form-control" name="uid" readonly>
+                    </div>
+
+                    <button type="button" onclick="handleDeleteCustomer(); return false;" class="btn btn-danger"
+                        data-dismiss="modal">Xóa</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="dlgupdatecustomer" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Chỉnh Sửa Thông Tin Khách Hàng</h4>
+            </div>
+
+            <div class="modal-body">
+                <form action="#" method="POST" id="formupdatecustomer">
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email:</label>
+                        <input type="text" class="form-control" id="email" name="email" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullname" class="control-label">Họ Và Tên:</label>
+                        <input type="text" class="form-control" id="fullName" name="fullName">
+                    </div>    
+                    <div class="form-group">
+                        <label for="avatar" class="control-label">URL Ảnh Đại Diện:</label>
+                        <input type="text" class="form-control" id="avatar" name="avatar">
+                    </div>                  
+                    <div class="form-group">
+                        <label for="phoneNumber" class="control-label">Số Điện Thoại:</label>
+                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="control-label">Địa Chỉ:</label>
+                        <input type="text" class="form-control" id="address" name="address">
+                    </div>
+                
+                    <button type="submit" onclick="handleUpdateCustomer(); return false;" class="btn btn-info"
+                        data-dismiss="modal">Cập Nhật</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
