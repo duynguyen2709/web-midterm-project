@@ -66,40 +66,29 @@ exports.user_login_post =  function(req, res) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log(errorMessage)
-        // ...
+        alert(errorMessage)
+        res.redirect('/',{listCategory: listCategories,user: null , code: errorMessage });
       }).then(()=>{
           let user=firebase.auth().currentUser
-          //console.log(firebase.auth().currentUser)
-          req.session.isLogged = true;
-          req.session.user = user
-          if(user.emailVerified==true)
+          console.log(firebase.auth().currentUser)
+          if(user!=null)
           {
-            axios({
-                method: 'PUT',
-                url: 'https://api-scttshop-v2.herokuapp.com/api/customers/'+user.email+"/verify",
-            }).catch(err => {
-                console.log(err)
-            })
-                  
-        }
-          res.redirect('/')
-        /*firebase.auth().onAuthStateChanged( function(user) {
-            if (user) {
                 req.session.isLogged = true;
                 req.session.user = user
                 if(user.emailVerified==true)
                 {
-                   
-                  
+                    axios({
+                        method: 'PUT',
+                        url: 'https://api-scttshop-v2.herokuapp.com/api/customers/'+user.email+"/verify",
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                        
                 }
-                
                 res.redirect('/')
-               
-            } else {
-                console.log("no user")
-            }
-          })*/
+          }
+          
+
 
       })
    
@@ -161,6 +150,10 @@ exports.user_create_post = async function(req, res) {
             //res.render('user/register_account',{listCategory: listCategories, user: currentUser ,code: code});
         })
         .catch(err=>{
+            firebase.auth().currentUser.signOut()
+            req.session.destroy(function() {
+                console.log("Logged Out!");
+              });
             res.redirect('/')
             //res.render('user/register_account',{listCategory: listCategories, user: currentUser ,code: "-1"});
         })
