@@ -54,52 +54,34 @@ exports.user_check_post = async function(req, res) {
 exports.user_login_post =  function(req, res) {
     let user=[]
     let email = req.body.username;
-    let password = req.body.password;  
-    //user = await firebase.auth().currentUser
-    /*await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    });*/
-  
+    let password = req.body.password; 
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorMessage)
-        // ...
+        res.redirect('/');
       }).then(()=>{
           let user=firebase.auth().currentUser
-          //console.log(firebase.auth().currentUser)
-          req.session.isLogged = true;
-          req.session.user = user
-          if(user.emailVerified==true)
+          console.log(user)
+          if(user!=null)
           {
-            axios({
-                method: 'PUT',
-                url: 'https://api-scttshop-v2.herokuapp.com/api/customers/'+user.email+"/verify",
-            }).catch(err => {
-                console.log(err)
-            })
-                  
-        }
-          res.redirect('/')
-        /*firebase.auth().onAuthStateChanged( function(user) {
-            if (user) {
                 req.session.isLogged = true;
                 req.session.user = user
                 if(user.emailVerified==true)
                 {
-                   
-                  
+                    axios({
+                        method: 'PUT',
+                        url: 'https://api-scttshop-v2.herokuapp.com/api/customers/'+user.email+"/verify",
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                        
                 }
-                
                 res.redirect('/')
-               
-            } else {
-                console.log("no user")
-            }
-          })*/
+          }
+          
+
 
       })
    
@@ -153,7 +135,7 @@ exports.user_create_post = async function(req, res) {
         let code="1"
         user.sendEmailVerification().then(function() {
             
-            firebase.auth().currentUser.signOut()
+            firebase.auth().signOut()
             req.session.destroy(function() {
                 console.log("Logged Out!");
               });
@@ -161,6 +143,10 @@ exports.user_create_post = async function(req, res) {
             //res.render('user/register_account',{listCategory: listCategories, user: currentUser ,code: code});
         })
         .catch(err=>{
+            req.session.destroy(function() {
+                 firebase.auth().signOut()
+                console.log("Logged Out!");
+              });
             res.redirect('/')
             //res.render('user/register_account',{listCategory: listCategories, user: currentUser ,code: "-1"});
         })
