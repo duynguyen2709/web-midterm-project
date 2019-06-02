@@ -135,7 +135,7 @@ exports.user_create_post = async function(req, res) {
         let code="1"
         user.sendEmailVerification().then(function() {
             
-            firebase.auth().currentUser.signOut()
+            firebase.auth().signOut()
             req.session.destroy(function() {
                 console.log("Logged Out!");
               });
@@ -143,8 +143,8 @@ exports.user_create_post = async function(req, res) {
             //res.render('user/register_account',{listCategory: listCategories, user: currentUser ,code: code});
         })
         .catch(err=>{
-            firebase.auth().currentUser.signOut()
             req.session.destroy(function() {
+                 firebase.auth().signOut()
                 console.log("Logged Out!");
               });
             res.redirect('/')
