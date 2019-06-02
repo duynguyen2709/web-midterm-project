@@ -54,23 +54,16 @@ exports.user_check_post = async function(req, res) {
 exports.user_login_post =  function(req, res) {
     let user=[]
     let email = req.body.username;
-    let password = req.body.password;  
-    //user = await firebase.auth().currentUser
-    /*await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    });*/
-  
+    let password = req.body.password; 
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        alert(errorMessage)
-        res.redirect('/',{listCategory: listCategories,user: null , code: errorMessage });
+        console.log(errorMessage)
+        res.redirect('/');
       }).then(()=>{
           let user=firebase.auth().currentUser
-          console.log(firebase.auth().currentUser)
+          console.log(user)
           if(user!=null)
           {
                 req.session.isLogged = true;
