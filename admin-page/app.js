@@ -161,6 +161,84 @@ app.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
+const {
+  Storage
+} = require('@google-cloud/storage');
+const Multer = require('multer');
+
+const storage = new Storage({
+  projectId: "dailyshop-4d39c",
+  keyFilename: "./serviceAccount.json"
+});
+
+const bucket = storage.bucket("dailyshop-4d39c.appspot.com");
+
+const multer = Multer({
+  storage: Multer.memoryStorage(),
+  limits: {
+    fileSize: 10 * 1024 * 1024 // no larger than 5mb, you can change as needed.
+  }
+});
+
+app.post('/upload', multer.any(), (req, res) => {
+
+  let file = req.files[0];
+  if (file) {
+    uploadImageToStorage(file).then((data) => {
+
+      res.json({
+        status: 200,
+        response: 'success',
+        url: data
+      });
+    }).catch((error) => {
+      console.error(error);
+      res.json({
+        status: 500,
+        response: 'error',
+        url: ''
+      });
+    });
+  } else {
+    res.json({
+      status: 500,
+      response: 'Image Not Found',
+      url: ''
+    })
+  }
+});
+
+
+const uploadImageToStorage = (file) => {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      reject('Image Not Found');
+    }
+
+    let newFileName = Date.now() + '_' + file.originalname;
+
+    let fileUpload = bucket.file(newFileName);
+
+    const blobStream = fileUpload.createWriteStream({
+      metadata: {
+        contentType: file.mimetype
+      }
+    });
+
+    blobStream.on('error', (error) => {
+      reject('Error Upload Image To FireBase Bucket');
+    });
+
+    blobStream.on('finish', () => {
+      // The public URL can be used to directly access the file via HTTP.
+      const url = 'https://storage.googleapis.com/' + bucket.name + '/' + fileUpload.name;
+
+      resolve(url);
+    });
+
+    blobStream.end(file.buffer);
+  });
+}
 
 ///////////////////////////////
 

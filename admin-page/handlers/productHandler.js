@@ -114,8 +114,7 @@ function showPopupUpdateProduct(itemthis) {
         }).attr("selected", true).prop("selected", "selected");
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus);
-    }).always(function () {
-    });
+    }).always(function () {});
 }
 
 function showPopupDeleteProduct(itemthis) {
@@ -185,3 +184,5 @@ function serializeFormToJSon(form) {
         [next.name]: next.value
     }), {});
 }
+
+

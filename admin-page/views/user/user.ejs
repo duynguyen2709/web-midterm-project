@@ -55,8 +55,11 @@
     <%include ../common/script%>
 
     <script>
+      
+      const user = encodeURI('<%-JSON.stringify(user)%>');
+
       $(function () {
-          loadUserAccount();
+          loadUserAccount(user);
       });
     </script>
 </body>
