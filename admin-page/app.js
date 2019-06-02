@@ -21,8 +21,20 @@ var productRouter = require('./routes/product');
 var userRouter = require('./routes/user');
 var categoryRouter = require('./routes/category');
 var promotionRouter = require('./routes/promotion');
-var testRouter = require('./routes/userdetail');
+var userDetailRouter = require('./routes/userdetail');
+var customerRouter = require('./routes/customer');
 
+// ###############  FIREBASE ADMIN SECTION #####################
+var firebase = require("firebase-admin");
+
+var serviceAccount = require("./serviceAccount.json");
+
+firebase.initializeApp({
+  credential: firebase.credential.cert(serviceAccount),
+  databaseURL: "https://dailyshop-4d39c.firebaseio.com"
+});
+
+// #############################################################
 
 var app = express();
 
@@ -71,7 +83,8 @@ app.use('/product', productRouter);
 app.use('/user', userRouter);
 app.use('/category', categoryRouter);
 app.use('/promotion', promotionRouter);
-app.use('/userdetail', testRouter);
+app.use('/userdetail', userDetailRouter);
+app.use('/customer', customerRouter);
 
 
 app.use(function (req, res, next) {
