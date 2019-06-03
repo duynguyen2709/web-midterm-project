@@ -27,8 +27,8 @@
                    </div>
                    <div class="aa-product-catg-body">
                      <ul id="listproduct" class="aa-product-catg" style="margin-left:-35px;">
-                      
-                        <%for(var i= 0; i< length; i++) {%>
+                      <%for(var i= 0; i< 6; i++) {
+                          if (info[i]!=null){%>
                         <li>
                         <figure>
                             <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=<%= info[i].image %> /></a>
@@ -43,7 +43,7 @@
                             </figcaption>
                           </figure>                        
                           <div class="aa-product-hvr-content">
-                            <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= info[i].image %>','/products/detail?id=<%=info[i].productID %>','<%=info[i].productName %>','<%=info[i].discountPrice %>','<%=info[i].description %>','<%=info[i].categoryName %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
+                            <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch(`<%= info[i].image %>`,`<%= info[i].productID %>`,`<%= info[i].productName %>`,`<%= info[i].discountPrice %>`,`<%= info[i].description %>`,`<%= info[i].categoryName %>`)" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
                           </div>
                           <!-- product badge -->
                           <%if (info[i].promotionDiscount > 0) { %>
@@ -52,7 +52,7 @@
                             <% } %>
                          
                         </li>
-                        <% } %>
+                        <% }} %>
                         
                      </ul>
                    <!-- quick view modal -->                  
@@ -124,20 +124,9 @@
                    <div class="aa-product-catg-pagination">
                      <nav>
                        <ul class="pagination">
-                         <li>
-                           <a href="#" aria-label="Previous">
-                             <span aria-hidden="true">&laquo;</span>
-                           </a>
-                         </li>
-                         <% for(var i=0; i<info.length/2; i++) {%>
-                          <li><a href="#" onclick="clickPagination('<%=i+1 %>','<%=info%>')"> <%=i+1 %></a></li>
+                         <% for(var i=0; i<length/6; i++) { %>
+                          <li><a href="#" onclick="clickPagination(`<%=i+1 %>`,productInfo)"> <%=i+1 %></a></li>
                             <% } %>
-
-                         <li>
-                           <a href="#" aria-label="Next">
-                             <span aria-hidden="true">&raquo;</span>
-                           </a>
-                         </li>
                        </ul>
                      </nav>
                    </div>
@@ -178,32 +167,68 @@
     
     </body>
     <script>
+          const productInfo = encodeURI(`<%-JSON.stringify(info)%>`);
+
           var listNode=document.getElementById("listproduct");
-          var items=document.querySelectorAll("#listproduct li");
-          function clickPagination(page,info)
+          //var items=document.querySelectorAll("#listproduct li");
+          
+          function clickPagination(page,productInfo)
           {
+            
+            const info = JSON.parse(decodeURI(productInfo));
+            const items= document.querySelectorAll("#listproduct li");
+            
             for( var j=0;j<items.length;j++)
              {
                items[j].parentNode.removeChild(items[j]);
              }
             
-             for(let i=(page-1)*2;i<(page-1)*2+2;i++){
-              $("#listproduct").append('<li><figure><a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src="<%= info[1].image%>" /></a><a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a><figcaption><h4 class="aa-product-title"><a href="/products/detail?id=<%=info[1].productID%>""><%= info[i].productName %></a></h4><span class="aa-product-price"><%= info[1].discountPrice %> VNĐ</span><%if (info[1].promotionDiscount > 0) { %><span class="aa-product-price"><del><%= info[1].sellPrice %> đ</del></span><% } %></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('+"'<%= info[i].image %>'"+','+"'/products/detail?id=<%=info[1].productID %>'"+','+"'<%=info[1].productName %>'"+','+"'<%=info[1].discountPrice %>'"+','+"'<%=info[1].description %>'"+','+"'<%=info[1].categoryName %>'"+')"'+" data-toggle="+'"modal"'+ "  data-target="+'"#quick-view-modal"'+"><span class="+'"fa fa-search"'+"></span></a></div></li>");
+             for(let i=(page-1)*6;i<(page-1)*6+6;i++){
+                if (info.length == i)
+                break;
+                console.log();
+              let image = info[i].image;
+              let productID = info[i].productID;				
+              let pathProduct = "/products/detail?id=" + info[i].productID;						
+						  let productName = info[i].productName;						
+						  let discountPrice = info[i].discountPrice;						
+              let sellPrice = info[i].sellPrice;	
+              let promotionDiscount=info[i].promotionDiscount;								
+						  let description = info[i].description;						
+              let categoryName = info[i].categoryName;
+              
+              if (promotionDiscount>0)
+              {
+                console.log(promotionDiscount);
+                console.log(discountPrice);
+                const clicksearch1 = "clickSearch('" + image + "','" + productID + "','" + productName + "','" + discountPrice + "','" + description + "','" + categoryName + "')";
+
+                $("#listproduct").append('<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' + image + '></a><a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a><figcaption><h4 class="aa-product-title"><a href="' + pathProduct + '">' + productName + '</a></h4><span class="aa-product-price">' + discountPrice +' VNĐ</span><span class="aa-product-price"><del>'+sellPrice +' đ</del></span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' + clicksearch1 + '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div><span class="aa-badge aa-sale">SALE!</span><span class="aa-badge-right aa-hot">' + promotionDiscount +'%'+ '</span></li>');
+              }
+              else{
+                const clicksearch2 = "clickSearch('" + image + "','" + productID + "','" + productName + "','" + sellPrice + "','" + description + "','" + categoryName + "')";
+
+                $("#listproduct").append('<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' + image + '></a><a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a><figcaption><h4 class="aa-product-title"><a href="' + pathProduct + '">' + productName + '</a></h4><span class="aa-product-price">' + discountPrice +' VNĐ</span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' + clicksearch2 + '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div></li>');
              }
+
+            }
                          
           }
       </script>
             <script>
-                function clickSearch(linkimg,linkP,name,sellPrice,description,categoryName)
+              
+                function clickSearch(image,productID,productName,sellPrice,description,categoryName)
                 {
-                  console.log(linkimg+linkP+name+sellPrice+description+categoryName);
-                  document.getElementsByClassName("simpleLens-lens-image")[0].src=linkimg;
-                  document.getElementById("showImg").src=linkimg;
-                  document.getElementById("linkProduct").href=linkP;
-                  document.getElementById("showName").textContent= name;
+                
+                  console.log(sellPrice);
+                  document.getElementsByClassName("simpleLens-lens-image")[0].src=image;
+                  document.getElementById("showImg").src=image;
+                  document.getElementById("linkProduct").href="/products/detail?id=" + productID;	
+                  document.getElementById("showName").textContent= productName;
                   document.getElementById("showPrice").textContent='Giá: '+sellPrice;
-                  document.getElementById("showDescription").textContent='Mô tả: '+description;
-                  document.getElementById("showCategory").textContent='Loại: '+categoryName;
+                  document.getElementById("showDescription").textContent='Mô tả: '+ description;
+                  document.getElementById("showCategory").textContent='Loại: '+ categoryName;
                 }
+
             </script>
 </html>
