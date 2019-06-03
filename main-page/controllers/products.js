@@ -32,7 +32,7 @@ exports.product_list_type = async function(req, res) {
     request(urlProduct, (error, response, body)=> {
         if (!error && response.statusCode === 200) {
         info = JSON.parse(body)
-        res.render('product/product',{info: info,listCategory: listCategories,user: curUser});
+        res.render('product/product',{info: info,listCategory: listCategories,user: curUser,length:info.length});
         } else {
         console.log("Got an error: ", error, ", status code: ", response.statusCode)
         }
