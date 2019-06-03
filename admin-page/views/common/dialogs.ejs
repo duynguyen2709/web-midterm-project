@@ -1,5 +1,5 @@
 <div id="dlgloading" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="padding-top: 5%;">
+    <div class="modal-dialog" style="padding-top: 5%">
         <div class="loader"></div>
     </div>
 </div>
@@ -17,6 +17,8 @@
             </div>
 
             <div class="modal-body">
+                    <form id="forminsertuseravatar" action="/upload" method="POST" enctype="multipart/form-data">
+                    </form>
                 <form action="#" method="POST" id="forminsertuser">
                     <div class="form-group">
                         <label for="id" class="control-label">Tên Đăng Nhập:</label>
@@ -38,6 +40,16 @@
                         <label for="email" class="control-label">Email:</label>
                         <input type="text" class="form-control" id="email" name="email">
                     </div>
+                    <div class="form-group">
+                            <label for="avatar" class="control-label">URL Ảnh Đại Diện:</label>
+                            <div style="display: flex;flex-direction: row;">
+                                <input type="text" class="form-control" id="avatar" name="avatar">
+                                <input style="width:50%; margin-left:10px; align-self: center;" type="file"
+                                    name="userAvatar" accept="image/png, image/jpeg"
+                                    onchange="uploadImage('#forminsertuseravatar','#dlginsertuser input[name=\'avatar\']');return false;"
+                                    form="forminsertuseravatar">
+                            </div>
+                        </div>
                     <div class="form-group">
                         <label for="birthDate" class="control-label">Ngày Sinh:</label>
                         <div class='input-group date date-picker2'>
@@ -89,6 +101,8 @@
             </div>
 
             <div class="modal-body">
+                    <form id="formupdateuseravatar" action="/upload" method="POST" enctype="multipart/form-data">
+                    </form>
                 <form action="#" method="POST" id="formupdateuser">
                     <div class="form-group">
                         <label for="id" class="control-label">Tên Đăng Nhập:</label>
@@ -105,6 +119,16 @@
                         <label for="email" class="control-label">Email:</label>
                         <input type="text" class="form-control" id="email" name="email">
                     </div>
+                    <div class="form-group">
+                            <label for="avatar" class="control-label">URL Ảnh Đại Diện:</label>
+                            <div style="display: flex;flex-direction: row;">
+                                <input type="text" class="form-control" id="avatar" name="avatar">
+                                <input style="width:50%; margin-left:10px; align-self: center;" type="file"
+                                    name="userAvatar" accept="image/png, image/jpeg"
+                                    onchange="uploadImage('#formupdateuseravatar','#dlgupdateuser input[name=\'avatar\']');return false;"
+                                    form="formupdateuseravatar">
+                            </div>
+                        </div>
                     <div class="form-group">
                         <label for="birthDate" class="control-label">Ngày Sinh:</label>
                         <div class='input-group date date-picker2'>
@@ -184,6 +208,8 @@
             </div>
 
             <div class="modal-body">
+                <form id="formupdateuserdetailavatar" action="/upload" method="POST" enctype="multipart/form-data">
+                </form>
                 <form action="#" method="POST" id="formupdateuserdetail">
                     <div class="form-group">
                         <label for="id" class="control-label">Tên Đăng Nhập:</label>
@@ -215,9 +241,16 @@
                             </span>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="avatar" class="control-label">URL Ảnh Đại Diện:</label>
-                        <input type="text" class="form-control" id="avatar" name="avatar">
+                        <div style="display: flex;flex-direction: row;">
+                            <input type="text" class="form-control" id="avatar" name="avatar">
+                            <input style="width:50%; margin-left:10px; align-self: center;" type="file"
+                                name="userAvatar" accept="image/png, image/jpeg"
+                                onchange="uploadImage('#formupdateuserdetailavatar','#dlgupdateuserdetail input[name=\'avatar\']');return false;"
+                                form="formupdateuserdetailavatar">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="phoneNumber" class="control-label">Số Điện Thoại:</label>
@@ -275,8 +308,8 @@
                         <input type="text" class="form-control" name="email" readonly required>
                     </div>
                     <div class="form-group" style="display: none">
-                            <input type="text" class="form-control" name="avatar" readonly required>
-                        </div>
+                        <input type="text" class="form-control" name="avatar" readonly required>
+                    </div>
 
                     <div class="form-group">
                         <label for="password" class="control-label">Mật Khẩu Mới:</label>

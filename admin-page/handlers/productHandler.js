@@ -44,7 +44,7 @@ function loadProduct() {
                 "defaultContent": ""
             }, {
                 "data": "isActive",
-                "defaultContent": ""
+                "defaultContent": ''
             }, {
                 data: null,
                 className: "center",
@@ -58,10 +58,12 @@ function loadProduct() {
         "rowCallback": function (row, data, index) {
             if (data["isActive"] == "1") {
                 $(row).find('td:eq(9)').css('color', 'green');
-                $(row).find('td:eq(9)').text('Đang Bán');
+                //$(row).find('td:eq(9)').text('Đang Bán');
+                $(row).find('td:eq(9)').html('<span class="label label-success">Đang Bán</span>');
             } else {
                 $(row).find('td:eq(9)').css('color', 'red');
-                $(row).find('td:eq(9)').text('Tạm Ngừng Bán');
+                //$(row).find('td:eq(9)').text('Tạm Ngừng Bán');
+                $(row).find('td:eq(9)').html('<span class="label label-danger">Tạm Ngừng Bán</span>');
             }
         },
         columnDefs: [{
@@ -112,8 +114,7 @@ function showPopupUpdateProduct(itemthis) {
         }).attr("selected", true).prop("selected", "selected");
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus);
-    }).always(function () {
-    });
+    }).always(function () {});
 }
 
 function showPopupDeleteProduct(itemthis) {
@@ -183,3 +184,5 @@ function serializeFormToJSon(form) {
         [next.name]: next.value
     }), {});
 }
+
+

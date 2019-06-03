@@ -19,26 +19,25 @@
 
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Danh Sách Người Dùng</h3>
-                  <a href="#" class="btn btn-sm btn-info btn-flat pull-right" data-toggle="modal"
-                    data-target="#dlginsertuser">Thêm Người Dùng Mới</a>
+                  <h3 class="box-title">Danh Sách Khách Hàng</h3>
+                
                 </div>
 
                 <div class="box-body">
-                  <table id="userAccountTable" class="table table-bordered table-striped table-hover">
+                  <table id="customerTable" class="table table-bordered table-striped table-hover">
                     <thead>
                       <tr>
-                        <th>Tên Đăng Nhập</th>
-                        <th style="width: 10%">Họ Và Tên</th>
-                        <th>Cấp Độ</th>
-                        <th>Ảnh Đại Diện</th>
                         <th>Email</th>
-                        <th style="width: 7%">Ngày Sinh</th>
+                        <th style="width:15%;">Họ Và Tên</th>
+                        <th style="width:7%;">Ảnh Đại Diện</th>
                         <th>Địa Chỉ</th>
                         <th>Số Điện Thoại</th>
-                        <th>Lần Đăng Nhập Cuối</th>
+                        <th style="width:8%;">Tổng Số Tiền Mua Hàng</th>
+                        <th style="width:8%;">Trạng Thái Xác Thực</th>
+                        <th style="width:8%;">Lần Đăng Nhập Cuối</th>
                         <th>Cập Nhật</th>
-                        <th>Xóa</th>
+                        <th>Xóa</th>     
+                        <th style="display: none;"></th>           
                       </tr>
                     </thead>
                   </table>
@@ -54,13 +53,12 @@
     </div>
     <%include ../common/dialogs%>
     <%include ../common/script%>
+    <%include ./customerDialogs%>
 
     <script>
-      
-      const user = encodeURI('<%-JSON.stringify(user)%>');
 
       $(function () {
-          loadUserAccount(user);
+          loadCustomer();
       });
     </script>
 </body>
