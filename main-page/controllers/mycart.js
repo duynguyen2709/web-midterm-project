@@ -11,7 +11,8 @@ exports.get_detail =async function(req, res) {
 exports.get_page = async function(req, res) {
     let listCategories=await category.getListCategory();   
     let  curUser =req.session.user
-    res.render('mycart/my_cart.ejs',{listCategory: listCategories, user:curUser});
+    // let listProductCart=req.session.cart;
+    res.render('mycart/my_cart.ejs',{listCategory: listCategories, user:curUser/*,list:listProductCart*/});
 };
 // Display detail page for a specific product.
 exports.apply_coupon =async function(req, res) {
@@ -37,7 +38,7 @@ exports.addProduct=async function(req,res){
     req.session.cart.print();
     res.redirect('/');
     
-}
+};
 
 exports.proceed_to_checkout =async function(req, res) {
     let listCategories=await category.getListCategory();  

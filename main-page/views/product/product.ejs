@@ -22,6 +22,19 @@
 // });
 
 //   });
+// function fetchData(){
+//   $.ajax('https://api-scttshop-v2.herokuapp.com/api/reload',
+// {          
+//   type: 'POST',  
+//   data:{
+//     type:
+    
+//   },
+//   success: function (data, status, xhr) {    // success callback function
+      
+//   }
+// });
+// }
 function addproduct(image,name,price){
   $.ajax('../my-cart/addproduct',   // request url
 {          
@@ -212,7 +225,6 @@ function addproduct(image,name,price){
           
           function clickPagination(page,productInfo)
           {
-            
             const info = JSON.parse(decodeURI(productInfo));
             const items= document.querySelectorAll("#listproduct li");
             
