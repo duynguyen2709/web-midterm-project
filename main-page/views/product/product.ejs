@@ -1,6 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
         <script src="jquery-3.4.0.min.js"></script>
+        <script type="text/javascript" 
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+    </script>
+
+<script type="text/javascript">
+//   $(document).ready(function () {
+
+// $('#addproduct').click(function(){
+// $.ajax('../my-cart/addproduct',   // request url
+// {          
+//   type: 'POST',  
+//   data:{
+//     myData:1
+//   },
+//   success: function (data, status, xhr) {    // success callback function
+//       $('p').append(data);
+//   }
+// });
+// });
+
+//   });
+function addproduct(image,name,price){
+  $.ajax('../my-cart/addproduct',   // request url
+{          
+  type: 'POST',  
+  data:{
+    image: image,
+    name: name,
+    price:price
+  },
+  success: function (data, status, xhr) {    // success callback function
+      
+  }
+});
+}
+
+</script>
         
   <body>
     <!-- product category -->
@@ -32,7 +69,8 @@
                         <li>
                         <figure>
                             <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=<%= info[i].image %> /></a>
-                            <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                            <!-- <a class="aa-add-card-btn" href="../my-cart/addproduct/<%=type%>/`<%=info[i].image%>`/<%=info[i].productName%>/<%=info[i].discountPrice%>"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a> -->
+                            <a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(`<%=info[i].image%>`,`<%=info[i].productName%>`,`<%=info[i].discountPrice%>`)"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                               <figcaption>
                               <h4 class="aa-product-title"><a href="/products/detail?id=<%=info[i].productID%>""><%= info[i].productName %></a></h4>
                               <span class="aa-product-price"><%= info[i].discountPrice %> VNĐ</span>
@@ -202,13 +240,22 @@
                 console.log(promotionDiscount);
                 console.log(discountPrice);
                 const clicksearch1 = "clickSearch('" + image + "','" + productID + "','" + productName + "','" + discountPrice + "','" + description + "','" + categoryName + "')";
-
-                $("#listproduct").append('<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' + image + '></a><a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a><figcaption><h4 class="aa-product-title"><a href="' + pathProduct + '">' + productName + '</a></h4><span class="aa-product-price">' + discountPrice +' VNĐ</span><span class="aa-product-price"><del>'+sellPrice +' đ</del></span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' + clicksearch1 + '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div><span class="aa-badge aa-sale">SALE!</span><span class="aa-badge-right aa-hot">' + promotionDiscount +'%'+ '</span></li>');
+                const addproduct1='<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct('
+                                +"'"+image+"'"+','+"'"+productName+"'"+','+"'"+discountPrice+"'"+')"'
+                                +'><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
+                $("#listproduct").append('<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' + image + '></a>'
+                  +addproduct1+`<figcaption><h4 class="aa-product-title"><a href="` + pathProduct + '">' + productName + '</a></h4><span class="aa-product-price">' + discountPrice +
+                    ' VNĐ</span><span class="aa-product-price"><del>'+sellPrice +' đ</del></span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' + clicksearch1 + '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div><span class="aa-badge aa-sale">SALE!</span><span class="aa-badge-right aa-hot">' + promotionDiscount +'%'+ '</span></li>');
               }
               else{
                 const clicksearch2 = "clickSearch('" + image + "','" + productID + "','" + productName + "','" + sellPrice + "','" + description + "','" + categoryName + "')";
-
-                $("#listproduct").append('<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' + image + '></a><a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a><figcaption><h4 class="aa-product-title"><a href="' + pathProduct + '">' + productName + '</a></h4><span class="aa-product-price">' + discountPrice +' VNĐ</span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' + clicksearch2 + '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div></li>');
+                const addproduct2='<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct('
+                                +"'"+image+"'"+','+"'"+productName+"'"+','+"'"+discountPrice+"'"+')"'
+                                +'><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
+         
+                $("#listproduct").append('<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' + image + '></a>'
+                  +addproduct2+'<figcaption><h4 class="aa-product-title"><a href="' + pathProduct + '">' + productName + '</a></h4><span class="aa-product-price">' + discountPrice +
+                    ' VNĐ</span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' + clicksearch2 + '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div></li>');
              }
 
             }
