@@ -25,14 +25,15 @@ exports.product_list = async function(req, res) {
 
 // Display list of all products of specific type.
 exports.product_list_type = async function(req, res) {     
-    let listCategories=await category.getListCategory();   
+    let listCategories=await category.getListCategory();  
+    var type=req.query.id; 
     var urlProduct= url+req.query.id+'/products';
     var info;
     let  curUser =req.session.user
     request(urlProduct, (error, response, body)=> {
         if (!error && response.statusCode === 200) {
         info = JSON.parse(body)
-        res.render('product/product',{info: info,listCategory: listCategories,user: curUser,length:info.length});
+        res.render('product/product',{info: info,listCategory: listCategories,user: curUser,length:info.length,type:type});
         } else {
         console.log("Got an error: ", error, ", status code: ", response.statusCode)
         }
