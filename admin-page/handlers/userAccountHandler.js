@@ -2,7 +2,9 @@ const BASE_USER_PATH = window.location.protocol + "//" + window.location.host + 
 
 var $dataTable;
 
-function loadUserAccount() {
+function loadUserAccount(encodedUser) {
+    const obj = JSON.parse(decodeURI(encodedUser));
+
     $dataTable = $('#userAccountTable').DataTable({
         "ajax": {
             "type": "GET",
@@ -23,6 +25,10 @@ function loadUserAccount() {
             {
                 "data": "role",
                 "defaultContent": ""
+            },{
+                "render": function (data, type, JsonResultRow, meta) {
+                    return '<img width="64px" height="64px" src="' + JsonResultRow.avatar + '">';
+                }
             },
             {
                 "data": "email",
@@ -58,6 +64,10 @@ function loadUserAccount() {
         ],
         "rowCallback": function (row, data, index) {
 
+            if (data["username"] == obj.username){
+                $(row).find('td:eq(9)').html('');
+                $(row).find('td:eq(10)').html('');
+            }
             // if (data["isActive"] == "1") {
             //     $(row).find('td:eq(6)').css('color', 'green');
             //     $(row).find('td:eq(6)').text('Đang Bán');
@@ -87,8 +97,10 @@ function showPopupUpdateUser(itemthis) {
         const obj = JSON.parse(resp);
 
         $("#dlgupdateuser input[name='username']").val(obj.username);
+        $("#dlgupdateuser input[name='password']").val(obj.password);
         $("#dlgupdateuser input[name='email']").val(obj.email);
         $("#dlgupdateuser input[name='birthDate']").val(obj.birthDate);
+        $("#dlgupdateuser input[name='avatar']").val(obj.avatar);
         $("#dlgupdateuser select[name='role'] option").filter(function () {
             return $.trim($(this).val()) === $.trim(obj.role);
         }).attr("selected", true).prop("selected", "selected");

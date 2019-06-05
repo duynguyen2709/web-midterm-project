@@ -72,7 +72,7 @@
       }), {});
    }
 
-   function showPopupChangePassword(encodedUser){
+   function showPopupChangePassword(encodedUser) {
       const obj = JSON.parse(decodeURI(encodedUser));
 
       $("#dlgchangepassword input[name='username']").val(obj.username);
@@ -85,4 +85,35 @@
       $("#dlgchangepassword input[name='phoneNumber']").val(obj.phoneNumber);
    }
 
+   function uploadImage(form, inputField) {
+
+      var formData = new FormData($(form)[0]);
+      FormUtils.showMessageBox('Đang Upload Hình Ảnh...', null, null);
+      $.ajax({
+         url: window.location.protocol + "//" + window.location.host + '/upload',
+         data: formData,
+         cache: false,
+         contentType: false,
+         processData: false,
+         method: 'POST',
+         success: function (data) {
+
+            $('#popup_message_box').hide();
+            if (data.status == 200) {
+               $(inputField).val(data.url);
+            } else {
+               FormUtils.showMessageBox('Upload Hình Ảnh Thất Bại', null, 'error');
+            }
+
+         },
+         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Status: " + textStatus);
+            console.log("Error: " + errorThrown);
+            $('#popup_message_box').hide();
+            FormUtils.showMessageBox('Upload Hình Ảnh Thất Bại', null, 'error');
+
+         }
+      });
+
+   }
 </script>

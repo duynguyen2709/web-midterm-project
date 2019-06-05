@@ -1,5 +1,6 @@
 var category=require('../model/category')
 var user=require('./user')
+var Cart=require('../model/cart').Cart
 // Display list of all products of specific type.
 exports.get_detail =async function(req, res) {
     let listCategories=await category.getListCategory();   
@@ -21,6 +22,22 @@ exports.apply_coupon =async function(req, res) {
 exports.update =async function(req, res) {
     let listCategories=await category.getListCategory();   s.send('NOT IMPLEMENTED: update');
 };
+exports.addProduct=async function(req,res){
+    // console.log("asdsa");
+    // var cart= await new Cart(req.session.cart?req.session.cart:{});
+    // cart.add();
+    // req.session.cart=await cart;
+    // console.log(req.session.cart.count);
+    // let type=await req.params.id;
+    // console.log(req.params.id+","+req.params.image+","+req.params.name+","+req.params.price);
+    // res.redirect('/products/type?id='+type);
+    var cart= await new Cart(req.session.cart?req.session.cart:{});
+    cart.add(req.body.image,req.body.name,req.body.price);
+    req.session.cart= await cart;
+    req.session.cart.print();
+    res.redirect('/');
+    
+}
 
 exports.proceed_to_checkout =async function(req, res) {
     let listCategories=await category.getListCategory();  

@@ -48,6 +48,12 @@ exports.deleteUserAccount = function (req, res) {
 
 exports.insertUserAccount = function (req, res) {
 
+    let avatar = 'https://i.stack.imgur.com/l60Hf.png';
+
+    if (req.body.avatar != null && req.body.avatar != ''){
+        avatar = req.body.avatar;
+    }
+
     axios({
             method: 'POST',
             url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/',
@@ -59,7 +65,7 @@ exports.insertUserAccount = function (req, res) {
                 phoneNumber: req.body.phoneNumber,
                 email: req.body.email,
                 birthDate: req.body.birthDate,
-                avatar: 'https://i.stack.imgur.com/l60Hf.png',
+                avatar: avatar,
                 role: 'ADMIN',
                 updDate: ''
             }
