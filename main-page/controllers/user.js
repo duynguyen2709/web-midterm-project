@@ -174,11 +174,63 @@ exports.user_update_get = async function(req, res) {
     }
     res.render('user/update_account',{listCategory: listCategories, user: curUser});
 };
+
+exports.user_update_password_get = async function(req, res) {
+    let listCategories=await category.getListCategory(); 
+    let user=null
+    user =  req.session.user
+    let data= await fetch("https://api-scttshop-v2.herokuapp.com/api/customers/"+user.email)
+    user= await data.json()
+    curUser={
+        email: user.email,
+        displayName: user.fullName,
+        avatar: user.avatar,
+        address: user.address,
+        phoneNumber: user.phoneNumber,
+        verified: user.verified
+    }
+    res.render('user/update_password',{listCategory: listCategories, user: curUser, code: "0"});
+};
+exports.user_update_password_post = async function(req, res) {
+    let listCategories=await category.getListCategory(); 
+    let user=null
+    user = await firebase.auth().currentUser
+    var password = req.body.password;
+    var pre_password= req.body.pre_password
+    var errorCode=null
+    firebase.auth().signInWithEmailAndPassword(user.email, pre_password).catch(function(error) {
+        // Handle Errors here.
+        errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorMessage)
+        res.render('user/update_password',{listCategory: listCategories, user: curUser, code: errorCode});
+    }).then(()=>{
+        if(errorCode==null)
+        {
+            user.updatePassword(password).then(function() {
+            console.log("Success")
+            req.session.destroy()
+            firebase.auth().signOut().then(()=>{
+                res.redirect('/')
+               
+            }).catch((err)=>{
+                console.log(err)
+            })
+          }).catch(function(error) {
+            console.log("Fail")
+            res.redirect('/')
+          });
+        }
+    })
+   
+
+};
+
 // Handle book update on POST.
 exports.user_update_post = async function(req, res) {
     let listCategories=await category.getListCategory(); 
     let user=null
-    user = await firebase.auth().currentUser
+    user =  req.session.user
     let data= await fetch("https://api-scttshop-v2.herokuapp.com/api/customers/"+user.email)
     user= await data.json()
     let curUser={
@@ -211,4 +263,16 @@ exports.user_update_post = async function(req, res) {
         //res.render('user/my_account',{listCategory: listCategories, user: currentUser ,code: "-1"});
     }) 
     res.redirect("/user/detailUser")
+};
+
+exports.user_reset_post = async function(req, res) {
+    let listCategories=await category.getListCategory(); 
+    let email=req.body.email
+    firebase.auth().sendPasswordResetEmail(email).then(function() {
+        res.redirect('/')
+      }).catch(function(error) {
+        console.log(error)
+        res.redirect('/')
+      });
+    
 };

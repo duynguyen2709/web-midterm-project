@@ -29,6 +29,9 @@
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -211,12 +214,11 @@
           <div class="modal-body">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4>Xác minh tài khoản</h4>
-            <form class="aa-login-form" action="" height="50px">
-              <label for="">Tài khoản hoặc Email<span>*</span></label>
-              <input type="text" placeholder="Username or email">
-              
+            <form class="aa-login-form" action="/user/reset" method="POST">
+              <label for="">Email<span>*</span></label>
+              <input type="text" id="email" name="email" placeholder="Email">
+              <button class="aa-browse-btn" data-dismiss="modal" type="submit" value="submit">Xác minh</button>
             </form>
-            <button class="aa-browse-btn" type="submit">Xác minh</button>
           </div>                        
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
