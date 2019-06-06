@@ -1,3 +1,5 @@
+
+  
 <!DOCTYPE html>
 <html lang="en">
 <script src="jquery-3.4.0.min.js"></script>
@@ -5,18 +7,19 @@
 </script>
 
 <script type="text/javascript">
-function addproduct(image,name,price){
-  $.ajax('../my-cart/addproduct',   // request url
-{          
-  type: 'POST',  
-  data:{
-    image: image,
-    name: name,
-    price:price
-  },
-  success: function (data) {    // success callback function
-     
-
+  function addproduct(image, name, price) {
+    $.ajax('../my-cart/addproduct', // request url
+      {
+        type: 'POST',
+        data: {
+          image: image,
+          name: name,
+          price: price
+        },
+        success: function (data, status, xhr) { // success callback function
+        }
+      });
+  }
 </script>
 
 <body>
@@ -60,7 +63,6 @@ function addproduct(image,name,price){
                           <%if (info[i].promotionDiscount > 0) { %>
                           <span class="aa-product-price"><del><%= info[i].sellPrice %> đ</del></span>
                           <% } %>
-
                     </figcaption>
                   </figure>
                   <div class="aa-product-hvr-content">
@@ -73,10 +75,8 @@ function addproduct(image,name,price){
                   <span class="aa-badge aa-sale">SALE!</span>
                   <span class="aa-badge-right aa-hot"><%= info[i].promotionDiscount %> %</span>
                   <% } %>
-
                 </li>
                 <% }} %>
-
               </ul>
               <!-- quick view modal -->
               <div class="modal fade" id="quick-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -109,7 +109,6 @@ function addproduct(image,name,price){
                               <p class="aa-product-avilability">Tình trạng: <span>Hàng có sẵn</span></p>
                             </div>
                             <p id="showDescription">Mô tả sản phẩm:
-
                             </p>
                             <h4>Size</h4>
                             <div class="aa-prod-view-size">
@@ -170,7 +169,6 @@ function addproduct(image,name,price){
                 </li><%
                       });
                       %>
-
               </ul>
             </div>
             <!-- single sidebar -->
@@ -187,23 +185,17 @@ function addproduct(image,name,price){
         </div>
       </div>
   </section>
-
 </body>
 <script>
   const productInfo = encodeURI(`<%-JSON.stringify(info)%>`);
-
   var listNode = document.getElementById("listproduct");
   //var items=document.querySelectorAll("#listproduct li");
-
   function urlParam(name) {
     var results = new RegExp('[\?&]' + name + '=([^&#]*)')
       .exec(window.location.search);
-
     return (results !== null) ? results[1] || 0 : false;
   }
-
   function clickPagination(page, productInfo) {
-
     const categoryID = urlParam('id');
     let info = [];
     const getListProductFunction = $.ajax({
@@ -216,94 +208,18 @@ function addproduct(image,name,price){
     }).done(function (resp) {
       for (var k = 0; k < resp.info.length; k++)
         info.push(resp.info[k]);
-
     }).fail(function (jqXHR, textStatus, errorThrown) {
       console.log("Error: " + textStatus);
       info = [];
     });
-
     getListProductFunction.then(function () {
       const items = document.querySelectorAll("#listproduct li");
-
-<<<<<<< HEAD
-          var listNode=document.getElementById("listproduct");
-          //var items=document.querySelectorAll("#listproduct li");
-          
-          function clickPagination(page,productInfo)
-          {
-            const info = JSON.parse(decodeURI(productInfo));
-            const items= document.querySelectorAll("#listproduct li");
-            
-            for( var j=0;j<items.length;j++)
-             {
-               items[j].parentNode.removeChild(items[j]);
-             }
-            
-             for(let i=(page-1)*5;i<(page-1)*6+5;i++){
-                if (info.length == i)
-                break;
-                console.log();
-              let image = info[i].image;
-              let productID = info[i].productID;				
-              let pathProduct = "/products/detail?id=" + info[i].productID;						
-						  let productName = info[i].productName;						
-						  let discountPrice = info[i].discountPrice;						
-              let sellPrice = info[i].sellPrice;	
-              let promotionDiscount=info[i].promotionDiscount;								
-						  let description = info[i].description;						
-              let categoryName = info[i].categoryName;
-              
-              if (promotionDiscount>0)
-              {
-                console.log(promotionDiscount);
-                console.log(discountPrice);
-                const clicksearch1 = "clickSearch('" + image + "','" + productID + "','" + productName + "','" + discountPrice + "','" + description + "','" + categoryName + "')";
-                const addproduct1='<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct('
-                                +"'"+image+"'"+','+"'"+productName+"'"+','+"'"+discountPrice+"'"+')"'
-                                +'><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
-                $("#listproduct").append('<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' + image + '></a>'
-                  +addproduct1+`<figcaption><h4 class="aa-product-title"><a href="` + pathProduct + '">' + productName + '</a></h4><span class="aa-product-price">' + discountPrice +
-                    ' VNĐ</span><span class="aa-product-price"><del>'+sellPrice +' đ</del></span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' + clicksearch1 + '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div><span class="aa-badge aa-sale">SALE!</span><span class="aa-badge-right aa-hot">' + promotionDiscount +'%'+ '</span></li>');
-              }
-              else{
-                const clicksearch2 = "clickSearch('" + image + "','" + productID + "','" + productName + "','" + sellPrice + "','" + description + "','" + categoryName + "')";
-                const addproduct2='<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct('
-                                +"'"+image+"'"+','+"'"+productName+"'"+','+"'"+discountPrice+"'"+')"'
-                                +'><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
-         
-                $("#listproduct").append('<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' + image + '></a>'
-                  +addproduct2+'<figcaption><h4 class="aa-product-title"><a href="' + pathProduct + '">' + productName + '</a></h4><span class="aa-product-price">' + discountPrice +
-                    ' VNĐ</span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' + clicksearch2 + '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div></li>');
-             }
-
-            }
-                         
-          }
-      </script>
-            <script>
-
-                function clickSearch(image,productID,productName,sellPrice,description,categoryName)
-                {
-                
-                  console.log(sellPrice);
-                  document.getElementsByClassName("simpleLens-lens-image")[0].src=image;
-                  document.getElementById("showImg").src=image;
-                  document.getElementById("linkProduct").href="/products/detail?id=" + productID;	
-                  document.getElementById("showName").textContent= productName;
-                  document.getElementById("showPrice").textContent='Giá: '+sellPrice;
-                  document.getElementById("showDescription").textContent='Mô tả: '+ description;
-                  document.getElementById("showCategory").textContent='Loại: '+ categoryName;
-                }
-            </script>
-=======
       for (var j = 0; j < items.length; j++) {
         items[j].parentNode.removeChild(items[j]);
       }
-
       for (let i = (page - 1) * 6; i < (page - 1) * 6 + 6; i++) {
         if (info.length == i)
           break;
-
         let image = info[i].image;
         let productID = info[i].productID;
         let pathProduct = "/products/detail?id=" + info[i].productID;
@@ -313,7 +229,6 @@ function addproduct(image,name,price){
         let promotionDiscount = info[i].promotionDiscount;
         let description = info[i].description;
         let categoryName = info[i].categoryName;
-
         if (promotionDiscount > 0) {
           const clicksearch1 = "clickSearch('" + image + "','" + productID + "','" + productName + "','" +
             discountPrice +
@@ -339,7 +254,6 @@ function addproduct(image,name,price){
           const addproduct2 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
             "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'" + ')"' +
             '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
-
           $("#listproduct").append(
             '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
             image + '></a>' +
@@ -351,11 +265,8 @@ function addproduct(image,name,price){
             '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div></li>'
             );
         }
-
       }
     });
-
-
   }
 </script>
 <script>
@@ -369,6 +280,5 @@ function addproduct(image,name,price){
     document.getElementById("showCategory").textContent = 'Loại: ' + categoryName;
   }
 </script>
-
->>>>>>> c36474360a044f69647aae0f53ae7630d90e05ae
 </html>
+
