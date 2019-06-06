@@ -21,9 +21,12 @@ router.post('/logout', user_controller.user_logout_post);
 
 // GET request to update Book.
 router.get('/update', user_controller.user_update_get);
+router.get('/updatePassword', user_controller.user_update_password_get);
+router.post('/updatePassword', user_controller.user_update_password_post);
 
 // POST request to update Book.
 router.post('/update', user_controller.user_update_post);
+router.post('/reset', user_controller.user_reset_post);
 router.post('/check', user_controller.user_check_post);
 
 module.exports = router;

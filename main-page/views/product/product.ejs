@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-        <script src="jquery-3.4.0.min.js"></script>
-        <script type="text/javascript" 
-            src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
-    </script>
+<script src="jquery-3.4.0.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+</script>
 
 <script type="text/javascript">
 function addproduct(image,name,price){
@@ -17,180 +16,216 @@ function addproduct(image,name,price){
   },
   success: function (data) {    // success callback function
      
-  }
-});
-}
 
 </script>
-        
-  <body>
-    <!-- product category -->
-         <section id="aa-product-category">
-           <div class="container">
-             <div class="row">
-               <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
-                 <div class="aa-product-catg-content">
-                   <div class="aa-product-catg-head">
-                     <div class="aa-product-catg-head-left">
-                       <form action="" class="aa-sort-form">
-                         <label for="">Sắp xếp theo</label>
-                         <select name="">
-                           <option value="1" selected="Default">Mặc định</option>
-                           <option value="2">Tên</option>
-                           <option value="3">Giá</option>
-                         </select>
-                       </form>
-                     </div>
-                     <div class="aa-product-catg-head-right">
-                       <a id="grid-catg" href="#"><span class="fa fa-th"></span></a>
-                       <a id="list-catg" href="#"><span class="fa fa-list"></span></a>
-                     </div>
-                   </div>
-                   <div class="aa-product-catg-body">
-                     <ul id="listproduct" class="aa-product-catg" style="margin-left:-35px;">
-                      <%for(var i= 0; i< 6; i++) {
+
+<body>
+  <!-- product category -->
+  <section id="aa-product-category">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+          <div class="aa-product-catg-content">
+            <div class="aa-product-catg-head">
+              <div class="aa-product-catg-head-left">
+                <form action="" class="aa-sort-form">
+                  <label for="">Sắp xếp theo</label>
+                  <select name="">
+                    <option value="1" selected="Default">Mặc định</option>
+                    <option value="2">Tên</option>
+                    <option value="3">Giá</option>
+                  </select>
+                </form>
+              </div>
+              <div class="aa-product-catg-head-right">
+                <a id="grid-catg" href="#"><span class="fa fa-th"></span></a>
+                <a id="list-catg" href="#"><span class="fa fa-list"></span></a>
+              </div>
+            </div>
+            <div class="aa-product-catg-body">
+              <ul id="listproduct" class="aa-product-catg" style="margin-left:-35px;">
+                <%for(var i= 0; i< 6; i++) {
                           if (info[i]!=null){%>
-                        <li>
-                        <figure>
-                            <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=<%= info[i].image %> /></a>
-                            <!-- <a class="aa-add-card-btn" href="../my-cart/addproduct/<%=type%>/`<%=info[i].image%>`/<%=info[i].productName%>/<%=info[i].discountPrice%>"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a> -->
-                            <a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(`<%=info[i].image%>`,`<%=info[i].productName%>`,`<%=info[i].discountPrice%>`)"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                              <figcaption>
-                              <h4 class="aa-product-title"><a href="/products/detail?id=<%=info[i].productID%>""><%= info[i].productName %></a></h4>
-                              <span class="aa-product-price"><%= info[i].discountPrice %> VNĐ</span>
-                              <%if (info[i].promotionDiscount > 0) { %>
-                                <span class="aa-product-price"><del><%= info[i].sellPrice %> đ</del></span>
-                              <% } %>
-                              
-                            </figcaption>
-                          </figure>                        
-                          <div class="aa-product-hvr-content">
-                            <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch(`<%= info[i].image %>`,`<%= info[i].productID %>`,`<%= info[i].productName %>`,`<%= info[i].discountPrice %>`,`<%= info[i].description %>`,`<%= info[i].categoryName %>`)" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
-                          </div>
-                          <!-- product badge -->
+                <li>
+                  <figure>
+                    <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px"
+                        alt="polo shirt img" src=<%= info[i].image %> /></a>
+                    <!-- <a class="aa-add-card-btn" href="../my-cart/addproduct/<%=type%>/`<%=info[i].image%>`/<%=info[i].productName%>/<%=info[i].discountPrice%>"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a> -->
+                    <a class="aa-add-card-btn" href="#" id="addproduct"
+                      onclick="addproduct(`<%=info[i].image%>`,`<%=info[i].productName%>`,`<%=info[i].discountPrice%>`)"><span
+                        class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                    <figcaption>
+                      <h4 class="aa-product-title"><a href="/products/detail?id=<%=info[i].productID%>""><%= info[i].productName %></a></h4>
+                              <span class=" aa-product-price"><%= info[i].discountPrice %> VNĐ</span>
                           <%if (info[i].promotionDiscount > 0) { %>
-                            <span class="aa-badge aa-sale">SALE!</span>
-                            <span class="aa-badge-right aa-hot"><%= info[i].promotionDiscount %> %</span>
-                            <% } %>
-                         
-                        </li>
-                        <% }} %>
-                        
-                     </ul>
-                   <!-- quick view modal -->                  
-      <div class="modal fade" id="quick-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">                      
-              <div class="modal-body">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <div class="row">
-                  <!-- Modal view slider -->
-                  <div class="col-md-6 col-sm-6 col-xs-12">                              
-                    <div class="aa-product-view-slider">                                
-                      <div class="simpleLens-gallery-container" id="demo-1">
-                        <div class="simpleLens-container">
-                            <div class="simpleLens-big-image-container">
-                                <a class="simpleLens-lens-image" >
+                          <span class="aa-product-price"><del><%= info[i].sellPrice %> đ</del></span>
+                          <% } %>
+
+                    </figcaption>
+                  </figure>
+                  <div class="aa-product-hvr-content">
+                    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View"
+                      onclick="clickSearch(`<%= info[i].image %>`,`<%= info[i].productID %>`,`<%= info[i].productName %>`,`<%= info[i].discountPrice %>`,`<%= info[i].description %>`,`<%= info[i].categoryName %>`)"
+                      data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
+                  </div>
+                  <!-- product badge -->
+                  <%if (info[i].promotionDiscount > 0) { %>
+                  <span class="aa-badge aa-sale">SALE!</span>
+                  <span class="aa-badge-right aa-hot"><%= info[i].promotionDiscount %> %</span>
+                  <% } %>
+
+                </li>
+                <% }} %>
+
+              </ul>
+              <!-- quick view modal -->
+              <div class="modal fade" id="quick-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <div class="row">
+                        <!-- Modal view slider -->
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="aa-product-view-slider">
+                            <div class="simpleLens-gallery-container" id="demo-1">
+                              <div class="simpleLens-container">
+                                <div class="simpleLens-big-image-container">
+                                  <a class="simpleLens-lens-image">
                                     <img id="showImg" width="250px" height="300px" src="" class="simpleLens-big-image">
-                                </a>
+                                  </a>
+                                </div>
+                              </div>
                             </div>
+                          </div>
+                        </div>
+                        <!-- Modal view content -->
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="aa-product-view-content">
+                            <h3 id="showName"></h3>
+                            <div class="aa-price-block">
+                              <span class="aa-product-view-price" id="showPrice">Giá tiền: </span>
+                              <p class="aa-product-avilability">Tình trạng: <span>Hàng có sẵn</span></p>
+                            </div>
+                            <p id="showDescription">Mô tả sản phẩm:
+
+                            </p>
+                            <h4>Size</h4>
+                            <div class="aa-prod-view-size">
+                              <a href="#">S</a>
+                              <a href="#">M</a>
+                              <a href="#">L</a>
+                              <a href="#">XL</a>
+                            </div>
+                            <div class="aa-prod-quantity">
+                              <form action="">
+                                <select name="" id="">
+                                  <option value="0" selected="1">1</option>
+                                  <option value="1">2</option>
+                                  <option value="2">3</option>
+                                  <option value="3">4</option>
+                                  <option value="4">5</option>
+                                  <option value="5">6</option>
+                                </select>
+                              </form>
+                              <p class="aa-prod-category" id="showCategory">
+                                Loại: <a href="#"></a>
+                              </p>
+                            </div>
+                            <div class="aa-prod-view-bottom">
+                              <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào
+                                giỏ hàng</a>
+                              <a id="linkProduct" href="" class="aa-add-to-cart-btn">Chi tiết</a>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- Modal view content -->
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="aa-product-view-content">
-                      <h3 id="showName"></h3>
-                      <div class="aa-price-block">
-                        <span class="aa-product-view-price" id="showPrice">Giá tiền: </span>
-                        <p class="aa-product-avilability">Tình trạng: <span>Hàng có sẵn</span></p>
-                      </div>
-                      <p id="showDescription">Mô tả sản phẩm:
-
-                      </p>
-                      <h4>Size</h4>
-                      <div class="aa-prod-view-size">
-                        <a href="#">S</a>
-                        <a href="#">M</a>
-                        <a href="#">L</a>
-                        <a href="#">XL</a>
-                      </div>
-                      <div class="aa-prod-quantity">
-                        <form action="">
-                          <select name="" id="">
-                            <option value="0" selected="1">1</option>
-                            <option value="1">2</option>
-                            <option value="2">3</option>
-                            <option value="3">4</option>
-                            <option value="4">5</option>
-                            <option value="5">6</option>
-                          </select>
-                        </form>
-                        <p class="aa-prod-category" id="showCategory">
-                          Loại: <a href="#"></a>
-                        </p>
-                      </div>
-                      <div class="aa-prod-view-bottom">
-                        <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                        <a id="linkProduct" href="" class="aa-add-to-cart-btn">Chi tiết</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>                        
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-        </div><!-- / quick view modal -->        
-                   </div>
-                   <div class="aa-product-catg-pagination">
-                     <nav>
-                       <ul class="pagination">
-                         <% for(var i=0; i<length/6; i++) { %>
-                          <li><a href="#" onclick="clickPagination(`<%=i+1 %>`,productInfo)"> <%=i+1 %></a></li>
-                            <% } %>
-                       </ul>
-                     </nav>
-                   </div>
-                 </div>
-               </div>
-               <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
-                 <aside class="aa-sidebar">
-                   <!-- single sidebar -->
-                   <div class="aa-sidebar-widget">
-                     <h3>Mục</h3>
-                     <ul class="aa-catg-nav">
-                      <%
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- / quick view modal -->
+            </div>
+            <div class="aa-product-catg-pagination">
+              <nav>
+                <ul class="pagination">
+                  <% for(var i=0; i<length/6; i++) { %>
+                  <li><a href="#" onclick="clickPagination(`<%=i+1 %>`,productInfo)"> <%=i+1 %></a></li>
+                  <% } %>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
+          <aside class="aa-sidebar">
+            <!-- single sidebar -->
+            <div class="aa-sidebar-widget">
+              <h3>Mục</h3>
+              <ul class="aa-catg-nav">
+                <%
                       listCategory.forEach(category=>{
                         %><li>
-                          <a href="/products/type?id=<%= category['Id'] %>" ><%= category['name'] %></a>
-                        </li><%
+                  <a href="/products/type?id=<%= category['Id'] %>"><%= category['name'] %></a>
+                </li><%
                       });
                       %>
 
-                     </ul>
-                   </div>
-                   <!-- single sidebar -->
-                   <div class="aa-sidebar-widget">
-                     <h3>Tags</h3>
-                     <div class="tag-cloud">
-                       <a href="#">KiriMaru</a>
-                       <a href="#">Ma Bư</a>
-                       <a href="#">StreetStyle</a>
-                       <a href="#">Hot</a>
-                       <a href="#">Sale</a>
-                     </div>
-                   </div>
-             </div>
-           </div>
-         </section>
-  
-         
-    
-    </body>
-    <script>
-          const productInfo = encodeURI(`<%-JSON.stringify(info)%>`);
+              </ul>
+            </div>
+            <!-- single sidebar -->
+            <div class="aa-sidebar-widget">
+              <h3>Tags</h3>
+              <div class="tag-cloud">
+                <a href="#">KiriMaru</a>
+                <a href="#">Ma Bư</a>
+                <a href="#">StreetStyle</a>
+                <a href="#">Hot</a>
+                <a href="#">Sale</a>
+              </div>
+            </div>
+        </div>
+      </div>
+  </section>
 
+</body>
+<script>
+  const productInfo = encodeURI(`<%-JSON.stringify(info)%>`);
+
+  var listNode = document.getElementById("listproduct");
+  //var items=document.querySelectorAll("#listproduct li");
+
+  function urlParam(name) {
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+      .exec(window.location.search);
+
+    return (results !== null) ? results[1] || 0 : false;
+  }
+
+  function clickPagination(page, productInfo) {
+
+    const categoryID = urlParam('id');
+    let info = [];
+    const getListProductFunction = $.ajax({
+      type: "POST",
+      url: window.location.protocol + "//" + window.location.host + "/products" + "/get",
+      data: {
+        categoryID: categoryID
+      },
+      dataType: "json"
+    }).done(function (resp) {
+      for (var k = 0; k < resp.info.length; k++)
+        info.push(resp.info[k]);
+
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      console.log("Error: " + textStatus);
+      info = [];
+    });
+
+    getListProductFunction.then(function () {
+      const items = document.querySelectorAll("#listproduct li");
+
+<<<<<<< HEAD
           var listNode=document.getElementById("listproduct");
           //var items=document.querySelectorAll("#listproduct li");
           
@@ -260,4 +295,80 @@ function addproduct(image,name,price){
                   document.getElementById("showCategory").textContent='Loại: '+ categoryName;
                 }
             </script>
+=======
+      for (var j = 0; j < items.length; j++) {
+        items[j].parentNode.removeChild(items[j]);
+      }
+
+      for (let i = (page - 1) * 6; i < (page - 1) * 6 + 6; i++) {
+        if (info.length == i)
+          break;
+
+        let image = info[i].image;
+        let productID = info[i].productID;
+        let pathProduct = "/products/detail?id=" + info[i].productID;
+        let productName = info[i].productName;
+        let discountPrice = info[i].discountPrice;
+        let sellPrice = info[i].sellPrice;
+        let promotionDiscount = info[i].promotionDiscount;
+        let description = info[i].description;
+        let categoryName = info[i].categoryName;
+
+        if (promotionDiscount > 0) {
+          const clicksearch1 = "clickSearch('" + image + "','" + productID + "','" + productName + "','" +
+            discountPrice +
+            "','" + description + "','" + categoryName + "')";
+          const addproduct1 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
+            "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'" + ')"' +
+            '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
+          $("#listproduct").append(
+            '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
+            image + '></a>' +
+            addproduct1 + `<figcaption><h4 class="aa-product-title"><a href="` + pathProduct + '">' +
+            productName +
+            '</a></h4><span class="aa-product-price">' + discountPrice +
+            ' VNĐ</span><span class="aa-product-price"><del>' + sellPrice +
+            ' đ</del></span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' +
+            clicksearch1 +
+            '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div><span class="aa-badge aa-sale">SALE!</span><span class="aa-badge-right aa-hot">' +
+            promotionDiscount + '%' + '</span></li>');
+        } else {
+          const clicksearch2 = "clickSearch('" + image + "','" + productID + "','" + productName + "','" +
+            sellPrice +
+            "','" + description + "','" + categoryName + "')";
+          const addproduct2 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
+            "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'" + ')"' +
+            '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
+
+          $("#listproduct").append(
+            '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
+            image + '></a>' +
+            addproduct2 + '<figcaption><h4 class="aa-product-title"><a href="' + pathProduct + '">' +
+            productName +
+            '</a></h4><span class="aa-product-price">' + discountPrice +
+            ' VNĐ</span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' +
+            clicksearch2 +
+            '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div></li>'
+            );
+        }
+
+      }
+    });
+
+
+  }
+</script>
+<script>
+  function clickSearch(image, productID, productName, sellPrice, description, categoryName) {
+    document.getElementsByClassName("simpleLens-lens-image")[0].src = image;
+    document.getElementById("showImg").src = image;
+    document.getElementById("linkProduct").href = "/products/detail?id=" + productID;
+    document.getElementById("showName").textContent = productName;
+    document.getElementById("showPrice").textContent = 'Giá: ' + sellPrice;
+    document.getElementById("showDescription").textContent = 'Mô tả: ' + description;
+    document.getElementById("showCategory").textContent = 'Loại: ' + categoryName;
+  }
+</script>
+
+>>>>>>> c36474360a044f69647aae0f53ae7630d90e05ae
 </html>
