@@ -11,7 +11,12 @@ exports.display_hp = async function(req, res) {
     }
     let curUser=null
     curUser=req.session.user
-    console.log(curUser)
-    res.render('home/homepage', {title: 'Daily Shop', listCategory: listCategories , productOfPromo:product.promoProduct, user: curUser});
+    let verify=null
+    verify=req.session.verify
+    console.log(verify)
+    if(verify===false)
+        res.render('home/homepage', {title: 'Daily Shop', listCategory: listCategories , productOfPromo:product.promoProduct, user: curUser,flag: 1});
+    else
+         res.render('home/homepage', {title: 'Daily Shop', listCategory: listCategories , productOfPromo:product.promoProduct, user: curUser,flag: 0});
  
 };

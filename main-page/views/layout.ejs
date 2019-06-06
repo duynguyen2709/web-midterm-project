@@ -198,7 +198,7 @@
               <input type="password" name="password" placeholder="Password">
               <button class="aa-browse-btn" type="submit" value="submit">Đăng nhập</button>
               <label for="rememberme" class="rememberme"><input type="checkbox" id="rememberme"> Ghi nhớ </label>
-              <p class="aa-lost-password"><a href="" data-toggle="modal" data-target="#forgot-password-modal" data-dismiss="modal" >Quên mật khẩu?</a></p>
+              <p class="aa-lost-password"><a href="" data-toggle="modal" data-dismiss="modal"  data-target="#forgot-password-modal"  >Quên mật khẩu?</a></p>
   
               <div class="aa-register-now">
                 Bạn chưa có tài khoản?<a href="/user/createUser">Đăng kí ngay!</a>
@@ -214,10 +214,10 @@
           <div class="modal-body">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4>Xác minh tài khoản</h4>
-            <form class="aa-login-form" action="/user/reset" method="POST">
+            <form class="aa-login-form" action="/user/reset" method="POST" height="50px">
               <label for="">Email<span>*</span></label>
               <input type="text" id="email" name="email" placeholder="Email">
-              <button class="aa-browse-btn" data-dismiss="modal" type="submit" value="submit">Xác minh</button>
+              <button class="aa-browse-btn" type="submit" value="submit">Xác minh</button>
             </form>
           </div>                        
         </div><!-- /.modal-content -->

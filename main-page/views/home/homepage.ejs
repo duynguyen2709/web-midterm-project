@@ -176,11 +176,27 @@
       <!-- / Products section -->
       <% include quickviewmodal %>
       <% include support %>
+      <div class="modal fade" id="notification-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">                      
+            <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4>Thông báo</h4>
+              <form class="aa-login-form" action="/user/reset" method="POST" height="50px">
+                <label for="">Vui lòng xác thực email trước khi đăng nhập.</label>
+              </form>
+            </div>                        
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>  
 </body>
 <script src="/js/sequence.js"></script>
 <script src="/js/sequence-theme.modern-slide-in.js"></script>  
 <script>
-   
+  var flag='<%= flag %>'
+  $(window).on('load',function(){
+        if(flag==="1") $('#notification-modal').modal('show');
+  });
   function clickSearch(linkimg,linkP)
     {
         document.getElementsByClassName("simpleLens-lens-image")[0].src=linkimg;

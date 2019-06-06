@@ -66,8 +66,7 @@ exports.user_login_post =  function(req, res) {
           console.log(user)
           if(user!=null)
           {
-                req.session.isLogged = true;
-                req.session.user = user
+                req.session.verify=false
                 if(user.emailVerified==true)
                 {
                     axios({
@@ -76,7 +75,9 @@ exports.user_login_post =  function(req, res) {
                     }).catch(err => {
                         console.log(err)
                     })
-                        
+                    req.session.isLogged = true;
+                    req.session.user = user
+                    req.session.verify=true              
                 }
                 res.redirect('/')
           }
