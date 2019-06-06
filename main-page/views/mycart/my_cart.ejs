@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <script type="text/javascript">
-    function checkout(){
-      $.ajax('../check-out',
+function updateCount(image,name, price, count){
+  alert(count);
+        $.ajax('../my-cart/updateCount',
       {
         type: 'POST',  
   data:{
     image: image,
     name: name,
-    price:price
+    price:price,
+    count: count
   },
   success: function (data) {
-    
+    addRow(data.cart);
   }
       });
-    }
+      }
     function removeProduct(image,name,price){
       $.ajax('../my-cart/removeProduct',   // request url
 {          
@@ -38,11 +39,11 @@ addRow(data.cart);
       for(let i=0;i<list.length;i++){
         total+=list[i].count*list[i].price;
         myvar += '<tr>'+
-'                                 <td><a class="remove" href="#" onclick="removeProduct('+"'"+ list[i].image+`','`+list[i].name+`','`+list[i].price+`')`+'"><fa class="fa fa-close"></fa></a></td>'+
+'                                 <td><a class="remove" href="#" onclick="removeProduct('+"'"+ list[i].image+"',`"+list[i].name+"`,'"+list[i].price+`')`+'"><fa class="fa fa-close"></fa></a></td>'+
 '                                 <td><a href="#"><img src= "'+list[i].image+'"'+' alt="img"></a></td>'+
 '                                 <td><a class="aa-cart-title" href="#">'+list[i].name+'</a></td>'+
 '                                 <td>'+list[i].price+'</td>'+
-'                                 <td><input class="aa-cart-quantity" type="number"  min="1" max="10" value="'+list[i].count+'"></td>'+
+`                                 <td><input class="aa-cart-quantity" type="number"  min="1" max="10" value="`+list[i].count+`" onfocusout="updateCount('`+list[i].image+"',`"+list[i].name+"`,'"+ list[i].price+"',"+`this.value)"`+'></td>'+
 '                                 <td>'+list[i].price*list[i].count+'</td>'+
 '                              </tr>';
       }
@@ -104,11 +105,11 @@ addRow(data.cart);
                         
                         %>
                           <tr>
-                               <td><a class="remove" href="#" onclick="removeProduct('<%= list[i].image %>','<%= list[i].name %>','<%= list[i].price %>')"><fa class="fa fa-close"></fa></a></td>
+                               <td><a class="remove" href="#" onclick="removeProduct('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>')"><fa class="fa fa-close"></fa></a></td>
                                <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
                                <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
                                <td><%= list[i].price %></td>
-                               <td><input class="aa-cart-quantity" type="number" min="1" max="10" value="<%= list[i].count %>" ></td>
+                               <td><input  class="aa-cart-quantity" type="number" min="1" max="10" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value)" ></td>
                                <td><%= list[i].price*list[i].count %></td>
                             </tr>
                      <%}}%>
@@ -149,4 +150,7 @@ addRow(data.cart);
  </section>
  <!-- / Cart view section -->
   </body>
+  <script>
+      
+    </script>
 </html>

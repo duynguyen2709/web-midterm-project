@@ -12,4 +12,6 @@ router.post('/addproduct',cart_controller.addProduct);
 
 router.post('/removeProduct',cart_controller.removeProduct);
 
+router.post('/updateCount',cart_controller.updateCount);
+
 module.exports = router;

@@ -53,6 +53,16 @@ exports.removeProduct=async function(req,res){
     
     
 };
+exports.updateCount=async function(req,res){
+    var cart= await new Cart(req.session.cart?req.session.cart:{});
+    cart.update(req.body.image,req.body.name,req.body.price,req.body.count);
+    req.session.cart= await cart;
+        res.json({
+            cart: req.session.cart.array
+        });
+    
+    
+};
 
 
 exports.proceed_to_checkout =async function(req, res) {

@@ -31,6 +31,16 @@ class Cart {
             }
             
         }
+        this.update=function(image,name,price,count){
+            if(this.array){
+                for(let i=0;i<this.array.length;i++){
+                    if(image===this.array[i].image&&name===this.array[i].name){
+                        this.array[i].count=count;
+                    }
+                }
+            }
+            
+        }
         this.print=function(){
             console.log('------------------------------');
             let i=0;
