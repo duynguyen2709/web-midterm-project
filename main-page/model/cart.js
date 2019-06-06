@@ -2,13 +2,12 @@ class Cart {
     constructor(oldCart) {
         this.array=oldCart.array||[]
         this.add = function (image,name,price) {
-            let tmp= new Product(image,name, price,0);
+            let tmp= new Product(image,name, price,1);
             let flag=0;
             if(this.array){
                 let i=0;
             for(i=0;i<this.array.length;i++){
                 if(image===this.array[i].image&&name===this.array[i].name){
-                    this.array[i].count++;
                     flag=1;
                     break
                 }
@@ -22,6 +21,16 @@ class Cart {
             }
             
         };
+        this.remove=function(image,name,price){
+            if(this.array){
+                for(let i=0;i<this.array.length;i++){
+                    if(image===this.array[i].image&&name===this.array[i].name){
+                        this.array.splice(i,1);
+                    }
+                }
+            }
+            
+        }
         this.print=function(){
             console.log('------------------------------');
             let i=0;

@@ -6,35 +6,6 @@
     </script>
 
 <script type="text/javascript">
-//   $(document).ready(function () {
-
-// $('#addproduct').click(function(){
-// $.ajax('../my-cart/addproduct',   // request url
-// {          
-//   type: 'POST',  
-//   data:{
-//     myData:1
-//   },
-//   success: function (data, status, xhr) {    // success callback function
-//       $('p').append(data);
-//   }
-// });
-// });
-
-//   });
-// function fetchData(){
-//   $.ajax('https://api-scttshop-v2.herokuapp.com/api/reload',
-// {          
-//   type: 'POST',  
-//   data:{
-//     type:
-    
-//   },
-//   success: function (data, status, xhr) {    // success callback function
-      
-//   }
-// });
-// }
 function addproduct(image,name,price){
   $.ajax('../my-cart/addproduct',   // request url
 {          
@@ -44,8 +15,8 @@ function addproduct(image,name,price){
     name: name,
     price:price
   },
-  success: function (data, status, xhr) {    // success callback function
-      
+  success: function (data) {    // success callback function
+     
   }
 });
 }
@@ -275,7 +246,7 @@ function addproduct(image,name,price){
           }
       </script>
             <script>
-              
+
                 function clickSearch(image,productID,productName,sellPrice,description,categoryName)
                 {
                 
@@ -288,6 +259,5 @@ function addproduct(image,name,price){
                   document.getElementById("showDescription").textContent='Mô tả: '+ description;
                   document.getElementById("showCategory").textContent='Loại: '+ categoryName;
                 }
-
             </script>
 </html>

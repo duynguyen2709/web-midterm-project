@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script type="text/javascript">
+    function removeProduct(image,name,price){
+      $.ajax('../my-cart/removeProduct',   // request url
+{          
+  type: 'POST',  
+  data:{
+    image: image,
+    name: name,
+    price:price
+  },
+  success: function (data) { 
+      
+  }
+});
+    }
+    
+    </script>
   <body>
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
@@ -40,36 +57,22 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                        <td><a href="#"><img src="./img/man/polo-shirt-1.png" alt="img"></a></td>
-                        <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                        <td>$250</td>
-                        <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                        <td>$250</td>
-                      </tr>
-                      <tr>
-                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                        <td><a href="#"><img src="./img/man/polo-shirt-2.png" alt="img"></a></td>
-                        <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                        <td>$150</td>
-                        <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                        <td>$150</td>
-                      </tr>
-                      <tr>
-                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                        <td><a href="#"><img src="./img/man/polo-shirt-3.png" alt="img"></a></td>
-                        <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                        <td>$50</td>
-                        <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                        <td>$50</td>
-                      </tr>
+                        <%if(list)
+                        {
+                          for (var i=0;i< list.length;i++){ 
+                        
+                        %>
+                          <tr>
+                               <td><a class="remove" href="#" onclick="removeProduct('<%= list[i].image %>','<%= list[i].name %>','<%= list[i].price %>')"><fa class="fa fa-close"></fa></a></td>
+                               <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
+                               <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
+                               <td><%= list[i].price %></td>
+                               <td><input class="aa-cart-quantity" type="number" value="<%= list[i].count %>"></td>
+                               <td><%= list[i].price*list[i].count %></td>
+                            </tr>
+                     <%}}%>
                       <tr>
                         <td colspan="6" class="aa-cart-view-bottom">
-                          <div class="aa-cart-coupon">
-                            <input class="aa-coupon-code" type="text" placeholder="Coupon">
-                            <input class="aa-cart-view-btn" type="submit" value="Áp dụng Coupon">
-                          </div>
                           <input class="aa-cart-view-btn" type="submit" value="Cập nhật giỏ đồ">
                         </td>
                       </tr>
@@ -82,10 +85,6 @@
                <h4>Tổng cộng</h4>
                <table class="aa-totals-table">
                  <tbody>
-                   <tr>
-                     <th>Subtotal</th>
-                     <td>$450</td>
-                   </tr>
                    <tr>
                      <th>Total</th>
                      <td>$450</td>
