@@ -2,6 +2,20 @@
 <html lang="en">
 
 <script type="text/javascript">
+    function checkout(){
+      $.ajax('../check-out',
+      {
+        type: 'POST',  
+  data:{
+    image: image,
+    name: name,
+    price:price
+  },
+  success: function (data) {
+    
+  }
+      });
+    }
     function removeProduct(image,name,price){
       $.ajax('../my-cart/removeProduct',   // request url
 {          
@@ -28,7 +42,7 @@ addRow(data.cart);
 '                                 <td><a href="#"><img src= "'+list[i].image+'"'+' alt="img"></a></td>'+
 '                                 <td><a class="aa-cart-title" href="#">'+list[i].name+'</a></td>'+
 '                                 <td>'+list[i].price+'</td>'+
-'                                 <td><input class="aa-cart-quantity" type="number" value="'+list[i].count+'"></td>'+
+'                                 <td><input class="aa-cart-quantity" type="number"  min="1" max="10" value="'+list[i].count+'"></td>'+
 '                                 <td>'+list[i].price*list[i].count+'</td>'+
 '                              </tr>';
       }
@@ -94,7 +108,7 @@ addRow(data.cart);
                                <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
                                <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
                                <td><%= list[i].price %></td>
-                               <td><input class="aa-cart-quantity" type="number" value="<%= list[i].count %>"></td>
+                               <td><input class="aa-cart-quantity" type="number" min="1" max="10" value="<%= list[i].count %>" ></td>
                                <td><%= list[i].price*list[i].count %></td>
                             </tr>
                      <%}}%>
@@ -113,7 +127,6 @@ addRow(data.cart);
                <table class="aa-totals-table">
                  <tbody>
                    <tr>
-                     
                      <%if(list)
                         {
                            var total=0
@@ -126,7 +139,7 @@ addRow(data.cart);
                    </tr>
                  </tbody>
                </table>
-               <a href="#" class="aa-cart-view-btn">Tiến hành thanh toán</a>
+               <a href="../check-out" class="aa-cart-view-btn" >Tiến hành thanh toán</a>
              </div>
            </div>
          </div>

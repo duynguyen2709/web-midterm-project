@@ -290,31 +290,25 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>T-Shirt <strong> x  1</strong></td>
-                          <td>$150</td>
-                        </tr>
-                        <tr>
-                          <td>Polo T-Shirt <strong> x  1</strong></td>
-                          <td>$250</td>
-                        </tr>
-                        <tr>
-                          <td>Shoes <strong> x  1</strong></td>
-                          <td>$350</td>
-                        </tr>
+                        <% if (list){
+                         for (var i=0;i<list.length;i++){ %>
+                            <tr>
+                                <td><%= list[i].name %> <strong> x  <%=list[i].count%> </strong></td>
+                                <td><%= list[i].price %></td>
+                            </tr>
+                        <%}}%>
                       </tbody>
                       <tfoot>
-                        <tr>
-                          <th>Tạm Tính</th>
-                          <td>$750</td>
-                        </tr>
-                         <tr>
-                          <th>Thuế</th>
-                          <td>$35</td>
-                        </tr>
-                         <tr>
+                          
+                          <%if(list)
+                        {
+                           var total=0
+                          for (var i=0;i< list.length;i++){
+                            total+=list[i].count*list[i].price;
+                          }%>
                           <th>Tổng</th>
-                          <td>$785</td>
+                          <td id="total"><%= total%></td>
+                        <%}%>
                         </tr>
                       </tfoot>
                     </table>
