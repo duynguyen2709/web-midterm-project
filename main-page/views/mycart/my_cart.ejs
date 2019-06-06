@@ -13,8 +13,35 @@
   },
   success: function (data) { 
       
+addRow(data.cart);
   }
 });
+    }
+    function addRow(list){
+      var tmp=$("#productTable").empty();
+      var myvar='<tbody id="productTable">';
+      let total=0;
+      for(let i=0;i<list.length;i++){
+        total+=list[i].count*list[i].price;
+        myvar += '<tr>'+
+'                                 <td><a class="remove" href="#" onclick="removeProduct('+"'"+ list[i].image+`','`+list[i].name+`','`+list[i].price+`')`+'"><fa class="fa fa-close"></fa></a></td>'+
+'                                 <td><a href="#"><img src= "'+list[i].image+'"'+' alt="img"></a></td>'+
+'                                 <td><a class="aa-cart-title" href="#">'+list[i].name+'</a></td>'+
+'                                 <td>'+list[i].price+'</td>'+
+'                                 <td><input class="aa-cart-quantity" type="number" value="'+list[i].count+'"></td>'+
+'                                 <td>'+list[i].price*list[i].count+'</td>'+
+'                              </tr>';
+      }
+      myvar+='<tr>'+
+'                        <td colspan="6" class="aa-cart-view-bottom">'+
+'                          <input class="aa-cart-view-btn" type="submit" value="Cập nhật giỏ đồ">'+
+'                        </td>'+
+'                      </tr>';
+      myvar+='</tbody>';
+      console.log(myvar+total);
+      document.getElementById("total").innerHTML =total;
+      tmp.replaceWith(myvar);
+
     }
     
     </script>
@@ -56,7 +83,7 @@
                         <th>Tổng</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="productTable">
                         <%if(list)
                         {
                           for (var i=0;i< list.length;i++){ 
@@ -71,12 +98,12 @@
                                <td><%= list[i].price*list[i].count %></td>
                             </tr>
                      <%}}%>
-                      <tr>
+                     <tr>
                         <td colspan="6" class="aa-cart-view-bottom">
-                          <input class="aa-cart-view-btn" type="submit" value="Cập nhật giỏ đồ">
-                        </td>
-                      </tr>
+                          <input class="aa-cart-view-btn" type="submit" value="Cập nhật giỏ đồ"></td>
+                        </tr>
                       </tbody>
+                      
                   </table>
                 </div>
              </form>
@@ -86,8 +113,16 @@
                <table class="aa-totals-table">
                  <tbody>
                    <tr>
-                     <th>Total</th>
-                     <td>$450</td>
+                     
+                     <%if(list)
+                        {
+                           var total=0
+                          for (var i=0;i< list.length;i++){
+                            total+=list[i].count*list[i].price;
+                          }%>
+                          <th>Total</th>
+                          <td id="total"><%= total%></td>
+                        <%}%>
                    </tr>
                  </tbody>
                </table>
