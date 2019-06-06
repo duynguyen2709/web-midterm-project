@@ -1,277 +1,306 @@
 <!-- catg header banner section -->
 <section id="aa-catg-head-banner">
-    <img src="../img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
-    <div class="aa-catg-head-banner-area">
-      <div class="container">
-       <div class="aa-catg-head-banner-content">
-         <h2>T-Shirt</h2>
-         <ol class="breadcrumb">
-           <li><a href="/">Home</a></li>  
-           <%       
-           %><li><a href="/products/type?id=<%=productInfo.categoryID%>"><%= listCategory.find(x => x.Id === productInfo.categoryID).name%></a></li><%
-           %><li class="active"><%=productInfo.productName%></li><%
+  <img src="../img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+  <div class="aa-catg-head-banner-area">
+    <div class="container">
+      <div class="aa-catg-head-banner-content">
+        <h2><%= listCategory.find(x => x.Id === productInfo.categoryID).name%></h2>
+        <ol class="breadcrumb">
+          <li><a href="/">Home</a></li>
+          <%       
+           %><li><a
+              href="/products/type?id=<%=productInfo.categoryID%>"><%= listCategory.find(x => x.Id === productInfo.categoryID).name%></a>
+          </li><%
+           %><li class="active" style="color:yellow;"><%=productInfo.productName%></li><%
            %>
-         </ol>
-       </div>
+        </ol>
       </div>
     </div>
-   </section>
-   <!-- / catg header banner section -->
- 
-   <!-- product category -->
-   <section id="aa-product-details">
-     <div class="container">
-       <div class="row">
-         <div class="col-md-12">
-           <div class="aa-product-details-area">
-             <div class="aa-product-details-content">
-               <div class="row">
-                  <%
-                  %><div class="col-md-5 col-sm-5 col-xs-12">                              
-                      <div class="aa-product-view-slider">                                
-                        <div id="demo-1" class="simpleLens-gallery-container">
-                          <div class="simpleLens-container">
-                            <div class="simpleLens-big-image-container"><img src="<%=productInfo.image%>" class="simpleLens-big-image"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                 <div class="col-md-7 col-sm-7 col-xs-12">
-                   <div class="aa-product-view-content">
-                     <h3><%=productInfo.productName%></h3>
-                     <div class="aa-price-block">
+  </div>
+</section>
+<!-- / catg header banner section -->
 
-                       <span class="aa-product-view-price"><%=productInfo.discountPrice%></span>
-                       <p class="aa-product-avilability">Tình trạng: <span>Có sẵn hàng</span></p>
-                     </div>
-                     <p><%=productInfo.description%></p>
-                     <h4>Size</h4>
-                     <div class="aa-prod-view-size">
-                       <a href="#">S</a>
-                       <a href="#">M</a>
-                       <a href="#">L</a>
-                       <a href="#">XL</a>
-                     </div>
-                     <h4>Màu</h4>
-                     <div class="aa-color-tag">
-                       <a href="#" class="aa-color-green"></a>
-                       <a href="#" class="aa-color-yellow"></a>
-                       <a href="#" class="aa-color-pink"></a>                      
-                       <a href="#" class="aa-color-black"></a>
-                       <a href="#" class="aa-color-white"></a>                      
-                     </div>
-                     <div class="aa-prod-quantity">
-                       <form action="">
-                         <select id="" name="">
-                           <option selected="1" value="0">1</option>
-                           <option value="1">2</option>
-                           <option value="2">3</option>
-                           <option value="3">4</option>
-                           <option value="4">5</option>
-                           <option value="5">6</option>
-                         </select>
-                       </form>
-                       <p class="aa-prod-category">
-                         Mục: <a href="/products/type?id=<%=productInfo.categoryID%>"><%= listCategory.find(x => x.Id === productInfo.categoryID).name%></a>
-                       </p>
-                     </div>
-                     <div class="aa-prod-view-bottom">
-                       <a class="aa-add-to-cart-btn" href="#">Thêm vào giỏ hàng</a>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </div><%
-             %>
-             <div class="aa-product-details-bottom">
-               <ul class="nav nav-tabs" id="myTab2">
-                 <li><a href="#description" data-toggle="tab">Mô tả</a></li>
-                 <li><a href="#review" data-toggle="tab">Đánh giá</a></li>                
-               </ul>
- 
-               <!-- Tab panes -->
-               <div class="tab-content">
-                 <div class="tab-pane fade in active" id="description">
-                   <%
-                   %><p><%=productInfo.description%></p><%
-                   %>
-                   
-                  
-                 </div>
-                 <div class="tab-pane fade " id="review">
-                  <div class="aa-product-review-area">
-                    <h4>2 đánh giá cho sản phẩm</h4> 
-                    <ul class="aa-review-nav">
-                      <li>
-                         <div class="media">
-                           <div class="media-left">
-                             <a href="#">
-                               <img class="media-object" src="../img/testimonial-img-3.jpg" alt="girl image">
-                             </a>
-                           </div>
-                           <div class="media-body">
-                             <h4 class="media-heading"><strong>Marla Jobs</strong> - <span>March 26, 2016</span></h4>
-                             <div class="aa-product-rating">
-                               <span class="fa fa-star"></span>
-                               <span class="fa fa-star"></span>
-                               <span class="fa fa-star"></span>
-                               <span class="fa fa-star"></span>
-                               <span class="fa fa-star-o"></span>
-                             </div>
-                             <p>Hàng rất ok!!</p>
-                           </div>
-                         </div>
-                       </li>
-                       <li>
-                         <div class="media">
-                           <div class="media-left">
-                             <a href="#">
-                               <img class="media-object" src="../img/testimonial-img-3.jpg" alt="girl image">
-                             </a>
-                           </div>
-                           <div class="media-body">
-                             <h4 class="media-heading"><strong>Marla Jobs</strong> - <span>March 26, 2016</span></h4>
-                             <div class="aa-product-rating">
-                               <span class="fa fa-star"></span>
-                               <span class="fa fa-star"></span>
-                               <span class="fa fa-star"></span>
-                               <span class="fa fa-star"></span>
-                               <span class="fa fa-star-o"></span>
-                             </div>
-                             <p>Hàng giống hình :)</p>
-                           </div>
-                         </div>
-                       </li>
-                    </ul>
-                    <h4>Thêm đánh giá</h4>
-                    <div class="aa-your-rating">
-                      <p>Đánh giá của bạn</p>
-                      <a href="#"><span class="fa fa-star-o"></span></a>
-                      <a href="#"><span class="fa fa-star-o"></span></a>
-                      <a href="#"><span class="fa fa-star-o"></span></a>
-                      <a href="#"><span class="fa fa-star-o"></span></a>
-                      <a href="#"><span class="fa fa-star-o"></span></a>
+<!-- product category -->
+<section id="aa-product-details">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="aa-product-details-area">
+          <div class="aa-product-details-content">
+            <div class="row">
+              <%
+                  %><div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="aa-product-view-slider">
+                  <div id="demo-1" class="simpleLens-gallery-container">
+                    <div class="simpleLens-container">
+                      <div class="simpleLens-big-image-container"><img src="<%=productInfo.image%>"
+                          class="simpleLens-big-image"></div>
                     </div>
-                    <!-- review form -->
-                    <form action="" class="aa-review-form">
-                       <div class="form-group">
-                         <label for="message">Nhận xét của bạn</label>
-                         <textarea class="form-control" rows="3" id="message"></textarea>
-                       </div>
-                       <div class="form-group">
-                         <label for="name">Tên</label>
-                         <input type="text" class="form-control" id="name" placeholder="Name">
-                       </div>  
-                       <div class="form-group">
-                         <label for="email">Email</label>
-                         <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
-                       </div>
- 
-                       <button type="submit" class="btn btn-default aa-review-submit">Đăng</button>
-                    </form>
                   </div>
-                 </div>            
-               </div>
-             </div>
-             <!-- Related product -->
-             <div class="aa-product-related-item">
-               <h3>Sản phẩm liên quan</h3>
-               <ul class="aa-product-catg aa-related-item-slider">
-                <% 
-                 
-                 productInfo.relatedProducts.forEach(product=>{
-                  %><li>
-                    <figure>
-                      <a class="aa-product-img" ><img src="<%= product['image'] %>" alt="img" style="height: 300px; width: 250px"></a>
-                      <a class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                        <figcaption>
-                        <h4 class="aa-product-title"><a href="/products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
-                        <span class="aa-product-price"><%= product['discountPrice']%> VNĐ</span><span class="aa-product-price"><del><%= product['sellPrice']%> đ</del></span>
-                      </figcaption>
-                    </figure>                        
-                    <div class="aa-product-hvr-content">
-                      <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>','/products/detail?id=<%=product.productID %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
-                    </div>
-                  </li><%
-                 })
-                %>                                                                                           
-               </ul>
- <!-- quick view modal -->                  
- <div class="modal fade" id="quick-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">                      
-        <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <div class="row">
-            <!-- Modal view slider -->
-            <div class="col-md-6 col-sm-6 col-xs-12">                              
-              <div class="aa-product-view-slider">                                
-                <div class="simpleLens-gallery-container" id="demo-1">
-                  <div class="simpleLens-container">
-                      <div class="simpleLens-big-image-container">
-                          <a class="simpleLens-lens-image">
-                              <img id="showImg" src="" class="simpleLens-big-image">
-                          </a>
-                      </div>
+                </div>
+              </div>
+              <div class="col-md-7 col-sm-7 col-xs-12">
+                <div class="aa-product-view-content">
+                  <h3><%=productInfo.productName%></h3>
+                  <div class="aa-price-block">
+
+                    <h2><span class="label label-default"><%=productInfo.discountPrice%> VNĐ</span></h2>
+                    <b class="aa-product-avilability">Tình trạng:
+                      <%if (productInfo['quantity'] > 0) { %>
+                      <span style="margin-left:5px;" class="label label-success">Có sẵn hàng</span>
+                      <% } %>
+
+                      <%if (productInfo['quantity'] <= 0) { %>
+                      <span style="margin-left:5px;" class="label label-error">Tạm Hết Hàng</span>
+                      <% } %>
+
+                    </b>
+                  </div>
+                  
+                  <h4>Size</h4>
+                  <div class="aa-prod-view-size">
+                    <a href="#">S</a>
+                    <a href="#">M</a>
+                    <a href="#">L</a>
+                    <a href="#">XL</a>
+                  </div>
+                  <h4>Màu</h4>
+                  <div class="aa-color-tag">
+                    <a href="#" class="aa-color-green"></a>
+                    <a href="#" class="aa-color-yellow"></a>
+                    <a href="#" class="aa-color-pink"></a>
+                    <a href="#" class="aa-color-black"></a>
+                    <a href="#" class="aa-color-white"></a>
+                  </div>
+                  <div class="aa-prod-quantity">
+                    <form action="">
+                      <select id="" name="">
+                        <option selected="1" value="0">1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                      </select>
+                    </form>
+                    <p class="aa-prod-category">
+                      Mục: <a
+                        href="/products/type?id=<%=productInfo.categoryID%>"><%= listCategory.find(x => x.Id === productInfo.categoryID).name%></a>
+                    </p>
+                  </div>
+                  <div class="aa-prod-view-bottom">
+                    <%if (productInfo['quantity'] > 0) { %>
+                    <a class="aa-add-to-cart-btn" href="#">Thêm vào giỏ hàng</a>
+                    <% } %>
+
                   </div>
                 </div>
               </div>
             </div>
-            <!-- Modal view content -->
-            <div class="col-md-6 col-sm-6 col-xs-12">
-               <div class="aa-product-view-content">
-                 <h3>Tên sản phẩm</h3>
-                 <div class="aa-price-block">
-                   <span class="aa-product-view-price">Giá tiền</span>
-                   <p class="aa-product-avilability">Tình trạng: <span>Hàng có sẵn</span></p>
-                 </div>
-                 <p>Mô tả sản phẩm</p>
-                 <h4>Size</h4>
-                 <div class="aa-prod-view-size">
-                   <a href="#">S</a>
-                   <a href="#">M</a>
-                   <a href="#">L</a>
-                   <a href="#">XL</a>
-                 </div>
-                 <div class="aa-prod-quantity">
-                   <form action="">
-                     <select name="" id="">
-                       <option value="0" selected="1">1</option>
-                       <option value="1">2</option>
-                       <option value="2">3</option>
-                       <option value="3">4</option>
-                       <option value="4">5</option>
-                       <option value="5">6</option>
-                     </select>
-                   </form>
-                   <p class="aa-prod-category">
-                     Loại: <a href="#"></a>
-                   </p>
-                 </div>
-                 <div class="aa-prod-view-bottom">
-                   <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                   <a id="linkProduct" href="" class="aa-add-to-cart-btn">Chi tiết</a>
+          </div><%
+             %>
+          <div class="aa-product-details-bottom">
+            <ul class="nav nav-tabs" id="myTab2">
+              <li><a href="#description" data-toggle="tab">Mô tả</a></li>
+              <li><a href="#review" data-toggle="tab">Đánh giá</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div class="tab-pane fade in active" id="description">
+                <%
+                   %><p><%=productInfo.description%></p><%
+                   %>
+
+              </div>
+              <div class="tab-pane fade " id="review">
+                <div class="aa-product-review-area">
+                  <h4>2 đánh giá cho sản phẩm</h4>
+                  <ul class="aa-review-nav">
+                    <li>
+                      <div class="media">
+                        <div class="media-left">
+                          <a href="#">
+                            <img class="media-object" src="../img/testimonial-img-3.jpg" alt="girl image">
+                          </a>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading"><strong>Marla Jobs</strong> - <span>March 26, 2016</span></h4>
+                          <div class="aa-product-rating">
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star-o"></span>
+                          </div>
+                          <p>Hàng rất ok!!</p>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="media">
+                        <div class="media-left">
+                          <a href="#">
+                            <img class="media-object" src="../img/testimonial-img-3.jpg" alt="girl image">
+                          </a>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading"><strong>Marla Jobs</strong> - <span>March 26, 2016</span></h4>
+                          <div class="aa-product-rating">
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star-o"></span>
+                          </div>
+                          <p>Hàng giống hình :)</p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <h4>Thêm đánh giá</h4>
+                  <div class="aa-your-rating">
+                    <p>Đánh giá của bạn</p>
+                    <a href="#"><span class="fa fa-star-o"></span></a>
+                    <a href="#"><span class="fa fa-star-o"></span></a>
+                    <a href="#"><span class="fa fa-star-o"></span></a>
+                    <a href="#"><span class="fa fa-star-o"></span></a>
+                    <a href="#"><span class="fa fa-star-o"></span></a>
+                  </div>
+                  <!-- review form -->
+                  <form action="" class="aa-review-form">
+                    <div class="form-group">
+                      <label for="message">Nhận xét của bạn</label>
+                      <textarea class="form-control" rows="3" id="message"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Tên</label>
+                      <input type="text" class="form-control" id="name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
+                    </div>
+
+                    <button type="submit" class="btn btn-default aa-review-submit">Đăng</button>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
-        </div>                        
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+          <!-- Related product -->
+          <div class="aa-product-related-item">
+            <h3>Sản phẩm liên quan</h3>
+            <ul class="aa-product-catg aa-related-item-slider">
+              <% 
+                 
+                 productInfo.relatedProducts.forEach(product=>{
+                  %><li>
+                <figure>
+                  <a class="aa-product-img"><img src="<%= product['image'] %>" alt="img"
+                      style="height: 300px; width: 250px"></a>
+                  <a class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                  <figcaption>
+                    <h4 class="aa-product-title"><a
+                        href="/products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
+                    <span class="aa-product-price"><%= product['discountPrice']%> VNĐ</span>
+                    <%if (product['promotionDiscount'] > 0) { %>
+                    <span class="aa-product-price"><del><%= product['sellPrice'] %> đ</del></span>
+                    <% } %>
+
+                  </figcaption>
+                </figure>
+                <div class="aa-product-hvr-content">
+                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View"
+                    onclick="clickSearch('<%= product.image %>','/products/detail?id=<%=product.productID %>')"
+                    data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
+                </div>
+                <%if (product['promotionDiscount'] > 0) { %>
+                <span class="aa-badge aa-sale">SALE!</span>
+                <span class="aa-badge-right aa-hot"><%= product['promotionDiscount'] %> %</span>
+                <% } %>
+
+              </li><%
+                 })
+                %>
+            </ul>
+            <!-- quick view modal -->
+            <div class="modal fade" id="quick-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <div class="row">
+                      <!-- Modal view slider -->
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="aa-product-view-slider">
+                          <div class="simpleLens-gallery-container" id="demo-1">
+                            <div class="simpleLens-container">
+                              <div class="simpleLens-big-image-container">
+                                <a class="simpleLens-lens-image">
+                                  <img id="showImg" src="" class="simpleLens-big-image">
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Modal view content -->
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="aa-product-view-content">
+                          <h3>Tên sản phẩm</h3>
+                          <div class="aa-price-block">
+                            <span class="aa-product-view-price">Giá tiền</span>
+                            <p class="aa-product-avilability">Tình trạng: <span>Hàng có sẵn</span></p>
+                          </div>
+                          <p>Mô tả sản phẩm</p>
+                          <h4>Size</h4>
+                          <div class="aa-prod-view-size">
+                            <a href="#">S</a>
+                            <a href="#">M</a>
+                            <a href="#">L</a>
+                            <a href="#">XL</a>
+                          </div>
+                          <div class="aa-prod-quantity">
+                            <form action="">
+                              <select name="" id="">
+                                <option value="0" selected="1">1</option>
+                                <option value="1">2</option>
+                                <option value="2">3</option>
+                                <option value="3">4</option>
+                                <option value="4">5</option>
+                                <option value="5">6</option>
+                              </select>
+                            </form>
+                            <p class="aa-prod-category">
+                              Loại: <a href="#"></a>
+                            </p>
+                          </div>
+                          <div class="aa-prod-view-bottom">
+                            <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ
+                              hàng</a>
+                            <a id="linkProduct" href="" class="aa-add-to-cart-btn">Chi tiết</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div>
+            <!-- / quick view modal -->
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- / quick view modal -->    
-             </div>  
-           </div>
-         </div>
-       </div>
-     </div>
-   </section>
-   <!-- / product category -->
-   <script>
-    function clickSearch(linkimg,linkP)
-    {
-        document.getElementsByClassName("simpleLens-lens-image")[0].src=linkimg;
-        document.getElementById("showImg").src=linkimg;
-        document.getElementById("linkProduct").href=linkP;
-    }
+</section>
+<!-- / product category -->
+<script>
+  function clickSearch(linkimg, linkP) {
+    document.getElementsByClassName("simpleLens-lens-image")[0].src = linkimg;
+    document.getElementById("showImg").src = linkimg;
+    document.getElementById("linkProduct").href = linkP;
+  }
 </script>
