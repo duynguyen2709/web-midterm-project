@@ -1,3 +1,18 @@
+<script type="text/javascript">
+  function addproduct(image, name, price) {
+    $.ajax('../my-cart/addproduct', // request url
+      {
+        type: 'POST',
+        data: {
+          image: image,
+          name: name,
+          price: price
+        },
+        success: function (data, status, xhr) { // success callback function
+        }
+      });
+  }
+</script>
 <!-- catg header banner section -->
 <section id="aa-catg-head-banner">
   <img src="../img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
@@ -90,7 +105,7 @@
                   </div>
                   <div class="aa-prod-view-bottom">
                     <%if (productInfo['quantity'] > 0) { %>
-                    <a class="aa-add-to-cart-btn" href="#">Thêm vào giỏ hàng</a>
+                    <a class="aa-add-to-cart-btn" onclick="addproduct(`<%=productInfo.image%>`,`<%=productInfo.productName%>`,`<%=productInfo.discountPrice%>`)"  href="#">Thêm vào giỏ hàng</a>
                     <% } %>
 
                   </div>
@@ -197,9 +212,9 @@
                  productInfo.relatedProducts.forEach(product=>{
                   %><li>
                 <figure>
-                  <a class="aa-product-img"><img src="<%= product['image'] %>" alt="img"
+                  <a class="aa-product-img"><img src="<%= product.image %>" alt="img"
                       style="height: 300px; width: 250px"></a>
-                  <a class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                  <a  href="#" onclick="addProduct('<%= product.image %>','<%= product.productName %>','<%= product.discountPrice %>')" class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                   <figcaption>
                     <h4 class="aa-product-title"><a
                         href="/products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>

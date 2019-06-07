@@ -2,7 +2,6 @@
 <html lang="en">
 <script type="text/javascript">
 function updateCount(image,name, price, count){
-  alert(count);
         $.ajax('../my-cart/updateCount',
       {
         type: 'POST',  
@@ -47,11 +46,11 @@ addRow(data.cart);
 '                                 <td>'+list[i].price*list[i].count+'</td>'+
 '                              </tr>';
       }
-      myvar+='<tr>'+
-'                        <td colspan="6" class="aa-cart-view-bottom">'+
-'                          <input class="aa-cart-view-btn" type="submit" value="Cập nhật giỏ đồ">'+
-'                        </td>'+
-'                      </tr>';
+//       myvar+='<tr>'+
+// '                        <td colspan="6" class="aa-cart-view-bottom">'+
+// '                          <input class="aa-cart-view-btn" type="submit" value="Cập nhật giỏ đồ">'+
+// '                        </td>'+
+// '                      </tr>';
       myvar+='</tbody>';
       console.log(myvar+total);
       document.getElementById("total").innerHTML =total;
@@ -113,10 +112,10 @@ addRow(data.cart);
                                <td><%= list[i].price*list[i].count %></td>
                             </tr>
                      <%}}%>
-                     <tr>
+                     <!-- <tr>
                         <td colspan="6" class="aa-cart-view-bottom">
                           <input class="aa-cart-view-btn" type="submit" value="Cập nhật giỏ đồ"></td>
-                        </tr>
+                        </tr> -->
                       </tbody>
                       
                   </table>

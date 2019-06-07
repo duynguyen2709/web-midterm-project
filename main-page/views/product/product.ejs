@@ -118,22 +118,13 @@
                               <a href="#">XL</a>
                             </div>
                             <div class="aa-prod-quantity">
-                              <form action="">
-                                <select name="" id="">
-                                  <option value="0" selected="1">1</option>
-                                  <option value="1">2</option>
-                                  <option value="2">3</option>
-                                  <option value="3">4</option>
-                                  <option value="4">5</option>
-                                  <option value="5">6</option>
-                                </select>
-                              </form>
+                              
                               <p class="aa-prod-category" id="showCategory">
                                 Loại: <a href="#"></a>
                               </p>
                             </div>
                             <div class="aa-prod-view-bottom">
-                              <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào
+                              <a href="#"onclick="addproduct(tmp_image,tmp_name,tmp_price)" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào
                                 giỏ hàng</a>
                               <a id="linkProduct" href="" class="aa-add-to-cart-btn">Chi tiết</a>
                             </div>
@@ -270,7 +261,11 @@
   }
 </script>
 <script>
+  var tmp_image, tmp_name,tmp_price
   function clickSearch(image, productID, productName, sellPrice, description, categoryName) {
+    tmp_image=image;
+    tmp_name=productName;
+    tmp_price=sellPrice
     document.getElementsByClassName("simpleLens-lens-image")[0].src = image;
     document.getElementById("showImg").src = image;
     document.getElementById("linkProduct").href = "/products/detail?id=" + productID;
