@@ -272,9 +272,6 @@
       if (resp.status == 0) {
         $("#textLoginError").show();
         $("#textLoginError").text("Tài Khoản Đã Bị Khóa");
-      } else if (resp.status == -1) {
-        $("#textLoginError").show();
-        $("#textLoginError").text("Tài Khoản Chưa Xác Thực. Vui Lòng Xác Thực Trước Khi Đăng Nhập");
       } else if (resp.status == 1) {
         $("#textLoginError").hide();
         $("#userLoginForm").submit();

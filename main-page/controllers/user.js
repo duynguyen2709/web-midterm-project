@@ -2,6 +2,7 @@ var category = require('../model/category')
 var product = require('../model/product')
 var firebase = require('firebase')
 var axios = require('axios');
+var popup = require('popups');
 
 exports.currentUser = function () {
     const user = firebase.auth().currentUser
@@ -83,6 +84,19 @@ exports.user_login_post = function (req, res) {
                 req.session.isLogged = true;
                 req.session.user = user
                 req.session.verify = true
+            } else {
+                popup.alert({
+                    content: 'Tài Khoản Chưa Xác Thực. Vui Lòng Xác Thực Trước Khi Đăng Nhập.'
+                });
+
+                req.session.isLogged = false;
+                req.session.user = null;
+                req.session.verify = false;
+                firebase.auth().signOut()
+                req.session.destroy(function () {
+                    console.log("Logged Out!");
+                });
+
             }
             res.redirect('/')
         }
@@ -306,13 +320,8 @@ exports.get_user_status = function (req, res) {
         .then(response => {
             const obj = response.data;
             if (obj != null) {
-                
-                if (obj.verified == false) {
-                    res.json({
-                        data: 'NOT VERIFIED',
-                        status: -1
-                    })
-                } else if (obj.status == 0) {
+
+                if (obj.status == 0) {
                     res.json({
                         data: 'LOCKED',
                         status: 0
