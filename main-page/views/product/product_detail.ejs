@@ -1,5 +1,6 @@
 <script type="text/javascript">
   function addproduct(image, name, price) {
+    console.log(image+name+price);
     $.ajax('../my-cart/addproduct', // request url
       {
         type: 'POST',
@@ -87,25 +88,13 @@
                     <a href="#" class="aa-color-black"></a>
                     <a href="#" class="aa-color-white"></a>
                   </div>
-                  <div class="aa-prod-quantity">
-                    <form action="">
-                      <select id="" name="">
-                        <option selected="1" value="0">1</option>
-                        <option value="1">2</option>
-                        <option value="2">3</option>
-                        <option value="3">4</option>
-                        <option value="4">5</option>
-                        <option value="5">6</option>
-                      </select>
-                    </form>
-                    <p class="aa-prod-category">
                       Mục: <a
                         href="/products/type?id=<%=productInfo.categoryID%>"><%= listCategory.find(x => x.Id === productInfo.categoryID).name%></a>
                     </p>
                   </div>
                   <div class="aa-prod-view-bottom">
                     <%if (productInfo['quantity'] > 0) { %>
-                    <a class="aa-add-to-cart-btn" onclick="addproduct(`<%=productInfo.image%>`,`<%=productInfo.productName%>`,`<%=productInfo.discountPrice%>`)"  href="#">Thêm vào giỏ hàng</a>
+                    <a class="aa-add-to-cart-btn"  href="#" onclick="addproduct('<%=productInfo.image%>','<%=productInfo.productName%>','<%=productInfo.discountPrice%>')" >Thêm vào giỏ hàng</a>
                     <% } %>
 
                   </div>
@@ -214,7 +203,7 @@
                 <figure>
                   <a class="aa-product-img"><img src="<%= product.image %>" alt="img"
                       style="height: 300px; width: 250px"></a>
-                  <a  href="#" onclick="addProduct('<%= product.image %>','<%= product.productName %>','<%= product.discountPrice %>')" class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                  <a  href="#" class="aa-add-card-btn" onclick="addproduct('<%= product.image %>','<%= product.productName %>','<%= product.discountPrice %>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                   <figcaption>
                     <h4 class="aa-product-title"><a
                         href="/products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
