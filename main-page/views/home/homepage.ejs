@@ -1,13 +1,16 @@
 <script>
-function addproduct(image, name, price) {
-  console.log(image+name+price);
+function addproduct(productID,categoryID,image, name, price,size) {
+  console.log(productID,categoryID,image+name+price);
   $.ajax('../my-cart/addproduct', // request url
     {
       type: 'POST',
       data: {
+        productID:productID,
+        categoryID:categoryID,
         image: image,
         name: name,
-        price: price
+        price: price,
+        size:size
       },
       success: function (data, status, xhr) { // success callback function
       }
@@ -47,14 +50,14 @@ function addproduct(image, name, price) {
                                 %><li style=>
                                 <figure>
                                   <a class="aa-product-img" ><img src="<%= product['image'] %>" alt="img" style="height: 300px; width: 250px"></a>
-                                  <a class="aa-add-card-btn" onclick="addproduct('<%=product.image%>','<%=product.productName%>','<%=product.discountPrice%>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                                  <a class="aa-add-card-btn" href="#" onclick="addproduct('<%=product.productID%>','<%=product.categoryID%>','<%=product.image%>','<%=product.productName%>','<%=product.discountPrice%>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                                     <figcaption>
                                     <h4 class="aa-product-title"><a href="products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
                                     <span class="aa-product-price"><%= product['discountPrice']%> VNĐ</span><span class="aa-product-price"><del><%= product['sellPrice']%> đ</del></span>
                                   </figcaption>
                                 </figure>                        
                                 <div class="aa-product-hvr-content">
-                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>','/products/detail?id=<%=product.productID %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
+                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch(`<%= product.categoryID %>`,`<%= product.image %>`,`<%= product.productID %>`,`<%= product.productName %>`,`<%= product.discountPrice %>`,`<%= product.description %>`,`<%= product.categoryName %>`)"  data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
                                 </div>
                                 <!-- product badge -->
                                 <span class="aa-badge aa-sale" href="#"><%= product['promotionDiscount']%> %</span>
@@ -85,14 +88,14 @@ function addproduct(image, name, price) {
                                 %><li style=>
                                 <figure>
                                   <a class="aa-product-img" ><img src="<%= product['image'] %>" alt="img" style="height: 300px; width: 250px"></a>
-                                  <a class="aa-add-card-btn" onclick="addproduct('<%=product.image%>','<%=product.productName%>','<%=product.discountPrice%>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                                  <a class="aa-add-card-btn" href="#" onclick="addproduct('<%=product.productID%>','<%=product.categoryID%>','<%=product.image%>','<%=product.productName%>','<%=product.discountPrice%>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                                     <figcaption>
                                     <h4 class="aa-product-title"><a href="products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
                                     <span class="aa-product-price"><%= product['discountPrice']%> VNĐ</span><span class="aa-product-price"><del><%= product['sellPrice']%> đ</del></span>
                                   </figcaption>
                                 </figure>                        
                                 <div class="aa-product-hvr-content">
-                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>','/products/detail?id=<%=product.productID %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
+                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch(`<%= product.categoryID %>`,`<%= product.image %>`,`<%= product.productID %>`,`<%= product.productName %>`,`<%= product.discountPrice %>`,`<%= product.description %>`,`<%= product.categoryName %>`)" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
                                 </div>
                                 <!-- product badge -->
                                 <span class="aa-badge aa-sale" href="#"><%= product['promotionDiscount']%> %</span>
@@ -123,14 +126,14 @@ function addproduct(image, name, price) {
                                 %><li style=>
                                 <figure>
                                   <a class="aa-product-img" ><img src="<%= product['image'] %>" alt="img" style="height: 300px; width: 250px"></a>
-                                  <a class="aa-add-card-btn" onclick="addproduct('<%=product.image%>','<%=product.productName%>','<%=product.discountPrice%>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                                  <a class="aa-add-card-btn" href="#" onclick="addproduct('<%=product.productID%>','<%=product.categoryID%>','<%=product.image%>','<%=product.productName%>','<%=product.discountPrice%>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                                     <figcaption>
                                     <h4 class="aa-product-title"><a href="products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
                                     <span class="aa-product-price" ><%= product['discountPrice']%> VNĐ</span><span class="aa-product-price"><del><%= product['sellPrice']%> đ</del></span>
                                   </figcaption>
                                 </figure>                        
                                 <div class="aa-product-hvr-content">
-                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>','/products/detail?id=<%=product.productID %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
+                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch(`<%= product.categoryID %>`,`<%= product.image %>`,`<%= product.productID %>`,`<%= product.productName %>`,`<%= product.discountPrice %>`,`<%= product.description %>`,`<%= product.categoryName %>`)"  data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
                                 </div>
                                 <!-- product badge -->
                                 <span class="aa-badge aa-sale" href="#"><%= product['promotionDiscount']%> %</span>
@@ -162,14 +165,15 @@ function addproduct(image, name, price) {
                                 %><li style=>
                                 <figure>
                                   <a class="aa-product-img" ><img src="<%= product['image'] %>" alt="img" style="height: 300px; width: 250px"></a>
-                                  <a class="aa-add-card-btn" onclick="addproduct('<%=product.image%>','<%=product.productName%>','<%=product.discountPrice%>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                                  <a class="aa-add-card-btn" href="#" onclick="addproduct('<%=product.productID%>','<%=product.categoryID%>','<%=product.image%>','<%=product.productName%>','<%=product.discountPrice%>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                                     <figcaption>
                                     <h4 class="aa-product-title"><a href="products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
                                     <span class="aa-product-price"><%= product['discountPrice']%> VNĐ</span><span class="aa-product-price"><del><%= product['sellPrice']%> đ</del></span>
                                   </figcaption>
                                 </figure>                        
                                 <div class="aa-product-hvr-content">
-                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="clickSearch('<%= product.image %>','/products/detail?id=<%=product.productID %>')" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
+                                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View"  onclick="clickSearch(`<%= product.categoryID %>`,`<%= product.image %>`,`<%= product.productID %>`,`<%= product.productName %>`,`<%= product.discountPrice %>`,`<%= product.description %>`,`<%= product.categoryName %>`)" 
+                                    data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                          
                                 </div>
                                 <!-- product badge -->
                                 <span class="aa-badge aa-sale" href="#"><%= product['promotionDiscount']%> %</span>
@@ -213,10 +217,5 @@ function addproduct(image, name, price) {
   $(window).on('load',function(){
         if(flag==="1") $('#notification-modal').modal('show');
   });
-  function clickSearch(linkimg,linkP)
-    {
-        document.getElementsByClassName("simpleLens-lens-image")[0].src=linkimg;
-        document.getElementById("showImg").src=linkimg;
-        document.getElementById("linkProduct").href=linkP;
-    }
+  
 </script>
