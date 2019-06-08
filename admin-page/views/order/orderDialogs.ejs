@@ -1,0 +1,70 @@
+<div id="dlgupdateorder" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Chỉnh Sửa Trạng Thái Đơn Hàng</h4>
+            </div>
+
+            <div class="modal-body">
+                <form action="#" method="POST" id="formupdateorder">
+                    <div class="form-group">
+                        <label for="orderID" class="control-label">Mã Đơn Hàng:</label>
+                        <input type="text" class="form-control" id="orderID" name="orderID" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label for="updstatus" class="control-label">Trạng Thái:</label>
+                        <select id="updstatus" name="status">
+                            <option value="PROCESSING">ĐANG XỬ LÝ</option>
+                            <option value="SHIPPING">ĐANG GIAO HÀNG</option>
+                            <option value="DELIVERED">ĐÃ GIAO</option>
+                            <option value="CANCELLED">ĐÃ HỦY</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderID" class="control-label">Thông Tin Bổ Sung:</label>
+                        <input type="text" class="form-control" id="extraInfo" name="extraInfo">
+                    </div>
+                    <button type="submit" onclick="handleUpdateOrder(); return false;" class="btn btn-info"
+                        data-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="dlgorderdetail" tabindex="-1" role="dialog" aria-labelledby="orderDetailModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="orderDetailModalLabel">Chi Tiết Đơn Hàng</h4>
+
+            </div>
+            <div class="modal-body">
+
+                <table style="width:100%;" class="table table-bordered table-striped table-hover" id="orderDetailTable">
+                    <thead>
+                        <tr>
+                            <th class="active">Tên Sản Phẩm</th>
+                            <th class="active">Số Lượng</th>
+                            <th class="active">Tổng Tiền</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>

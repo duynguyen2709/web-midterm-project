@@ -19,7 +19,7 @@
             <!-- TABLE: LATEST ORDERS -->
             <div class="box box-info">
               <div class="box-header with-border">
-                <h3 class="box-title">Tình Trạng 10 Đơn Hàng Gần Nhất</h3>
+                <h3 class="box-title">Danh Sách Đơn Hàng</h3>
 
                 <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -31,97 +31,20 @@
 
               <div class="box-body">
                 <div class="table-responsive">
-                  <table class="table no-margin">
+                  <table id="orderTable" style="width:100%;" class="table no-margin table-striped table-hover">
                     <thead>
                       <tr>
                         <th>Mã Đơn Hàng</th>
+                        <th>Ngày Mua Hàng</th>
+                        <th style="width:10%;">Khách Hàng</th>
+                        <th>Chi Tiết Đơn Hàng</th>
                         <th>Tổng Giá Trị</th>
-                        <th>Trạng Thái</th>
                         <th>Địa Chỉ Giao Hàng</th>
+                        <th>Trạng Thái</th>
+                        <th>Thông Tin Phụ</th>
+                        <th>Cập Nhật</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                        <td>500.000VNĐ</td>
-                        <td><span class="label label-success">Đã Giao</span></td>
-                        <td>
-                          <div class="sparkbar" data-color="#00a65a" data-height="20">Quận 5, Thành Phố Hồ Chí Minh
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                        <td>1.000.000VNĐ</td>
-                        <td><span class="label label-info">Đang Xử Lý</span></td>
-                        <td>
-                          <div class="sparkbar" data-color="#f39c12" data-height="20">Quận 3, Thành Phố Hồ Chí Minh
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                        <td>2.000.000VNĐ</td>
-                        <td><span class="label label-danger">Đang Giao</span></td>
-                        <td>
-                          <div class="sparkbar" data-color="#f56954" data-height="20">Quận 9, Thành Phố Hồ Chí Minh
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                        <td>2.500.000VNĐ</td>
-                        <td><span class="label label-info">Đang Xử Lý</span></td>
-                        <td>
-                          <div class="sparkbar" data-color="#00c0ef" data-height="20">Quận 2, Thành Phố Hồ Chí Minh
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="pages/examples/invoice.html">OR3515</a></td>
-                        <td>4.550.000VNĐ</td>
-                        <td><span class="label label-info">Đang Xử Lý</span></td>
-                        <td>
-                          <div class="sparkbar" data-color="#00c0ef" data-height="20">Quận 2, Thành Phố Hồ Chí Minh
-                          </div>
-                        </td>
-                      </tr>
-
-                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                      <td>3.000.000VNĐ</td>
-                      <td><span class="label label-warning">Chưa Thanh Toán</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">Quận Bình Thạnh, Thành Phố Hồ Chí
-                          Minh</div>
-                      </td>
-                      </tr>
-                      <tr>
-                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                        <td>3.500.000VNĐ</td>
-                        <td><span class="label label-success">Đã Giao</span></td>
-                        <td>
-                          <div class="sparkbar" data-color="#f56954" data-height="20">Biên Hòa, Đồng Nai</div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                        <td>2.000.000VNĐ</td>
-                        <td><span class="label label-success">Đã Giao</span></td>
-                        <td>
-                          <div class="sparkbar" data-color="#00a65a" data-height="20">Vũng Tàu</div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="pages/examples/invoice.html">OR2709</a></td>
-                        <td>4.500.000VNĐ</td>
-                        <td><span class="label label-info">Đang Xử Lý</span></td>
-                        <td>
-                          <div class="sparkbar" data-color="#00c0ef" data-height="20">Quận 2, Thành Phố Hồ Chí Minh
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                    </tbody>
                   </table>
                 </div>
 
@@ -134,9 +57,16 @@
       </section>
 
     </div>
-
+    <%include ../common/dialogs%>
     <%include ../common/script%>
+    <%include ./orderDialogs%>
 
 </body>
+
+<script>
+  $(function () {
+    loadOrder();
+  });
+</script>
 
 </html>
