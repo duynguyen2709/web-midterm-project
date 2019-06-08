@@ -35,7 +35,8 @@ exports.update =async function(req, res) {
 };
 exports.addProduct=async function(req,res){
     var cart= await new Cart(req.session.cart?req.session.cart:{});
-    cart.add(req.body.image,req.body.name,req.body.price);
+    console.log(req.body.image+req.body.name+req.body.price+req.body.size);
+    cart.add(req.body.image,req.body.name,req.body.price,req.body.size);
     req.session.cart= await cart;
     req.session.cart.print();
     res.json({
@@ -55,7 +56,7 @@ exports.removeProduct=async function(req,res){
 };
 exports.updateCount=async function(req,res){
     var cart= await new Cart(req.session.cart?req.session.cart:{});
-    cart.update(req.body.image,req.body.name,req.body.price,req.body.count);
+    cart.update(req.body.image,req.body.name,req.body.price,req.body.count,req.body.size);
     req.session.cart= await cart;
         res.json({
             cart: req.session.cart.array

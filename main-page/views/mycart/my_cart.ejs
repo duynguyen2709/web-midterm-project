@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <script type="text/javascript">
-function updateCount(image,name, price, count){
+function updateCount(image,name, price,size, count){
+  if(count==""){
+    count=1;
+  }
+  if(size==""){
+    size="S";
+  }
+  console.log(name+price+size+count);
         $.ajax('../my-cart/updateCount',
       {
         type: 'POST',  
@@ -9,6 +16,7 @@ function updateCount(image,name, price, count){
     image: image,
     name: name,
     price:price,
+    size:size,
     count: count
   },
   success: function (data) {
@@ -34,15 +42,47 @@ addRow(data.cart);
     function addRow(list){
       var tmp=$("#productTable").empty();
       var myvar='<tbody id="productTable">';
+      var select;
       let total=0;
       for(let i=0;i<list.length;i++){
+        console.log(list[i].size);
         total+=list[i].count*list[i].price;
+        if(list[i].size==""||list[i].size=="S"){
+          select='                                  <option selected>S</option>'+
+'                                  <option>M</option>'+
+'                                  <option>L</option>'+
+'                                  <option>XL</option>'
+        }
+        if(list[i].size=="M"){
+          select='                                  <option>S</option>'+
+'                                  <option selected>M</option>'+
+'                                  <option>L</option>'+
+'                                  <option>XL</option>'
+        }
+        if(list[i].size=="L"){
+          console.log("asdasdasd");
+          select='                                  <option>S</option>'+
+'                                  <option>M</option>'+
+'                                  <option selected>L</option>'+
+'                                  <option>XL</option>'
+        }
+        if(list[i].size=="XL"){
+          select='                                  <option>S</option>'+
+'                                  <option>M</option>'+
+'                                  <option>L</option>'+
+'                                  <option selected>XL</option>'
+        }
+
+
         myvar += '<tr>'+
 '                                 <td><a class="remove" href="#" onclick="removeProduct('+"'"+ list[i].image+"',`"+list[i].name+"`,'"+list[i].price+`')`+'"><fa class="fa fa-close"></fa></a></td>'+
 '                                 <td><a href="#"><img src= "'+list[i].image+'"'+' alt="img"></a></td>'+
 '                                 <td><a class="aa-cart-title" href="#">'+list[i].name+'</a></td>'+
 '                                 <td>'+list[i].price+'</td>'+
-`                                 <td><input class="aa-cart-quantity" type="number"  min="1" max="10" value="`+list[i].count+`" onfocusout="updateCount('`+list[i].image+"',`"+list[i].name+"`,'"+ list[i].price+"',"+`this.value)"`+'></td>'+
+`                                 <td><input class="aa-cart-quantity" type="number"  min="1" max="10" value="`+list[i].count+`" onfocusout="updateCount('`+list[i].image+"',`"+list[i].name+"`,'"+ list[i].price+"','"+list[i].size+"',"+`this.value)"`+'></td>'+
+`<td><select ` +`" onchange="updateCount('`+list[i].image+"',`"+list[i].name+"`,'"+list[i].price+`',this.value`+`,'`+list[i].count+ `')">`+
+select+
+'                                </select></td>'+
 '                                 <td>'+list[i].price*list[i].count+'</td>'+
 '                              </tr>';
       }
@@ -52,7 +92,7 @@ addRow(data.cart);
 // '                        </td>'+
 // '                      </tr>';
       myvar+='</tbody>';
-      console.log(myvar+total);
+      console.log(select);
       document.getElementById("total").innerHTML =total;
       tmp.replaceWith(myvar);
 
@@ -94,6 +134,7 @@ addRow(data.cart);
                         <th>Sản phẩm</th>
                         <th>Giá</th>
                         <th>Số lượng</th>
+                        <th>Kích thước</th>
                         <th>Tổng</th>
                       </tr>
                     </thead>
@@ -101,17 +142,76 @@ addRow(data.cart);
                         <%if(list)
                         {
                           for (var i=0;i< list.length;i++){ 
-                        
-                        %>
+                            if(list[i].size=="S"||list[i].size==""){%>
                           <tr>
                                <td><a class="remove" href="#" onclick="removeProduct('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>')"><fa class="fa fa-close"></fa></a></td>
                                <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
                                <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
                                <td><%= list[i].price %></td>
-                               <td><input  class="aa-cart-quantity" type="number" min="1" max="10" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value)" ></td>
+                               <td><input  class="aa-cart-quantity" type="number" min="1" max="10" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
+                               <td><select onchange="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value,'<%= list[i].count %>')">
+                                  <option selected>S</option>
+                                  <option>M</option>
+                                  <option>L</option>
+                                  <option>XL</option>
+                                </select></td>
+                               
                                <td><%= list[i].price*list[i].count %></td>
                             </tr>
-                     <%}}%>
+                            <%}
+                            if(list[i].size=="M"){%>
+                              <tr>
+                                  <td><a class="remove" href="#" onclick="removeProduct('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>')"><fa class="fa fa-close"></fa></a></td>
+                                  <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
+                                  <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
+                                  <td><%= list[i].price %></td>
+                                  <td><input  class="aa-cart-quantity" type="number" min="1" max="10" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
+                                  <td><select onchange="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value,'<%= list[i].count %>')">
+                                     <option>S</option>
+                                     <option selected>M</option>
+                                     <option>L</option>
+                                     <option>XL</option>
+                                   </select></td>
+                                  
+                                  <td><%= list[i].price*list[i].count %></td>
+                               </tr>
+                               <%}
+                               if(list[i].size=="L"){%>
+                                <tr>
+                                    <td><a class="remove" href="#" onclick="removeProduct('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>')"><fa class="fa fa-close"></fa></a></td>
+                                    <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
+                                    <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
+                                    <td><%= list[i].price %></td>
+                                    <td><input  class="aa-cart-quantity" type="number" min="1" max="10" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
+                                    <td><select onchange="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value,'<%= list[i].count %>')">
+                                       <option>S</option>
+                                       <option>M</option>
+                                       <option selected>L</option>
+                                       <option>XL</option>
+                                     </select></td>
+                                    
+                                    <td><%= list[i].price*list[i].count %></td>
+                                 </tr>
+                                 <%}
+                                 if(list[i].size=="XL"){%>
+                                  <tr>
+                                      <td><a class="remove" href="#" onclick="removeProduct('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>')"><fa class="fa fa-close"></fa></a></td>
+                                      <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
+                                      <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
+                                      <td><%= list[i].price %></td>
+                                      <td><input  class="aa-cart-quantity" type="number" min="1" max="10" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
+                                      <td><select onchange="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value,'<%= list[i].count %>')">
+                                         <option>S</option>
+                                         <option>M</option>
+                                         <option>L</option>
+                                         <option selected>XL</option>
+                                       </select></td>
+                                      
+                                      <td><%= list[i].price*list[i].count %></td>
+                                   </tr>
+                                   <%}%>
+                                   
+                        <%}}%>
                      <!-- <tr>
                         <td colspan="6" class="aa-cart-view-bottom">
                           <input class="aa-cart-view-btn" type="submit" value="Cập nhật giỏ đồ"></td>

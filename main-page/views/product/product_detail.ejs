@@ -1,13 +1,17 @@
 <script type="text/javascript">
-  function addproduct(image, name, price) {
+  function addproduct(image, name, price,size) {
     console.log(image+name+price);
+    if(size){
+      size='S';
+    }
     $.ajax('../my-cart/addproduct', // request url
       {
         type: 'POST',
         data: {
           image: image,
           name: name,
-          price: price
+          price: price,
+          size:size
         },
         success: function (data, status, xhr) { // success callback function
         }
@@ -75,10 +79,10 @@
                   
                   <h4>Size</h4>
                   <div class="aa-prod-view-size">
-                    <a href="#">S</a>
-                    <a href="#">M</a>
-                    <a href="#">L</a>
-                    <a href="#">XL</a>
+                      <a href="#" onclick="selectedSize(this.text)">S</a>
+                      <a href="#" onclick="selectedSize(this.text)">M</a>
+                      <a href="#" onclick="selectedSize(this.text)">L</a>
+                      <a href="#" onclick="selectedSize(this.text)">XL</a>
                   </div>
                   <h4>Màu</h4>
                   <div class="aa-color-tag">
@@ -94,7 +98,7 @@
                   </div>
                   <div class="aa-prod-view-bottom">
                     <%if (productInfo['quantity'] > 0) { %>
-                    <a class="aa-add-to-cart-btn"  href="#" onclick="addproduct('<%=productInfo.image%>','<%=productInfo.productName%>','<%=productInfo.discountPrice%>')" >Thêm vào giỏ hàng</a>
+                    <a class="aa-add-to-cart-btn"  href="#" onclick="addproduct('<%=productInfo.image%>','<%=productInfo.productName%>','<%=productInfo.discountPrice%>',tmp_size)" >Thêm vào giỏ hàng</a>
                     <% } %>
 
                   </div>
@@ -203,7 +207,7 @@
                 <figure>
                   <a class="aa-product-img"><img src="<%= product.image %>" alt="img"
                       style="height: 300px; width: 250px"></a>
-                  <a  href="#" class="aa-add-card-btn" onclick="addproduct('<%= product.image %>','<%= product.productName %>','<%= product.discountPrice %>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                  <a  href="#" class="aa-add-card-btn" onclick="addproduct('<%= product.image %>','<%= product.productName %>','<%= product.discountPrice %>','S')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                   <figcaption>
                     <h4 class="aa-product-title"><a
                         href="/products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
@@ -261,10 +265,10 @@
                           <p>Mô tả sản phẩm</p>
                           <h4>Size</h4>
                           <div class="aa-prod-view-size">
-                            <a href="#">S</a>
-                            <a href="#">M</a>
-                            <a href="#">L</a>
-                            <a href="#">XL</a>
+                            <a href="#" onclick="selectedSize(this.text)">S</a>
+                              <a href="#" onclick="selectedSize(this.text)">M</a>
+                              <a href="#" onclick="selectedSize(this.text)">L</a>
+                              <a href="#" onclick="selectedSize(this.text)">XL</a>
                           </div>
                           <div class="aa-prod-quantity">
                             <form action="">
@@ -302,6 +306,10 @@
 </section>
 <!-- / product category -->
 <script>
+  var tmp_size;
+  function selectedSize(value){
+    tmp_size=value;
+  }
   function clickSearch(linkimg, linkP) {
     document.getElementsByClassName("simpleLens-lens-image")[0].src = linkimg;
     document.getElementById("showImg").src = linkimg;

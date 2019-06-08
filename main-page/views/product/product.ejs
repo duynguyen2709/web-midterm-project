@@ -7,14 +7,15 @@
 </script>
 
 <script type="text/javascript">
-  function addproduct(image, name, price) {
+  function addproduct(image, name, price,size) {
     $.ajax('../my-cart/addproduct', // request url
       {
         type: 'POST',
         data: {
           image: image,
           name: name,
-          price: price
+          price: price,
+          size: size
         },
         success: function (data, status, xhr) { // success callback function
         }
@@ -55,7 +56,7 @@
                         alt="polo shirt img" src=<%= info[i].image %> /></a>
                     <!-- <a class="aa-add-card-btn" href="../my-cart/addproduct/<%=type%>/`<%=info[i].image%>`/<%=info[i].productName%>/<%=info[i].discountPrice%>"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a> -->
                     <a class="aa-add-card-btn" href="#" id="addproduct"
-                      onclick="addproduct(`<%=info[i].image%>`,`<%=info[i].productName%>`,`<%=info[i].discountPrice%>`)"><span
+                      onclick="addproduct(`<%=info[i].image%>`,`<%=info[i].productName%>`,`<%=info[i].discountPrice%>`,'S')"><span
                         class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="/products/detail?id=<%=info[i].productID%>""><%= info[i].productName %></a></h4>
@@ -112,10 +113,10 @@
                             </p>
                             <h4>Size</h4>
                             <div class="aa-prod-view-size">
-                              <a href="#">S</a>
-                              <a href="#">M</a>
-                              <a href="#">L</a>
-                              <a href="#">XL</a>
+                              <a href="#" onclick="selectedSize(this.text)">S</a>
+                              <a href="#" onclick="selectedSize(this.text)">M</a>
+                              <a href="#" onclick="selectedSize(this.text)">L</a>
+                              <a href="#" onclick="selectedSize(this.text)">XL</a>
                             </div>
                             <div class="aa-prod-quantity">
                               
@@ -124,7 +125,7 @@
                               </p>
                             </div>
                             <div class="aa-prod-view-bottom">
-                              <a href="#"onclick="addproduct(tmp_image,tmp_name,tmp_price)" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào
+                              <a href="#"onclick="addproduct(tmp_image,tmp_name,tmp_price,tmp_size)" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào
                                 giỏ hàng</a>
                               <a id="linkProduct" href="" class="aa-add-to-cart-btn">Chi tiết</a>
                             </div>
@@ -225,7 +226,7 @@
             discountPrice +
             "','" + description + "','" + categoryName + "')";
           const addproduct1 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
-            "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'" + ')"' +
+            "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'" + "'S'"+')"' +
             '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
           $("#listproduct").append(
             '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
@@ -243,7 +244,7 @@
             sellPrice +
             "','" + description + "','" + categoryName + "')";
           const addproduct2 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
-            "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'" + ')"' +
+            "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'" + "'S'"+ ')"' +
             '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
           $("#listproduct").append(
             '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
@@ -261,11 +262,15 @@
   }
 </script>
 <script>
-  var tmp_image, tmp_name,tmp_price
+  var tmp_image, tmp_name,tmp_price,tmp_size;
+  function selectedSize(value){
+    tmp_size=value;
+  }
+
   function clickSearch(image, productID, productName, sellPrice, description, categoryName) {
     tmp_image=image;
     tmp_name=productName;
-    tmp_price=sellPrice
+    tmp_price=sellPrice;
     document.getElementsByClassName("simpleLens-lens-image")[0].src = image;
     document.getElementById("showImg").src = image;
     document.getElementById("linkProduct").href = "/products/detail?id=" + productID;

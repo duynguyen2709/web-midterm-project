@@ -1,8 +1,17 @@
 class Cart {
     constructor(oldCart) {
         this.array=oldCart.array||[]
-        this.add = function (image,name,price) {
-            let tmp= new Product(image,name, price,1);
+        this.add = function (image,name,price,size) {
+            let tmp;
+            if (size)
+            {
+                tmp= new Product(image,name, price,1,size);
+            }
+            else
+            {
+                tmp= new Product(image,name, price,1,"S");
+            }
+            
             let flag=0;
             if(this.array){
                 let i=0;
@@ -21,7 +30,7 @@ class Cart {
             }
             
         };
-        this.remove=function(image,name,price){
+        this.remove=function(image,name,price,size){
             if(this.array){
                 for(let i=0;i<this.array.length;i++){
                     if(image===this.array[i].image&&name===this.array[i].name){
@@ -31,11 +40,12 @@ class Cart {
             }
             
         }
-        this.update=function(image,name,price,count){
+        this.update=function(image,name,price,count,size){
             if(this.array){
                 for(let i=0;i<this.array.length;i++){
                     if(image===this.array[i].image&&name===this.array[i].name){
                         this.array[i].count=count;
+                        this.array[i].size=size;
                     }
                 }
             }
@@ -52,11 +62,12 @@ class Cart {
     }
 }; 
 class Product {
-    constructor(image,name,price,count){
+    constructor(image,name,price,count,size){
         this.image=image||"";
         this.name=name||"";
         this.price=price||0;
         this.count=count||0;
+        this.size=size||"S"
     }
 }
 module.exports.Product = Product;

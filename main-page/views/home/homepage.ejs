@@ -1,3 +1,19 @@
+<script>
+function addproduct(image, name, price) {
+  console.log(image+name+price);
+  $.ajax('../my-cart/addproduct', // request url
+    {
+      type: 'POST',
+      data: {
+        image: image,
+        name: name,
+        price: price
+      },
+      success: function (data, status, xhr) { // success callback function
+      }
+    });
+}
+</script>
 <body>
       <% include slider %>
       <% include promotion %>
@@ -31,7 +47,7 @@
                                 %><li style=>
                                 <figure>
                                   <a class="aa-product-img" ><img src="<%= product['image'] %>" alt="img" style="height: 300px; width: 250px"></a>
-                                  <a class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                                  <a class="aa-add-card-btn" onclick="addproduct('<%=product.image%>','<%=product.productName%>','<%=product.discountPrice%>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                                     <figcaption>
                                     <h4 class="aa-product-title"><a href="products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
                                     <span class="aa-product-price"><%= product['discountPrice']%> VNĐ</span><span class="aa-product-price"><del><%= product['sellPrice']%> đ</del></span>
@@ -69,7 +85,7 @@
                                 %><li style=>
                                 <figure>
                                   <a class="aa-product-img" ><img src="<%= product['image'] %>" alt="img" style="height: 300px; width: 250px"></a>
-                                  <a class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                                  <a class="aa-add-card-btn" onclick="addproduct('<%=product.image%>','<%=product.productName%>','<%=product.discountPrice%>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                                     <figcaption>
                                     <h4 class="aa-product-title"><a href="products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
                                     <span class="aa-product-price"><%= product['discountPrice']%> VNĐ</span><span class="aa-product-price"><del><%= product['sellPrice']%> đ</del></span>
@@ -107,10 +123,10 @@
                                 %><li style=>
                                 <figure>
                                   <a class="aa-product-img" ><img src="<%= product['image'] %>" alt="img" style="height: 300px; width: 250px"></a>
-                                  <a class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                                  <a class="aa-add-card-btn" onclick="addproduct('<%=product.image%>','<%=product.productName%>','<%=product.discountPrice%>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                                     <figcaption>
                                     <h4 class="aa-product-title"><a href="products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
-                                    <span class="aa-product-price"><%= product['discountPrice']%> VNĐ</span><span class="aa-product-price"><del><%= product['sellPrice']%> đ</del></span>
+                                    <span class="aa-product-price" ><%= product['discountPrice']%> VNĐ</span><span class="aa-product-price"><del><%= product['sellPrice']%> đ</del></span>
                                   </figcaption>
                                 </figure>                        
                                 <div class="aa-product-hvr-content">
@@ -146,7 +162,7 @@
                                 %><li style=>
                                 <figure>
                                   <a class="aa-product-img" ><img src="<%= product['image'] %>" alt="img" style="height: 300px; width: 250px"></a>
-                                  <a class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                                  <a class="aa-add-card-btn" onclick="addproduct('<%=product.image%>','<%=product.productName%>','<%=product.discountPrice%>')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                                     <figcaption>
                                     <h4 class="aa-product-title"><a href="products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>
                                     <span class="aa-product-price"><%= product['discountPrice']%> VNĐ</span><span class="aa-product-price"><del><%= product['sellPrice']%> đ</del></span>
