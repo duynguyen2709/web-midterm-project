@@ -27,6 +27,15 @@ exports.getCategory = async function (req, res) {
     res.send(JSON.stringify(category));
 }
 
+
+exports.getListProductOfCategory = async function (req, res) {
+
+    const categoryID = req.params.categoryID;
+    const category = await categoryModel.getListProductOfCategory(categoryID);
+
+    res.send(JSON.stringify(category));
+}
+
 exports.deleteCategory = function (req, res) {
     const categoryID = req.body.categoryID;
 

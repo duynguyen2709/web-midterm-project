@@ -23,7 +23,11 @@ function loadCategory() {
                 "data": "totalProductType",
                 "defaultContent": ""
             },
-        
+            {
+                data: null,
+                className: "center",
+                defaultContent: '<Button class="btn btn-block btn-success btn-sm" data-toggle="modal" onclick="showPopupListProduct(this)">Danh Sách Sản Phẩm</Button>'
+            },
             {
                 data: null,
                 className: "center",
@@ -50,6 +54,60 @@ function loadCategory() {
     });
 }
 
+function showPopupListProduct(itemthis) {
+    $("#dlgloading").modal('show');
+    var chil = $(itemthis).parent().parent().children();
+
+    var id = chil[0].innerHTML;
+
+    $.ajax({
+        type: "GET",
+        url: BASE_CATEGORY_PATH + "/get/" + id + "/products",
+        data: {
+            categoryID: id
+        }
+    }).done(function (resp) {
+        $("#dlgloading").modal('hide');
+        $("#dlglistproduct").modal('show');
+        const obj = JSON.parse(resp);
+
+        $('#listProductTable').DataTable({
+            "data": obj,
+            "columns": [{
+                    "data": "productName",
+                    "defaultContent": ""
+                },
+                {
+                    "data": null,
+                    "defaultContent": "",
+                    "render": function (data, type, JsonResultRow, meta) {
+                        return '<img width="64px" height="64px" src="' + JsonResultRow.image + '">';
+                    }
+                },
+                {
+                    "data": "quantity",
+                    "defaultContent": ""
+                }
+            ],
+            "rowCallback": function (row, data, index) {
+
+            },
+            columnDefs: [{
+                    'searchable': false,
+                    'targets': [1]
+                },
+
+            ],
+            "bDestroy": true,
+            "lengthMenu": [[5,10,50], [5,10,50]]
+
+        });
+
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("Error: " + textStatus);
+    }).always(function () {});
+}
+
 function showPopupUpdateCategory(itemthis) {
     var chil = $(itemthis).parent().parent().children();
 
@@ -68,11 +126,10 @@ function showPopupUpdateCategory(itemthis) {
         $("#dlgupdatecategory input[name='categoryID']").val(obj.categoryID);
         $("#dlgupdatecategory input[name='categoryName']").val(obj.categoryName);
         $("#dlgupdatecategory input[name='totalProductType']").val(obj.totalProductType);
-        
+
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus);
-    }).always(function () {
-    });
+    }).always(function () {});
 }
 
 function showPopupDeleteCategory(itemthis) {

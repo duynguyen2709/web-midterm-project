@@ -18,3 +18,13 @@ module.exports.getCategory = async (categoryID) => {
 
     return result;
 }
+
+module.exports.getListProductOfCategory = async (categoryID) => {
+
+    const result = await axios.get('https://api-scttshop-v2.herokuapp.com/api/categories/' + categoryID + '/products')
+        .then((res) => {
+           return res.data;
+        })
+
+    return result;
+}
