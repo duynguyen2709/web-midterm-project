@@ -112,6 +112,11 @@ passport.use('local', new LocalStrategy({
       return done(null, false);
     }
 
+    if (user.status == 0){
+      req.authError = "Tài Khoản Đã Bị Khóa";
+      return done(null, false);
+    }
+
     UserModel.comparePassword(password, user.password, function (err, isMatch) {
       if (err) throw err;
 

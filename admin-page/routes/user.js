@@ -17,4 +17,6 @@ router.post('/update',userController.updateUserAccount);
 
 router.post('/changepassword',userController.changePassword);
 
+router.post('/lock',userController.lockUserAccount);
+
 module.exports = router;

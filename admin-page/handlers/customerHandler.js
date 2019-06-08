@@ -49,7 +49,7 @@ function loadCustomer() {
             {
                 data: null,
                 className: "center",
-                defaultContent: '<Button class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#dlgupdatecustomer" onclick="showPopupUpdateCustomer(this)">Chỉnh Sửa</Button>'
+                defaultContent: ''
             },
             {
                 data: null,
@@ -75,6 +75,13 @@ function loadCustomer() {
                 //$(row).find('td:eq(6)').text('Đang Dừng Bán');
                 $(row).find('td:eq(6)').html('<span class="label label-warning">Chưa Xác Thực</span>');
             }
+
+            if (data["status"] == "1"){
+                $(row).find('td:eq(8)').html('<Button class="btn btn-block btn-warning btn-sm" value="0" data-toggle="modal" data-target="#dlgupdatecustomer" onclick="showPopupUpdateCustomer(this)">Khóa</Button>');
+            }
+            else {
+                $(row).find('td:eq(8)').html('<Button class="btn btn-block btn-success btn-sm" value="1" data-toggle="modal" data-target="#dlgupdatecustomer" onclick="showPopupUpdateCustomer(this)">Mở Khóa</Button>');
+            }
         },
         // columnDefs: [{
         //     "targets": [10],
@@ -89,29 +96,13 @@ function loadCustomer() {
 function showPopupUpdateCustomer(itemthis) {
     $("#formupdatecustomer").trigger('reset'); 
 
+    var status = $(itemthis).val();
     var chil = $(itemthis).parent().parent().children();
 
     var email = chil[0].innerHTML;
     
-    $.ajax({
-        type: "GET",
-        url: BASE_CUSTOMER_PATH + "/get/" + email,
-        data: {
-            email: email
-        }
-    }).done(function (resp) {
-
-        const obj = JSON.parse(resp);
-        console.log(obj);
-
-        $("#dlgupdatecustomer input[name='email']").val(obj.email);
-        $("#dlgupdatecustomer input[name='fullName']").val(obj.fullName);
-        $("#dlgupdatecustomer input[name='avatar']").val(obj.avatar);
-        $("#dlgupdatecustomer input[name='address']").val(obj.address);
-        $("#dlgupdatecustomer input[name='phoneNumber']").val(obj.phoneNumber);
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        console.log("Error: " + textStatus);
-    }).always(function () {});
+    $("#dlgupdatecustomer input[name='email']").val(email);
+    $("#dlgupdatecustomer input[name='status']").val(status);
 }
 
 function showPopupDeleteCustomer(itemthis) {

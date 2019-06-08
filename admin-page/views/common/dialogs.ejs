@@ -97,68 +97,19 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Chỉnh Sửa Thông Tin Người Dùng</h4>
+                <h4 class="modal-title">Xác Nhận Khóa/ Mở Khóa Tài Khoản</h4>
             </div>
 
             <div class="modal-body">
-                    <form id="formupdateuseravatar" action="/upload" method="POST" enctype="multipart/form-data">
-                    </form>
                 <form action="#" method="POST" id="formupdateuser">
                     <div class="form-group">
                         <label for="id" class="control-label">Tên Đăng Nhập:</label>
                         <input type="text" class="form-control" id="username" name="username" readonly required>
                     </div>
-                    <div class="form-group" style="display:none">
-                        <input type="text" class="form-control" name="password">
-                    </div>
-                    <div class="form-group">
-                        <label for="fullname" class="control-label">Họ Và Tên:</label>
-                        <input type="text" class="form-control" id="fullName" name="fullName">
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="control-label">Email:</label>
-                        <input type="text" class="form-control" id="email" name="email">
-                    </div>
-                    <div class="form-group">
-                            <label for="avatar" class="control-label">URL Ảnh Đại Diện:</label>
-                            <div style="display: flex;flex-direction: row;">
-                                <input type="text" class="form-control" id="avatar" name="avatar">
-                                <input style="width:50%; margin-left:10px; align-self: center;" type="file"
-                                    name="userAvatar" accept="image/png, image/jpeg"
-                                    onchange="uploadImage('#formupdateuseravatar','#dlgupdateuser input[name=\'avatar\']');return false;"
-                                    form="formupdateuseravatar">
-                            </div>
-                        </div>
-                    <div class="form-group">
-                        <label for="birthDate" class="control-label">Ngày Sinh:</label>
-                        <div class='input-group date date-picker2'>
-                            <input type="text" class="form-control" id="birthDate" name="birthDate"
-                                placeholder="DD-MM-YYYY"></input>
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="phoneNumber" class="control-label">Số Điện Thoại:</label>
-                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
-                    </div>
-                    <div class="form-group">
-                        <label for="address" class="control-label">Địa Chỉ:</label>
-                        <input type="text" class="form-control" id="address" name="address">
-                    </div>
-                    <div class="form-group">
-                        <label for="role" class="control-label">Cấp Độ:</label>
-                        <select id="role" name="role">
-                            <option value="ADMIN">Quản Trị Viên</option>
-                            <option value="MANAGER">Quản Lý</option>
-                            <option value="USER">Người Dùng</option>
-                        </select>
-
-                    </div>
+                    <input type="text" style="display:none;" class="form-control" id="status" name="status" readonly required>
 
                     <button type="submit" onclick="handleUpdateUserAccount(); return false;" class="btn btn-info"
-                        data-dismiss="modal">Cập Nhật</button>
+                        data-dismiss="modal">OK</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                 </form>
             </div>
