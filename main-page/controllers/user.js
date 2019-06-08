@@ -2,8 +2,6 @@ var category = require('../model/category')
 var product = require('../model/product')
 var firebase = require('firebase')
 var axios = require('axios');
-var popup = require('popups');
-
 exports.currentUser = function () {
     const user = firebase.auth().currentUser
     return user
@@ -85,10 +83,7 @@ exports.user_login_post = function (req, res) {
                 req.session.user = user
                 req.session.verify = true
             } else {
-                popup.alert({
-                    content: 'Tài Khoản Chưa Xác Thực. Vui Lòng Xác Thực Trước Khi Đăng Nhập.'
-                });
-
+                //popup(500, 500, 'Tài Khoản Chưa Xác Thực. Vui Lòng Xác Thực Trước Khi Đăng Nhập.');
                 req.session.isLogged = false;
                 req.session.user = null;
                 req.session.verify = false;
@@ -100,8 +95,6 @@ exports.user_login_post = function (req, res) {
             }
             res.redirect('/')
         }
-
-
 
     })
 
@@ -315,7 +308,7 @@ exports.get_user_status = function (req, res) {
 
     axios({
             method: 'GET',
-            url: 'https://api-scttshop-v2.herokuapp.com/api/customers/' + req.body.email,
+            url: 'https://api-scttshop-v2.herokuapp.com/api/customers/' + req.body.username,
         })
         .then(response => {
             const obj = response.data;
@@ -326,11 +319,6 @@ exports.get_user_status = function (req, res) {
                         data: 'LOCKED',
                         status: 0
                     })
-                } else {
-                    res.json({
-                        data: "OK",
-                        status: 1
-                    });
                 }
             } else {
                 res.json({
@@ -347,4 +335,56 @@ exports.get_user_status = function (req, res) {
                 status: 500
             });
         });
+
+    let user = []
+    let email = req.body.username;
+    let password = req.body.password;
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorMessage)
+        res.json({
+            data: "GET Customer Status Failed",
+            status: 500
+        });
+    }).then(() => {
+        let user = firebase.auth().currentUser
+        //console.log(user)
+        if (user != null) {
+            req.session.verify = false
+            if (user.emailVerified == true) {
+                axios({
+                    method: 'PUT',
+                    url: 'https://api-scttshop-v2.herokuapp.com/api/customers/' + user.email + "/verify",
+                }).catch(err => {
+                    console.log(err)
+                })
+                req.session.isLogged = true;
+                req.session.user = user
+                req.session.verify = true
+
+                res.json({
+                    data: 'SUCCESS',
+                    status: 1
+                })
+            } else {
+                //popup(500, 500, 'Tài Khoản Chưa Xác Thực. Vui Lòng Xác Thực Trước Khi Đăng Nhập.');
+                req.session.isLogged = false;
+                req.session.user = null;
+                req.session.verify = false;
+                firebase.auth().signOut()
+                req.session.destroy(function () {
+                    console.log("Logged Out!");
+                });
+
+                res.json({
+                    data: 'NOT VERIFIED',
+                    status: -1
+                })
+            }
+
+        }
+
+    })
 }

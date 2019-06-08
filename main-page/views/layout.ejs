@@ -261,20 +261,28 @@
     $("#textLoginError").hide();
 
     const username = $("#login-modal input[name='username']").val();
+    const password = $("#login-modal input[name='password']").val();
     const checkUserStatus = $.ajax({
       type: "POST",
       url: window.location.protocol + "//" + window.location.host + "/user" + "/getUserStatus",
       data: {
-        email: username
+        username: username,
+        password:password
       },
       dataType: "json"
     }).done(function (resp) {
       if (resp.status == 0) {
         $("#textLoginError").show();
         $("#textLoginError").text("Tài Khoản Đã Bị Khóa");
-      } else if (resp.status == 1) {
+      }
+      else if (resp.status == -1) {
+        $("#textLoginError").show();
+        $("#textLoginError").text("Tài Khoản Chưa Xác Thực. Vui Lòng Xác Thực Trước Khi Đăng Nhập.");
+      } 
+      else if (resp.status == 1) {
         $("#textLoginError").hide();
-        $("#userLoginForm").submit();
+        //$("#userLoginForm").submit();
+        window.location.href = window.location.protocol + "//" + window.location.host;
       } else {
         $("#textLoginError").show();
         $("#textLoginError").text("Đã Xảy Ra Lỗi. Vui Lòng Thử Lại Sau");
