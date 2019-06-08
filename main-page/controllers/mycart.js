@@ -35,10 +35,9 @@ exports.update =async function(req, res) {
 };
 exports.addProduct=async function(req,res){
     var cart= await new Cart(req.session.cart?req.session.cart:{});
-    console.log(req.body.image+req.body.name+req.body.price+req.body.size);
-    cart.add(req.body.image,req.body.name,req.body.price,req.body.size);
+    console.log(req.body.productID,req.body.categoryID,req.body.image+req.body.name+req.body.price+req.body.size);
+    cart.add(req.body.productID,req.body.categoryID,req.body.image,req.body.name,req.body.price,req.body.size);
     req.session.cart= await cart;
-    req.session.cart.print();
     res.json({
         returncode:1
     });

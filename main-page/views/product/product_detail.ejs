@@ -1,13 +1,15 @@
 <script type="text/javascript">
-  function addproduct(image, name, price,size) {
+  function addproduct(productID,categoryID,image, name, price,size) {
     console.log(image+name+price);
-    if(size){
+    if(size==""){
       size='S';
     }
     $.ajax('../my-cart/addproduct', // request url
       {
         type: 'POST',
         data: {
+          productID:productID,
+          categoryID:categoryID,
           image: image,
           name: name,
           price: price,
@@ -98,7 +100,7 @@
                   </div>
                   <div class="aa-prod-view-bottom">
                     <%if (productInfo['quantity'] > 0) { %>
-                    <a class="aa-add-to-cart-btn"  href="#" onclick="addproduct('<%=productInfo.image%>','<%=productInfo.productName%>','<%=productInfo.discountPrice%>',tmp_size)" >Thêm vào giỏ hàng</a>
+                    <a class="aa-add-to-cart-btn"  href="#" onclick="addproduct('<%=productInfo.productID%>','<%=productInfo.categoryID%>','<%=productInfo.image%>','<%=productInfo.productName%>','<%=productInfo.discountPrice%>',tmp_size)" >Thêm vào giỏ hàng</a>
                     <% } %>
 
                   </div>
@@ -207,7 +209,7 @@
                 <figure>
                   <a class="aa-product-img"><img src="<%= product.image %>" alt="img"
                       style="height: 300px; width: 250px"></a>
-                  <a  href="#" class="aa-add-card-btn" onclick="addproduct('<%= product.image %>','<%= product.productName %>','<%= product.discountPrice %>','S')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                  <a  href="#" class="aa-add-card-btn" onclick="addproduct('<%=productInfo.productID%>','<%=productInfo.categoryID%>','<%= product.image %>','<%= product.productName %>','<%= product.discountPrice %>','S')"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                   <figcaption>
                     <h4 class="aa-product-title"><a
                         href="/products/detail?id=<%=product['productID']%>"><%= product['productName']%></a></h4>

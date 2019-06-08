@@ -1,15 +1,15 @@
 class Cart {
     constructor(oldCart) {
         this.array=oldCart.array||[]
-        this.add = function (image,name,price,size) {
+        this.add = function (productID,categoryID,image,name,price,size) {
             let tmp;
             if (size)
             {
-                tmp= new Product(image,name, price,1,size);
+                tmp= new Product(productID,categoryID,image,name, price,1,size);
             }
             else
             {
-                tmp= new Product(image,name, price,1,"S");
+                tmp= new Product(productID,categoryID,image,name, price,1,"S");
             }
             
             let flag=0;
@@ -55,14 +55,16 @@ class Cart {
             console.log('------------------------------');
             let i=0;
             for(i=0;i<this.array.length;i++){
-                console.log(this.array[i].image+"   "+this.array[i].count);
+                console.log(this.array[i].productID+"   "+this.array[i].categoryID+"   "+this.array[i].image+"   "+this.array[i].count);
             }
             console.log('------------------------------');
         }
     }
 }; 
 class Product {
-    constructor(image,name,price,count,size){
+    constructor(productID,categoryID,image,name,price,count,size){
+        this.productID=productID||0;
+        this.categoryID=categoryID||0;
         this.image=image||"";
         this.name=name||"";
         this.price=price||0;

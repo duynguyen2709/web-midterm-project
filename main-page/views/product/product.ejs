@@ -7,11 +7,13 @@
 </script>
 
 <script type="text/javascript">
-  function addproduct(image, name, price,size) {
+  function addproduct(productID,categoryID,image, name, price,size) {
     $.ajax('../my-cart/addproduct', // request url
       {
         type: 'POST',
         data: {
+          productID: productID,
+          categoryID:categoryID,
           image: image,
           name: name,
           price: price,
@@ -56,7 +58,7 @@
                         alt="polo shirt img" src=<%= info[i].image %> /></a>
                     <!-- <a class="aa-add-card-btn" href="../my-cart/addproduct/<%=type%>/`<%=info[i].image%>`/<%=info[i].productName%>/<%=info[i].discountPrice%>"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a> -->
                     <a class="aa-add-card-btn" href="#" id="addproduct"
-                      onclick="addproduct(`<%=info[i].image%>`,`<%=info[i].productName%>`,`<%=info[i].discountPrice%>`,'S')"><span
+                      onclick="addproduct(`<%=info[i].productID%>`,`<%=info[i].categoryID%>`,`<%=info[i].image%>`,`<%=info[i].productName%>`,`<%=info[i].discountPrice%>`,'S')"><span
                         class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="/products/detail?id=<%=info[i].productID%>""><%= info[i].productName %></a></h4>
@@ -68,7 +70,7 @@
                   </figure>
                   <div class="aa-product-hvr-content">
                     <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View"
-                      onclick="clickSearch(`<%= info[i].image %>`,`<%= info[i].productID %>`,`<%= info[i].productName %>`,`<%= info[i].discountPrice %>`,`<%= info[i].description %>`,`<%= info[i].categoryName %>`)"
+                      onclick="clickSearch(`<%= info[i].categoryID %>`,`<%= info[i].image %>`,`<%= info[i].productID %>`,`<%= info[i].productName %>`,`<%= info[i].discountPrice %>`,`<%= info[i].description %>`,`<%= info[i].categoryName %>`)"
                       data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
                   </div>
                   <!-- product badge -->
@@ -125,7 +127,7 @@
                               </p>
                             </div>
                             <div class="aa-prod-view-bottom">
-                              <a href="#"onclick="addproduct(tmp_image,tmp_name,tmp_price,tmp_size)" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào
+                              <a href="#"onclick="addproduct(tmp_productID,tmp_categoryID,tmp_image,tmp_name,tmp_price,tmp_size)" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào
                                 giỏ hàng</a>
                               <a id="linkProduct" href="" class="aa-add-to-cart-btn">Chi tiết</a>
                             </div>
@@ -212,6 +214,7 @@
       for (let i = (page - 1) * 6; i < (page - 1) * 6 + 6; i++) {
         if (info.length == i)
           break;
+        let categoryID=info[i].categoryID;
         let image = info[i].image;
         let productID = info[i].productID;
         let pathProduct = "/products/detail?id=" + info[i].productID;
@@ -222,10 +225,11 @@
         let description = info[i].description;
         let categoryName = info[i].categoryName;
         if (promotionDiscount > 0) {
-          const clicksearch1 = "clickSearch('" + image + "','" + productID + "','" + productName + "','" +
+          const clicksearch1 = "clickSearch('"+categoryID+"','" + image + "','" + productID + "','" + productName + "','" +
             discountPrice +
             "','" + description + "','" + categoryName + "')";
-          const addproduct1 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
+          const addproduct1 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct('+
+            "'" + productID + "'" + ',' +"'" + categoryID + "'" + ','
             "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'" + "'S'"+')"' +
             '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
           $("#listproduct").append(
@@ -240,10 +244,11 @@
             '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div><span class="aa-badge aa-sale">SALE!</span><span class="aa-badge-right aa-hot">' +
             promotionDiscount + '%' + '</span></li>');
         } else {
-          const clicksearch2 = "clickSearch('" + image + "','" + productID + "','" + productName + "','" +
+          const clicksearch2 = "clickSearch('"+categoryID+"','" + image + "','" + productID + "','" + productName + "','" +
             sellPrice +
             "','" + description + "','" + categoryName + "')";
           const addproduct2 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
+          "'" + productID + "'" + ',' +"'" + categoryID + "'" + ','
             "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'" + "'S'"+ ')"' +
             '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
           $("#listproduct").append(
@@ -262,12 +267,14 @@
   }
 </script>
 <script>
-  var tmp_image, tmp_name,tmp_price,tmp_size;
+  var tmp_image, tmp_name,tmp_price,tmp_size,tmp_categoryID,tmp_productID;
   function selectedSize(value){
     tmp_size=value;
   }
 
-  function clickSearch(image, productID, productName, sellPrice, description, categoryName) {
+  function clickSearch(categoryID,image, productID, productName, sellPrice, description, categoryName) {
+    tmp_categoryID=categoryID;
+    tmp_productID=productID;
     tmp_image=image;
     tmp_name=productName;
     tmp_price=sellPrice;

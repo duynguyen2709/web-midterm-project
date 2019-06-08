@@ -45,7 +45,7 @@ addRow(data.cart);
       var select;
       let total=0;
       for(let i=0;i<list.length;i++){
-        console.log(list[i].size);
+        console.log(list[i].size+list[i].productID+list[i].categoryID);
         total+=list[i].count*list[i].price;
         if(list[i].size==""||list[i].size=="S"){
           select='                                  <option selected>S</option>'+
