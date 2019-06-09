@@ -1,4 +1,5 @@
 var category=require('../model/category')
+var product=require('../model/product')
 var user=require('./user')
 var Cart=require('../model/cart').Cart
 // Display list of all products of specific type.
@@ -11,17 +12,28 @@ exports.get_detail =async function(req, res) {
 exports.get_page = async function(req, res) {
     let listCategories=await category.getListCategory();   
     let  curUser =req.session.user
+    let listCount=new Array();
     let listProductCart;
     if(req.session.cart)
     {
+        for(let i=0;i<req.session.cart.array.length;i++){
+            console.log(req.session.cart.array[i].productID);
+            let productDetail= await product.getProductDetail(req.session.cart.array[i].productID);
+            console.log(productDetail);
+            listCount.push(productDetail['quantity']);
+            console.log(listCount[i]);
+            if(req.session.cart.array[i].count>listCount[i]){
+                req.session.cart.array[i].count=listCount[i];
+            }
+        }
         listProductCart=req.session.cart.array;
         console.log("test");
-        res.render('mycart/my_cart.ejs',{listCategory: listCategories, user:curUser,list:listProductCart});
+        res.render('mycart/my_cart.ejs',{listCategory: listCategories, user:curUser,list:listProductCart,listCount:listCount});
     }
     else{
         
         console.log("k co array");
-        res.render('mycart/my_cart.ejs',{listCategory: listCategories, user:curUser,list:null});
+        res.render('mycart/my_cart.ejs',{listCategory: listCategories, user:curUser,list:null,listCount:null});
     }
 };
 // Display detail page for a specific product.
@@ -45,20 +57,45 @@ exports.addProduct=async function(req,res){
 };
 exports.removeProduct=async function(req,res){
     var cart= await new Cart(req.session.cart?req.session.cart:{});
+    let listCount=new Array();
     cart.remove(req.body.image,req.body.name,req.body.price);
+    for(let i=0;i<cart.array.length;i++){
+        console.log(cart.array[i].productID);
+        let productDetail= await product.getProductDetail(cart.array[i].productID);
+        console.log(productDetail);
+        listCount.push(productDetail['quantity']);
+        console.log(listCount[i]);
+        if(cart.array[i].count>listCount[i]){
+            cart.array[i].count=listCount[i];
+        }
+    }
+    
     req.session.cart= await cart;
         res.json({
-            cart: req.session.cart.array
+            cart: req.session.cart.array,
+            listCount:listCount
         });
     
     
 };
 exports.updateCount=async function(req,res){
     var cart= await new Cart(req.session.cart?req.session.cart:{});
+    let listCount=new Array();
     cart.update(req.body.image,req.body.name,req.body.price,req.body.count,req.body.size);
+    for(let i=0;i<cart.array.length;i++){
+        console.log(cart.array[i].productID);
+        let productDetail= await product.getProductDetail(cart.array[i].productID);
+        console.log(productDetail);
+        listCount.push(productDetail['quantity']);
+        console.log(listCount[i]);
+        if(cart.array[i].count>listCount[i]){
+            cart.array[i].count=listCount[i];
+        }
+    }
     req.session.cart= await cart;
         res.json({
-            cart: req.session.cart.array
+            cart: req.session.cart.array,
+            listCount:listCount
         });
     
     

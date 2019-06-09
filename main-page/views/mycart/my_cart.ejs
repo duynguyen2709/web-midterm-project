@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  
 <script type="text/javascript">
 function updateCount(image,name, price,size, count){
   if(count==""){
@@ -20,7 +21,7 @@ function updateCount(image,name, price,size, count){
     count: count
   },
   success: function (data) {
-    addRow(data.cart);
+    addRow(data.cart,data.listCount);
   }
       });
       }
@@ -35,11 +36,11 @@ function updateCount(image,name, price,size, count){
   },
   success: function (data) { 
       
-addRow(data.cart);
+addRow(data.cart,data.listCount);
   }
 });
     }
-    function addRow(list){
+    function addRow(list,listCount){
       var tmp=$("#productTable").empty();
       var myvar='<tbody id="productTable">';
       var select;
@@ -79,7 +80,7 @@ addRow(data.cart);
 '                                 <td><a href="#"><img src= "'+list[i].image+'"'+' alt="img"></a></td>'+
 '                                 <td><a class="aa-cart-title" href="#">'+list[i].name+'</a></td>'+
 '                                 <td>'+list[i].price+'</td>'+
-`                                 <td><input class="aa-cart-quantity" type="number"  min="1" max="10" value="`+list[i].count+`" onfocusout="updateCount('`+list[i].image+"',`"+list[i].name+"`,'"+ list[i].price+"','"+list[i].size+"',"+`this.value)"`+'></td>'+
+`                                 <td><input class="aa-cart-quantity" type="number"  min="1" max="`+listCount[i]+`" value="`+list[i].count+`" onfocusout="updateCount('`+list[i].image+"',`"+list[i].name+"`,'"+ list[i].price+"','"+list[i].size+"',"+`this.value)"`+'></td>'+
 `<td><select ` +`" onchange="updateCount('`+list[i].image+"',`"+list[i].name+"`,'"+list[i].price+`',this.value`+`,'`+list[i].count+ `')">`+
 select+
 '                                </select></td>'+
@@ -148,7 +149,7 @@ select+
                                <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
                                <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
                                <td><%= list[i].price %></td>
-                               <td><input  class="aa-cart-quantity" type="number" min="1" max="10" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
+                               <td><input  class="aa-cart-quantity" type="number" min="1" max="<%=listCount[i]%>" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
                                <td><select onchange="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value,'<%= list[i].count %>')">
                                   <option selected>S</option>
                                   <option>M</option>
@@ -165,7 +166,7 @@ select+
                                   <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
                                   <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
                                   <td><%= list[i].price %></td>
-                                  <td><input  class="aa-cart-quantity" type="number" min="1" max="10" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
+                                  <td><input  class="aa-cart-quantity" type="number" min="1" max="<%=listCount[i]%>" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
                                   <td><select onchange="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value,'<%= list[i].count %>')">
                                      <option>S</option>
                                      <option selected>M</option>
@@ -182,7 +183,7 @@ select+
                                     <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
                                     <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
                                     <td><%= list[i].price %></td>
-                                    <td><input  class="aa-cart-quantity" type="number" min="1" max="10" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
+                                    <td><input  class="aa-cart-quantity" type="number" min="1" max="<%=listCount[i]%>" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
                                     <td><select onchange="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value,'<%= list[i].count %>')">
                                        <option>S</option>
                                        <option>M</option>
@@ -199,7 +200,7 @@ select+
                                       <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
                                       <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
                                       <td><%= list[i].price %></td>
-                                      <td><input  class="aa-cart-quantity" type="number" min="1" max="10" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
+                                      <td><input  class="aa-cart-quantity" type="number" min="1" max="<%=listCount[i]%>" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
                                       <td><select onchange="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value,'<%= list[i].count %>')">
                                          <option>S</option>
                                          <option>M</option>
@@ -239,7 +240,14 @@ select+
                    </tr>
                  </tbody>
                </table>
-               <a href="../check-out" class="aa-cart-view-btn" >Tiến hành thanh toán</a>
+               <% if(list){%>
+               <% if(user)
+               {%>
+                <a href="../check-out" class="aa-cart-view-btn" >Tiến hành thanh toán</a>
+               <%}else{%>
+                <a href="#" class="aa-cart-view-btn" data-toggle="modal" data-target="#login-modal" >Tiến hành thanh toán</a>
+               <%}}%>
+               
              </div>
            </div>
          </div>
