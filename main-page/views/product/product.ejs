@@ -23,6 +23,26 @@
         }
       });
   }
+  function comparePrice( a, b ) {
+  if ( a.discountPrice < b.discountPrice ){
+    return -1;
+  }
+  if ( a.discountPrice > b.discountPrice ){
+    return 1;
+  }
+  return 0;
+  
+}
+function compareName( a, b ) {
+  if ( a.productName < b.productName ){
+    return -1;
+  }
+  if ( a.productName > b.productName ){
+    return 1;
+  }
+  return 0;
+  
+}
 </script>
 
 <body>
@@ -36,7 +56,7 @@
               <div class="aa-product-catg-head-left">
                 <form action="" class="aa-sort-form">
                   <label for="">Sắp xếp theo</label>
-                  <select name="">
+                  <select id="Sort" name="" onchange="clickPagination(1,productInfo)">
                     <option value="1" selected="Default">Mặc định</option>
                     <option value="2">Tên</option>
                     <option value="3">Giá</option>
@@ -189,7 +209,9 @@
       .exec(window.location.search);
     return (results !== null) ? results[1] || 0 : false;
   }
+  
   function clickPagination(page, productInfo) {
+    let flag=document.getElementById("Sort").options[document.getElementById("Sort").selectedIndex].value;
     const categoryID = urlParam('id');
     let info = [];
     const getListProductFunction = $.ajax({
@@ -202,6 +224,12 @@
     }).done(function (resp) {
       for (var k = 0; k < resp.info.length; k++)
         info.push(resp.info[k]);
+        if (flag==3){
+          info.sort(comparePrice);
+        }else if (flag==2){
+          info.sort(compareName);
+
+        }
     }).fail(function (jqXHR, textStatus, errorThrown) {
       console.log("Error: " + textStatus);
       info = [];
