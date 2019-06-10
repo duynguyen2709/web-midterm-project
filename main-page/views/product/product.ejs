@@ -229,9 +229,10 @@
             discountPrice +
             "','" + description + "','" + categoryName + "')";
           const addproduct1 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct('+
-            "'" + productID + "'" + ',' +"'" + categoryID + "'" + ','
-            "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'" + "'S'"+')"' +
+            "'" + productID + "'" + ',' +"'" + categoryID + "'" + ','+
+            "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'," + "'S'"+')"' +
             '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
+            console.log(addproduct1);
           $("#listproduct").append(
             '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
             image + '></a>' +
@@ -248,8 +249,8 @@
             sellPrice +
             "','" + description + "','" + categoryName + "')";
           const addproduct2 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
-          "'" + productID + "'" + ',' +"'" + categoryID + "'" + ','
-            "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'" + "'S'"+ ')"' +
+          "'" + productID + "'" + ',' +"'" + categoryID + "'" + ','+
+            "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'," + "'S'"+ ')"' +
             '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
           $("#listproduct").append(
             '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
