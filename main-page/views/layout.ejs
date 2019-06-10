@@ -195,12 +195,14 @@
           <div class="modal-body">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4>Đăng nhập/Đăng kí</h4>
-            <form class="aa-login-form" action="/user/login" method="POST">
+            <form class="aa-login-form" id="userLoginForm" action="/user/login" method="POST">
+              <p style="color:red;display:none;margin-top:2px;margin-bottom:2px;" id="textLoginError"></p>
               <label for="">Tài khoản hoặc Email<span>*</span></label>
               <input type="text" name="username" placeholder="Username or email">
               <label for="">Mật khẩu<span>*</span></label>
               <input type="password" name="password" placeholder="Password">
-              <button class="aa-browse-btn" type="submit" value="submit">Đăng nhập</button>
+              <button class="aa-browse-btn" type="button" onclick="checkCustomerStatus(); return false;"
+                value="submit">Đăng nhập</button>
               <label for="rememberme" class="rememberme"><input type="checkbox" id="rememberme"> Ghi nhớ
               </label>
               <p class="aa-lost-password"><a href="" data-toggle="modal" data-target="#forgot-password-modal"
@@ -224,7 +226,7 @@
             <form class="aa-login-form" action="/user/reset" method="POST" height="50px">
               <label for="">Email<span>*</span></label>
               <input type="text" id="email" name="email" placeholder="Email">
-              <button class="aa-browse-btn"  data-dismiss="modal" type="submit" value="submit">Xác minh</button>
+              <button class="aa-browse-btn" data-dismiss="modal" type="submit" value="submit">Xác minh</button>
             </form>
           </div>
         </div><!-- /.modal-content -->
@@ -253,5 +255,44 @@
     <script src="/js/custom.js"></script>
 
 </body>
+
+<script>
+  function checkCustomerStatus() {
+    $("#textLoginError").hide();
+
+    const username = $("#login-modal input[name='username']").val();
+    const password = $("#login-modal input[name='password']").val();
+    const checkUserStatus = $.ajax({
+      type: "POST",
+      url: window.location.protocol + "//" + window.location.host + "/user" + "/getUserStatus",
+      data: {
+        username: username,
+        password:password
+      },
+      dataType: "json"
+    }).done(function (resp) {
+      if (resp.status == 0) {
+        $("#textLoginError").show();
+        $("#textLoginError").text("Tài Khoản Đã Bị Khóa");
+      }
+      else if (resp.status == -1) {
+        $("#textLoginError").show();
+        $("#textLoginError").text("Tài Khoản Chưa Xác Thực. Vui Lòng Xác Thực Trước Khi Đăng Nhập.");
+      } 
+      else if (resp.status == 1) {
+        $("#textLoginError").hide();
+        //$("#userLoginForm").submit();
+        window.location.href = window.location.protocol + "//" + window.location.host;
+      } else {
+        $("#textLoginError").show();
+        $("#textLoginError").text("Đã Xảy Ra Lỗi. Vui Lòng Thử Lại Sau");
+      }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      console.log("Error: " + textStatus);
+
+    });
+
+  }
+</script>
 
 </html>

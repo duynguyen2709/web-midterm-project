@@ -159,3 +159,24 @@ exports.updateUserAccount = function (req, res) {
             });
         });
 }
+
+exports.lockUserAccount = function (req, res) {
+
+    axios({
+            method: 'PUT',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username + '/lock/' + req.body.status        
+        })
+        .then(response => {
+            res.json({
+                data: "Update Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Update Failed",
+                status: 500
+            });
+        });
+}

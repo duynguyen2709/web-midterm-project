@@ -59,15 +59,7 @@ exports.updateCustomer = function (req, res) {
 
     axios({
             method: 'PUT',
-            url: 'https://api-scttshop-v2.herokuapp.com/api/customers/' + req.body.email,
-            data: {
-                email: req.body.email,
-                avatar: req.body.avatar,
-                fullName: req.body.fullName,
-                address: req.body.address,
-                phoneNumber: req.body.phoneNumber,
-                updDate: ''
-            }
+            url: 'https://api-scttshop-v2.herokuapp.com/api/customers/' + req.body.email + "/lock/" + req.body.status
         })
         .then(response => {
 

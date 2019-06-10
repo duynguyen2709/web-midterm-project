@@ -7,6 +7,8 @@ router.get('/', categoryController.index);
 
 router.get('/get/:categoryID',categoryController.getCategory);
 
+router.get('/get/:categoryID/products',categoryController.getListProductOfCategory);
+
 router.get('/get',categoryController.getListCategory);
 
 router.post('/delete',categoryController.deleteCategory);
