@@ -3,6 +3,7 @@
   
 <script type="text/javascript">
 function updateCount(image,name, price,size, count){
+  document.getElementById('btnunloading').disabled=true;
   if(count==""){
     count=1;
   }
@@ -22,6 +23,7 @@ function updateCount(image,name, price,size, count){
   },
   success: function (data) {
     addRow(data.cart,data.listCount);
+    document.getElementById('btnunloading').disabled=false;
   }
       });
       }
@@ -241,12 +243,13 @@ select+
                  </tbody>
                </table>
                <% if(list){%>
-               <% if(user)
-               {%>
-                <a href="../check-out" class="aa-cart-view-btn" >Tiến hành thanh toán</a>
-               <%}else{%>
-                <a href="#" class="aa-cart-view-btn" data-toggle="modal" data-target="#login-modal" >Tiến hành thanh toán</a>
-               <%}}%>
+                <% if(user)
+                {%>
+                 <button id="btnunloading" href="../check-out" class="btn btn-lg btn-primary" style="margin-top: 20px" >Tiến hành thanh toán</button>
+                <%}else{%>
+                 
+                 <button id="btnunloading" href="#" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#login-modal" style="margin-top: 20px"  >Tiến hành thanh toán</button>
+                <%}}%>
                
              </div>
            </div>
