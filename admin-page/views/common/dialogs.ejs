@@ -151,6 +151,34 @@
     </div>
 </div>
 
+<div id="dlgverifyuser" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="padding-top: 10%;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Xác Thực Tài Khoản</h4>
+            </div>
+
+            <div class="modal-body">
+                <form action="#" method="POST" id="formverifyuser">
+                    <div class="form-group">
+                        <label for="id" class="control-label">Tên Đăng Nhập:</label>
+                        <input type="text" class="form-control" id="username" name="username" readonly required>
+                    </div>
+                   
+                    <button type="submit" onclick="handleVerifyUser(); return false;" class="btn btn-info"
+                        data-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <div id="dlgdeleteuser" class="modal fade" role="dialog">
     <div class="modal-dialog" style="padding-top: 10%;">
 

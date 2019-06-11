@@ -3,6 +3,8 @@ var transporter = require('../utils/MailUtil');
 var UserModel = require('../models/userAccountModel');
 var bcrypt = require('bcrypt');
 var axios = require('axios');
+var passwordValidator = require('password-validator');
+
 
 exports.index = function (req, res) {
   if (req.isAuthenticated()) {
