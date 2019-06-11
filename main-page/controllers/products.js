@@ -30,6 +30,34 @@ exports.product_list_type = async function (req, res) {
     });
 };
 
+// Display list of all products of specific type (Filter).
+exports.product_list_type_filter = async function (req, res) {
+    
+    let listCategories = await category.getListCategory();
+    var type = req.body.type;
+    let curUser = req.session.user;
+    let valueFilter=req.body.value;
+    var listProduct = await product.getProductOfCategory(type);
+    var listProduct1= new Array();
+    var listProductReal=new Array();
+    listProduct1=listProduct;
+    console.log(valueFilter);
+    
+    for (let i=0;i < listProduct1.length ;i++){
+        if(listProduct1[i].manufacturer===valueFilter)
+        listProductReal.push(listProduct1[i]);
+    }
+    console.log(listProductReal);
+    console.log(listProductReal.length);
+    res.render('product/product', {
+        info: listProductReal,
+        listCategory: listCategories,
+        user: curUser,
+        length: listProductReal.length,
+        type: type
+    });
+};
+
 // Display detail page for a specific product.
 exports.product_detail = async function (req, res) {
     let listCategories = await category.getListCategory();

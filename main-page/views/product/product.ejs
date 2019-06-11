@@ -23,7 +23,17 @@
         }
       });
   }
-  function comparePrice( a, b ) {
+  function comparePriceIncrease( a, b ) {
+  if ( a.discountPrice > b.discountPrice ){
+    return -1;
+  }
+  if ( a.discountPrice < b.discountPrice ){
+    return 1;
+  }
+  return 0;
+  
+}
+function comparePriceDecrease( a, b ) {
   if ( a.discountPrice < b.discountPrice ){
     return -1;
   }
@@ -33,15 +43,20 @@
   return 0;
   
 }
-function compareName( a, b ) {
-  if ( a.productName < b.productName ){
-    return -1;
-  }
-  if ( a.productName > b.productName ){
-    return 1;
-  }
-  return 0;
-  
+function filter( manufacturer){
+  $.ajax('../products/filter', // request url
+      {
+        type: 'POST',
+        data: {
+          value: manufacturer,
+          type: '<%= type %>'
+        },
+        success: function (data) { // success callback function
+          // $.get('../',function(){
+          //   alert("dasd");
+          // });
+        }
+      });
 }
 </script>
 
@@ -58,11 +73,44 @@ function compareName( a, b ) {
                   <label for="">Sắp xếp theo</label>
                   <select id="Sort" name="" onchange="clickPagination(1,productInfo)">
                     <option value="1" selected="Default">Mặc định</option>
-                    <option value="2">Tên</option>
-                    <option value="3">Giá</option>
+                    <option value="2">Giá tăng</option>
+                    <option value="3">Giá giảm</option>
                   </select>
                 </form>
               </div>
+              <div class="aa-product-catg-head-left">
+                  <form action="" class="aa-sort-form">
+                    <label for="">NSX</label>
+                    <select id="Filter" name="" onchange="filter(this.options[this.selectedIndex].text)">
+                      <option value="1" selected="Default">Tất cả</option>
+                      <%
+                      let manufacturerlist = new Array();
+                      let tmpBrand;
+                      for(let i=0;i < info.length;i++)
+                      {
+                        let flag=1;
+                        for(let j=0;j < manufacturerlist.length;j++)
+                        {
+                         
+                            if(manufacturerlist[j]===info[i].manufacturer)
+                            {
+                              flag=0;
+                              break;
+                            }
+                          }
+                        if(flag===1)
+                        {
+                          manufacturerlist.push(info[i].manufacturer);
+                        }
+                        
+                      }
+                      for(let i=0;i< manufacturerlist.length;i++ )
+                      { %>
+                          <option value="<%= i %>"><%= manufacturerlist[i]%></option>
+                      <%}%>
+                    </select>
+                  </form>
+                </div>
               <div class="aa-product-catg-head-right">
                 <a id="grid-catg" href="#"><span class="fa fa-th"></span></a>
                 <a id="list-catg" href="#"><span class="fa fa-list"></span></a>
@@ -201,6 +249,7 @@ function compareName( a, b ) {
   </section>
 </body>
 <script>
+  console.log('<%=info%>');
   const productInfo = encodeURI(`<%-JSON.stringify(info)%>`);
   var listNode = document.getElementById("listproduct");
   //var items=document.querySelectorAll("#listproduct li");
@@ -211,7 +260,7 @@ function compareName( a, b ) {
   }
   
   function clickPagination(page, productInfo) {
-    let flag=document.getElementById("Sort").options[document.getElementById("Sort").selectedIndex].value;
+    let flagSort=document.getElementById("Sort").options[document.getElementById("Sort").selectedIndex].value;
     const categoryID = urlParam('id');
     let info = [];
     const getListProductFunction = $.ajax({
@@ -222,14 +271,16 @@ function compareName( a, b ) {
       },
       dataType: "json"
     }).done(function (resp) {
+
+      console.log(window.location.protocol + "//" + window.location.host + "/products" + "/get");
       for (var k = 0; k < resp.info.length; k++)
         info.push(resp.info[k]);
-        if (flag==3){
-          info.sort(comparePrice);
-        }else if (flag==2){
-          info.sort(compareName);
-
+        if (flagSort==3){
+          info.sort(comparePriceIncrease);
+        }else if (flagSort==2){
+          info.sort(comparePriceDecrease);
         }
+        
     }).fail(function (jqXHR, textStatus, errorThrown) {
       console.log("Error: " + textStatus);
       info = [];
