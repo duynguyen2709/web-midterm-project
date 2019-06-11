@@ -8,6 +8,7 @@ exports.getLinkProduct = function () {
 }
 exports.getListCategory = async () => {
     if (CATEGORY_CACHE == null || CATEGORY_CACHE.length == 0) {
+
         const res = await fetch('https://api-scttshop-v2.herokuapp.com/api/categories');
         let data = await res.json();
         data.forEach(element => {
@@ -19,4 +20,9 @@ exports.getListCategory = async () => {
     }
 
     return CATEGORY_CACHE;
+}
+
+exports.evictCache = async function(){
+    CATEGORY_CACHE = [];
+
 }

@@ -40,6 +40,7 @@ var productRoutes=require('./routes/product.js');
 var orderRoutes=require('./routes/order.js');
 var checkoutRoutes=require('./routes/checkout.js');
 var carttRoutes=require('./routes/mycart.js');
+var apiRoutes=require('./routes/api.js');
 //
 //
 
@@ -65,11 +66,7 @@ app.use('/products',productRoutes);
 app.use('/order',orderRoutes);
 app.use('/check-out',checkoutRoutes);
 app.use('/my-cart',carttRoutes);
-
-
-
-
-
+app.use('/api',apiRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

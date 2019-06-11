@@ -4,7 +4,6 @@ var user = require('./user')
 
 exports.product_list = async function (req, res) {
 
-    console.log("get into product_list");
     const categoryID = req.body.categoryID;
 
     const listProduct = await product.getProductOfCategory(categoryID);
