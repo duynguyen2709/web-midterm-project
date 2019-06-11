@@ -41,10 +41,20 @@ exports.deleteCategory = function (req, res) {
 
     axios.delete("https://api-scttshop-v2.herokuapp.com/api/categories/" + categoryID)
         .then(response => {
+            axios({
+                method: 'POST',
+                url: process.env.MAIN_PAGE_URL_EVICT_CACHE,
+                data: {
+                    type: 'CATEGORY'
+                }
+            })
+
             res.json({
                 data: "Delete Succeed",
                 status: 200
             });
+
+
         })
         .catch(err => {
             console.log(err);
@@ -66,6 +76,14 @@ exports.insertCategory = function (req, res) {
             }
         })
         .then(response => {
+            axios({
+                method: 'POST',
+                url: process.env.MAIN_PAGE_URL_EVICT_CACHE,
+                data: {
+                    type: 'CATEGORY'
+                }
+            })
+
             res.json({
                 data: "Insert Succeed",
                 status: 200
@@ -91,6 +109,14 @@ exports.updateCategory = function (req, res) {
             }
         })
         .then(response => {
+            axios({
+                method: 'POST',
+                url: process.env.MAIN_PAGE_URL_EVICT_CACHE,
+                data: {
+                    type: 'CATEGORY'
+                }
+            })
+            
             res.json({
                 data: "Update Succeed",
                 status: 200

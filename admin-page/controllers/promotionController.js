@@ -40,6 +40,14 @@ exports.deletePromotion = function (req, res) {
 
     axios.delete("https://api-scttshop-v2.herokuapp.com/api/promotions/" + promotionID)
         .then(response => {
+            axios({
+                method: 'POST',
+                url: process.env.MAIN_PAGE_URL_EVICT_CACHE,
+                data: {
+                    type: 'PRODUCT'
+                }
+            })
+
             res.json({
                 data: "Delete Succeed",
                 status: 200
@@ -71,6 +79,14 @@ exports.insertPromotion = function (req, res) {
             }
         })
         .then(response => {
+            axios({
+                method: 'POST',
+                url: process.env.MAIN_PAGE_URL_EVICT_CACHE,
+                data: {
+                    type: 'PRODUCT'
+                }
+            })
+
             res.json({
                 data: "Insert Succeed",
                 status: 200
@@ -103,6 +119,14 @@ exports.updatePromotion = function (req, res) {
             }
         })
         .then(response => {
+            axios({
+                method: 'POST',
+                url: process.env.MAIN_PAGE_URL_EVICT_CACHE,
+                data: {
+                    type: 'PRODUCT'
+                }
+            })
+            
             res.json({
                 data: "Update Succeed",
                 status: 200

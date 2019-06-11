@@ -44,19 +44,32 @@ function comparePriceDecrease( a, b ) {
   
 }
 function filter( manufacturer){
-  $.ajax('../products/filter', // request url
-      {
-        type: 'POST',
-        data: {
-          value: manufacturer,
-          type: '<%= type %>'
-        },
-        success: function (data) { // success callback function
-          // $.get('../',function(){
-          //   alert("dasd");
-          // });
-        }
-      });
+  const flagFilter=document.getElementById("Filter").options[document.getElementById("Filter").selectedIndex].text;
+  const form = document.createElement('form');
+  form.method = 'post';
+  form.action = '../products/filter';
+
+      var hiddenField = document.createElement('input');
+      hiddenField.value = manufacturer;
+      hiddenField.name  = "value";
+      hiddenField.type  = "hidden";
+      form.appendChild(hiddenField);
+
+      hiddenField = document.createElement('input');
+      hiddenField.value = '<%= type %>';
+      hiddenField.name  = "type";
+      hiddenField.type  = "hidden";
+      form.appendChild(hiddenField);
+
+      hiddenField = document.createElement('input');
+      hiddenField.value = flagFilter;
+      hiddenField.name  = "filterName";
+      hiddenField.type  = "hidden";
+      form.appendChild(hiddenField);
+  
+
+  document.body.appendChild(form);
+  form.submit();
 }
 </script>
 
@@ -82,9 +95,20 @@ function filter( manufacturer){
                   <form action="" class="aa-sort-form">
                     <label for="">NSX</label>
                     <select id="Filter" name="" onchange="filter(this.options[this.selectedIndex].text)">
-                      <option value="1" selected="Default">Tất cả</option>
+                      <option value="1" selected="Default" >Tất cả</option>
                       <%
-                      let manufacturerlist = new Array();
+                      if(listType){
+                          for(let i =0;i< listType.length;i++){ 
+                            if (manufaceturerName==listType[i]){ %>
+                              <option value="<%= i %>" selected="Default"><%= listType[i]%></option>
+                            <% }
+                            else{ %>
+                              <option value="<%= i %>"><%= listType[i]%></option>
+                            <% } %>
+                            
+                          <%}
+                      }else{
+                         let manufacturerlist = new Array();
                       let tmpBrand;
                       for(let i=0;i < info.length;i++)
                       {
@@ -105,9 +129,17 @@ function filter( manufacturer){
                         
                       }
                       for(let i=0;i< manufacturerlist.length;i++ )
-                      { %>
-                          <option value="<%= i %>"><%= manufacturerlist[i]%></option>
-                      <%}%>
+                      {
+                        if(manufacturerlist[i]===manufaceturerName){ %>
+
+                          <option value="<%= i %>" selected ="Default"><%= manufacturerlist[i]%></option>
+                          <% } else{ %>
+
+                            <option value="<%= i %>"><%= manufacturerlist[i]%></option>
+                          
+                          
+                      <%}}}%>
+                     
                     </select>
                   </form>
                 </div>
@@ -249,7 +281,6 @@ function filter( manufacturer){
   </section>
 </body>
 <script>
-  console.log('<%=info%>');
   const productInfo = encodeURI(`<%-JSON.stringify(info)%>`);
   var listNode = document.getElementById("listproduct");
   //var items=document.querySelectorAll("#listproduct li");
@@ -260,14 +291,18 @@ function filter( manufacturer){
   }
   
   function clickPagination(page, productInfo) {
-    let flagSort=document.getElementById("Sort").options[document.getElementById("Sort").selectedIndex].value;
-    const categoryID = urlParam('id');
+    const flagSort=document.getElementById("Sort").options[document.getElementById("Sort").selectedIndex].value;
+    const flagFilter=document.getElementById("Filter").options[document.getElementById("Filter").selectedIndex].text;
+    const categoryID = '<%= type%>';
+  
+    console.log(categoryID);
     let info = [];
     const getListProductFunction = $.ajax({
       type: "POST",
       url: window.location.protocol + "//" + window.location.host + "/products" + "/get",
       data: {
-        categoryID: categoryID
+        categoryID: categoryID,
+        filterName:flagFilter
       },
       dataType: "json"
     }).done(function (resp) {

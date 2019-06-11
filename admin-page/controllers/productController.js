@@ -38,6 +38,13 @@ exports.deleteProduct = function (req, res) {
 
     axios.delete("https://api-scttshop-v2.herokuapp.com/api/products/" + productID)
         .then(response => {
+            axios({
+                method: 'POST',
+                url: process.env.MAIN_PAGE_URL_EVICT_CACHE,
+                data: {
+                    type: 'PRODUCT'
+                }
+            })
             res.json({
                 data: "Delete Succeed",
                 status: 200
@@ -54,7 +61,9 @@ exports.deleteProduct = function (req, res) {
 
 exports.insertProduct = function (req, res) {
 
-    console.log("categoryID:" + req.body.categoryID);
+    let subCategory = null;
+    if (req.body.subCategoryID != null)
+        subCategory = req.body.subCategoryID;
 
     axios({
             method: 'POST',
@@ -62,6 +71,7 @@ exports.insertProduct = function (req, res) {
             data: {
                 productName: req.body.productName,
                 categoryID: req.body.categoryID,
+                subCategoryID: subCategory,
                 manufacturer: req.body.manufacturer,
                 image: req.body.image,
                 description: req.body.description,
@@ -73,6 +83,13 @@ exports.insertProduct = function (req, res) {
             }
         })
         .then(response => {
+            axios({
+                method: 'POST',
+                url: process.env.MAIN_PAGE_URL_EVICT_CACHE,
+                data: {
+                    type: 'PRODUCT'
+                }
+            })
             res.json({
                 data: "Insert Succeed",
                 status: 200
@@ -89,6 +106,10 @@ exports.insertProduct = function (req, res) {
 
 exports.updateProduct = function (req, res) {
 
+    let subCategory = null;
+    if (req.body.subCategoryID != null)
+        subCategory = req.body.subCategoryID;
+
     axios({
             method: 'PUT',
             url: 'https://api-scttshop-v2.herokuapp.com/api/products/' + req.body.productID,
@@ -96,6 +117,7 @@ exports.updateProduct = function (req, res) {
                 productID: req.body.productID,
                 productName: req.body.productName,
                 categoryID: req.body.categoryID,
+                subCategoryID: subCategory,
                 manufacturer: req.body.manufacturer,
                 image: req.body.image,
                 description: req.body.description,
@@ -107,6 +129,13 @@ exports.updateProduct = function (req, res) {
             }
         })
         .then(response => {
+            axios({
+                method: 'POST',
+                url: process.env.MAIN_PAGE_URL_EVICT_CACHE,
+                data: {
+                    type: 'PRODUCT'
+                }
+            })
             res.json({
                 data: "Update Succeed",
                 status: 200
