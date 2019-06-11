@@ -38,6 +38,7 @@ firebase.initializeApp({
 
 var app = express();
 
+console.log(process.env.MAIN_PAGE_URL_EVICT_CACHE);
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

@@ -111,25 +111,13 @@ function showPopupListProduct(itemthis) {
 function showPopupUpdateCategory(itemthis) {
     var chil = $(itemthis).parent().parent().children();
 
-    var id = chil[0].innerHTML;
+    const id = chil[0].innerHTML;
+    const name = chil[1].innerHTML;
+    const totalProductType = chil[2].innerHTML;
 
-    $.ajax({
-        type: "GET",
-        url: BASE_CATEGORY_PATH + "/get/" + id,
-        data: {
-            categoryID: id
-        }
-    }).done(function (resp) {
-
-        const obj = JSON.parse(resp);
-
-        $("#dlgupdatecategory input[name='categoryID']").val(obj.categoryID);
-        $("#dlgupdatecategory input[name='categoryName']").val(obj.categoryName);
-        $("#dlgupdatecategory input[name='totalProductType']").val(obj.totalProductType);
-
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        console.log("Error: " + textStatus);
-    }).always(function () {});
+    $("#dlgupdatecategory input[name='categoryID']").val(id);
+        $("#dlgupdatecategory input[name='categoryName']").val(name);
+        $("#dlgupdatecategory input[name='totalProductType']").val(totalProductType);
 }
 
 function showPopupDeleteCategory(itemthis) {
@@ -144,6 +132,7 @@ function showPopupDeleteCategory(itemthis) {
 
 
 function handleDeleteCategory() {
+    $("#dlgloading").modal('show');
     $.ajax({
         type: "POST",
         url: BASE_CATEGORY_PATH + "/delete",
@@ -156,10 +145,12 @@ function handleDeleteCategory() {
     }).always(function () {
         $("#dlgdeleteuser").modal('hide');
         $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
     });
 }
 
 function handleInsertCategory() {
+    $("#dlgloading").modal('show');
     $.ajax({
         type: "POST",
         url: BASE_CATEGORY_PATH + "/insert",
@@ -173,10 +164,12 @@ function handleInsertCategory() {
     }).always(function () {
         $("#dlginsertcategory").modal('hide');
         $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
     });
 }
 
 function handleUpdateCategory() {
+    $("#dlgloading").modal('show');
     $.ajax({
         type: "POST",
         url: BASE_CATEGORY_PATH + "/update",
@@ -190,6 +183,7 @@ function handleUpdateCategory() {
     }).always(function () {
         $("#dlgupdatecategory").modal('hide');
         $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
     });
 }
 
