@@ -12,4 +12,6 @@ router.get('/search',product_controller.search);
 
 router.post('/get',product_controller.product_list);
 
+router.post('/filter',product_controller.product_list_type_filter);
+
 module.exports = router;
