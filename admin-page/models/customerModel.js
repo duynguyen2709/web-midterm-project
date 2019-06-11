@@ -40,7 +40,7 @@ module.exports.customerList = async () => {
 
             return listCustomer;
         }).catch((err) => {
-            console.log("Error userAccountList : " + err.response);
+            console.log("Error customerList : " + err.response);
             return null;
         });
 
@@ -61,6 +61,7 @@ module.exports.getCustomer = async (email) => {
 
         return result;
     } catch (err) {
+        console.log("Error getCustomer : " + err.response);
         return null;
     }
 }

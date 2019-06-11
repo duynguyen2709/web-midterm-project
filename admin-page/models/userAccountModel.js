@@ -1,8 +1,8 @@
 var axios = require('axios');
 var bcrypt = require('bcrypt');
 
-module.exports.userAccountList = async () => {
-    const result = await axios.get('https://api-scttshop-v2.herokuapp.com/api/useraccounts')
+module.exports.userAccountList = async (notVerifiedStatus) => {
+    const result = await axios.get('https://api-scttshop-v2.herokuapp.com/api/useraccounts?notVerified=' + notVerifiedStatus)
         .then((response) => {
             return response.data;
         }).catch((err) => {

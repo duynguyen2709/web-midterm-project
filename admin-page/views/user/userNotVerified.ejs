@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<% include ../common/preheader%>
+
+<body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+    <% include ../common/header%>
+    <% include ../common/sidebar%>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+      <!-- Main content -->
+      <section class="content">
+
+        <div id="products">
+          <div class="row">
+            <div class="col-xs-12">
+
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Danh Sách Người Dùng Chờ Xác Thực</h3>
+                </div>
+
+                <div class="box-body">
+                  <table id="userNotVerifiedTable" class="table no-margin table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Tên Đăng Nhập</th>
+                        <th style="width: 10%">Họ Và Tên</th>
+                        <th>Email</th>
+                        <th style="width: 7%">Ngày Sinh</th>
+                        <th>Địa Chỉ</th>
+                        <th>Số Điện Thoại</th>
+                        <th>Xác Thực</th>
+                        <th>Xóa</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <!-- /.box-body -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+    <%include ../common/dialogs%>
+    <%include ../common/script%>
+
+    <script>
+
+      $(function () {
+          loadUserNotVerified();
+      });
+    </script>
+</body>
+
+</html>

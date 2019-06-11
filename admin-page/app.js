@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -9,7 +10,6 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var UserModel = require('./models/userAccountModel');
 var axios = require('axios');
-var bcrypt = require('bcrypt');
 
 // ################# ROUTER SECTION ############################
 
@@ -86,6 +86,15 @@ app.use('/promotion', promotionRouter);
 app.use('/userdetail', userDetailRouter);
 app.use('/customer', customerRouter);
 
+app.get('/notverified', function (req, res) {
+  if (req.isAuthenticated()) {
+    res.render('user/userNotVerified', {
+      user: req.user
+    });
+  } else {
+    res.redirect('/');
+  }
+})
 
 app.use(function (req, res, next) {
   if (req.protocol !== 'http') {
@@ -96,7 +105,6 @@ app.use(function (req, res, next) {
   // allow the request to continue
   next();
 });
-
 
 // ###############  PASSPORT AUTHENTICATE SECTION #####################
 
@@ -112,8 +120,13 @@ passport.use('local', new LocalStrategy({
       return done(null, false);
     }
 
-    if (user.status == 0){
+    if (user.status == 0) {
       req.authError = "Tài Khoản Đã Bị Khóa";
+      return done(null, false);
+    }
+
+    if (user.isVerified == 0) {
+      req.authError = "Quản Trị Viên Chưa Cấp Quyền Cho Tài Khoản";
       return done(null, false);
     }
 
