@@ -100,6 +100,14 @@ exports.updateCount=async function(req,res){
     
     
 };
+exports.deleteCart=async function(req,res){
+    let listCategories=await category.getListCategory();  
+    req.session.cart.array=[];
+    let  curUser =req.session.user;
+    res.render('./checkout/checkout',{
+        listCategory: listCategories, user: curUser,list:[],listInDb:[]
+    });
+}
 
 
 exports.proceed_to_checkout =async function(req, res) {

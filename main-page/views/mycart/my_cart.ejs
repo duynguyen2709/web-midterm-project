@@ -47,6 +47,10 @@ addRow(data.cart,data.listCount);
       var myvar='<tbody id="productTable">';
       var select;
       let total=0;
+      if(list.length==0){
+        document.getElementById("btnunloading").style.visibility = "hidden";
+      }
+      
       for(let i=0;i<list.length;i++){
         console.log(list[i].size+list[i].productID+list[i].categoryID);
         total+=list[i].count*list[i].price;

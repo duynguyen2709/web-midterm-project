@@ -6,7 +6,47 @@
     <script>
       function submitButton(){
         
-      }
+        
+        var info= '<%- JSON.stringify(listInDb) %>';
+        
+        console.log(info);
+  // const form = document.createElement('form');
+  // form.method = 'post';
+  // form.action = '../products/filter';
+
+  //     var hiddenField = document.createElement('input');
+  //     hiddenField.value = $('#name').val();
+  //     hiddenField.name  = "email";
+  //     hiddenField.type  = "hidden";
+  //     form.appendChild(hiddenField);
+
+  //     hiddenField = document.createElement('input');
+  //     hiddenField.value = $('#address').val();
+  //     hiddenField.name  = "shippingAddress";
+  //     hiddenField.type  = "hidden";
+  //     form.appendChild(hiddenField);
+
+  //     hiddenField = document.createElement('input');
+  //     hiddenField.value = info;
+  //     hiddenField.name  = "orderDetail";
+  //     hiddenField.type  = "hidden";
+  //     form.appendChild(hiddenField);
+  
+
+  // document.body.appendChild(form);
+  // form.submit();
+  const form1= document.createElement('form');
+  form1.method = 'post';
+  form1.action = '../my-cart/deleteCart';
+  var hiddenField = document.createElement('input');
+      hiddenField.value = $('#address').val();
+      hiddenField.name  = "shippingAddress";
+      hiddenField.type  = "hidden";
+      form1.appendChild(hiddenField);
+      document.body.appendChild(form1);
+  form1.submit();
+  }
+
       </script>  
     
 
@@ -50,9 +90,9 @@
                       </div>
                       <div id="collapseTwo" class="panel-collapse collapse">
                         <div class="panel-body">
-                          <input type="text" placeholder="Email">
-                          <input type="text" placeholder="Địa chỉ">
-                          <button onclick="submitButton()">Xác nhận</button>
+                          <input type="text" id="name" placeholder="Email">
+                          <input type="text" id="address" placeholder="Địa chỉ">
+                          <input type='button' onclick="submitButton()">Xác nhận</button>
                         </div>
                       </div>
                     </div>
@@ -268,7 +308,7 @@
                   </div>-->
                 </div>
               </div> 
-              <div class="col-md-4">
+              <div class="col-md-8">
                 <div class="checkout-right">
                   <h4>Chi Tiết Hóa Đơn</h4>
                   <div class="aa-order-summary-area">

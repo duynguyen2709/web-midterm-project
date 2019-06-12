@@ -72,5 +72,24 @@ class Product {
         this.size=size||"S"
     }
 }
+class CartInDb{
+    constructor (cart){
+        let tmp;
+        this.array=[];
+        for(let i=0;i<cart.length;i++){
+            tmp=new ProductInDb(cart[i].productID,cart[i].count);
+            this.array.push(tmp);
+        }
+        
+    }
+}
+class ProductInDb{
+    constructor(productID,quantity){
+        this.productID=productID;
+        this.quantity=quantity;
+    }
+}
 module.exports.Product = Product;
 module.exports.Cart = Cart;
+module.exports.ProductInDb = ProductInDb;
+module.exports.CartInDb = CartInDb;

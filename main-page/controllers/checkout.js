@@ -1,5 +1,6 @@
 var category=require('../model/category')
 var user=require('./user')
+var CartInDb=require('../model/cart').CartInDb
 // Display list of all products of specific type.
 exports.get_detail = async function(req, res) {            
     let listCategories=await category.getListCategory();  
@@ -7,7 +8,8 @@ exports.get_detail = async function(req, res) {
     let list;
         if(req.session.cart){
             list = req.session.cart.array;
-            res.render('checkout/checkout',{listCategory: listCategories, user: curUser,list:list});
+            var listInDb=new CartInDb(list);
+            res.render('checkout/checkout',{listCategory: listCategories, user: curUser,list:list,listInDb:listInDb.array});
         }else{
             res.render('checkout/checkout',{listCategory: listCategories, user: curUser,list:null});
         }
