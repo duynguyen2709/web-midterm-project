@@ -130,3 +130,79 @@ exports.updateCategory = function (req, res) {
             });
         });
 }
+
+
+exports.deleteSubCategory = function (req, res) {
+    const subCategoryID = req.body.subCategoryID;
+
+    axios.delete("https://api-scttshop-v2.herokuapp.com/api/subcategories/" + subCategoryID)
+        .then(response => {
+        
+            res.json({
+                data: "Delete Succeed",
+                status: 200
+            });
+
+
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Delete Failed",
+                status: 500
+            });
+        });
+}
+
+exports.insertSubCategory = function (req, res) {
+
+    axios({
+            method: 'POST',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/subcategories/',
+            data: {
+                categoryID: req.body.categoryID,
+                subCategoryName: req.body.subCategoryName,
+                updDate: ''
+            }
+        })
+        .then(response => {
+
+            res.json({
+                data: "Insert Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Insert Failed",
+                status: 500
+            });
+        });
+}
+
+exports.updateSubCategory = function (req, res) {
+
+    axios({
+            method: 'PUT',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/subcategories/' + req.body.subCategoryID,
+            data: {
+                subCategoryName: req.body.subCategoryName,
+                updDate: ''
+            }
+        })
+        .then(response => {
+            
+            res.json({
+                data: "Update Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Update Failed",
+                status: 500
+            });
+        });
+}
