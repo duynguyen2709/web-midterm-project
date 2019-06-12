@@ -233,7 +233,7 @@ const uploadImageToStorage = (file) => {
       reject('Image Not Found');
     }
 
-    let newFileName = Date.now() + '_' + file.originalname;
+    let newFileName = Date.now() + '_' + Date.now() * 2;
 
     let fileUpload = bucket.file(newFileName);
 

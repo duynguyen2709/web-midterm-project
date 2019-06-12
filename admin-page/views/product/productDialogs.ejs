@@ -19,15 +19,28 @@
                         <input type="text" class="form-control" id="productName" name="productName" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="categoryID" class="control-label">Loại Sản Phẩm:</label>
-                        <select id="categoryID" name="categoryID">
-                            <% for(var i=0; i<listCategory.length; i++) {%>
-                            <option value="<%= listCategory[i].categoryID %>"><%= listCategory[i].categoryName %>
-                            </option>
-                            <% } %>
+                    <div class="form-group" style="display: flex;flex-direction: row;">
+                        <div>
+                            <label for="categoryID" class="control-label">Loại Sản Phẩm:</label>
+                            <select id="categoryID" name="categoryID"
+                                onchange="changeSubCategory(this.value,categories,'#subCategoryID'); return false;">
+                                <% for(var i=0; i<listCategory.length; i++) {%>
+                                <option value="<%= listCategory[i].categoryID %>"><%= listCategory[i].categoryName %>
+                                </option>
+                                <% } %>
 
-                        </select>
+                            </select>
+                        </div>
+                        <div style="margin-left:20%">
+                            <label for="subCategoryID" class="control-label">Phân Loại:</label>
+                            <select id="subCategoryID" name="subCategoryID">
+                                <% for(var i=0; i<listCategory[0].subCategories.length; i++) {%>
+                                <option value="<%= listCategory[0].subCategories[i].subCategoryID %>">
+                                    <%= listCategory[0].subCategories[i].subCategoryName %>
+                                </option>
+                                <% } %>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="manufacturer" class="control-label">Nhà Sản Xuất:</label>
@@ -103,15 +116,28 @@
                         <input type="text" class="form-control" id="updproductName" name="productName" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="updcategoryID" class="control-label">Loại Sản Phẩm:</label>
-                        <select id="updcategoryID" name="categoryID">
-                            <% for(var i=0; i<listCategory.length; i++) {%>
-                            <option value="<%= listCategory[i].categoryID %>"><%= listCategory[i].categoryName %>
-                            </option>
-                            <% } %>
+                    <div class="form-group" style="display: flex;flex-direction: row;">
+                        <div>
+                            <label for="upd_categoryID" class="control-label">Loại Sản Phẩm:</label>
+                            <select id="upd_categoryID" name="categoryID"
+                                onchange="changeSubCategory(this.value,categories,'#upd_subCategoryID'); return false;">
+                                <% for(var i=0; i<listCategory.length; i++) {%>
+                                <option value="<%= listCategory[i].categoryID %>"><%= listCategory[i].categoryName %>
+                                </option>
+                                <% } %>
 
-                        </select>
+                            </select>
+                        </div>
+                        <div style="margin-left:20%">
+                            <label for="upd_subCategoryID" class="control-label">Phân Loại:</label>
+                            <select id="upd_subCategoryID" name="subCategoryID">
+                                <% for(var i=0; i<listCategory[0].subCategories.length; i++) {%>
+                                <option value="<%= listCategory[0].subCategories[i].subCategoryID %>">
+                                    <%= listCategory[0].subCategories[i].subCategoryName %>
+                                </option>
+                                <% } %>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="updmanufacturer" class="control-label">Nhà Sản Xuất:</label>
@@ -194,3 +220,27 @@
         </div>
     </div>
 </div>
+
+<script>
+    function changeSubCategory(val, obj,id) {
+
+        const categories = JSON.parse(decodeURI(obj));
+
+        let items = null;
+        for (i = 0; i < categories.length; i++) {
+            if (categories[i].categoryID == val) {
+                items = categories[i].subCategories;
+                break;
+            }
+        }
+        $(id).find('option')
+            .remove();
+
+        $.each(items, function (i, item) {
+            $(id).append($('<option>', {
+                value: item.subCategoryID,
+                text: item.subCategoryName
+            }));
+        });
+    }
+</script>

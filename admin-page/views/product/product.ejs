@@ -31,6 +31,7 @@
                         <th>ID</th>
                         <th>Tên Sản Phẩm</th>
                         <th>Loại Sản Phẩm</th>
+                        <th>Phân Loại</th>
                         <th>Nhà Sản Xuất</th>
                         <th>Hình Ảnh</th>
                         <th>Mô Tả</th>
@@ -58,6 +59,9 @@
     <%include ./productDialogs%>
 
     <script>
+
+        const categories = encodeURI('<%-JSON.stringify(listCategory)%>');
+
         $(function () {
             loadProduct();
         });

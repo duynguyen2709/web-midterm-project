@@ -24,6 +24,10 @@ function loadProduct() {
                 "defaultContent": "",
             },
             {
+                "data": "subCategoryName",
+                "defaultContent": "",
+            },
+            {
                 "data": "manufacturer",
                 "defaultContent": ""
             }, {
@@ -57,22 +61,22 @@ function loadProduct() {
         ],
         "rowCallback": function (row, data, index) {
             if (data["isActive"] == "1") {
-                $(row).find('td:eq(9)').css('color', 'green');
+                $(row).find('td:eq(10)').css('color', 'green');
                 //$(row).find('td:eq(9)').text('Đang Bán');
-                $(row).find('td:eq(9)').html('<span class="label label-success">Đang Bán</span>');
+                $(row).find('td:eq(10)').html('<span class="label label-success">Đang Bán</span>');
             } else {
-                $(row).find('td:eq(9)').css('color', 'red');
+                $(row).find('td:eq(10)').css('color', 'red');
                 //$(row).find('td:eq(9)').text('Tạm Ngừng Bán');
-                $(row).find('td:eq(9)').html('<span class="label label-danger">Tạm Ngừng Bán</span>');
+                $(row).find('td:eq(10)').html('<span class="label label-danger">Tạm Ngừng Bán</span>');
             }
         },
         columnDefs: [{
-                targets: 5,
+                targets: 6,
                 render: $.fn.dataTable.render.ellipsis(128, false)
             },
             {
                 'searchable': false,
-                'targets': [4, 5, 8]
+                'targets': [5, 6, 9]
             }
         ],
         "bDestroy": true
@@ -82,6 +86,7 @@ function loadProduct() {
 
 
 function showPopupUpdateProduct(itemthis) {
+    $("#formupdateproduct").trigger('reset');
     var chil = $(itemthis).parent().parent().children();
 
     var productID = chil[0].innerHTML;
@@ -99,6 +104,28 @@ function showPopupUpdateProduct(itemthis) {
         $("#dlgupdateproduct input[name='productID']").val(obj.productID);
         $("#dlgupdateproduct select[name='categoryID'] option").filter(function () {
             return $.trim($(this).val()) === $.trim(obj.categoryID);
+        }).attr("selected", true).prop("selected", "selected");
+
+        const categoryList = JSON.parse(decodeURI(categories));
+
+        let items = null;
+        for (i = 0; i < categoryList.length; i++) {
+            if (categoryList[i].categoryID == obj.categoryID) {
+                items = categoryList[i].subCategories;
+                break;
+            }
+        }
+        $('#upd_subCategoryID').find('option')
+            .remove();
+
+        $.each(items, function (i, item) {
+            $('#upd_subCategoryID').append($('<option>', {
+                value: item.subCategoryID,
+                text: item.subCategoryName
+            }));
+        });
+        $("#dlgupdateproduct select[name='subCategoryID'] option").filter(function () {
+            return $.trim($(this).val()) === $.trim(obj.subCategoryID);
         }).attr("selected", true).prop("selected", "selected");
 
         $("#dlgupdateproduct input[name='productName']").val(obj.productName);
@@ -129,6 +156,7 @@ function showPopupDeleteProduct(itemthis) {
 
 
 function handleDeleteProduct() {
+    $("#dlgloading").modal('show');
     $.ajax({
         type: "POST",
         url: BASE_PATH + "/delete",
@@ -141,10 +169,12 @@ function handleDeleteProduct() {
     }).always(function () {
         $("#dlgdeleteproduct").modal('hide');
         $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
     });
 }
 
 function handleInsertProduct() {
+    $("#dlgloading").modal('show');
     $.ajax({
         type: "POST",
         url: BASE_PATH + "/insert",
@@ -158,10 +188,12 @@ function handleInsertProduct() {
     }).always(function () {
         $("#dlginsertproduct").modal('hide');
         $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
     });
 }
 
 function handleUpdateProduct() {
+    $("#dlgloading").modal('show');
     $.ajax({
         type: "POST",
         url: BASE_PATH + "/update",
@@ -175,6 +207,7 @@ function handleUpdateProduct() {
     }).always(function () {
         $("#dlgupdateproduct").modal('hide');
         $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
     });
 }
 
@@ -184,5 +217,3 @@ function serializeFormToJSon(form) {
         [next.name]: next.value
     }), {});
 }
-
-

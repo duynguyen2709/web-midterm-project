@@ -128,3 +128,101 @@
         </div>
     </div>
 </div>
+
+
+<!-- ############################### SUB CATEGORY SECTION ###############################-->
+<div id="dlginsertsubcategory" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="padding-top: 10%;">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Thêm Phân Loại Sản Phẩm Mới</h4>
+                </div>
+    
+                <div class="modal-body">
+                    <form action="#" method="POST" id="forminsertsubcategory">
+                        <div class="form-group">
+                            <label for="subCategoryName" class="control-label">Tên Phân Loại:</label>
+                            <input type="text" class="form-control" id="subCategoryName" name="subCategoryName" required>
+                        </div>
+                        <input style="display: none;" type="text" class="form-control" id="categoryID" name="categoryID">
+    
+                        <button type="submit"
+                            onclick="handleInsertSubCategory(); $('#forminsertsubcategory').get(0).reset();  return false;"
+                            class="btn btn-info" data-dismiss="modal">Thêm</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+    <div id="dlgupdatesubcategory" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="padding-top: 10%;">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Chỉnh Sửa Thông Tin Phân Loại Sản Phẩm</h4>
+                </div>
+    
+                <div class="modal-body">
+                    <form action="#" method="POST" id="formupdatesubcategory">
+                        <div class="form-group">
+                            <label for="subCategoryID" class="control-label">ID:</label>
+                            <input type="text" class="form-control" id="subCategoryID" name="subCategoryID" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label for="updsubCategoryName" class="control-label">Tên Phân Loại Sản Phẩm:</label>
+                            <input type="text" class="form-control" id="updsubCategoryName" name="subCategoryName" required>
+                        </div>
+                        
+                        <button type="submit" onclick="handleUpdateSubCategory(); return false;" class="btn btn-info"
+                            data-dismiss="modal">Cập Nhật</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+    <div id="dlgdeletesubcategory" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="padding-top: 10%;">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Xóa Phân Loại Sản Phẩm</h4>
+                </div>
+    
+                <div class="modal-body">
+                    <form method="POST" action="#" id="formdeletesubcategory">
+                        <div class="form-group">
+                            <label for="delcategoryID" class="control-label">ID:</label>
+                            <input type="text" class="form-control" id="delcategoryID" name="subCategoryID" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label for="delsubCategoryName" class="control-label">Tên Phân Loại Sản Phẩm:</label>
+                            <input type="text" class="form-control" id="delsubCategoryName" name="subCategoryName" readonly
+                                required>
+                        </div>
+    
+                        <button type="button" onclick="handleDeleteSubCategory(); return false;" class="btn btn-danger"
+                            data-dismiss="modal">Xóa</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    <!-- ############################### END CATEGORY SECTION ###############################-->

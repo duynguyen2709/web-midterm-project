@@ -113,6 +113,7 @@ function showPopupDeletePromotion(itemthis) {
 
 
 function handleDeletePromotion() {
+    $("#dlgloading").modal('show');
     $.ajax({
         type: "POST",
         url: BASE_PROMOTION_PATH + "/delete",
@@ -125,10 +126,12 @@ function handleDeletePromotion() {
     }).always(function () {
         $("#dlgdeletepromotion").modal('hide');
         $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
     });
 }
 
 function handleInsertPromotion() {
+    $("#dlgloading").modal('show');
     $.ajax({
         type: "POST",
         url: BASE_PROMOTION_PATH + "/insert",
@@ -142,10 +145,12 @@ function handleInsertPromotion() {
     }).always(function () {
         $("#dlginsertpromotion").modal('hide');
         $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
     });
 }
 
 function handleUpdatePromotion() {
+    $("#dlgloading").modal('show');
     $.ajax({
         type: "POST",
         url: BASE_PROMOTION_PATH + "/update",
@@ -159,6 +164,7 @@ function handleUpdatePromotion() {
     }).always(function () {
         $("#dlgupdatepromotion").modal('hide');
         $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
     });
 }
 

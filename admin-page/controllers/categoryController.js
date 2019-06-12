@@ -41,10 +41,20 @@ exports.deleteCategory = function (req, res) {
 
     axios.delete("https://api-scttshop-v2.herokuapp.com/api/categories/" + categoryID)
         .then(response => {
+            axios({
+                method: 'POST',
+                url: process.env.MAIN_PAGE_URL_EVICT_CACHE,
+                data: {
+                    type: 'CATEGORY'
+                }
+            })
+
             res.json({
                 data: "Delete Succeed",
                 status: 200
             });
+
+
         })
         .catch(err => {
             console.log(err);
@@ -66,6 +76,14 @@ exports.insertCategory = function (req, res) {
             }
         })
         .then(response => {
+            axios({
+                method: 'POST',
+                url: process.env.MAIN_PAGE_URL_EVICT_CACHE,
+                data: {
+                    type: 'CATEGORY'
+                }
+            })
+
             res.json({
                 data: "Insert Succeed",
                 status: 200
@@ -91,6 +109,90 @@ exports.updateCategory = function (req, res) {
             }
         })
         .then(response => {
+            axios({
+                method: 'POST',
+                url: process.env.MAIN_PAGE_URL_EVICT_CACHE,
+                data: {
+                    type: 'CATEGORY'
+                }
+            })
+            
+            res.json({
+                data: "Update Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Update Failed",
+                status: 500
+            });
+        });
+}
+
+
+exports.deleteSubCategory = function (req, res) {
+    const subCategoryID = req.body.subCategoryID;
+
+    axios.delete("https://api-scttshop-v2.herokuapp.com/api/subcategories/" + subCategoryID)
+        .then(response => {
+        
+            res.json({
+                data: "Delete Succeed",
+                status: 200
+            });
+
+
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Delete Failed",
+                status: 500
+            });
+        });
+}
+
+exports.insertSubCategory = function (req, res) {
+
+    axios({
+            method: 'POST',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/subcategories/',
+            data: {
+                categoryID: req.body.categoryID,
+                subCategoryName: req.body.subCategoryName,
+                updDate: ''
+            }
+        })
+        .then(response => {
+
+            res.json({
+                data: "Insert Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Insert Failed",
+                status: 500
+            });
+        });
+}
+
+exports.updateSubCategory = function (req, res) {
+
+    axios({
+            method: 'PUT',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/subcategories/' + req.body.subCategoryID,
+            data: {
+                subCategoryName: req.body.subCategoryName,
+                updDate: ''
+            }
+        })
+        .then(response => {
+            
             res.json({
                 data: "Update Succeed",
                 status: 200

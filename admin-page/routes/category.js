@@ -17,4 +17,10 @@ router.post('/insert',categoryController.insertCategory);
 
 router.post('/update',categoryController.updateCategory);
 
+router.post('/sub/delete',categoryController.deleteSubCategory);
+
+router.post('/sub/insert',categoryController.insertSubCategory);
+
+router.post('/sub/update',categoryController.updateSubCategory);
+
 module.exports = router;
