@@ -28,6 +28,7 @@ function updateCount(image,name, price,size, count){
       });
       }
     function removeProduct(image,name,price){
+      document.getElementById('btnunloading').disabled=true;
       $.ajax('../my-cart/removeProduct',   // request url
 {          
   type: 'POST',  
@@ -37,6 +38,7 @@ function updateCount(image,name, price,size, count){
     price:price
   },
   success: function (data) { 
+    document.getElementById('btnunloading').disabled=false;
       
 addRow(data.cart,data.listCount);
   }
@@ -246,14 +248,16 @@ select+
                    </tr>
                  </tbody>
                </table>
-               <% if(list){%>
+               <% if(list){
+                 if (list.length>0){%>
+
                 <% if(user)
                 {%>
-                 <button id="btnunloading" href="../check-out" class="btn btn-lg btn-primary" style="margin-top: 20px" >Tiến hành thanh toán</button>
+                 <button id="btnunloading"onclick="window.location.href = '../check-out';" class="btn btn-lg btn-primary" style="margin-top: 20px" >Tiến hành thanh toán</button>
                 <%}else{%>
                  
                  <button id="btnunloading" href="#" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#login-modal" style="margin-top: 20px"  >Tiến hành thanh toán</button>
-                <%}}%>
+                <%}}}%>
                
              </div>
            </div>
