@@ -10,41 +10,41 @@
         var info= '<%- JSON.stringify(listInDb) %>';
         
         console.log(info);
-  // const form = document.createElement('form');
-  // form.method = 'post';
-  // form.action = '../products/filter';
-
-  //     var hiddenField = document.createElement('input');
-  //     hiddenField.value = $('#name').val();
-  //     hiddenField.name  = "email";
-  //     hiddenField.type  = "hidden";
-  //     form.appendChild(hiddenField);
-
-  //     hiddenField = document.createElement('input');
-  //     hiddenField.value = $('#address').val();
-  //     hiddenField.name  = "shippingAddress";
-  //     hiddenField.type  = "hidden";
-  //     form.appendChild(hiddenField);
-
-  //     hiddenField = document.createElement('input');
-  //     hiddenField.value = info;
-  //     hiddenField.name  = "orderDetail";
-  //     hiddenField.type  = "hidden";
-  //     form.appendChild(hiddenField);
+        const ajax=$.ajax('../check-out/postOrder', {
+  type: "POST",
+  data: {
+    email: $('#name').val(),
+    shippingAddress: $('#address').val(),
+    orderDetail: info
+  },
+  error: function(){
+    location.href("./");
+    $('#myModal').modal('show');
+    
+  },
+  success: function(data, status, xhr){
+    alert("Đặt hàng thành công!");
+   
+    const form1= document.createElement('form');
+    form1.style.visibility = "hidden";
+    form1.method = 'post';
+    form1.action = '../my-cart/deleteCart';
+    var hiddenField = document.createElement('input');
+    hiddenField.value = $('#address').val();
+    hiddenField.name  = "shippingAddress";
+    hiddenField.type  = "hidden";
+    form1.appendChild(hiddenField);
+    document.body.appendChild(form1);
+    form1.submit(function(){});
+    
+  }
   
+});
+ajax.then(function(){
+  $('#myModal').modal('show');
+});
 
-  // document.body.appendChild(form);
-  // form.submit();
-  const form1= document.createElement('form');
-  form1.method = 'post';
-  form1.action = '../my-cart/deleteCart';
-  var hiddenField = document.createElement('input');
-      hiddenField.value = $('#address').val();
-      hiddenField.name  = "shippingAddress";
-      hiddenField.type  = "hidden";
-      form1.appendChild(hiddenField);
-      document.body.appendChild(form1);
-  form1.submit();
+
   }
 
       </script>  
@@ -92,7 +92,7 @@
                         <div class="panel-body">
                           <input type="text" id="name" placeholder="Email">
                           <input type="text" id="address" placeholder="Địa chỉ">
-                          <input type='button' onclick="submitButton()">Xác nhận</button>
+                          <input type='button' onclick="submitButton()" value="Xác nhận"></button>
                         </div>
                       </div>
                     </div>
@@ -361,6 +361,6 @@
  </section>
  <!-- / Cart view section -->
 
-    
   </body>
+   
 </html>

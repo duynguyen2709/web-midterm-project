@@ -1,6 +1,7 @@
 var category=require('../model/category')
 var user=require('./user')
 var CartInDb=require('../model/cart').CartInDb
+var axios = require('axios');
 // Display list of all products of specific type.
 exports.get_detail = async function(req, res) {            
     let listCategories=await category.getListCategory();  
@@ -22,6 +23,35 @@ exports.submit_checkout_post = async function(req, res) {
     let listCategories=await category.getListCategory();  
     let  curUser =req.session.user
     res.send('NOT IMPLEMENTED: submit checkout POST');
+};
+
+exports.postOrder = async function(req,res){
+    console.log(req.body.email + req.body.shippingAddress+req.body.orderDetail);
+    axios({
+        method: 'POST',
+        url: 'http://api-scttshop-v2.herokuapp.com/api/orders/',
+        data: {
+            email: req.body.email,
+            shippingAddress:req.body.shippingAddress,
+            orderDetail: JSON.stringify(req.body.orderDetail) 
+        }
+    })
+    .then(
+        response => {
+            res.json({
+                data: "Insert Succeed",
+                status: 200
+            });
+    })
+    .catch(err => {
+        console.log(err)
+        res.json({
+            data: "Error",
+            status: 500
+        });
+    })
+    
+
 };
 
 
