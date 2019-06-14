@@ -1,7 +1,7 @@
 var category = require('../model/category')
 var product = require('../model/product')
 var user = require('./user')
-
+var axios = require('axios');
 exports.product_list = async function (req, res) {
     const categoryID = req.body.categoryID;
     var listProductReal=new Array();
@@ -118,4 +118,44 @@ exports.search = function (req, res) {
     const dataSearch = req.body.data;
     //handle search;
     res.send('NOT IMPLEMENTED: product search');
+}
+
+exports.product_comment = async function(req,res){
+    console.log("sdasdasdsa"+req.body.email+req.body.comment+req.body.customerName);
+    if(req.body.email)
+    {
+    axios({
+        method: 'POST',
+        url: 'http://api-scttshop-v2.herokuapp.com/api/components/',
+        data: {
+            productID: req.body.productID,
+            email:req.body.email,
+            comment: req.body.comment
+        }
+    }).then(
+        response => {
+            res.json({
+                data: "Success",
+                status: 200
+            });
+    })
+}
+else{
+    axios({
+        method: 'POST',
+        url: 'http://api-scttshop-v2.herokuapp.com/api/components/',
+        data: {
+            productID: req.body.productID,
+            customerName:req.body.customerName,
+            comment: req.body.comment
+        }
+    }).then(
+        response => {
+            res.json({
+                data: "Success",
+                status: 200
+            });
+    })
+}
+    
 }
