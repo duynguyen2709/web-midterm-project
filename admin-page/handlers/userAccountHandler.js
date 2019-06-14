@@ -54,6 +54,11 @@ function loadUserAccount(encodedUser) {
             {
                 data: null,
                 className: "center",
+                defaultContent: '<Button class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#dlgupdateuserrole" onclick="showPopupUpdateUserRole(this)">Phân Quyền</Button>'
+            },
+            {
+                data: null,
+                className: "center",
                 defaultContent: '<Button class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUser(this)">Chỉnh Sửa</Button>'
             },
             {
@@ -63,17 +68,32 @@ function loadUserAccount(encodedUser) {
             },
         ],
         "rowCallback": function (row, data, index) {
-
-            if (data["status"] == "1"){
-                $(row).find('td:eq(9)').html('<Button class="btn btn-block btn-warning btn-sm" value="0" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUser(this)">Khóa</Button>');
+            if (data["role"] == "ADMIN") {
+                $(row).find('td:eq(2)').css('color', 'green');
+                //$(row).find('td:eq(9)').text('Đang Bán');
+                $(row).find('td:eq(2)').html('<h4><span class="label label-success">ADMIN</span></h4>');
+            } else if (data["role"] == "MANAGER"){
+                $(row).find('td:eq(2)').css('color', 'blue');
+                //$(row).find('td:eq(9)').text('Tạm Ngừng Bán');
+                $(row).find('td:eq(2)').html('<h4><span class="label label-info">MANAGER</span></h4>');
             }
             else {
-                $(row).find('td:eq(9)').html('<Button class="btn btn-block btn-success btn-sm" value="1" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUser(this)">Mở Khóa</Button>');
+                $(row).find('td:eq(2)').css('color', 'gray');
+                //$(row).find('td:eq(9)').text('Tạm Ngừng Bán');
+                $(row).find('td:eq(2)').html('<h4><span class="label label-default">USER</span></h4>');
+            }
+
+            if (data["status"] == "1"){
+                $(row).find('td:eq(10)').html('<Button class="btn btn-block btn-warning btn-sm" value="0" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUser(this)">Khóa</Button>');
+            }
+            else {
+                $(row).find('td:eq(10)').html('<Button class="btn btn-block btn-success btn-sm" value="1" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUser(this)">Mở Khóa</Button>');
             }
 
             if (data["username"] == obj.username){
                 $(row).find('td:eq(9)').html('');
                 $(row).find('td:eq(10)').html('');
+                $(row).find('td:eq(11)').html('');
             }
 
            
@@ -99,6 +119,14 @@ function showPopupUpdateUser(itemthis) {
 
     $("#dlgupdateuser input[name='username']").val(username);
     $("#dlgupdateuser input[name='status']").val(status);
+
+}
+function showPopupUpdateUserRole(itemthis) {
+    var chil = $(itemthis).parent().parent().children();
+
+    var username = chil[0].innerHTML;
+
+    $("#dlgupdateuserrole input[name='username']").val(username);
 
 }
 
@@ -164,6 +192,25 @@ function handleUpdateUserAccount() {
         type: "POST",
         url: BASE_USER_PATH + "/lock",
         data: serializeFormToJSon("#formupdateuser"),
+        dataType: "json"
+    }).done(function (resp) {
+        console.log("Response: " + resp.status + " - " + resp.data);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("Error: " + textStatus);
+    }).always(function () {
+        $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
+    });
+}
+
+function handleUpdateUserRole() {
+    $("#dlgupdateuserrole").modal('hide');
+    $("#dlgloading").modal('show');
+    
+    $.ajax({
+        type: "POST",
+        url: BASE_USER_PATH + "/changerole",
+        data: serializeFormToJSon("#formupdateuserrole"),
         dataType: "json"
     }).done(function (resp) {
         console.log("Response: " + resp.status + " - " + resp.data);

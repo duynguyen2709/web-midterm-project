@@ -25,4 +25,6 @@ router.post('/lock',userController.lockUserAccount);
 
 router.post('/verify',userController.verifyUserAccount);
 
+router.post('/changerole',userController.changeUserAccountRole);
+
 module.exports = router;

@@ -75,7 +75,7 @@ exports.insertUserAccount = function (req, res) {
                 email: req.body.email,
                 birthDate: req.body.birthDate,
                 avatar: avatar,
-                role: 'ADMIN',
+                role: req.body.role,
                 updDate: ''
             }
         })
@@ -195,6 +195,34 @@ exports.verifyUserAccount = function (req, res) {
     axios({
             method: 'PUT',
             url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username + '/verify'      
+        })
+        .then(response => {
+            res.json({
+                data: "Update Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Update Failed",
+                status: 500
+            });
+        });
+}
+
+
+
+exports.changeUserAccountRole = function (req, res) {
+
+    axios({
+            method: 'PUT',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username + '/changerole',
+            data: {
+                username: req.body.username,
+                role: req.body.role,
+                updDate: ''
+            }
         })
         .then(response => {
             res.json({
