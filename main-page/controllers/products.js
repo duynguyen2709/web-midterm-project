@@ -6,15 +6,26 @@ exports.product_list = async function (req, res) {
     const categoryID = req.body.categoryID;
     var listProductReal=new Array();
     const listProduct = await product.getProductOfCategory(categoryID);
-    if(req.body.filterName=="Tất cả"){
+    if(req.body.filterName=="Tất cả"&& req.body.filterSub=="Tất cả"){
         res.json({
             info: listProduct
         });
     }
     else{   
         for (let i=0;i < listProduct.length ;i++){
-        if(listProduct[i].manufacturer===req.body.filterName)
-        listProductReal.push(listProduct[i]);
+            if(req.body.filterSub=="Tất cả"){
+                if(listProduct[i].manufacturer===req.body.filterName)
+                listProductReal.push(listProduct[i]);
+            }
+            else if (req.body.filterName=="Tất cả"){
+                if(listProduct[i].subCategoryName===req.body.filterSub)
+                listProductReal.push(listProduct[i]);
+            }
+            else{
+                if(listProduct[i].manufacturer===req.body.filterName&&listProduct[i].subCategoryName===req.body.filterSub)
+                listProductReal.push(listProduct[i]);
+            }
+        
         }
         res.json({
             info: listProductReal
@@ -39,7 +50,9 @@ exports.product_list_type = async function (req, res) {
         length: listProduct.length,
         type: type,
         listType: null,
-        manufaceturerName: null
+        listType1:null,
+        manufaceturerName: null,
+        subCategoryName:null
     });
 };
 
@@ -50,24 +63,48 @@ exports.product_list_type_filter = async function (req, res) {
     // listTypeReal=Array.from(unique);
     var body;
     var listType=[];
+    var listSub=[];
     let listCategories = await category.getListCategory();
     var type = req.body.type;
     let curUser = req.session.user;
-    let valueFilter=req.body.value;
+    let valueFilter=req.body.filterName;
     const listProduct = await product.getProductOfCategory(type);
     var listProduct1= new Array();
     var listProductReal=new Array();
     listProduct1=listProduct;
-    for (let i=0;i < listProduct1.length ;i++){
-        listType.push(listProduct1[i].manufacturer);
-        if(listProduct1[i].manufacturer===valueFilter)
-        listProductReal.push(listProduct1[i]);
-    }
+    console.log(req.body.filterSub+req.body.filterName+valueFilter);
+    if(valueFilter=="Tất cả" && req.body.filterSub!="Tất cả"){
+        for (let i=0;i < listProduct1.length ;i++){
+            listType.push(listProduct1[i].manufacturer);
+            listSub.push(listProduct1[i].subCategoryName);
+                if(listProduct1[i].subCategoryName===req.body.filterSub)
+                listProductReal.push(listProduct1[i]);    
+        }
+    }else if(valueFilter!="Tất cả" && req.body.filterSub=="Tất cả"){
+            for (let i=0;i < listProduct1.length ;i++){
+                listType.push(listProduct1[i].manufacturer);
+                listSub.push(listProduct1[i].subCategoryName);
+                    if(listProduct1[i].manufacturer===valueFilter)
+                    listProductReal.push(listProduct1[i]);    
+            }
+        }
+        else if(valueFilter!="Tất cả" && req.body.filterSub!="Tất cả"){
+            for (let i=0;i < listProduct1.length ;i++){
+                listType.push(listProduct1[i].manufacturer);
+                listSub.push(listProduct1[i].subCategoryName);
+                    if(listProduct1[i].manufacturer===valueFilter&&listProduct1[i].subCategoryName===req.body.filterSub)
+                    listProductReal.push(listProduct1[i]);    
+            }
+        }
+    
+    
+    
     var uniq = [...new Set(listType)];
+    var uniq1=[...new Set(listSub)];
     // var tmp=listType.push("asd");
     // console.log(JSON.stringify(listType));
     
-    if(valueFilter=="Tất cả"){
+    if(valueFilter=="Tất cả"&&req.body.filterSub=="Tất cả"){
         res.render('product/product', {
             info: listProduct,
             listCategory: listCategories,
@@ -75,7 +112,9 @@ exports.product_list_type_filter = async function (req, res) {
             length: listProduct.length,
             type: type,
             listType : null,
-            manufaceturerName: null
+            listType1: null,
+            manufaceturerName: null,
+            subCategoryName:null
         });
     }
     else{
@@ -86,7 +125,9 @@ exports.product_list_type_filter = async function (req, res) {
         length: listProductReal.length,
         type: type,
         listType : uniq,
-        manufaceturerName:req.body.filterName
+        listType1:uniq1,
+        manufaceturerName:valueFilter,
+        subCategoryName: req.body.filterSub
     });
     }
     
