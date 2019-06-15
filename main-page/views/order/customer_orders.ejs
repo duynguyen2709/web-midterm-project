@@ -15,51 +15,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th># 1735</th>
-                            <td>22/06/2018</td>
-                            <td>300.000 VNĐ</td>
-                            <td><span class="label label-info">Đã sẵn sàng</span>
-                            </td>
-                            <td><a href="/order/detail?id=1" class="aa-add-card-btn">Chi tiết</a>
-                            </td>
-                        </tr>
-                        <tr>
-                           <th># 1735</th>
-                            <td>22/06/2018</td>
-                            <td>300.000 VNĐ</td>
-                            <td><span class="label label-info">Đã sẵn sàng</span>
-                            </td>
-                            <td><a href="/order/detail?id=1" class="aa-add-card-btn">Chi tiết</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th># 1735</th>
-                            <td>22/06/2018</td>
-                            <td>450.000VNĐ</td>
-                            <td><span class="label label-success">Hoàn thành</span>
-                            </td>
-                            <td><a href="/order/detail?id=1" class="aa-add-card-btn">Chi tiết</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th># 1735</th>
-                            <td>22/06/2018</td>
-                            <td> 150.000VNĐ</td>
-                            <td><span class="label label-danger">Hủy</span>
-                            </td>
-                            <td><a href="/order/detail?id=1" class="aa-add-card-btn">Chi tiết</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th># 1735</th>
-                            <td>22/06/2018</td>
-                            <td>50.000VNĐ</td>
-                            <td><span class="label label-warning">Nháp</span>
-                            </td>
-                            <td><a href="/order/detail?id=1" class="aa-add-card-btn">Chi tiết</a>
-                            </td>
-                        </tr>
+                    <%if (typeof listOrders == 'undefined') { %>
+                       
+                        <% }
+                    else { %>
+                        <% if (listOrders!==null) {
+                            for(let i =0;i< listOrders.length;i++)
+                            {%>
+                                <tr>
+                                    <th>#<%=listOrders[i].orderID %></th>
+                                    <td><%=listOrders[i].orderTime %></td>
+                                    <td><%=listOrders[i].orderID %></td>
+                                    <% if (listOrders[i].status==="PROCESSING"){
+                                        %><td><span class="label label-info">Soạn hàng</span></td><%
+                                    }
+                                    else{%>
+                                        <% if(listOrders[i].status==="SHIPPING"){
+                                            %><td><span class="label label-warning">Shipping</span></td><%
+                                        }else{
+                                            %><td><span class="label label-success">Hoàn tất</span</td><%
+                                        } %>
+                                    <%}
+                                    %>
+                                    <td><a href="/order/detail?id=<%=listOrders[i].orderID %>" class="aa-add-card-btn">Chi tiết</a>
+                                    </td>
+                                </tr>
+            
+                            <%}
+                            }
+                            else {%> <%}
+                                %>
+                        <%} %>
                     </tbody>
                 </table>
             </div>
