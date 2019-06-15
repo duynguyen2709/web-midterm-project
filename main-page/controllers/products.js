@@ -2,9 +2,10 @@ var category = require('../model/category')
 var product = require('../model/product')
 var user = require('./user')
 var axios = require('axios');
+
 exports.product_list = async function (req, res) {
     const categoryID = req.body.categoryID;
-    var listProductReal=new Array();
+    var listProductReal = new Array();
     const listProduct = await product.getProductOfCategory(categoryID);
     if(req.body.filterName=="Tất cả"&& req.body.filterSub=="Tất cả"){
         res.json({
@@ -32,8 +33,8 @@ exports.product_list = async function (req, res) {
         });
         console.log(listProductReal);
     }
-    
-    
+
+
 }
 
 // Display list of all products of specific type.
@@ -99,12 +100,16 @@ exports.product_list_type_filter = async function (req, res) {
     
     
     
+
     var uniq = [...new Set(listType)];
     var uniq1=[...new Set(listSub)];
     // var tmp=listType.push("asd");
     // console.log(JSON.stringify(listType));
+
     
     if(valueFilter=="Tất cả"&&req.body.filterSub=="Tất cả"){
+
+
         res.render('product/product', {
             info: listProduct,
             listCategory: listCategories,
@@ -116,8 +121,7 @@ exports.product_list_type_filter = async function (req, res) {
             manufaceturerName: null,
             subCategoryName:null
         });
-    }
-    else{
+    } else {
         res.render('product/product', {
         info: listProductReal,
         listCategory: listCategories,
@@ -130,8 +134,8 @@ exports.product_list_type_filter = async function (req, res) {
         subCategoryName: req.body.filterSub
     });
     }
-    
-    
+
+
 };
 
 // Display detail page for a specific product.
@@ -140,7 +144,16 @@ exports.product_detail = async function (req, res) {
     var productId = req.query.id
     const productInfo = await product.getProductDetail(productId)
     let curUser = null
-    curUser = user.currentUser()
+    curUser = req.session.user
+    axios({
+            method: 'PUT',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/products/' + productId + '/view'
+        })
+        .then(response => {})
+        .catch(err => {
+            console.log(err);
+        });
+
     res.render('product/product_detail', {
         productInfo: productInfo,
         listCategory: listCategories,
@@ -154,6 +167,7 @@ exports.product_update_post = async function (req, res) {
     let listCategories = await category.getListCategory();
     res.send('NOT IMPLEMENTED: product update POST');
 };
+
 
 exports.search = function (req, res) {
     const dataSearch = req.body.data;
@@ -199,4 +213,5 @@ else{
     })
 }
     
+
 }

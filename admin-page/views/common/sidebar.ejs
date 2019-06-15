@@ -58,9 +58,16 @@
               </span>
             </a>
           </li>
+          <li>
+              <a href="/charttopsell"><i class="fa fa-line-chart"></i> Hàng Bán Chạy
+                <span class="pull-right-container">
+                </span>
+              </a>
+            </li>
         </ul>
       </li>
 
+      <%if (user.role == "ADMIN" || user.role == "MANAGER") { %>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-cogs"></i> <span>Quản Lý</span>
@@ -69,19 +76,21 @@
           </span>
         </a>
         <ul class="treeview-menu">
-
-          <li class="treeview">
-            <a href="#"><i class="fa fa-users"></i> Người Dùng
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="/user"><i class="fa fa-user"></i>Quản Trị Viên</a></li>
-              <li><a href="/notverified"><i class="fa fa-user"></i>Yêu Cầu Xác Thực</a></li>
-              <li><a href="/customer"><i class="fa fa-user"></i>Khách Hàng</a></li>
-            </ul>
-          </li>
+            <%if (user.role == "ADMIN") { %>
+              <li class="treeview">
+                  <a href="#"><i class="fa fa-users"></i> Người Dùng
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="/user"><i class="fa fa-user"></i>Tài Khoản</a></li>
+                    <li><a href="/notverified"><i class="fa fa-user"></i>Yêu Cầu Xác Thực</a></li>
+                    <li><a href="/customer"><i class="fa fa-user"></i>Khách Hàng</a></li>
+                  </ul>
+                </li>
+                <% } %>
+              
           <li class="treeview">
             <a href="#"><i class="fa fa-shopping-cart"></i> Cửa Hàng
               <span class="pull-right-container">
@@ -97,6 +106,7 @@
           </li>
         </ul>
       </li>
+      <% } %>
 
     </ul>
   </section>

@@ -21,7 +21,7 @@ module.exports.getCategory = async (categoryID) => {
 
 module.exports.getListProductOfCategory = async (categoryID) => {
 
-    const result = await axios.get('https://api-scttshop-v2.herokuapp.com/api/categories/' + categoryID + '/products')
+    const result = await axios.get('https://api-scttshop-v2.herokuapp.com/api/categories/' + categoryID + '/products?isActive=false')
         .then((res) => {
            return res.data;
         })

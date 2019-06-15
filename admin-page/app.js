@@ -106,6 +106,15 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get('/charttopsell', function (req, res) {
+  if (req.isAuthenticated()) {
+    res.render('chart/chartTopSell', {
+      user: req.user
+    });
+  } else {
+    res.redirect('/');
+  }
+})
 // ###############  PASSPORT AUTHENTICATE SECTION #####################
 
 passport.use('local', new LocalStrategy({
