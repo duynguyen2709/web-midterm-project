@@ -2,6 +2,8 @@ var category = require('../model/category')
 var user = require('./user')
 var CartInDb = require('../model/cart').CartInDb
 var axios = require('axios');
+var productModel = require('../model/product');
+
 // Display list of all products of specific type.
 exports.get_detail = async function (req, res) {
     let listCategories = await category.getListCategory();
@@ -54,6 +56,7 @@ exports.postOrder = async function (req, res) {
                     data: "Insert Succeed",
                     status: 200
                 });
+                productModel.evictCache();
             })
         .catch(err => {
             console.log(err)
