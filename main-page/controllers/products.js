@@ -118,13 +118,6 @@ exports.product_detail = async function (req, res) {
     })
 };
 
-
-// Handle product update on POST.
-exports.product_update_post = async function (req, res) {
-    let listCategories = await category.getListCategory();
-    res.send('NOT IMPLEMENTED: product update POST');
-};
-
 exports.search = async function (req, res) {
     let listCategories = await category.getListCategory();
     let curUser = null
