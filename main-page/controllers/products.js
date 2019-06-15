@@ -1,6 +1,7 @@
 var category = require('../model/category')
 var product = require('../model/product')
 var user = require('./user')
+var axios = require('axios');
 
 exports.product_list = async function (req, res) {
 
@@ -36,7 +37,7 @@ exports.product_detail = async function (req, res) {
     var productId = req.query.id
     const productInfo = await product.getProductDetail(productId)
     let curUser = null
-    curUser = user.currentUser()
+    curUser=req.session.user
     res.render('product/product_detail', {
         productInfo: productInfo,
         listCategory: listCategories,
@@ -51,8 +52,55 @@ exports.product_update_post = async function (req, res) {
     res.send('NOT IMPLEMENTED: product update POST');
 };
 
-exports.search = function (req, res) {
-    const dataSearch = req.body.data;
-    //handle search;
-    res.send('NOT IMPLEMENTED: product search');
+exports.search = async function (req, res) {
+    let listCategories = await category.getListCategory();
+    let curUser = null
+    curUser=req.session.user
+    res.render('product/product_search', {
+        listCategory: listCategories,
+        user: curUser
+    })
+}
+
+exports.search_post = async function (req, res) {
+    let listCategories = await category.getListCategory();
+    var productId = req.query.id
+    const productInfo = await product.getProductDetail(productId)
+    let curUser = null
+    curUser=req.session.user
+   let query=req.body.query
+   let type=req.body.category
+   let min=req.body.minVal
+   let max=req.body.maxVal
+   let check=null
+   if(req.body.promotion!="undefined")
+   {
+     check=true
+   }
+   else check=false
+   await axios({
+    method: 'POST',
+    url: 'https://api-scttshop-v2.herokuapp.com/api/products/search',
+    data: {
+     productName: query,
+     categoryID: type,
+     minPrice: min,
+     maxPrice:max,
+     isOnPromotion: check
+    }
+}).then((response)=>{
+    res.render('product/product', {
+        info: response.data,
+        listCategory: listCategories,
+        user: curUser,
+        length: response.data.length,
+        type: ""
+    });
+
+})
+.catch(err => {
+    console.log(err)
+    //res.render('user/my_account',{listCategory: listCategories, user: currentUser ,code: "-1"});
+}) 
+
 }
