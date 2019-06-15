@@ -98,7 +98,7 @@ exports.product_detail = async function (req, res) {
     var productId = req.query.id
     const productInfo = await product.getProductDetail(productId)
     let curUser = null
-    curUser=req.session.user
+    curUser = req.session.user
     axios({
             method: 'PUT',
             url: 'https://api-scttshop-v2.herokuapp.com/api/products/' + productId + '/view'
@@ -125,7 +125,7 @@ exports.product_update_post = async function (req, res) {
 exports.search = async function (req, res) {
     let listCategories = await category.getListCategory();
     let curUser = null
-    curUser=req.session.user
+    curUser = req.session.user
     res.render('product/product_search', {
         listCategory: listCategories,
         user: curUser
@@ -135,40 +135,40 @@ exports.search = async function (req, res) {
 exports.search_post = async function (req, res) {
     let listCategories = await category.getListCategory();
     let curUser = null
-    curUser=req.session.user
-   let query=req.body.query
-   let type=req.body.category
-   let min=req.body.minVal
-   let max=req.body.maxVal
-   let check=null
-   if(req.body.promotion!="undefined")
-   {
-     check=true
-   }
-   else check=false
-   await axios({
-    method: 'POST',
-    url: 'https://api-scttshop-v2.herokuapp.com/api/products/search',
-    data: {
-     productName: query,
-     categoryID: type,
-     minPrice: min,
-     maxPrice:max,
-     isOnPromotion: check
-    }
-}).then((response)=>{
-    res.render('product/product', {
-        info: response.data,
-        listCategory: listCategories,
-        user: curUser,
-        length: response.data.length,
-        type: ""
-    });
+    curUser = req.session.user
+    let query = req.body.query
+    let type = req.body.category
+    let min = req.body.minVal
+    let max = req.body.maxVal
+    let check = null
+    if (req.body.promotion != "undefined") {
+        check = true
+    } else check = false
+    await axios({
+            method: 'POST',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/products/search',
+            data: {
+                productName: query,
+                categoryID: type,
+                minPrice: min,
+                maxPrice: max,
+                isOnPromotion: check
+            }
+        }).then((response) => {
+            res.render('product/product', {
+                info: response.data,
+                listCategory: listCategories,
+                user: curUser,
+                length: response.data.length,
+                type: "",
+                listType: null,
+                manufaceturerName: null
+            });
 
-})
-.catch(err => {
-    console.log(err)
-    //res.render('user/my_account',{listCategory: listCategories, user: currentUser ,code: "-1"});
-}) 
+        })
+        .catch(err => {
+            console.log(err)
+            //res.render('user/my_account',{listCategory: listCategories, user: currentUser ,code: "-1"});
+        })
 
 }
