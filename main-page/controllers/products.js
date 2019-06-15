@@ -57,77 +57,76 @@ exports.product_list_type = async function (req, res) {
 
 // Display list of all products of specific type (Filter).
 exports.product_list_type_filter = async function (req, res) {
-    var listType=[];
-    var listSub=[];
+    var listType = [];
+    var listSub = [];
     let listCategories = await category.getListCategory();
     var type = req.body.type;
     let curUser = req.session.user;
-    let valueFilter=req.body.filterName;
+    let valueFilter = req.body.filterName;
     const listProduct = await product.getProductOfCategory(type);
-    var listProduct1= new Array();
-    var listProductReal=new Array();
-    listProduct1=listProduct;
-    console.log(req.body.filterSub+req.body.filterName+valueFilter);
-    if(valueFilter=="Tất cả" && req.body.filterSub!="Tất cả"){
-        for (let i=0;i < listProduct1.length ;i++){
+    var listProduct1 = new Array();
+    var listProductReal = new Array();
+    listProduct1 = listProduct;
+    console.log(req.body.filterSub + req.body.filterName + valueFilter);
+    if (valueFilter == "Tất cả" && req.body.filterSub != "Tất cả") {
+        for (let i = 0; i < listProduct1.length; i++) {
             listType.push(listProduct1[i].manufacturer);
             listSub.push(listProduct1[i].subCategoryName);
-                if(listProduct1[i].subCategoryName===req.body.filterSub)
-                listProductReal.push(listProduct1[i]);    
-        }
-    }else if(valueFilter!="Tất cả" && req.body.filterSub=="Tất cả"){
-            for (let i=0;i < listProduct1.length ;i++){
-                listType.push(listProduct1[i].manufacturer);
-                listSub.push(listProduct1[i].subCategoryName);
-                if(listProduct1[i].manufacturer===valueFilter)
-                listProductReal.push(listProduct1[i]);
-            }
-        } else if (valueFilter!="Tất cả" && req.body.filterSub!="Tất cả"){
-            for (let i=0;i < listProduct1.length ;i++){
-                listType.push(listProduct1[i].manufacturer);
-                listSub.push(listProduct1[i].subCategoryName);
-                if(listProduct1[i].manufacturer===valueFilter&&listProduct1[i].subCategoryName===req.body.filterSub)
+            if (listProduct1[i].subCategoryName === req.body.filterSub)
                 listProductReal.push(listProduct1[i]);
         }
-        
-                
+    } else if (valueFilter != "Tất cả" && req.body.filterSub == "Tất cả") {
+        for (let i = 0; i < listProduct1.length; i++) {
+            listType.push(listProduct1[i].manufacturer);
+            listSub.push(listProduct1[i].subCategoryName);
+            if (listProduct1[i].manufacturer === valueFilter)
+                listProductReal.push(listProduct1[i]);
+        }
+    } else if (valueFilter != "Tất cả" && req.body.filterSub != "Tất cả") {
+        for (let i = 0; i < listProduct1.length; i++) {
+            listType.push(listProduct1[i].manufacturer);
+            listSub.push(listProduct1[i].subCategoryName);
+            if (listProduct1[i].manufacturer === valueFilter && listProduct1[i].subCategoryName === req.body.filterSub)
+                listProductReal.push(listProduct1[i]);
+        }
+
+
     }
     var uniq = [...new Set(listType)];
-    var uniq1=[...new Set(listSub)];
+    var uniq1 = [...new Set(listSub)];
     // var tmp=listType.push("asd");
     // console.log(JSON.stringify(listType));
-    
-    if(valueFilter=="Tất cả"&&req.body.filterSub=="Tất cả"){
+
+    if (valueFilter == "Tất cả" && req.body.filterSub == "Tất cả") {
         res.render('product/product', {
             info: listProduct,
             listCategory: listCategories,
             user: curUser,
             length: listProduct.length,
             type: type,
-            listType : null,
-            listType1:null,
+            listType: null,
+            listType1: null,
             manufaceturerName: null,
-            subCategoryName:null,
-            isRenderFilter:true
+            subCategoryName: null,
+            isRenderFilter: true
 
         });
-    }
-    else{
+    } else {
         res.render('product/product', {
-        info: listProductReal,
-        listCategory: listCategories,
-        user: curUser,
-        length: listProductReal.length,
-        type: type,
-        listType : uniq,
-        listType1:uniq1,
-        manufaceturerName:req.body.filterName,
-        subCategoryName:req.body.filterSub,
-        isRenderFilter:true
-    });
+            info: listProductReal,
+            listCategory: listCategories,
+            user: curUser,
+            length: listProductReal.length,
+            type: type,
+            listType: uniq,
+            listType1: uniq1,
+            manufaceturerName: req.body.filterName,
+            subCategoryName: req.body.filterSub,
+            isRenderFilter: true
+        });
 
     }
-    
+
 }
 
 // Display detail page for a specific product.
@@ -171,7 +170,7 @@ exports.search = async function (req, res) {
     })
 }
 exports.product_comment = async function (req, res) {
-    console.log("sdasdasdsa" + req.body.email + req.body.comment + req.body.customerName);
+
     if (req.body.email) {
         axios({
             method: 'POST',
@@ -188,6 +187,22 @@ exports.product_comment = async function (req, res) {
                     status: 200
                 });
 
+            })
+    } else {
+        axios({
+            method: 'POST',
+            url: 'http://api-scttshop-v2.herokuapp.com/api/comments/',
+            data: {
+                productID: req.body.productID,
+                customerName: req.body.customerName,
+                comment: req.body.comment
+            }
+        }).then(
+            response => {
+                res.json({
+                    data: "Success",
+                    status: 200
+                });
             })
     }
 }

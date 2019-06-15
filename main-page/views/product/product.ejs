@@ -219,10 +219,12 @@ function filter( manufacturer){
                   <figure>
                     <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px"
                         alt="polo shirt img" src=<%= info[i].image %> /></a>
-                    <!-- <a class="aa-add-card-btn" href="../my-cart/addproduct/<%=type%>/`<%=info[i].image%>`/<%=info[i].productName%>/<%=info[i].discountPrice%>"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a> -->
-                    <a class="aa-add-card-btn" href="#" id="addproduct"
+                   
+                        <%if (info[i].quantity > 0) { %>
+                      <a class="aa-add-card-btn" href="#" id="addproduct"
                       onclick="addproduct(`<%=info[i].productID%>`,`<%=info[i].categoryID%>`,`<%=info[i].image%>`,`<%=info[i].productName%>`,`<%=info[i].discountPrice%>`,'S')"><span
                         class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+                        <% } %>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="/products/detail?id=<%=info[i].productID%>""><%= info[i].productName %></a></h4>
                               <span class=" aa-product-price"><%= info[i].discountPrice %> VNĐ</span>
@@ -380,11 +382,14 @@ function filter( manufacturer){
           const clicksearch1 = "clickSearch('"+categoryID+"','" + image + "','" + productID + "','" + productName + "','" +
             discountPrice +
             "','" + description + "','" + categoryName + "')";
-          const addproduct1 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct('+
+          let addproduct1 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct('+
             "'" + productID + "'" + ',' +"'" + categoryID + "'" + ','+
             "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'," + "'S'"+')"' +
             '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
-            console.log(addproduct1);
+
+            if (info[i].quantity <= 0)
+              addproduct1 = '';
+            
           $("#listproduct").append(
             '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
             image + '></a>' +
@@ -400,10 +405,13 @@ function filter( manufacturer){
           const clicksearch2 = "clickSearch('"+categoryID+"','" + image + "','" + productID + "','" + productName + "','" +
             sellPrice +
             "','" + description + "','" + categoryName + "')";
-          const addproduct2 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
+          let addproduct2 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
           "'" + productID + "'" + ',' +"'" + categoryID + "'" + ','+
             "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'," + "'S'"+ ')"' +
             '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
+
+            if (info[i].quantity <= 0)
+              addproduct2 = '';
           $("#listproduct").append(
             '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
             image + '></a>' +
