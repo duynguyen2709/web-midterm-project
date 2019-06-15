@@ -294,7 +294,9 @@ exports.user_update_post = async function (req, res) {
 exports.user_reset_post = async function (req, res) {
     let listCategories = await category.getListCategory();
     let email = req.body.email
+    console.log(email)
     firebase.auth().sendPasswordResetEmail(email).then(function () {
+        console.log("success")
         res.redirect('/')
     }).catch(function (error) {
         console.log(error)
