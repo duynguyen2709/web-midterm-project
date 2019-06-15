@@ -15,4 +15,6 @@ router.post('/get',product_controller.product_list);
 
 router.post('/filter',product_controller.product_list_type_filter);
 
+router.post('/comment',product_controller.product_comment);
+
 module.exports = router;

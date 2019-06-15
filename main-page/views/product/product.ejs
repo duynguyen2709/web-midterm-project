@@ -43,8 +43,12 @@ function comparePriceDecrease( a, b ) {
   return 0;
   
 }
+
+//Filter
 function filter( manufacturer){
   const flagFilter=document.getElementById("Filter").options[document.getElementById("Filter").selectedIndex].text;
+  const flagFilter1=document.getElementById("Filter1").options[document.getElementById("Filter1").selectedIndex].text;
+  console.log(flagFilter+flagFilter1+manufacturer);
   const form = document.createElement('form');
   form.method = 'post';
   form.action = '../products/filter';
@@ -65,6 +69,13 @@ function filter( manufacturer){
       hiddenField.value = flagFilter;
       hiddenField.name  = "filterName";
       hiddenField.type  = "hidden";
+      form.appendChild(hiddenField);
+
+      hiddenField = document.createElement('input');
+      hiddenField.value = flagFilter1;
+      hiddenField.name  = "filterSub";
+      hiddenField.type  = "hidden";
+
       form.appendChild(hiddenField);
   
 
@@ -137,6 +148,56 @@ function filter( manufacturer){
                           <% } else{ %>
 
                             <option value="<%= i %>"><%= manufacturerlist[i]%></option>
+                          
+                          
+                      <%}}}%>
+                     
+                    </select>
+                  </form>
+                  <form action="" class="aa-sort-form">
+                    <label for="">Loại</label>
+                    <select id="Filter1" name="" onchange="filter(this.options[this.selectedIndex].text)">
+                      <option value="1" selected="Default" >Tất cả</option>
+                      <%
+                      if(listType1){
+                          for(let i =0;i< listType1.length;i++){ 
+                            if (subCategoryName==listType1[i]){ %>
+                              <option value="<%= i %>" selected="Default"><%= listType1[i]%></option>
+                            <% }
+                            else{ %>
+                              <option value="<%= i %>"><%= listType1[i]%></option>
+                            <% } %>
+                            
+                          <%}
+                      }else{
+                         let subCategoryNameList = new Array();
+                      let tmpBrand;
+                      for(let i=0;i < info.length;i++)
+                      {
+                        let flag=1;
+                        for(let j=0;j < subCategoryNameList.length;j++)
+                        {
+                         
+                            if(subCategoryNameList[j]===info[i].subCategoryName)
+                            {
+                              flag=0;
+                              break;
+                            }
+                          }
+                        if(flag===1&&info[i].subCategoryName)
+                        {
+                          subCategoryNameList.push(info[i].subCategoryName);
+                        }
+                        
+                      }
+                      for(let i=0;i< subCategoryNameList.length;i++ )
+                      {
+                        if(subCategoryNameList[i]===subCategoryName){ %>
+
+                          <option value="<%= i %>" selected ="Default"><%= subCategoryNameList[i]%></option>
+                          <% } else{ %>
+
+                            <option value="<%= i %>"><%= subCategoryNameList[i]%></option>
                           
                           
                       <%}}}%>
@@ -268,6 +329,7 @@ function filter( manufacturer){
   function clickPagination(page, productInfo) {
     const flagSort=document.getElementById("Sort").options[document.getElementById("Sort").selectedIndex].value;
     const flagFilter=document.getElementById("Filter").options[document.getElementById("Filter").selectedIndex].text;
+    const flagFilter1=document.getElementById("Filter1").options[document.getElementById("Filter1").selectedIndex].text;
     const categoryID = '<%= type%>';
   
     console.log(categoryID);
@@ -277,7 +339,8 @@ function filter( manufacturer){
       url: window.location.protocol + "//" + window.location.host + "/products" + "/get",
       data: {
         categoryID: categoryID,
-        filterName:flagFilter
+        filterName:flagFilter,
+        filterSub:flagFilter1
       },
       dataType: "json"
     }).done(function (resp) {
