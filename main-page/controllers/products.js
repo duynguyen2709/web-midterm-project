@@ -5,7 +5,7 @@ var axios = require('axios');
 
 exports.product_list = async function (req, res) {
     const categoryID = req.body.categoryID;
-    var listProductReal = new Array();
+    var listProductReal=new Array();
     const listProduct = await product.getProductOfCategory(categoryID);
     if(req.body.filterName=="Tất cả"&& req.body.filterSub=="Tất cả"){
         res.json({
@@ -33,8 +33,8 @@ exports.product_list = async function (req, res) {
         });
         console.log(listProductReal);
     }
-
-
+    
+    
 }
 
 // Display list of all products of specific type.
@@ -85,31 +85,25 @@ exports.product_list_type_filter = async function (req, res) {
             for (let i=0;i < listProduct1.length ;i++){
                 listType.push(listProduct1[i].manufacturer);
                 listSub.push(listProduct1[i].subCategoryName);
-                    if(listProduct1[i].manufacturer===valueFilter)
-                    listProductReal.push(listProduct1[i]);    
+                if(listProduct1[i].manufacturer===valueFilter)
+                listProductReal.push(listProduct1[i]);
             }
-        }
-        else if(valueFilter!="Tất cả" && req.body.filterSub!="Tất cả"){
+        } else if (valueFilter!="Tất cả" && req.body.filterSub!="Tất cả"){
             for (let i=0;i < listProduct1.length ;i++){
                 listType.push(listProduct1[i].manufacturer);
                 listSub.push(listProduct1[i].subCategoryName);
-                    if(listProduct1[i].manufacturer===valueFilter&&listProduct1[i].subCategoryName===req.body.filterSub)
-                    listProductReal.push(listProduct1[i]);    
-            }
+                if(listProduct1[i].manufacturer===valueFilter&&listProduct1[i].subCategoryName===req.body.filterSub)
+                listProductReal.push(listProduct1[i]);
         }
-    
-    
-    
-
+        
+                
+    }
     var uniq = [...new Set(listType)];
     var uniq1=[...new Set(listSub)];
     // var tmp=listType.push("asd");
     // console.log(JSON.stringify(listType));
-
     
     if(valueFilter=="Tất cả"&&req.body.filterSub=="Tất cả"){
-
-
         res.render('product/product', {
             info: listProduct,
             listCategory: listCategories,
@@ -117,11 +111,12 @@ exports.product_list_type_filter = async function (req, res) {
             length: listProduct.length,
             type: type,
             listType : null,
-            listType1: null,
+            listType1:null,
             manufaceturerName: null,
             subCategoryName:null
         });
-    } else {
+    }
+    else{
         res.render('product/product', {
         info: listProductReal,
         listCategory: listCategories,
@@ -130,12 +125,12 @@ exports.product_list_type_filter = async function (req, res) {
         type: type,
         listType : uniq,
         listType1:uniq1,
-        manufaceturerName:valueFilter,
-        subCategoryName: req.body.filterSub
+        manufaceturerName:req.body.filterName,
+        subCategoryName:req.body.filterSub
     });
     }
-
-
+    
+    
 };
 
 // Display detail page for a specific product.
@@ -144,16 +139,7 @@ exports.product_detail = async function (req, res) {
     var productId = req.query.id
     const productInfo = await product.getProductDetail(productId)
     let curUser = null
-    curUser = req.session.user
-    axios({
-            method: 'PUT',
-            url: 'https://api-scttshop-v2.herokuapp.com/api/products/' + productId + '/view'
-        })
-        .then(response => {})
-        .catch(err => {
-            console.log(err);
-        });
-
+    curUser = user.currentUser()
     res.render('product/product_detail', {
         productInfo: productInfo,
         listCategory: listCategories,
@@ -167,7 +153,6 @@ exports.product_update_post = async function (req, res) {
     let listCategories = await category.getListCategory();
     res.send('NOT IMPLEMENTED: product update POST');
 };
-
 
 exports.search = function (req, res) {
     const dataSearch = req.body.data;
@@ -213,5 +198,4 @@ else{
     })
 }
     
-
 }

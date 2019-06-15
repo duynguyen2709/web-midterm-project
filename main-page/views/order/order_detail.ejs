@@ -1,17 +1,7 @@
 <div class="container" >
-<div class="col-md-12 clearfix" id="customer-order">
+<div class="col-md-9 clearfix" id="customer-order">
 
-    <p class="lead">Đơn hàng <strong><%= order.orderID %></strong>  được tạo ngày <strong><%= order.orderTime%></strong> và đang có trạng thái  <% if (order.status==="PROCESSING"){
-        %><td><span class="label label-info">Soạn hàng</span></td><%
-    }
-    else{%>
-        <% if(order.status==="SHIPPING"){
-            %><td><span class="label label-warning">Shipping</span></td><%
-        }else{
-            %><td><span class="label label-success">Hoàn tất</span</td><%
-        } %>
-    <%}
-    %>.</p>
+    <p class="lead">Đơn hàng #1735 được tạo ngày <strong>22/06/2018</strong> và đang có trạng thái <strong>Đã sẵn sàng</strong>.</p>
     
 
     <div class="box">
@@ -19,29 +9,32 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Sản phẩm</th>
+                        <th colspan="2">Sản phẩm</th>
                         <th>Số lượng</th>
-                        <th></th>
-                        <th>Tổng tiền</th>
+                        <th>Đơn giá</th>
+                        <th>Giảm giá</th>
+                        <th>Tổng cộng</th>
                     </tr>
                 </thead>
                 <tbody>
-                        <% for(let i =0;i< order.orderDetail.length;i++)
-                        {%>
-                            <tr>
-                                <td><a href="/products/detail?id=<%=order.orderDetail[i].productID%>"><%= order.orderDetail[i].productName %></a></td>
-                                <td><%= order.orderDetail[i].quantity %></td>
-                                <td></td>
-                                <td><%= order.orderDetail[i].price %></td>
-                            </tr>
-        
-                        <%}
-                        %>
+                    <tr>
+                        <td>
+                            <a href="/products/detail?id=1">
+                                <img src="/img/t-shirt/8.jpg" alt="White Blouse Armani">
+                            </a>
+                        </td>
+                        <td><a href="/products/detail?id=1">Áo thun KiriMaru</a>
+                        </td>
+                        <td>2</td>
+                        <td>150.000 VNĐ</td>
+                        <td></td>
+                        <td>300.000 VNĐ</td>
+                    </tr>
                 </tbody>
                 <tfoot>
                     <tr>
                         <th colspan="5" class="text-right">Tổng tiền</th>
-                        <th><%= order.totalPrice %></th>
+                        <th>300.000 VNĐ</th>
                     </tr>
                     <tr>
                         <th colspan="5" class="text-right">Phí vận chuyển</th>
@@ -53,13 +46,35 @@
                     </tr>
                     <tr>
                         <th colspan="5" class="text-right">Tổng cộng</th>
-                        <th><%= order.totalPrice %></th>
+                        <th>300.000 VNĐ</th>
                     </tr>
                 </tfoot>
             </table>
 
         </div>
         <!-- /.table-responsive -->
+
+        <div class="row addresses" style="text-align: right;">
+                <div class="col-sm-6">
+                        <h3 class="text-uppercase"></h3>
+                        <p>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            </p>
+                    </div>
+            <div class="col-sm-6">
+                <h3 class="text-uppercase">Địa chỉ giao hàng</h3>
+                <p>Tấn Duy
+                    <br>102/66/8 Lê Văn Thọ
+                    <br>phường 11
+                    <br>quận Gò Vấp
+                    <br>TP.HCM
+                    </p>
+            </div>
+        </div>
+        <!-- /.addresses -->
 
     </div>
     <!-- /.box -->

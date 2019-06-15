@@ -34,7 +34,6 @@ exports.getProductOfCategory = async (categoryID) => {
 
         PRODUCT_OF_CATEGORIES_CACHE.set(categoryID, data);
     }
-
     return PRODUCT_OF_CATEGORIES_CACHE.get(categoryID);
 }
 

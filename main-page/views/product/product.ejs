@@ -158,10 +158,8 @@ function filter( manufacturer){
                     <select id="Filter1" name="" onchange="filter(this.options[this.selectedIndex].text)">
                       <option value="1" selected="Default" >Tất cả</option>
                       <%
-                    
                       if(listType1){
                           for(let i =0;i< listType1.length;i++){ 
-                            if(subCategoryName){
                             if (subCategoryName==listType1[i]){ %>
                               <option value="<%= i %>" selected="Default"><%= listType1[i]%></option>
                             <% }
@@ -169,7 +167,7 @@ function filter( manufacturer){
                               <option value="<%= i %>"><%= listType1[i]%></option>
                             <% } %>
                             
-                          <%}}
+                          <%}
                       }else{
                          let subCategoryNameList = new Array();
                       let tmpBrand;
@@ -184,8 +182,8 @@ function filter( manufacturer){
                               flag=0;
                               break;
                             }
-                        }
-                        if(flag===1 && info[i].subCategoryName)
+                          }
+                        if(flag===1&&info[i].subCategoryName)
                         {
                           subCategoryNameList.push(info[i].subCategoryName);
                         }
@@ -312,6 +310,33 @@ function filter( manufacturer){
               </nav>
             </div>
           </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
+          <aside class="aa-sidebar">
+            <!-- single sidebar -->
+            <div class="aa-sidebar-widget">
+              <h3>Mục</h3>
+              <ul class="aa-catg-nav">
+                <%
+                      listCategory.forEach(category=>{
+                        %><li>
+                  <a href="/products/type?id=<%= category['Id'] %>"><%= category['name'] %></a>
+                </li><%
+                      });
+                      %>
+              </ul>
+            </div>
+            <!-- single sidebar -->
+            <div class="aa-sidebar-widget">
+              <h3>Tags</h3>
+              <div class="tag-cloud">
+                <a href="#">KiriMaru</a>
+                <a href="#">Ma Bư</a>
+                <a href="#">StreetStyle</a>
+                <a href="#">Hot</a>
+                <a href="#">Sale</a>
+              </div>
+            </div>
         </div>
       </div>
   </section>
