@@ -77,9 +77,10 @@ function filter( manufacturer){
   <!-- product category -->
   <section id="aa-product-category">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+      <div class="row"  style="margin-left:-200px;">
+        <div class="col-lg-9 col-md-10 col-sm-8 col-md-push-3">
           <div class="aa-product-catg-content">
+              <%if (isRenderFilter == true) { %>
             <div class="aa-product-catg-head">
               <div class="aa-product-catg-head-left">
                 <form action="" class="aa-sort-form">
@@ -93,7 +94,7 @@ function filter( manufacturer){
               </div>
               <div class="aa-product-catg-head-left">
                   <form action="" class="aa-sort-form">
-                    <label for="">NSX</label>
+                    <label style="margin-left:10px;" for="">NSX</label>
                     <select id="Filter" name="" onchange="filter(this.options[this.selectedIndex].text)">
                       <option value="1" selected="Default" >Tất cả</option>
                       <%
@@ -148,8 +149,9 @@ function filter( manufacturer){
                 <a id="list-catg" href="#"><span class="fa fa-list"></span></a>
               </div>
             </div>
+            <% } %>
             <div class="aa-product-catg-body">
-              <ul id="listproduct" class="aa-product-catg" style="margin-left:-35px;">
+              <ul id="listproduct" class="aa-product-catg">
                 <%for(var i= 0; i< 6; i++) {
                           if (info[i]!=null){%>
                 <li>

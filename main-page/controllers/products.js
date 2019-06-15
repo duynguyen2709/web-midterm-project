@@ -39,7 +39,8 @@ exports.product_list_type = async function (req, res) {
         length: listProduct.length,
         type: type,
         listType: null,
-        manufaceturerName: null
+        manufaceturerName: null,
+        isRenderFilter:true
     });
 };
 
@@ -75,7 +76,8 @@ exports.product_list_type_filter = async function (req, res) {
             length: listProduct.length,
             type: type,
             listType: null,
-            manufaceturerName: null
+            manufaceturerName: null,
+            isRenderFilter:true
         });
     } else {
         res.render('product/product', {
@@ -85,7 +87,8 @@ exports.product_list_type_filter = async function (req, res) {
             length: listProductReal.length,
             type: type,
             listType: uniq,
-            manufaceturerName: req.body.filterName
+            manufaceturerName: req.body.filterName,
+            isRenderFilter:true
         });
     }
 
@@ -134,8 +137,7 @@ exports.search = async function (req, res) {
 
 exports.search_post = async function (req, res) {
     let listCategories = await category.getListCategory();
-    let curUser = null
-    curUser = req.session.user
+    let curUser = req.session.user
     let query = req.body.query
     let type = req.body.category
     let min = req.body.minVal
@@ -160,7 +162,8 @@ exports.search_post = async function (req, res) {
                 length: response.data.length,
                 type: "",
                 listType: null,
-                manufaceturerName: null
+                manufaceturerName: null,
+                isRenderFilter:false
             });
 
         })
