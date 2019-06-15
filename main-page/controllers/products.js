@@ -227,6 +227,7 @@ exports.search_post = async function (req, res) {
                 isOnPromotion: check
             }
         }).then((response) => {
+            console.log(response.data)
             res.render('product/product', {
                 info: response.data,
                 listCategory: listCategories,
