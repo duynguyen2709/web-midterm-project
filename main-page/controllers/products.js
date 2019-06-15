@@ -153,6 +153,7 @@ exports.product_detail = async function (req, res) {
 };
 
 
+
 // Handle product update on POST.
 exports.product_update_post = async function (req, res) {
     let listCategories = await category.getListCategory();
@@ -183,6 +184,7 @@ exports.product_comment = async function(req,res){
                 data: "Success",
                 status: 200
             });
+
     })
 }
 else{
