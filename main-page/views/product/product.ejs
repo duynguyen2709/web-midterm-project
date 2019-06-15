@@ -1,5 +1,3 @@
-
-  
 <!DOCTYPE html>
 <html lang="en">
 <script src="jquery-3.4.0.min.js"></script>
@@ -7,13 +5,13 @@
 </script>
 
 <script type="text/javascript">
-  function addproduct(productID,categoryID,image, name, price,size) {
+  function addproduct(productID, categoryID, image, name, price, size) {
     $.ajax('../my-cart/addproduct', // request url
       {
         type: 'POST',
         data: {
           productID: productID,
-          categoryID:categoryID,
+          categoryID: categoryID,
           image: image,
           name: name,
           price: price,
@@ -23,75 +21,78 @@
         }
       });
   }
-  function comparePriceIncrease( a, b ) {
-  if ( a.discountPrice > b.discountPrice ){
-    return -1;
+
+  function comparePriceIncrease(a, b) {
+    if (a.discountPrice > b.discountPrice) {
+      return -1;
+    }
+    if (a.discountPrice < b.discountPrice) {
+      return 1;
+    }
+    return 0;
+
   }
-  if ( a.discountPrice < b.discountPrice ){
-    return 1;
+
+  function comparePriceDecrease(a, b) {
+    if (a.discountPrice < b.discountPrice) {
+      return -1;
+    }
+    if (a.discountPrice > b.discountPrice) {
+      return 1;
+    }
+    return 0;
+
   }
-  return 0;
-  
-}
-function comparePriceDecrease( a, b ) {
-  if ( a.discountPrice < b.discountPrice ){
-    return -1;
+
+  //Filter
+  function filter(manufacturer) {
+    const flagFilter = document.getElementById("Filter").options[document.getElementById("Filter").selectedIndex].text;
+    const flagFilter1 = document.getElementById("Filter1").options[document.getElementById("Filter1").selectedIndex]
+      .text;
+    console.log(flagFilter + flagFilter1 + manufacturer);
+    const form = document.createElement('form');
+    form.method = 'post';
+    form.action = '../products/filter';
+
+    var hiddenField = document.createElement('input');
+    hiddenField.value = manufacturer;
+    hiddenField.name = "value";
+    hiddenField.type = "hidden";
+    form.appendChild(hiddenField);
+
+    hiddenField = document.createElement('input');
+    hiddenField.value = '<%= type %>';
+    hiddenField.name = "type";
+    hiddenField.type = "hidden";
+    form.appendChild(hiddenField);
+
+    hiddenField = document.createElement('input');
+    hiddenField.value = flagFilter;
+    hiddenField.name = "filterName";
+    hiddenField.type = "hidden";
+    form.appendChild(hiddenField);
+
+    hiddenField = document.createElement('input');
+    hiddenField.value = flagFilter1;
+    hiddenField.name = "filterSub";
+    hiddenField.type = "hidden";
+
+    form.appendChild(hiddenField);
+
+
+    document.body.appendChild(form);
+    form.submit();
   }
-  if ( a.discountPrice > b.discountPrice ){
-    return 1;
-  }
-  return 0;
-  
-}
-
-//Filter
-function filter( manufacturer){
-  const flagFilter=document.getElementById("Filter").options[document.getElementById("Filter").selectedIndex].text;
-  const flagFilter1=document.getElementById("Filter1").options[document.getElementById("Filter1").selectedIndex].text;
-  console.log(flagFilter+flagFilter1+manufacturer);
-  const form = document.createElement('form');
-  form.method = 'post';
-  form.action = '../products/filter';
-
-      var hiddenField = document.createElement('input');
-      hiddenField.value = manufacturer;
-      hiddenField.name  = "value";
-      hiddenField.type  = "hidden";
-      form.appendChild(hiddenField);
-
-      hiddenField = document.createElement('input');
-      hiddenField.value = '<%= type %>';
-      hiddenField.name  = "type";
-      hiddenField.type  = "hidden";
-      form.appendChild(hiddenField);
-
-      hiddenField = document.createElement('input');
-      hiddenField.value = flagFilter;
-      hiddenField.name  = "filterName";
-      hiddenField.type  = "hidden";
-      form.appendChild(hiddenField);
-
-      hiddenField = document.createElement('input');
-      hiddenField.value = flagFilter1;
-      hiddenField.name  = "filterSub";
-      hiddenField.type  = "hidden";
-
-      form.appendChild(hiddenField);
-  
-
-  document.body.appendChild(form);
-  form.submit();
-}
 </script>
 
 <body>
   <!-- product category -->
   <section id="aa-product-category">
     <div class="container">
-      <div class="row"  style="margin-left:-200px;">
+      <div class="row" style="margin-left:-200px;">
         <div class="col-lg-9 col-md-10 col-sm-8 col-md-push-3">
           <div class="aa-product-catg-content">
-              <%if (isRenderFilter == true) { %>
+            <%if (isRenderFilter == true) { %>
             <div class="aa-product-catg-head">
               <div class="aa-product-catg-head-left">
                 <form action="" class="aa-sort-form">
@@ -104,21 +105,21 @@ function filter( manufacturer){
                 </form>
               </div>
               <div class="aa-product-catg-head-left">
-                  <form action="" class="aa-sort-form">
-                    <label style="margin-left:10px;" for="">NSX</label>
-                    <select id="Filter" name="" onchange="filter(this.options[this.selectedIndex].text)">
-                      <option value="1" selected="Default" >Tất cả</option>
-                      <%
+                <form action="" class="aa-sort-form">
+                  <label style="margin-left:10px;" for="">NSX</label>
+                  <select id="Filter" name="" onchange="filter(this.options[this.selectedIndex].text)">
+                    <option value="1" selected="Default">Tất cả</option>
+                    <%
                       if(listType){
                           for(let i =0;i< listType.length;i++){ 
                             if (manufaceturerName==listType[i]){ %>
-                              <option value="<%= i %>" selected="Default"><%= listType[i]%></option>
-                            <% }
+                    <option value="<%= i %>" selected="Default"><%= listType[i]%></option>
+                    <% }
                             else{ %>
-                              <option value="<%= i %>"><%= listType[i]%></option>
-                            <% } %>
-                            
-                          <%}
+                    <option value="<%= i %>"><%= listType[i]%></option>
+                    <% } %>
+
+                    <%}
                       }else{
                          let manufacturerlist = new Array();
                       let tmpBrand;
@@ -144,31 +145,31 @@ function filter( manufacturer){
                       {
                         if(manufacturerlist[i]===manufaceturerName){ %>
 
-                          <option value="<%= i %>" selected ="Default"><%= manufacturerlist[i]%></option>
-                          <% } else{ %>
+                    <option value="<%= i %>" selected="Default"><%= manufacturerlist[i]%></option>
+                    <% } else{ %>
 
-                            <option value="<%= i %>"><%= manufacturerlist[i]%></option>
-                          
-                          
-                      <%}}}%>
-                     
-                    </select>
-                  </form>
-                  <form action="" class="aa-sort-form">
-                    <label for="">Loại</label>
-                    <select id="Filter1" name="" onchange="filter(this.options[this.selectedIndex].text)">
-                      <option value="1" selected="Default" >Tất cả</option>
-                      <%
+                    <option value="<%= i %>"><%= manufacturerlist[i]%></option>
+
+
+                    <%}}}%>
+
+                  </select>
+                </form>
+                <form action="" class="aa-sort-form">
+                  <label for="">Loại</label>
+                  <select id="Filter1" name="" onchange="filter(this.options[this.selectedIndex].text)">
+                    <option value="1" selected="Default">Tất cả</option>
+                    <%
                       if(listType1){
                           for(let i =0;i< listType1.length;i++){ 
                             if (subCategoryName==listType1[i]){ %>
-                              <option value="<%= i %>" selected="Default"><%= listType1[i]%></option>
-                            <% }
+                    <option value="<%= i %>" selected="Default"><%= listType1[i]%></option>
+                    <% }
                             else{ %>
-                              <option value="<%= i %>"><%= listType1[i]%></option>
-                            <% } %>
-                            
-                          <%}
+                    <option value="<%= i %>"><%= listType1[i]%></option>
+                    <% } %>
+
+                    <%}
                       }else{
                          let subCategoryNameList = new Array();
                       let tmpBrand;
@@ -194,17 +195,17 @@ function filter( manufacturer){
                       {
                         if(subCategoryNameList[i]===subCategoryName){ %>
 
-                          <option value="<%= i %>" selected ="Default"><%= subCategoryNameList[i]%></option>
-                          <% } else{ %>
+                    <option value="<%= i %>" selected="Default"><%= subCategoryNameList[i]%></option>
+                    <% } else{ %>
 
-                            <option value="<%= i %>"><%= subCategoryNameList[i]%></option>
-                          
-                          
-                      <%}}}%>
-                     
-                    </select>
-                  </form>
-                </div>
+                    <option value="<%= i %>"><%= subCategoryNameList[i]%></option>
+
+
+                    <%}}}%>
+
+                  </select>
+                </form>
+              </div>
               <div class="aa-product-catg-head-right">
                 <a id="grid-catg" href="#"><span class="fa fa-th"></span></a>
                 <a id="list-catg" href="#"><span class="fa fa-list"></span></a>
@@ -219,12 +220,12 @@ function filter( manufacturer){
                   <figure>
                     <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px"
                         alt="polo shirt img" src=<%= info[i].image %> /></a>
-                   
-                        <%if (info[i].quantity > 0) { %>
-                      <a class="aa-add-card-btn" href="#" id="addproduct"
+
+                    <%if (info[i].quantity > 0) { %>
+                    <a class="aa-add-card-btn" href="#" id="addproduct"
                       onclick="addproduct(`<%=info[i].productID%>`,`<%=info[i].categoryID%>`,`<%=info[i].image%>`,`<%=info[i].productName%>`,`<%=info[i].discountPrice%>`,'S')"><span
                         class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-                        <% } %>
+                    <% } %>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="/products/detail?id=<%=info[i].productID%>""><%= info[i].productName %></a></h4>
                               <span class=" aa-product-price"><%= info[i].discountPrice %> VNĐ</span>
@@ -286,13 +287,15 @@ function filter( manufacturer){
                               <a href="#" onclick="selectedSize(this.text)">XL</a>
                             </div>
                             <div class="aa-prod-quantity">
-                              
+
                               <p class="aa-prod-category" id="showCategory">
                                 Loại: <a href="#"></a>
                               </p>
                             </div>
                             <div class="aa-prod-view-bottom">
-                              <a href="#"onclick="addproduct(tmp_productID,tmp_categoryID,tmp_image,tmp_name,tmp_price,tmp_size)" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào
+                              <a href="#"
+                                onclick="addproduct(tmp_productID,tmp_categoryID,tmp_image,tmp_name,tmp_price,tmp_size)"
+                                class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào
                                 giỏ hàng</a>
                               <a id="linkProduct" href="" class="aa-add-to-cart-btn">Chi tiết</a>
                             </div>
@@ -327,118 +330,197 @@ function filter( manufacturer){
       .exec(window.location.search);
     return (results !== null) ? results[1] || 0 : false;
   }
-  
-  function clickPagination(page, productInfo) {
-    const flagSort=document.getElementById("Sort").options[document.getElementById("Sort").selectedIndex].value;
-    const flagFilter=document.getElementById("Filter").options[document.getElementById("Filter").selectedIndex].text;
-    const flagFilter1=document.getElementById("Filter1").options[document.getElementById("Filter1").selectedIndex].text;
-    const categoryID = '<%= type%>';
-  
-    console.log(categoryID);
-    let info = [];
-    const getListProductFunction = $.ajax({
-      type: "POST",
-      url: window.location.protocol + "//" + window.location.host + "/products" + "/get",
-      data: {
-        categoryID: categoryID,
-        filterName:flagFilter,
-        filterSub:flagFilter1
-      },
-      dataType: "json"
-    }).done(function (resp) {
 
-      console.log(window.location.protocol + "//" + window.location.host + "/products" + "/get");
-      for (var k = 0; k < resp.info.length; k++)
-        info.push(resp.info[k]);
-        if (flagSort==3){
+  function clickPagination(page, productInfo) {
+
+    const categoryID = '<%= type%>';
+
+    const isRenderFilter = '<%= isRenderFilter %>';
+
+    let info = [];
+
+    if (isRenderFilter == "true") {
+      const flagSort = document.getElementById("Sort").options[document.getElementById("Sort").selectedIndex].value;
+      const flagFilter = document.getElementById("Filter").options[document.getElementById("Filter").selectedIndex]
+        .text;
+      const flagFilter1 = document.getElementById("Filter1").options[document.getElementById("Filter1").selectedIndex]
+        .text;
+
+      const getListProductFunction = $.ajax({
+        type: "POST",
+        url: window.location.protocol + "//" + window.location.host + "/products" + "/get",
+        data: {
+          categoryID: categoryID,
+          filterName: flagFilter,
+          filterSub: flagFilter1
+        },
+        dataType: "json"
+      }).done(function (resp) {
+
+        console.log(window.location.protocol + "//" + window.location.host + "/products" + "/get");
+        for (var k = 0; k < resp.info.length; k++)
+          info.push(resp.info[k]);
+        if (flagSort == 3) {
           info.sort(comparePriceIncrease);
-        }else if (flagSort==2){
+        } else if (flagSort == 2) {
           info.sort(comparePriceDecrease);
         }
-        
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-      console.log("Error: " + textStatus);
-      info = [];
-    });
-    getListProductFunction.then(function () {
-      const items = document.querySelectorAll("#listproduct li");
-      for (var j = 0; j < items.length; j++) {
-        items[j].parentNode.removeChild(items[j]);
-      }
-      for (let i = (page - 1) * 6; i < (page - 1) * 6 + 6; i++) {
-        if (info.length == i)
-          break;
-        let categoryID=info[i].categoryID;
-        let image = info[i].image;
-        let productID = info[i].productID;
-        let pathProduct = "/products/detail?id=" + info[i].productID;
-        let productName = info[i].productName;
-        let discountPrice = info[i].discountPrice;
-        let sellPrice = info[i].sellPrice;
-        let promotionDiscount = info[i].promotionDiscount;
-        let description = info[i].description;
-        let categoryName = info[i].categoryName;
-        if (promotionDiscount > 0) {
-          const clicksearch1 = "clickSearch('"+categoryID+"','" + image + "','" + productID + "','" + productName + "','" +
-            discountPrice +
-            "','" + description + "','" + categoryName + "')";
-          let addproduct1 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct('+
-            "'" + productID + "'" + ',' +"'" + categoryID + "'" + ','+
-            "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'," + "'S'"+')"' +
-            '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
+
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("Error: " + textStatus);
+        info = [];
+      });
+      getListProductFunction.then(function () {
+        const items = document.querySelectorAll("#listproduct li");
+        for (var j = 0; j < items.length; j++) {
+          items[j].parentNode.removeChild(items[j]);
+        }
+        for (let i = (page - 1) * 6; i < (page - 1) * 6 + 6; i++) {
+          if (info.length == i)
+            break;
+          let categoryID = info[i].categoryID;
+          let image = info[i].image;
+          let productID = info[i].productID;
+          let pathProduct = "/products/detail?id=" + info[i].productID;
+          let productName = info[i].productName;
+          let discountPrice = info[i].discountPrice;
+          let sellPrice = info[i].sellPrice;
+          let promotionDiscount = info[i].promotionDiscount;
+          let description = info[i].description;
+          let categoryName = info[i].categoryName;
+          if (promotionDiscount > 0) {
+            const clicksearch1 = "clickSearch('" + categoryID + "','" + image + "','" + productID + "','" +
+              productName + "','" +
+              discountPrice +
+              "','" + description + "','" + categoryName + "')";
+            let addproduct1 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
+              "'" + productID + "'" + ',' + "'" + categoryID + "'" + ',' +
+              "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'," + "'S'" + ')"' +
+              '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
 
             if (info[i].quantity <= 0)
               addproduct1 = '';
-            
-          $("#listproduct").append(
-            '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
-            image + '></a>' +
-            addproduct1 + `<figcaption><h4 class="aa-product-title"><a href="` + pathProduct + '">' +
-            productName +
-            '</a></h4><span class="aa-product-price">' + discountPrice +
-            ' VNĐ</span><span class="aa-product-price"><del>' + sellPrice +
-            ' đ</del></span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' +
-            clicksearch1 +
-            '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div><span class="aa-badge aa-sale">SALE!</span><span class="aa-badge-right aa-hot">' +
-            promotionDiscount + '%' + '</span></li>');
-        } else {
-          const clicksearch2 = "clickSearch('"+categoryID+"','" + image + "','" + productID + "','" + productName + "','" +
-            sellPrice +
-            "','" + description + "','" + categoryName + "')";
-          let addproduct2 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
-          "'" + productID + "'" + ',' +"'" + categoryID + "'" + ','+
-            "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'," + "'S'"+ ')"' +
-            '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
+
+            $("#listproduct").append(
+              '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
+              image + '></a>' +
+              addproduct1 + `<figcaption><h4 class="aa-product-title"><a href="` + pathProduct + '">' +
+              productName +
+              '</a></h4><span class="aa-product-price">' + discountPrice +
+              ' VNĐ</span><span class="aa-product-price"><del>' + sellPrice +
+              ' đ</del></span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' +
+              clicksearch1 +
+              '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div><span class="aa-badge aa-sale">SALE!</span><span class="aa-badge-right aa-hot">' +
+              promotionDiscount + '%' + '</span></li>');
+          } else {
+            const clicksearch2 = "clickSearch('" + categoryID + "','" + image + "','" + productID + "','" +
+              productName + "','" +
+              sellPrice +
+              "','" + description + "','" + categoryName + "')";
+            let addproduct2 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
+              "'" + productID + "'" + ',' + "'" + categoryID + "'" + ',' +
+              "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'," + "'S'" + ')"' +
+              '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
 
             if (info[i].quantity <= 0)
               addproduct2 = '';
-          $("#listproduct").append(
-            '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
-            image + '></a>' +
-            addproduct2 + '<figcaption><h4 class="aa-product-title"><a href="' + pathProduct + '">' +
-            productName +
-            '</a></h4><span class="aa-product-price">' + discountPrice +
-            ' VNĐ</span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' +
-            clicksearch2 +
-            '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div></li>'
+            $("#listproduct").append(
+              '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
+              image + '></a>' +
+              addproduct2 + '<figcaption><h4 class="aa-product-title"><a href="' + pathProduct + '">' +
+              productName +
+              '</a></h4><span class="aa-product-price">' + discountPrice +
+              ' VNĐ</span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' +
+              clicksearch2 +
+              '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div></li>'
             );
+          }
         }
-      }
-    });
+      });
+    } else {
+      info = JSON.parse('<%- JSON.stringify(info) %>');
+      const items = document.querySelectorAll("#listproduct li");
+        for (var j = 0; j < items.length; j++) {
+          items[j].parentNode.removeChild(items[j]);
+        }
+        for (let i = (page - 1) * 6; i < (page - 1) * 6 + 6; i++) {
+          if (info.length == i)
+            break;
+          let categoryID = info[i].categoryID;
+          let image = info[i].image;
+          let productID = info[i].productID;
+          let pathProduct = "/products/detail?id=" + info[i].productID;
+          let productName = info[i].productName;
+          let discountPrice = info[i].discountPrice;
+          let sellPrice = info[i].sellPrice;
+          let promotionDiscount = info[i].promotionDiscount;
+          let description = info[i].description;
+          let categoryName = info[i].categoryName;
+          if (promotionDiscount > 0) {
+            const clicksearch1 = "clickSearch('" + categoryID + "','" + image + "','" + productID + "','" +
+              productName + "','" +
+              discountPrice +
+              "','" + description + "','" + categoryName + "')";
+            let addproduct1 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
+              "'" + productID + "'" + ',' + "'" + categoryID + "'" + ',' +
+              "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'," + "'S'" + ')"' +
+              '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
+
+            if (info[i].quantity <= 0)
+              addproduct1 = '';
+
+            $("#listproduct").append(
+              '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
+              image + '></a>' +
+              addproduct1 + `<figcaption><h4 class="aa-product-title"><a href="` + pathProduct + '">' +
+              productName +
+              '</a></h4><span class="aa-product-price">' + discountPrice +
+              ' VNĐ</span><span class="aa-product-price"><del>' + sellPrice +
+              ' đ</del></span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' +
+              clicksearch1 +
+              '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div><span class="aa-badge aa-sale">SALE!</span><span class="aa-badge-right aa-hot">' +
+              promotionDiscount + '%' + '</span></li>');
+          } else {
+            const clicksearch2 = "clickSearch('" + categoryID + "','" + image + "','" + productID + "','" +
+              productName + "','" +
+              sellPrice +
+              "','" + description + "','" + categoryName + "')";
+            let addproduct2 = '<a class="aa-add-card-btn" href="#" id="addproduct" onclick="addproduct(' +
+              "'" + productID + "'" + ',' + "'" + categoryID + "'" + ',' +
+              "'" + image + "'" + ',' + "'" + productName + "'" + ',' + "'" + discountPrice + "'," + "'S'" + ')"' +
+              '><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>';
+
+            if (info[i].quantity <= 0)
+              addproduct2 = '';
+            $("#listproduct").append(
+              '<li><figure> <a class="aa-product-img" href="#"><img id="imgsrc1" width="250px" height="300px" alt="polo shirt img" src=' +
+              image + '></a>' +
+              addproduct2 + '<figcaption><h4 class="aa-product-title"><a href="' + pathProduct + '">' +
+              productName +
+              '</a></h4><span class="aa-product-price">' + discountPrice +
+              ' VNĐ</span></figcaption></figure><div class="aa-product-hvr-content"><a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" onclick="' +
+              clicksearch2 +
+              '" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a></div></li>'
+            );
+          }
+        }
+    }
+    //
   }
 </script>
 <script>
-  var tmp_image, tmp_name,tmp_price,tmp_size,tmp_categoryID,tmp_productID;
-  function selectedSize(value){
-    tmp_size=value;
+  var tmp_image, tmp_name, tmp_price, tmp_size, tmp_categoryID, tmp_productID;
+
+  function selectedSize(value) {
+    tmp_size = value;
   }
 
-  function clickSearch(categoryID,image, productID, productName, sellPrice, description, categoryName) {
-    tmp_categoryID=categoryID;
-    tmp_productID=productID;
-    tmp_image=image;
-    tmp_name=productName;
-    tmp_price=sellPrice;
+  function clickSearch(categoryID, image, productID, productName, sellPrice, description, categoryName) {
+    tmp_categoryID = categoryID;
+    tmp_productID = productID;
+    tmp_image = image;
+    tmp_name = productName;
+    tmp_price = sellPrice;
     document.getElementsByClassName("simpleLens-lens-image")[0].src = image;
     document.getElementById("showImg").src = image;
     document.getElementById("linkProduct").href = "/products/detail?id=" + productID;
@@ -448,5 +530,5 @@ function filter( manufacturer){
     document.getElementById("showCategory").textContent = 'Loại: ' + categoryName;
   }
 </script>
-</html>
 
+</html>
