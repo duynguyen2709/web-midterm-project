@@ -53,7 +53,8 @@ exports.product_list_type = async function (req, res) {
         listType: null,
         listType1:null,
         manufaceturerName: null,
-        subCategoryName:null
+        subCategoryName:null,
+        isRenderFilter:true
     });
 };
 
@@ -113,7 +114,9 @@ exports.product_list_type_filter = async function (req, res) {
             listType : null,
             listType1:null,
             manufaceturerName: null,
-            subCategoryName:null
+            subCategoryName:null,
+            isRenderFilter:true
+
         });
     }
     else{
@@ -126,8 +129,10 @@ exports.product_list_type_filter = async function (req, res) {
         listType : uniq,
         listType1:uniq1,
         manufaceturerName:req.body.filterName,
-        subCategoryName:req.body.filterSub
+        subCategoryName:req.body.filterSub,
+        isRenderFilter:true
     });
+
     }
     
     
@@ -198,4 +203,42 @@ else{
     })
 }
     
+}
+
+
+
+
+exports.search_post = async function (req, res) {
+    let listCategories = await category.getListCategory();
+    let curUser = req.session.user
+    let query = req.body.query
+    let type = req.body.category
+    let min = req.body.minVal
+    let max = req.body.maxVal
+    let check = req.body.promotion
+    
+    await axios({
+            method: 'POST',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/products/search',
+            data: {
+                productName: query,
+                categoryID: type,
+                minPrice: min,
+                maxPrice: max,
+                isOnPromotion: check
+            }
+        }).then((response) => {
+            res.render('product/product', {
+                info: response.data,
+                listCategory: listCategories,
+                user: curUser,
+                length: response.data.length,
+                type: "",
+                listType : uniq,
+                listType1:uniq1,
+                manufaceturerName:req.body.filterName,
+                subCategoryName:req.body.filterSub,
+                isRenderFilter:false
+            });
+    })
 }
