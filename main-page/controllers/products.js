@@ -143,7 +143,7 @@ exports.product_comment = async function(req,res){
 else{
     axios({
         method: 'POST',
-        url: 'http://api-scttshop-v2.herokuapp.com/api/components/',
+        url: 'http://api-scttshop-v2.herokuapp.com/api/comments/',
         data: {
             productID: req.body.productID,
             customerName:req.body.customerName,

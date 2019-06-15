@@ -19,7 +19,7 @@
       info = JSON.parse('<%- JSON.stringify(productInfo)%>');
       console.log(info.comments);
       
-      for (let i = (page - 1) * 1; i < (page - 1) * 1 + 1; i++) {
+      for (let i = (page - 1) * 3; i < (page - 1) * 3 + 3; i++) {
         if (info.comments.length == i) break;
         
         let name =info.comments[i].customerName;
@@ -29,22 +29,11 @@
         
 var myvar = '<li>'+
 '                      <div class="media">'+
-'                        <div class="media-left">'+
-'                          <a href="#">'+
-'                            <img class="media-object" src="../img/testimonial-img-3.jpg" alt="girl image">'+
-'                          </a>'+
-'                        </div>'+
 '                        <div class="media-body">'+
 '                          <h4 class="media-heading"><strong>'+name+`</strong> - <span>`+date+`</span></h4>`+
-'                          <div class="aa-product-rating">'+
-'                            <span class="fa fa-star"></span>'+
-'                            <span class="fa fa-star"></span>'+
-'                            <span class="fa fa-star"></span>'+
-'                            <span class="fa fa-star"></span>'+
-'                            <span class="fa fa-star-o"></span>'+
-'                          </div>'+
 '                          <p>'+comment+'</p>'+
 '                        </div>'+
+`<div style='border-bottom:1px solid #ccc;'></div>`+
 '                      </div>'+
 '                    </li>';
 
@@ -60,6 +49,7 @@ $("#listComment").append(myvar);
     function postComment(){
       var type='<%- productInfo.productID %>'
       console.log($('#name').val()+"  "+$('#comment').val())
+      if($('#name').val()===""||$('#comment').val()==="") return;
       if('<%= user %>'){
         $.ajax('../products/comment',
       {
@@ -70,7 +60,9 @@ $("#listComment").append(myvar);
           comment: $('#comment').val()
         },
         success: function (data, status, xhr) { // success callback function
+          window.location.reload();
         }
+        
       });
       }
       else{
@@ -83,6 +75,7 @@ $("#listComment").append(myvar);
           comment:$('#comment').val()
         },
         success: function (data, status, xhr) { // success callback function
+          window.location.reload();
         }
       });
     }
@@ -225,49 +218,34 @@ $("#listComment").append(myvar);
                 <div class="aa-product-review-area">
                   <h4><%= productInfo.comments.length %> đánh giá cho sản phẩm</h4>
                   <ul class="aa-review-nav" id="listComment">
-                    <% for(let i=0; i< 1;i++){ %>
+                    <% if(productInfo.comments.length>0){
+                    for(let i=0; i< 3 ;i++){ 
+                      if ( productInfo.comments[i] == null) break; 
+                      %>
                     <li>
                       <div class="media">
-                        <div class="media-left">
-                          <a href="#">
-                            <img class="media-object" src="../img/testimonial-img-3.jpg" alt="girl image">
-                          </a>
-                        </div>
+                        
                         <div class="media-body">
                           <h4 class="media-heading"><strong><%= productInfo.comments[i].customerName %></strong> - <span><%= productInfo.comments[i].commentTime %></span></h4>
-                          <div class="aa-product-rating">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star-o"></span>
-                          </div>
                           <p><%= productInfo.comments[i].comment %></p>
                         </div>
+                        <div style='border-bottom:1px solid #ccc;'></div>
                       </div>
                     </li>
-                    <%}%>
+                    <%}}%>
                     
                     
                   </ul>
                   <div class="aa-product-catg-pagination">
                       <nav>
                         <ul class="pagination">
-                          <% for(var i=0; i<productInfo.comments.length; i++) { %>
+                          <% for(var i=0; i<productInfo.comments.length/3; i++) { %>
                           <li><a href="#" onclick="clickPagination(`<%=i+1 %>`)"> <%=i+1 %></a></li>
                           <% } %>
                         </ul>
                       </nav>
                     </div>
-                  <h4>Thêm đánh giá</h4>
-                  <div class="aa-your-rating">
-                    <p>Đánh giá của bạn</p>
-                    <a href="#"><span class="fa fa-star-o"></span></a>
-                    <a href="#"><span class="fa fa-star-o"></span></a>
-                    <a href="#"><span class="fa fa-star-o"></span></a>
-                    <a href="#"><span class="fa fa-star-o"></span></a>
-                    <a href="#"><span class="fa fa-star-o"></span></a>
-                  </div>
+                  
                   <!-- review form -->
                   <form action="" class="aa-review-form">
                     <div class="form-group">
