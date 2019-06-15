@@ -140,10 +140,8 @@ exports.search_post = async function (req, res) {
     let type = req.body.category
     let min = req.body.minVal
     let max = req.body.maxVal
-    let check = null
-    if (req.body.promotion != "undefined") {
-        check = true
-    } else check = false
+    let check = req.body.promotion
+    
     await axios({
             method: 'POST',
             url: 'https://api-scttshop-v2.herokuapp.com/api/products/search',
