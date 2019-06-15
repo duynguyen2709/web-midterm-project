@@ -28,7 +28,7 @@ exports.product_list = async function (req, res) {
         res.json({
             info: listProductReal
         });
-        console.log(listProductReal);
+        
     }
 
 
@@ -67,7 +67,7 @@ exports.product_list_type_filter = async function (req, res) {
     var listProduct1 = new Array();
     var listProductReal = new Array();
     listProduct1 = listProduct;
-    console.log(req.body.filterSub + req.body.filterName + valueFilter);
+    
     if (valueFilter == "Tất cả" && req.body.filterSub != "Tất cả") {
         for (let i = 0; i < listProduct1.length; i++) {
             listType.push(listProduct1[i].manufacturer);
@@ -227,7 +227,7 @@ exports.search_post = async function (req, res) {
                 isOnPromotion: check
             }
         }).then((response) => {
-            console.log(response.data)
+            
             res.render('product/product', {
                 info: response.data,
                 listCategory: listCategories,

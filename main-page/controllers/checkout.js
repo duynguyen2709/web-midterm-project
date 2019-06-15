@@ -57,6 +57,7 @@ exports.postOrder = async function (req, res) {
                     status: 200
                 });
                 productModel.evictCache();
+                req.session.cart.array = [];
             })
         .catch(err => {
             console.log(err)
