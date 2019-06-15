@@ -134,8 +134,6 @@ exports.search = async function (req, res) {
 
 exports.search_post = async function (req, res) {
     let listCategories = await category.getListCategory();
-    var productId = req.query.id
-    const productInfo = await product.getProductDetail(productId)
     let curUser = null
     curUser=req.session.user
    let query=req.body.query
