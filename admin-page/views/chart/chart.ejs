@@ -1,125 +1,74 @@
 <!DOCTYPE html>
 <html>
-  <% include ../common/preheader%>
+<% include ../common/preheader%>
+
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-  <% include ../common/header%>
-  <% include ../common/sidebar%>
+  <div class="wrapper">
+    <% include ../common/header%>
+    <% include ../common/sidebar%>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-  
-    <!-- Main content -->
-    <section class="content">
-      <!-- Info boxes -->
-      <div id="summary">
-        <div class="row">
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-aqua"><i class="fa fa-bar-chart"></i></span>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
 
-              <div class="info-box-content">
-                <span class="info-box-text">KPI</span>
-                <span class="info-box-number">90<small>%</small></span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-red"><i class="fa fa-star"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Đánh Giá Trung Bình</span>
-                <span class="info-box-number">4.75*</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-
-          <!-- fix for small devices only -->
-          <div class="clearfix visible-sm-block"></div>
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Số Đơn Hàng</span>
-                <span class="info-box-number">760</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Người dùng mới</span>
-                <span class="info-box-number">2,000</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
+      <!-- Main content -->
+      <section class="content">
+        <!-- Info boxes -->
+        <div id="summary">
+         <div class="form-group col-md-8" style="display: flex;flex-direction: row">
+          <h4 class="col-md-2">Thống Kê Theo: </h4>
+          <select class="form-control" id="summaryType" onchange="changeSummaryType()">
+            <option value="DAY">Ngày</option>
+            <option value="WEEK">Tuần</option>
+            <option value="MONTH">Tháng</option>
+            <option value="QUARTER">Quý</option>
+            <option value="YEAR">Năm</option>
+          </select>
         </div>
-        <!-- /.row -->
 
-        <div class="row">
-          <div class="col-md-12">
-            <div class="box">
-              <div class="box-header with-border">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-10" id="chartSection">
 
-                <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                  </button>
-                  
-                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body">
-                <div class="row">
-
-                      <div class="col-md-10">
-                      <!-- <iframe
-                        src="http://chart-scttshop.herokuapp.com/public/dashboard/19a88397-0e3d-4483-b967-1488691ccf1d"
-                        frameborder="0"
-                        style="width:120%;"
-                        height="600"
-                        allowtransparency
-                    ></iframe> -->
+                    <iframe
+                      src="http://chart-scttshop.herokuapp.com/public/dashboard/033a257b-2a4f-4050-81bf-fc09e8abc092#refresh=60"
+                      frameborder="1" style="width:120%;" height="750" allowtransparency></iframe>
                   </div>
-                  <!-- /.col -->
-                </div>
-                <!-- /.row -->
-              </div>
-              <!-- ./box-body -->
-              
+              <!-- /.box -->
             </div>
-            <!-- /.box -->
+            <!-- /.col -->
           </div>
-          <!-- /.col -->
+          <!-- /.row -->
+
         </div>
-        <!-- /.row -->
 
-       </div>
+      </section>
 
-    </section>
-   
-  </div>
+    </div>
 
-  <%include ../common/script%>
-
-  
+    <%include ../common/script%>
 
 </body>
+<script>
+  function changeSummaryType(){
+    const type = $("#summaryType").val();
+    
+    if (type == "DAY"){
+      document.getElementById("chartSection").innerHTML = '<iframe src="http://chart-scttshop.herokuapp.com/public/dashboard/033a257b-2a4f-4050-81bf-fc09e8abc092#refresh=60 frameborder="0" style="width:120%;" height="750" allowtransparency></iframe>';
+    }
+    else if (type == "WEEK"){
+      document.getElementById("chartSection").innerHTML = '<iframe src="http://chart-scttshop.herokuapp.com/public/dashboard/d6554b47-5243-4b12-a8db-ff233ecc87d2#refresh=60 frameborder="0" style="width:120%;" height="750" allowtransparency></iframe>';
+    }
+    else if (type == "MONTH"){
+      document.getElementById("chartSection").innerHTML = '<iframe src="http://chart-scttshop.herokuapp.com/public/dashboard/cdd1cc32-662d-4448-9aa0-6da617462489#refresh=60 frameborder="0" style="width:120%;" height="750" allowtransparency></iframe>';
+    }
+    else if (type == "QUARTER"){
+      document.getElementById("chartSection").innerHTML = '<iframe src="http://chart-scttshop.herokuapp.com/public/dashboard/d9b04367-4f62-4ca5-a8ca-4de88cf87b66#refresh=60 frameborder="0" style="width:120%;" height="750" allowtransparency></iframe>';
+    }
+    else if (type == "YEAR"){
+      document.getElementById("chartSection").innerHTML = '<iframe src="http://chart-scttshop.herokuapp.com/public/dashboard/40d824a9-13a8-449a-b7a3-6f323ea4eacd#refresh=60 frameborder="0" style="width:120%;" height="750" allowtransparency></iframe>';
+    }
+
+  }
+</script>
+
 </html>
