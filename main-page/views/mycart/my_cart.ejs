@@ -1,6 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+  
+<script type="text/javascript">
+function updateCount(image,name, price,size, count){
+  document.getElementById('btnunloading').disabled=true;
+  if(count==""){
+    count=1;
+  }
+  if(size==""){
+    size="S";
+  }
+  console.log(name+price+size+count);
+        $.ajax('../my-cart/updateCount',
+      {
+        type: 'POST',  
+  data:{
+    image: image,
+    name: name,
+    price:price,
+    size:size,
+    count: count
+  },
+  success: function (data) {
+    addRow(data.cart,data.listCount);
+    document.getElementById('btnunloading').disabled=false;
+  }
+      });
+      }
+    function removeProduct(image,name,price){
+      document.getElementById('btnunloading').disabled=true;
+      $.ajax('../my-cart/removeProduct',   // request url
+{          
+  type: 'POST',  
+  data:{
+    image: image,
+    name: name,
+    price:price
+  },
+  success: function (data) { 
+    document.getElementById('btnunloading').disabled=false;
+      
+addRow(data.cart,data.listCount);
+  }
+});
+    }
+    function addRow(list,listCount){
+      var tmp=$("#productTable").empty();
+      var myvar='<tbody id="productTable">';
+      var select;
+      let total=0;
+      if(list.length==0){
+        document.getElementById("btnunloading").style.visibility = "hidden";
+      }
+      
+      for(let i=0;i<list.length;i++){
+        console.log(list[i].size+list[i].productID+list[i].categoryID);
+        total+=list[i].count*list[i].price;
+        if(list[i].size==""||list[i].size=="S"){
+          select='                                  <option selected>S</option>'+
+'                                  <option>M</option>'+
+'                                  <option>L</option>'+
+'                                  <option>XL</option>'
+        }
+        if(list[i].size=="M"){
+          select='                                  <option>S</option>'+
+'                                  <option selected>M</option>'+
+'                                  <option>L</option>'+
+'                                  <option>XL</option>'
+        }
+        if(list[i].size=="L"){
+          console.log("asdasdasd");
+          select='                                  <option>S</option>'+
+'                                  <option>M</option>'+
+'                                  <option selected>L</option>'+
+'                                  <option>XL</option>'
+        }
+        if(list[i].size=="XL"){
+          select='                                  <option>S</option>'+
+'                                  <option>M</option>'+
+'                                  <option>L</option>'+
+'                                  <option selected>XL</option>'
+        }
 
+
+        myvar += '<tr>'+
+'                                 <td><a class="remove" href="#" onclick="removeProduct('+"'"+ list[i].image+"',`"+list[i].name+"`,'"+list[i].price+`')`+'"><fa class="fa fa-close"></fa></a></td>'+
+'                                 <td><a href="#"><img src= "'+list[i].image+'"'+' alt="img"></a></td>'+
+'                                 <td><a class="aa-cart-title" href="#">'+list[i].name+'</a></td>'+
+'                                 <td>'+list[i].price+'</td>'+
+`                                 <td><input class="aa-cart-quantity" type="number"  min="1" max="`+listCount[i]+`" value="`+list[i].count+`" onfocusout="updateCount('`+list[i].image+"',`"+list[i].name+"`,'"+ list[i].price+"','"+list[i].size+"',"+`this.value)"`+'></td>'+
+`<td><select ` +`" onchange="updateCount('`+list[i].image+"',`"+list[i].name+"`,'"+list[i].price+`',this.value`+`,'`+list[i].count+ `')">`+
+select+
+'                                </select></td>'+
+'                                 <td>'+list[i].price*list[i].count+'</td>'+
+'                              </tr>';
+      }
+//       myvar+='<tr>'+
+// '                        <td colspan="6" class="aa-cart-view-bottom">'+
+// '                          <input class="aa-cart-view-btn" type="submit" value="Cập nhật giỏ đồ">'+
+// '                        </td>'+
+// '                      </tr>';
+      myvar+='</tbody>';
+      console.log(select);
+      document.getElementById("total").innerHTML =total;
+      tmp.replaceWith(myvar);
+
+    }
+    
+    </script>
   <body>
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
@@ -36,44 +143,90 @@
                         <th>Sản phẩm</th>
                         <th>Giá</th>
                         <th>Số lượng</th>
+                        <th>Kích thước</th>
                         <th>Tổng</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                        <td><a href="#"><img src="./img/man/polo-shirt-1.png" alt="img"></a></td>
-                        <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                        <td>$250</td>
-                        <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                        <td>$250</td>
-                      </tr>
-                      <tr>
-                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                        <td><a href="#"><img src="./img/man/polo-shirt-2.png" alt="img"></a></td>
-                        <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                        <td>$150</td>
-                        <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                        <td>$150</td>
-                      </tr>
-                      <tr>
-                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                        <td><a href="#"><img src="./img/man/polo-shirt-3.png" alt="img"></a></td>
-                        <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                        <td>$50</td>
-                        <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                        <td>$50</td>
-                      </tr>
-                      <tr>
+                    <tbody id="productTable">
+                        <%if(list)
+                        {
+                          for (var i=0;i< list.length;i++){ 
+                            if(list[i].size=="S"||list[i].size==""){%>
+                          <tr>
+                               <td><a class="remove" href="#" onclick="removeProduct('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>')"><fa class="fa fa-close"></fa></a></td>
+                               <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
+                               <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
+                               <td><%= list[i].price %></td>
+                               <td><input  class="aa-cart-quantity" type="number" min="1" max="<%=listCount[i]%>" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
+                               <td><select onchange="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value,'<%= list[i].count %>')">
+                                  <option selected>S</option>
+                                  <option>M</option>
+                                  <option>L</option>
+                                  <option>XL</option>
+                                </select></td>
+                               
+                               <td><%= list[i].price*list[i].count %></td>
+                            </tr>
+                            <%}
+                            if(list[i].size=="M"){%>
+                              <tr>
+                                  <td><a class="remove" href="#" onclick="removeProduct('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>')"><fa class="fa fa-close"></fa></a></td>
+                                  <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
+                                  <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
+                                  <td><%= list[i].price %></td>
+                                  <td><input  class="aa-cart-quantity" type="number" min="1" max="<%=listCount[i]%>" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
+                                  <td><select onchange="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value,'<%= list[i].count %>')">
+                                     <option>S</option>
+                                     <option selected>M</option>
+                                     <option>L</option>
+                                     <option>XL</option>
+                                   </select></td>
+                                  
+                                  <td><%= list[i].price*list[i].count %></td>
+                               </tr>
+                               <%}
+                               if(list[i].size=="L"){%>
+                                <tr>
+                                    <td><a class="remove" href="#" onclick="removeProduct('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>')"><fa class="fa fa-close"></fa></a></td>
+                                    <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
+                                    <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
+                                    <td><%= list[i].price %></td>
+                                    <td><input  class="aa-cart-quantity" type="number" min="1" max="<%=listCount[i]%>" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
+                                    <td><select onchange="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value,'<%= list[i].count %>')">
+                                       <option>S</option>
+                                       <option>M</option>
+                                       <option selected>L</option>
+                                       <option>XL</option>
+                                     </select></td>
+                                    
+                                    <td><%= list[i].price*list[i].count %></td>
+                                 </tr>
+                                 <%}
+                                 if(list[i].size=="XL"){%>
+                                  <tr>
+                                      <td><a class="remove" href="#" onclick="removeProduct('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>')"><fa class="fa fa-close"></fa></a></td>
+                                      <td><a href="#"><img src='<%= list[i].image %>' alt="img"></a></td>
+                                      <td><a class="aa-cart-title" href="#"><%= list[i].name %></a></td>
+                                      <td><%= list[i].price %></td>
+                                      <td><input  class="aa-cart-quantity" type="number" min="1" max="<%=listCount[i]%>" value="<%= list[i].count %>" onfocusout="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>','<%= list[i].size %>',this.value)" ></td>
+                                      <td><select onchange="updateCount('<%= list[i].image %>',`<%= list[i].name %>`,'<%= list[i].price %>',this.value,'<%= list[i].count %>')">
+                                         <option>S</option>
+                                         <option>M</option>
+                                         <option>L</option>
+                                         <option selected>XL</option>
+                                       </select></td>
+                                      
+                                      <td><%= list[i].price*list[i].count %></td>
+                                   </tr>
+                                   <%}%>
+                                   
+                        <%}}%>
+                     <!-- <tr>
                         <td colspan="6" class="aa-cart-view-bottom">
-                          <div class="aa-cart-coupon">
-                            <input class="aa-coupon-code" type="text" placeholder="Coupon">
-                            <input class="aa-cart-view-btn" type="submit" value="Áp dụng Coupon">
-                          </div>
-                          <input class="aa-cart-view-btn" type="submit" value="Cập nhật giỏ đồ">
-                        </td>
-                      </tr>
+                          <input class="aa-cart-view-btn" type="submit" value="Cập nhật giỏ đồ"></td>
+                        </tr> -->
                       </tbody>
+                      
                   </table>
                 </div>
              </form>
@@ -83,16 +236,29 @@
                <table class="aa-totals-table">
                  <tbody>
                    <tr>
-                     <th>Subtotal</th>
-                     <td>$450</td>
-                   </tr>
-                   <tr>
-                     <th>Total</th>
-                     <td>$450</td>
+                     <%if(list)
+                        {
+                           var total=0
+                          for (var i=0;i< list.length;i++){
+                            total+=list[i].count*list[i].price;
+                          }%>
+                          <th>Total</th>
+                          <td id="total"><%= total%></td>
+                        <%}%>
                    </tr>
                  </tbody>
                </table>
-               <a href="#" class="aa-cart-view-btn">Tiến hành thanh toán</a>
+               <% if(list){
+                 if (list.length>0){%>
+
+                <% if(user)
+                {%>
+                 <button id="btnunloading"onclick="window.location.href = '../check-out';" class="btn btn-lg btn-primary" style="margin-top: 20px" >Tiến hành thanh toán</button>
+                <%}else{%>
+                 
+                 <button id="btnunloading" href="#" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#login-modal" style="margin-top: 20px"  >Tiến hành thanh toán</button>
+                <%}}}%>
+               
              </div>
            </div>
          </div>
@@ -102,4 +268,7 @@
  </section>
  <!-- / Cart view section -->
   </body>
+  <script>
+      
+    </script>
 </html>

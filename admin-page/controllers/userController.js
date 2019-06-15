@@ -15,7 +15,16 @@ exports.index = function (req, res) {
 
 exports.getListUserAccount = async function (req, res) {
 
-    const listUserAccount = await user.userAccountList();
+    const listUserAccount = await user.userAccountList(false);
+    res.send(JSON.stringify(listUserAccount));
+}
+
+exports.getListUserNotVerified = async function (req, res) {
+
+    console.log("test\n\n\n");
+    const listUserAccount = await user.userAccountList(true);
+
+    console.log(listUserAccount);
     res.send(JSON.stringify(listUserAccount));
 }
 
@@ -66,7 +75,7 @@ exports.insertUserAccount = function (req, res) {
                 email: req.body.email,
                 birthDate: req.body.birthDate,
                 avatar: avatar,
-                role: 'ADMIN',
+                role: req.body.role,
                 updDate: ''
             }
         })
@@ -141,6 +150,76 @@ exports.updateUserAccount = function (req, res) {
                 fullName: req.body.fullName,
                 address: req.body.address,
                 phoneNumber: req.body.phoneNumber,
+                role: req.body.role,
+                updDate: ''
+            }
+        })
+        .then(response => {
+            res.json({
+                data: "Update Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Update Failed",
+                status: 500
+            });
+        });
+}
+
+exports.lockUserAccount = function (req, res) {
+
+    axios({
+            method: 'PUT',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username + '/lock/' + req.body.status        
+        })
+        .then(response => {
+            res.json({
+                data: "Update Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Update Failed",
+                status: 500
+            });
+        });
+}
+
+exports.verifyUserAccount = function (req, res) {
+
+    axios({
+            method: 'PUT',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username + '/verify'      
+        })
+        .then(response => {
+            res.json({
+                data: "Update Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Update Failed",
+                status: 500
+            });
+        });
+}
+
+
+
+exports.changeUserAccountRole = function (req, res) {
+
+    axios({
+            method: 'PUT',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username + '/changerole',
+            data: {
+                username: req.body.username,
                 role: req.body.role,
                 updDate: ''
             }

@@ -13,6 +13,8 @@ router.get('/detailUser',user_controller.view_detail);
 
 router.get('/createUser', user_controller.user_create_get);
 
+router.post('/getUserStatus',user_controller.get_user_status);
+
 // POST request for creating Book.
 router.post('/createUser', user_controller.user_create_post);
 

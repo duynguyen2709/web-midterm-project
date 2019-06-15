@@ -1,4 +1,7 @@
-exports.index = function(req, res) {
+var axios = require('axios');
+var orderModel = require('../models/orderModel');
+
+exports.index = function (req, res) {
     if (req.isAuthenticated()) {
         res.render('order/order', {
             user: req.user
@@ -6,30 +9,45 @@ exports.index = function(req, res) {
     } else {
         res.redirect('/');
     }
-    
 };
 
-// Display list of all orders.
-exports.order_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: order list');
-};
+exports.getListOrder = async function (req, res) {
 
-// Display detail page for a specific order.
-exports.order_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: order detail: ' + req.params.id);
-};
+    const listOrder = await orderModel.orderList();
+    res.send(JSON.stringify(listOrder));
+}
 
-// Display order create form on POST.
-exports.order_create = function(req, res) {
-    res.send('NOT IMPLEMENTED: order create');
-};
+exports.getOrder = async function (req, res) {
 
-// Display order delete form on GET.
-exports.order_delete = function(req, res) {
-    res.send('NOT IMPLEMENTED: order delete');
-};
+    const orderID = req.params.orderID;
+    const order = await orderModel.getOrder(orderID);
 
-// Display order update form on GET.
-exports.order_update = function(req, res) {
-    res.send('NOT IMPLEMENTED: order update GET');
-};
+    res.send(JSON.stringify(order));
+}
+
+exports.updateOrder = function (req, res) {
+
+    axios({
+            method: 'PUT',
+            url: 'https://api-scttshop-v2.herokuapp.com/api/orders/' + req.body.orderID,
+            data: {
+                orderID: req.body.orderID,
+                status: req.body.status,
+                extraInfo: req.body.extraInfo,
+                updDate: ''
+            }
+        })
+        .then(response => {
+            res.json({
+                data: "Update Succeed",
+                status: 200
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                data: "Update Failed",
+                status: 500
+            });
+        });
+}

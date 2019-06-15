@@ -54,6 +54,11 @@ function loadUserAccount(encodedUser) {
             {
                 data: null,
                 className: "center",
+                defaultContent: '<Button class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#dlgupdateuserrole" onclick="showPopupUpdateUserRole(this)">Phân Quyền</Button>'
+            },
+            {
+                data: null,
+                className: "center",
                 defaultContent: '<Button class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUser(this)">Chỉnh Sửa</Button>'
             },
             {
@@ -63,11 +68,36 @@ function loadUserAccount(encodedUser) {
             },
         ],
         "rowCallback": function (row, data, index) {
+            if (data["role"] == "ADMIN") {
+                $(row).find('td:eq(2)').css('color', 'green');
+                //$(row).find('td:eq(9)').text('Đang Bán');
+                $(row).find('td:eq(2)').html('<h4><span class="label label-success">ADMIN</span></h4>');
+            } else if (data["role"] == "MANAGER"){
+                $(row).find('td:eq(2)').css('color', 'blue');
+                //$(row).find('td:eq(9)').text('Tạm Ngừng Bán');
+                $(row).find('td:eq(2)').html('<h4><span class="label label-info">MANAGER</span></h4>');
+            }
+            else {
+                $(row).find('td:eq(2)').css('color', 'gray');
+                //$(row).find('td:eq(9)').text('Tạm Ngừng Bán');
+                $(row).find('td:eq(2)').html('<h4><span class="label label-default">USER</span></h4>');
+            }
+
+            if (data["status"] == "1"){
+                $(row).find('td:eq(10)').html('<Button class="btn btn-block btn-warning btn-sm" value="0" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUser(this)">Khóa</Button>');
+            }
+            else {
+                $(row).find('td:eq(10)').html('<Button class="btn btn-block btn-success btn-sm" value="1" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUser(this)">Mở Khóa</Button>');
+            }
 
             if (data["username"] == obj.username){
                 $(row).find('td:eq(9)').html('');
                 $(row).find('td:eq(10)').html('');
+                $(row).find('td:eq(11)').html('');
             }
+
+           
+
             // if (data["isActive"] == "1") {
             //     $(row).find('td:eq(6)').css('color', 'green');
             //     $(row).find('td:eq(6)').text('Đang Bán');
@@ -85,34 +115,19 @@ function showPopupUpdateUser(itemthis) {
     var chil = $(itemthis).parent().parent().children();
 
     var username = chil[0].innerHTML;
+    var status = $(itemthis).val();
 
-    $.ajax({
-        type: "GET",
-        url: BASE_USER_PATH + "/get/" + username,
-        data: {
-            username: username
-        }
-    }).done(function (resp) {
+    $("#dlgupdateuser input[name='username']").val(username);
+    $("#dlgupdateuser input[name='status']").val(status);
 
-        const obj = JSON.parse(resp);
+}
+function showPopupUpdateUserRole(itemthis) {
+    var chil = $(itemthis).parent().parent().children();
 
-        $("#dlgupdateuser input[name='username']").val(obj.username);
-        $("#dlgupdateuser input[name='password']").val(obj.password);
-        $("#dlgupdateuser input[name='email']").val(obj.email);
-        $("#dlgupdateuser input[name='birthDate']").val(obj.birthDate);
-        $("#dlgupdateuser input[name='avatar']").val(obj.avatar);
-        $("#dlgupdateuser select[name='role'] option").filter(function () {
-            return $.trim($(this).val()) === $.trim(obj.role);
-        }).attr("selected", true).prop("selected", "selected");
+    var username = chil[0].innerHTML;
 
-        $("#dlgupdateuser input[name='fullName']").val(obj.fullName);
-        $("#dlgupdateuser input[name='address']").val(obj.address);
-        $("#dlgupdateuser input[name='phoneNumber']").val(obj.phoneNumber);
-        $("#dlgupdateuser input[name='lastLoginTime']").val(obj.lastLoginTime);
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        console.log("Error: " + textStatus);
-    }).always(function () {
-    });
+    $("#dlgupdateuserrole input[name='username']").val(username);
+
 }
 
 function showPopupDeleteUser(itemthis) {
@@ -175,8 +190,27 @@ function handleUpdateUserAccount() {
     
     $.ajax({
         type: "POST",
-        url: BASE_USER_PATH + "/update",
+        url: BASE_USER_PATH + "/lock",
         data: serializeFormToJSon("#formupdateuser"),
+        dataType: "json"
+    }).done(function (resp) {
+        console.log("Response: " + resp.status + " - " + resp.data);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("Error: " + textStatus);
+    }).always(function () {
+        $dataTable.ajax.reload(null, false);
+        $("#dlgloading").modal('hide');
+    });
+}
+
+function handleUpdateUserRole() {
+    $("#dlgupdateuserrole").modal('hide');
+    $("#dlgloading").modal('show');
+    
+    $.ajax({
+        type: "POST",
+        url: BASE_USER_PATH + "/changerole",
+        data: serializeFormToJSon("#formupdateuserrole"),
         dataType: "json"
     }).done(function (resp) {
         console.log("Response: " + resp.status + " - " + resp.data);

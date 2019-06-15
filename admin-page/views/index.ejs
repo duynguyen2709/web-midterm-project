@@ -12,6 +12,7 @@
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="bootstrap-select/js/i18n/defaults-vi_VN.min.js"></script>
+    <script src="handlers/utils.js"></script>
     <style>
         body {
             background: #ddd;
@@ -38,12 +39,19 @@
                 <button style="margin-top:5px" class="btn btn-lg btn-primary btn-block" type="submit">Đăng Nhập</button>
             </form>
 
+            <div style="margin-top:10px; text-align: center;">
+                <a href="#" data-toggle="modal" data-target="#dlgforgotpass">
+                    <p style="color:red;">Quên mật khẩu ?</p>
+                </a>
+            </div>
+
             <div style="margin-top:10px; text-align: center">
                 <a href="/signup">Đăng Ký Tài Khoản</a>
             </div>
         </div>
     </div> <!-- /container -->
 
+    <%include ./common/dialogs%>
 </body>
 <script>
     window.onload = function () {
@@ -51,6 +59,51 @@
             if (window.location.protocol === "https:")
                 window.location.protocol = "http";
         });
+    }
+
+    function handleForgotPass(e) {
+        e.preventDefault();
+
+        const username = $("#dlgforgotpass input[name='username']").val();
+        const email = $("#dlgforgotpass input[name='email']").val();
+
+        if (username == "" || email == "")
+            return false;
+
+        $.ajax({
+            type: "POST",
+            url: window.location.protocol + "//" + window.location.host + "/forgotpass",
+            data: serializeFormToJSon("#formforgotpass"),
+            dataType: "json"
+        }).done(function (resp) {
+            if (resp.returncode == -2){
+                FormUtils.showMessageBox('Người Dùng Không Tồn Tại',null,'error');
+            }
+            else if (resp.returncode == -1){
+                FormUtils.showMessageBox('Email Không Khớp Với Người Dùng',null,'error');
+            }
+            else if (resp.returncode == 0){
+                FormUtils.showMessageBox('Đã xảy ra lỗi trong quá trình xử lý',null,'error');
+            }
+            else if (resp.returncode == 1){
+                FormUtils.showMessageBox('Gửi Mail Reset Mật Khẩu Thành Công',null,'success');
+                $("#dlgforgotpass").modal('hide');
+            }
+
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log("Error: " + textStatus);
+        }).always(function () {
+        });
+
+        return false;
+        
+    }
+
+    function serializeFormToJSon(form) {
+        return $(form).serializeArray().reduce((acc, next) => ({
+            ...acc,
+            [next.name]: next.value
+        }), {});
     }
 </script>
 

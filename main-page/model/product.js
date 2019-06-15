@@ -19,15 +19,26 @@ exports.getProductDetail = async (ID) => {
 }
 
 exports.getProductOfCategory = async (categoryID) => {
+
+    if (PRODUCT_OF_CATEGORIES_CACHE == null){
+        PRODUCT_OF_CATEGORIES_CACHE = new Map([]);
+    }
     
     if (PRODUCT_OF_CATEGORIES_CACHE.get(categoryID) == null ||
         !PRODUCT_OF_CATEGORIES_CACHE.has(categoryID)) {
             //not in cache
             //then get from api
+
         const res = await fetch('https://api-scttshop-v2.herokuapp.com/api/categories/' + categoryID + '/products');
         let data = await res.json();
 
         PRODUCT_OF_CATEGORIES_CACHE.set(categoryID, data);
     }
+
     return PRODUCT_OF_CATEGORIES_CACHE.get(categoryID);
+}
+
+exports.evictCache = function(){
+    PRODUCT_OF_CATEGORIES_CACHE = null;
+
 }

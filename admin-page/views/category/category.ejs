@@ -13,7 +13,7 @@
       <!-- Main content -->
       <section class="content">
 
-        <div id="products">
+        <div>
           <div class="row">
             <div class="col-xs-12">
 
@@ -25,12 +25,14 @@
                 </div>
 
                 <div class="box-body">
-                  <table id="categoryTable" class="table table-bordered table-striped table-hover">
+                  <table id="categoryTable" style="table-layout: fixed;" class="table no-margin table-striped table-hover">
                     <thead>
                       <tr>
                         <th>ID</th>
                         <th>Tên Loại Sản Phẩm</th>
                         <th>Số Sản Phẩm Tương Ứng</th>
+                        <th>Phân Loại</th>
+                        <th>Chi Tiết</th>
                         <th>Cập Nhật</th>
                         <th>Xóa</th>
                       </tr>
@@ -42,6 +44,35 @@
             </div>
           </div>
         </div>
+
+        <div >
+            <div id="subCategorySection" style="display:none" class="row" >
+              <div class="col-xs-12">
+  
+                <div class="box">
+                  <div class="box-header">
+                    <h3 class="box-title">Phân Loại Tương Ứng</h3>
+                    <Button class="btn btn-sm btn-info btn-flat pull-right" data-toggle="modal" id="btnInsertSubCategory"
+                      data-target="#dlginsertsubcategory">Thêm Phân Loại Sản Phẩm Mới</Button>
+                  </div>
+  
+                  <div class="box-body">
+                    <table id="subCategoryTable" class="table no-margin table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Phân Loại</th>
+                          <th>Cập Nhật</th>
+                          <th>Xóa</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+              </div>
+            </div>
+          </div>
 
       </section>
 
