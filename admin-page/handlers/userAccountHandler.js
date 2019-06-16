@@ -21,11 +21,11 @@ function loadUserAccount(encodedUser) {
                 "data": "fullName",
                 "defaultContent": ""
             },
-            
+
             {
                 "data": "role",
                 "defaultContent": ""
-            },{
+            }, {
                 "render": function (data, type, JsonResultRow, meta) {
                     return '<img width="64px" height="64px" src="' + JsonResultRow.avatar + '">';
                 }
@@ -59,7 +59,7 @@ function loadUserAccount(encodedUser) {
             {
                 data: null,
                 className: "center",
-                defaultContent: '<Button class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUser(this)">Chỉnh Sửa</Button>'
+                defaultContent: '<Button class="btn btn-block btn-warning btn-sm" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUserAccount(this)">Khóa</Button>'
             },
             {
                 data: null,
@@ -72,31 +72,30 @@ function loadUserAccount(encodedUser) {
                 $(row).find('td:eq(2)').css('color', 'green');
                 //$(row).find('td:eq(9)').text('Đang Bán');
                 $(row).find('td:eq(2)').html('<h4><span class="label label-success">ADMIN</span></h4>');
-            } else if (data["role"] == "MANAGER"){
+            } else if (data["role"] == "MANAGER") {
                 $(row).find('td:eq(2)').css('color', 'blue');
                 //$(row).find('td:eq(9)').text('Tạm Ngừng Bán');
                 $(row).find('td:eq(2)').html('<h4><span class="label label-info">MANAGER</span></h4>');
-            }
-            else {
+            } else {
                 $(row).find('td:eq(2)').css('color', 'gray');
                 //$(row).find('td:eq(9)').text('Tạm Ngừng Bán');
                 $(row).find('td:eq(2)').html('<h4><span class="label label-default">USER</span></h4>');
             }
 
             if (data["status"] == "1"){
-                $(row).find('td:eq(10)').html('<Button class="btn btn-block btn-warning btn-sm" value="0" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUser(this)">Khóa</Button>');
+                $(row).find('td:eq(10)').html('<Button class="btn btn-block btn-warning btn-sm" value="0" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUserAccount(this)">Khóa</Button>');
             }
             else {
-                $(row).find('td:eq(10)').html('<Button class="btn btn-block btn-success btn-sm" value="1" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUser(this)">Mở Khóa</Button>');
+                $(row).find('td:eq(10)').html('<Button class="btn btn-block btn-success btn-sm" value="1" data-toggle="modal" data-target="#dlgupdateuser" onclick="showPopupUpdateUserAccount(this)">Mở Khóa</Button>');
             }
 
-            if (data["username"] == obj.username){
+            if (data["username"] == obj.username) {
                 $(row).find('td:eq(9)').html('');
                 $(row).find('td:eq(10)').html('');
                 $(row).find('td:eq(11)').html('');
             }
 
-           
+
 
             // if (data["isActive"] == "1") {
             //     $(row).find('td:eq(6)').css('color', 'green');
@@ -110,17 +109,28 @@ function loadUserAccount(encodedUser) {
 
     });
 }
-
-function showPopupUpdateUser(itemthis) {
+function showPopupUpdateUserAccount(itemthis){
     var chil = $(itemthis).parent().parent().children();
 
-    var username = chil[0].innerHTML;
+    var username = chil[0].innerText;
+    var status = $(itemthis).val();
+
+    $("#dlgupdateuser input[name='username']").val(username);
+    $("#dlgupdateuser input[name='status']").val(status);
+}
+
+function showPopupUpdateUser(itemthis) {
+    alert('test');
+    var chil = $(itemthis).parent().parent().children();
+
+    var username = chil[0].innerText;
     var status = $(itemthis).val();
 
     $("#dlgupdateuser input[name='username']").val(username);
     $("#dlgupdateuser input[name='status']").val(status);
 
 }
+
 function showPopupUpdateUserRole(itemthis) {
     var chil = $(itemthis).parent().parent().children();
 
@@ -152,17 +162,16 @@ function handleDeleteUserAccount() {
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus);
     }).always(function () {
-        
+
         $dataTable.ajax.reload(null, false);
         $("#dlgloading").modal('hide');
     });
 }
 
 function handleInsertUserAccount() {
-    
-    if ($("#dlginsertuser input[name='password']").val() != $("#dlginsertuser input[name='repassword']").val())
-    {
-        FormUtils.showMessageBox('Mật Khẩu Không Trùng. Vui Lòng Nhập Lại', null,'error');
+
+    if ($("#dlginsertuser input[name='password']").val() != $("#dlginsertuser input[name='repassword']").val()) {
+        FormUtils.showMessageBox('Mật Khẩu Không Trùng. Vui Lòng Nhập Lại', null, 'error');
         return false;
     }
     $("#dlginsertuser").modal('hide');
@@ -187,7 +196,7 @@ function handleInsertUserAccount() {
 function handleUpdateUserAccount() {
     $("#dlgupdateuser").modal('hide');
     $("#dlgloading").modal('show');
-    
+
     $.ajax({
         type: "POST",
         url: BASE_USER_PATH + "/lock",
@@ -206,7 +215,7 @@ function handleUpdateUserAccount() {
 function handleUpdateUserRole() {
     $("#dlgupdateuserrole").modal('hide');
     $("#dlgloading").modal('show');
-    
+
     $.ajax({
         type: "POST",
         url: BASE_USER_PATH + "/changerole",

@@ -102,7 +102,7 @@ function showPopupDeleteCustomer(itemthis) {
     var chil = $(itemthis).parent().parent().children();
 
     var email = chil[0].innerText;
-    var uid = chil[10].textContent;
+    var uid = chil[9].textContent;
     $("#dlgdeletecustomer input[name='email']").val(email);
     $("#dlgdeletecustomer input[name='uid']").val(uid);
 }

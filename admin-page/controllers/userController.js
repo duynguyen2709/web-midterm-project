@@ -109,7 +109,7 @@ exports.insertUserAccount = function (req, res) {
         });
 }
 
-exports.changePassword = function (req, res) {
+exports.changePassword = async function (req, res) {
     var schema = new passwordValidator();
 
     schema
@@ -122,50 +122,68 @@ exports.changePassword = function (req, res) {
 
     if (!schema.validate(req.body.password)) {
         res.json({
-            data: "Update Failed",
+            data: "Mật Khẩu Mới Không Hợp Lệ. Vui Lòng Nhập Lại.",
             status: 500
         });
         return;
     }
 
-    axios({
-            method: 'PUT',
-            url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username,
-            data: {
-                username: req.body.username,
-                password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null),
-                email: req.body.email,
-                avatar: req.body.avatar,
-                birthDate: req.body.birthDate,
-                fullName: req.body.fullName,
-                address: req.body.address,
-                phoneNumber: req.body.phoneNumber,
-                role: req.body.role,
-                updDate: ''
-            }
-        })
-        .then(async function (response) {
-            const newUser = await user.getUser(req.body.username);
+    const oldUser = await user.getUser(req.body.username);
 
-            req.logout();
-
-            req.login(newUser, function (err) {
-                if (err) return next(err)
-
-                res.json({
-                    data: "Update Succeed",
-                    status: 200
-                });
-            })
-
-        })
-        .catch(err => {
-            console.log(err);
-            res.json({
-                data: "Update Failed",
+    await user.comparePassword(req.body.oldpassword, oldUser.password, function (err, isMatch) {
+        if (err) {
+            return res.json({
+                data: "Đã Xảy Ra Lỗi",
                 status: 500
             });
-        });
+
+        }
+
+        if (!isMatch) {
+            return res.json({
+                data: "Mật Khẩu Cũ Không Khớp",
+                status: 500
+            });
+        } else {
+            axios({
+                    method: 'PUT',
+                    url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username,
+                    data: {
+                        username: req.body.username,
+                        password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null),
+                        email: req.body.email,
+                        avatar: req.body.avatar,
+                        birthDate: req.body.birthDate,
+                        fullName: req.body.fullName,
+                        address: req.body.address,
+                        phoneNumber: req.body.phoneNumber,
+                        role: req.body.role,
+                        updDate: ''
+                    }
+                })
+                .then(async function (response) {
+                    const newUser = await user.getUser(req.body.username);
+
+                    req.logout();
+
+                    req.login(newUser, function (err) {
+
+                        return res.json({
+                            data: "Update Succeed",
+                            status: 200
+                        });
+                    })
+
+                }).catch(err => {
+                    return res.json({
+                        data: "Update Failed",
+                        status: 500
+                    });
+                });
+        }
+    });
+
+
 }
 
 exports.updateUserAccount = function (req, res) {

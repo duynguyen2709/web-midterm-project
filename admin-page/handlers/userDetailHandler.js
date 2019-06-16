@@ -18,7 +18,7 @@ function handleChangePassword() {
         if (resp.status == 200) {
             FormUtils.showMessageBox('Đổi Mật Khẩu Thành Công', reloadUserDetail, 'success');
         } else {
-            FormUtils.showMessageBox('Đổi Mật Khẩu Thất Bại', null, 'error');
+            FormUtils.showMessageBox(resp.data, null, 'error');
         }
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log("Error: " + textStatus);
