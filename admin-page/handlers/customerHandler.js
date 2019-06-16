@@ -20,13 +20,6 @@ function loadCustomer() {
                 "defaultContent": ""
             },
             {
-                "data": null,
-                "defaultContent": "",
-                "render": function (data, type, JsonResultRow, meta) {
-                    return '<img width="64px" height="64px" src="' + JsonResultRow.avatar + '">';
-                }
-            },
-            {
                 "data": "address",
                 "defaultContent": ""
             },
@@ -67,20 +60,20 @@ function loadCustomer() {
         "rowCallback": function (row, data, index) {
 
             if (data["verified"] == true) {
-                $(row).find('td:eq(6)').css('color', 'green');
+                $(row).find('td:eq(5)').css('color', 'green');
                 //$(row).find('td:eq(6)').text('Đang Bán');
-                $(row).find('td:eq(6)').html('<span class="label label-success">Đã Xác Thực</span>');
+                $(row).find('td:eq(5)').html('<span class="label label-success">Đã Xác Thực</span>');
             } else {
-                $(row).find('td:eq(6)').css('color', 'red');
+                $(row).find('td:eq(5)').css('color', 'red');
                 //$(row).find('td:eq(6)').text('Đang Dừng Bán');
-                $(row).find('td:eq(6)').html('<span class="label label-warning">Chưa Xác Thực</span>');
+                $(row).find('td:eq(5)').html('<span class="label label-warning">Chưa Xác Thực</span>');
             }
 
             if (data["status"] == "1"){
-                $(row).find('td:eq(8)').html('<Button class="btn btn-block btn-warning btn-sm" value="0" data-toggle="modal" data-target="#dlgupdatecustomer" onclick="showPopupUpdateCustomer(this)">Khóa</Button>');
+                $(row).find('td:eq(7)').html('<Button class="btn btn-block btn-warning btn-sm" value="0" data-toggle="modal" data-target="#dlgupdatecustomer" onclick="showPopupUpdateCustomer(this)">Khóa</Button>');
             }
             else {
-                $(row).find('td:eq(8)').html('<Button class="btn btn-block btn-success btn-sm" value="1" data-toggle="modal" data-target="#dlgupdatecustomer" onclick="showPopupUpdateCustomer(this)">Mở Khóa</Button>');
+                $(row).find('td:eq(7)').html('<Button class="btn btn-block btn-success btn-sm" value="1" data-toggle="modal" data-target="#dlgupdatecustomer" onclick="showPopupUpdateCustomer(this)">Mở Khóa</Button>');
             }
         },
         // columnDefs: [{

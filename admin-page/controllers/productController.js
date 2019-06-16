@@ -61,6 +61,16 @@ exports.deleteProduct = function (req, res) {
 
 exports.insertProduct = function (req, res) {
 
+    if (req.body.importPrice <= 0 || req.body.sellPrice <= 0 || req.body.importPrice > req.body.sellPrice ||
+        req.body.quantity <= 0) {
+        res.json({
+            data: "Insert Failed",
+            status: 500
+        });
+
+        return;
+    }
+
     let subCategory = null;
     if (req.body.subCategoryID != null)
         subCategory = req.body.subCategoryID;
@@ -105,7 +115,16 @@ exports.insertProduct = function (req, res) {
 }
 
 exports.updateProduct = function (req, res) {
+    if (req.body.importPrice <= 0 || req.body.sellPrice <= 0 || req.body.importPrice > req.body.sellPrice ||
+        req.body.quantity <= 0) {
+        res.json({
+            data: "Insert Failed",
+            status: 500
+        });
 
+        return;
+    }
+    
     let subCategory = null;
     if (req.body.subCategoryID != null)
         subCategory = req.body.subCategoryID;

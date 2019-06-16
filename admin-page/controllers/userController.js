@@ -1,6 +1,7 @@
 var axios = require('axios');
 var user = require('../models/userAccountModel');
 var bcrypt = require('bcrypt');
+var passwordValidator = require('password-validator');
 
 exports.index = function (req, res) {
     if (req.isAuthenticated()) {
@@ -20,11 +21,7 @@ exports.getListUserAccount = async function (req, res) {
 }
 
 exports.getListUserNotVerified = async function (req, res) {
-
-    console.log("test\n\n\n");
     const listUserAccount = await user.userAccountList(true);
-
-    console.log(listUserAccount);
     res.send(JSON.stringify(listUserAccount));
 }
 
@@ -57,9 +54,27 @@ exports.deleteUserAccount = function (req, res) {
 
 exports.insertUserAccount = function (req, res) {
 
+    var schema = new passwordValidator();
+
+    schema
+        .is().min(8)
+        .is().max(100)
+        .has().uppercase()
+        .has().lowercase()
+        .has().digits()
+        .has().not().spaces();
+
+    if (!schema.validate(req.body.password)) {
+        res.json({
+            data: "Update Failed",
+            status: 500
+        });
+        return;
+    }
+
     let avatar = 'https://i.stack.imgur.com/l60Hf.png';
 
-    if (req.body.avatar != null && req.body.avatar != ''){
+    if (req.body.avatar != null && req.body.avatar != '') {
         avatar = req.body.avatar;
     }
 
@@ -95,6 +110,23 @@ exports.insertUserAccount = function (req, res) {
 }
 
 exports.changePassword = function (req, res) {
+    var schema = new passwordValidator();
+
+    schema
+        .is().min(8)
+        .is().max(100)
+        .has().uppercase()
+        .has().lowercase()
+        .has().digits()
+        .has().not().spaces();
+
+    if (!schema.validate(req.body.password)) {
+        res.json({
+            data: "Update Failed",
+            status: 500
+        });
+        return;
+    }
 
     axios({
             method: 'PUT',
@@ -173,7 +205,7 @@ exports.lockUserAccount = function (req, res) {
 
     axios({
             method: 'PUT',
-            url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username + '/lock/' + req.body.status        
+            url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username + '/lock/' + req.body.status
         })
         .then(response => {
             res.json({
@@ -194,7 +226,7 @@ exports.verifyUserAccount = function (req, res) {
 
     axios({
             method: 'PUT',
-            url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username + '/verify'      
+            url: 'https://api-scttshop-v2.herokuapp.com/api/useraccounts/' + req.body.username + '/verify'
         })
         .then(response => {
             res.json({

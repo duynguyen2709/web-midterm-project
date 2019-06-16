@@ -72,8 +72,6 @@ exports.insertPromotion = function (req, res) {
                 appliedID: req.body.appliedID,
                 promotionDiscount: req.body.promotionDiscount,
                 promotionName: req.body.promotionName,
-                timeFrom: req.body.timeFrom,
-                timeTo: req.body.timeTo,
                 isActive: req.body.isActive,
                 updDate: ''
             }
@@ -112,8 +110,6 @@ exports.updatePromotion = function (req, res) {
                 appliedID: req.body.appliedID,
                 promotionDiscount: req.body.promotionDiscount,
                 promotionName: req.body.promotionName,
-                timeFrom: req.body.timeFrom,
-                timeTo: req.body.timeTo,
                 isActive: req.body.isActive,
                 updDate: ''
             }

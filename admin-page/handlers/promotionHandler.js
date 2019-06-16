@@ -27,15 +27,6 @@ function loadPromotion() {
                 "data": "promotionDiscount",
                 "defaultContent": ""
             },
-            
-            {
-                "data": "timeFrom",
-                "defaultContent": ""
-            },
-            {
-                "data": "timeTo",
-                "defaultContent": ""
-            },
             {
                 "data": "isActive",
                 "defaultContent": ""
@@ -55,11 +46,11 @@ function loadPromotion() {
         "rowCallback": function (row, data, index) {
             
             if (data["isActive"] == "1") {
-                $(row).find('td:eq(6)').css('color', 'green');
-                $(row).find('td:eq(6)').text('Đang Chạy');
+                $(row).find('td:eq(4)').css('color', 'green');
+                $(row).find('td:eq(4)').text('Đang Chạy');
             } else {
-                $(row).find('td:eq(6)').css('color', 'red');
-                $(row).find('td:eq(6)').text('Tạm Dừng');
+                $(row).find('td:eq(4)').css('color', 'red');
+                $(row).find('td:eq(4)').text('Tạm Dừng');
             }
         },
         "bDestroy": true
@@ -89,8 +80,6 @@ function showPopupUpdatePromotion(itemthis) {
 
         $("#dlgupdatepromotion input[name='promotionName']").val(obj.promotionName);
         $("#dlgupdatepromotion input[name='promotionDiscount']").val(obj.promotionDiscount);
-        $("#dlgupdatepromotion input[name='timeFrom']").val(obj.timeFrom);
-        $("#dlgupdatepromotion input[name='timeTo']").val(obj.timeTo);
 
         $("#dlgupdatepromotion select[name='isActive'] option").filter(function () {
             return $.trim($(this).val()) === $.trim(obj.isActive);
